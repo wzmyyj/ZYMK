@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:wzm="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+    </android.support.v4.view.ViewPager>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:background="@color/colorLine" />
+
+    <top.wzmyyj.wzm_sdk.view.TabMenu
+        android:id="@+id/tabMenu"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_gravity="bottom"
+        android:orientation="horizontal"
+        android:textSize="11.5sp"
+        wzm:icon_size="25dp"
+        wzm:item_bg="@drawable/click_bg"
+        wzm:text_color1="@color/colorText2"
+        wzm:text_color2="@color/colorText1" />
+
+</LinearLayout>
