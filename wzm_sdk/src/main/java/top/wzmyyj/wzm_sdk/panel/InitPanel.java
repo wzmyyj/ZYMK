@@ -1,0 +1,37 @@
+package top.wzmyyj.wzm_sdk.panel;
+
+import android.content.Context;
+import android.os.Bundle;
+
+/**
+ * Created by wzm on 2018/4/23 0023.
+ */
+
+public abstract class InitPanel extends Panel {
+
+    public InitPanel(Context context) {
+        super(context);
+        this.title = "";
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        initSome(savedInstanceState);
+        initData();
+        initListener();
+        initEvent();
+    }
+
+    protected void initSome(Bundle savedInstanceState) {
+    }
+
+    protected abstract void initView();
+
+    protected abstract void initData();
+
+    protected abstract void initListener();
+
+    protected void initEvent() {
+    }
+}

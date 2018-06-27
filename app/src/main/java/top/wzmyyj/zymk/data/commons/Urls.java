@@ -25,6 +25,8 @@ public class Urls {
     public static String ZYMK_Book_7="http://m.zymk.cn/book/7.html";
     // 完结
     public static String ZYMK_Book_8="http://m.zymk.cn/book/8.html";
+    // 霸总
+    public static String ZYMK_Book_10357="http://m.zymk.cn/book/10357.html";
     // 活动列表
     public static String ZYMK_Activity="http://activity.zymk.cn/find/";
     // 天猫商城
