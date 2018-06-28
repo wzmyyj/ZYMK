@@ -1,6 +1,7 @@
-package top.wzmyyj.wzm_sdk.view;
+package top.wzmyyj.wzm_sdk.widget;
 
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
@@ -20,6 +21,7 @@ import android.widget.ImageView;
 import top.wzmyyj.wzm_sdk.R;
 
 
+@SuppressLint("AppCompatCustomView")
 public class CircleImageView extends ImageView {
 
     private static final ScaleType SCALE_TYPE = ScaleType.CENTER_CROP;

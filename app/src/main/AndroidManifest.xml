@@ -3,13 +3,13 @@
     package="top.wzmyyj.zymk">
 
     <application
-        android:name=".application.MyApplication"
+        android:name=".app.application.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.activity.LaunchActivity"
+        <activity android:name=".view.activity.LaunchActivity"
             android:configChanges="locale"
             android:theme="@style/splash_style">
             <intent-filter>
@@ -18,7 +18,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.MainActivity" />
+        <activity android:name=".view.activity.MainActivity" />
 
     </application>
 

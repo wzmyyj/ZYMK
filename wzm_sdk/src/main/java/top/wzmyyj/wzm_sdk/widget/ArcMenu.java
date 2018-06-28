@@ -1,4 +1,4 @@
-package top.wzmyyj.wzm_sdk.view;
+package top.wzmyyj.wzm_sdk.widget;
 
 
 import android.content.Context;

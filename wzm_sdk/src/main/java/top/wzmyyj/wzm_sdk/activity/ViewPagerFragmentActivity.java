@@ -9,33 +9,35 @@ import java.util.ArrayList;
 import java.util.List;
 
 import top.wzmyyj.wzm_sdk.R;
-import top.wzmyyj.wzm_sdk.view.TabMenu;
+import top.wzmyyj.wzm_sdk.widget.TabMenu;
 
 /**
  * Created by wzm on 2018/4/18 0018.
  */
 
 public abstract class ViewPagerFragmentActivity extends InitActivity {
-    private List<Fragment> mFragmentList;
-    private TabMenu mTabMenu;
-    private ViewPager mViewPager;
 
-    protected class FPT {
-        List<Fragment> fragments = new ArrayList<>();
-        String[] str = new String[6];
-        int[] icon1 = new int[6];
-        int[] icon2 = new int[6];
+    protected List<Fragment> mFragmentList = new ArrayList<>();
+    protected String[] mStr = new String[6];
+    protected int[] mIcon1 = new int[6];
+    protected int[] mIcon2 = new int[6];
 
-        public FPT add(Fragment fragment, String text, int ic_1, int ic_2) {
-            int i = this.fragments.size();
-            if (i >= 6) {
-                return this;
-            }
-            this.fragments.add(fragment);
-            this.str[i] = text;
-            this.icon1[i] = ic_1;
-            this.icon2[i] = ic_2;
-            return this;
+    protected TabMenu mTabMenu;
+    protected ViewPager mViewPager;
+
+    protected List<FT> mFTs = new ArrayList<>();
+
+    protected class FT {
+        Fragment fragment;
+        String str;
+        int icon1;
+        int icon2;
+
+        public FT(Fragment fragment, String str, int icon1, int icon2) {
+            this.fragment = fragment;
+            this.str = str;
+            this.icon1 = icon1;
+            this.icon2 = icon2;
         }
     }
 
@@ -47,15 +49,27 @@ public abstract class ViewPagerFragmentActivity extends InitActivity {
 
     }
 
+    protected void addFT(Fragment fragment, String str, int icon1, int icon2) {
+        mFTs.add(new FT(fragment, str, icon1, icon2));
+    }
+
+    protected abstract void initFTs(List<FT> fts);
+
     @Override
     protected void initData() {
-        FPT fpt = getFPT(new FPT());
+        initFTs(mFTs);
         int which = getWhich();
-        if (fpt == null) {
+        if (mFTs == null || mFTs.size() == 0) {
             return;
         }
-        mFragmentList = new ArrayList<>();
-        mFragmentList = fpt.fragments;
+        int i = 0;
+        for (FT ft : mFTs) {
+            mFragmentList.add(ft.fragment);
+            mStr[i] = ft.str;
+            mIcon1[i] = ft.icon1;
+            mIcon2[i] = ft.icon2;
+            if (++i >= 6) break;
+        }
 
 
         FragmentPagerAdapter mAdapter = new FragmentPagerAdapter(getSupportFragmentManager()) {
@@ -77,13 +91,12 @@ public abstract class ViewPagerFragmentActivity extends InitActivity {
         };
         mViewPager.setAdapter(mAdapter);
 
-        mTabMenu.setItemText(fpt.str)
-                .setItemIcon(fpt.icon1, fpt.icon2)
+        mTabMenu.setItemText(mStr)
+                .setItemIcon(mIcon1, mIcon2)
                 .setupWithViewPager(mViewPager);
 
     }
 
-    protected abstract FPT getFPT(FPT fpt);
 
     protected int getWhich() {
         return 0;

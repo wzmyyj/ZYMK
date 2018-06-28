@@ -1,6 +1,7 @@
 package top.wzmyyj.wzm_sdk.panel;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
@@ -25,15 +26,16 @@ public abstract class ToolbarSinglePanel extends InitPanel {
         super(context);
     }
 
-    @Override
-    protected void initPanelList() {
-        super.initPanelList();
-        mPanel = getPanel();
-        addPanel(mPanel);
-    }
 
     @NonNull
     protected abstract Panel getPanel();
+
+    @Override
+    protected void initSome(Bundle savedInstanceState) {
+        super.initSome(savedInstanceState);
+        mPanel = getPanel();
+        addPanels(mPanel);
+    }
 
     @Override
     protected void initView() {
@@ -42,9 +44,9 @@ public abstract class ToolbarSinglePanel extends InitPanel {
         mToolbar = view.findViewById(R.id.toolbar);
         img_1 = view.findViewById(R.id.img_1);
         img_2 = view.findViewById(R.id.img_2);
-        mPanel = mPanelList.get(0);
+
         setView(mToolbar, img_1, img_2);
-        layout.addView(mPanel.getView());
+
     }
 
     protected abstract void setView(Toolbar toolbar, ImageView img_1, ImageView img_2);
@@ -52,7 +54,7 @@ public abstract class ToolbarSinglePanel extends InitPanel {
 
     @Override
     protected void initData() {
-
+        layout.addView(mPanel.getView());
     }
 
     @Override

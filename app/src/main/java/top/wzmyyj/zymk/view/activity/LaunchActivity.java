@@ -1,4 +1,4 @@
-package top.wzmyyj.zymk.ui.activity;
+package top.wzmyyj.zymk.view.activity;
 
 import android.app.Activity;
 import android.content.Intent;

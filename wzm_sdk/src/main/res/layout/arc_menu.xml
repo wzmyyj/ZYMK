@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<top.wzmyyj.wzm_sdk.view.ArcMenu xmlns:android="http://schemas.android.com/apk/res/android"
+<top.wzmyyj.wzm_sdk.widget.ArcMenu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:wzm="http://schemas.android.com/apk/res-auto"
     android:id="@+id/arcMenu"
     android:layout_width="match_parent"
@@ -42,5 +42,5 @@
         android:contentDescription="@null"
         android:src="#777777"
         android:tag="Item4" />
-</top.wzmyyj.wzm_sdk.view.ArcMenu>
+</top.wzmyyj.wzm_sdk.widget.ArcMenu>
 

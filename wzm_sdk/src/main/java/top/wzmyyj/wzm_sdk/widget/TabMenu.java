@@ -1,4 +1,4 @@
-package top.wzmyyj.wzm_sdk.view;
+package top.wzmyyj.wzm_sdk.widget;
 
 
 import android.content.Context;
@@ -97,26 +97,27 @@ public class TabMenu extends LinearLayout {
             layout.setOrientation(LinearLayout.VERTICAL);
             layout.setBackgroundResource(item_bg);
             layout.setClickable(true);
-            LinearLayout.LayoutParams param1 = new LinearLayout.LayoutParams(
+            LayoutParams param1 = new LayoutParams(
                     0, LayoutParams.MATCH_PARENT);
             param1.weight = 1;
             layout.setLayoutParams(param1);
             //icon
             ImageView img = new ImageView(this.getContext());
             layout.addView(img);
-            LinearLayout.LayoutParams param2 = new LinearLayout.LayoutParams(
+            LayoutParams param2 = new LayoutParams(
                     icon_size, icon_size);
-            param2.topMargin = 10;
+            param2.topMargin = icon_size / 3;
             param2.gravity = Gravity.CENTER_HORIZONTAL;
             img.setLayoutParams(param2);
             //text
             TextView tv = new TextView(this.getContext());
             layout.addView(tv);
             tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, text_size);
-            LinearLayout.LayoutParams param3 = new LinearLayout.LayoutParams(
+            LayoutParams param3 = new LayoutParams(
                     LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);
-            param3.gravity = Gravity.CENTER;
+            param3.gravity = Gravity.CENTER_HORIZONTAL;
             tv.setLayoutParams(param3);
+            tv.setGravity(Gravity.CENTER);
 
             final int w = i;
             layout.setOnClickListener(new OnClickListener() {

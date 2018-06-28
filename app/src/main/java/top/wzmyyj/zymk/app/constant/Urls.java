@@ -1,4 +1,4 @@
-package top.wzmyyj.zymk.data.commons;
+package top.wzmyyj.zymk.app.constant;
 
 public class Urls {
     // 主页

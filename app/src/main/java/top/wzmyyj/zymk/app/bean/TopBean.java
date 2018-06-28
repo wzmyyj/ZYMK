@@ -1,4 +1,4 @@
-package top.wzmyyj.zymk.data.entity;
+package top.wzmyyj.zymk.app.bean;
 
 public class TopBean {
     private int id;

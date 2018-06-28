@@ -78,27 +78,20 @@ public class Panel {
     }
 
 
-
     // child panels
     protected List<Panel> mPanelList = new ArrayList<>();
 
-    public void addPanel(Panel panel) {
-        if (panel != null)
-            this.mPanelList.add(panel);
+    public void addPanels(Panel... panels) {
+        for (int i = 0; i < panels.length; i++)
+            if (panels[i] != null)
+                this.mPanelList.add(panels[i]);
     }
-
-    protected void initPanelList() {
-        mPanelList.clear();
-    }
-
-
 
     public List<Panel> getPanelList() {
         return this.mPanelList;
     }
 
     public void onCreate(Bundle savedInstanceState) {
-        initPanelList();
         for (Panel p : mPanelList) {
             p.onCreate(savedInstanceState);
         }
