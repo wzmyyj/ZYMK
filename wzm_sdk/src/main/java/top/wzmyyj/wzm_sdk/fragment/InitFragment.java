@@ -21,13 +21,18 @@ public abstract class InitFragment extends Fragment {
     protected Context context;
     protected Fragment fragment;
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        this.context = context;
+        this.activity = this.getActivity();
+        this.fragment = this;
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        context = getActivity();
-        activity = getActivity();
-        fragment = this;
         initSome(savedInstanceState);
         View view = initView(inflater, container);
         initData();

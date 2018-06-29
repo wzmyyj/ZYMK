@@ -1,10 +1,7 @@
 package top.wzmyyj.wzm_sdk.activity;
 
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 
 import top.wzmyyj.wzm_sdk.panel.Panel;
 
@@ -13,21 +10,30 @@ import top.wzmyyj.wzm_sdk.panel.Panel;
  */
 
 
-public abstract class PanelActivity extends AppCompatActivity {
+public abstract class PanelActivity extends InitActivity {
 
     protected Panel mPanel;
 
     @NonNull
     protected abstract Panel getPanel();
 
+    private void checkPanelIsNull() {
+        if (mPanel == null) {
+            throw new IllegalStateException("mPanel is null");
+        }
+    }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
+    protected void initSome(Bundle savedInstanceState) {
+        super.initSome(savedInstanceState);
         mPanel = getPanel();
+        checkPanelIsNull();
         mPanel.onCreate(savedInstanceState);
-        setContentView(mPanel.getView());
+    }
 
+    @Override
+    protected void initView() {
+        setContentView(mPanel.getView());
     }
 
     @Override

@@ -3,7 +3,6 @@ package top.wzmyyj.wzm_sdk.fragment;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,25 +14,30 @@ import top.wzmyyj.wzm_sdk.panel.Panel;
  */
 
 
-public abstract class PanelFragment extends Fragment {
+public abstract class PanelFragment extends InitFragment {
 
     protected Panel mPanel;
 
     @NonNull
     protected abstract Panel getPanel();
 
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return mPanel.getView();
+    private void checkPanelIsNull() {
+        if (mPanel == null) {
+            throw new IllegalStateException("mPanel is null");
+        }
     }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void initSome(Bundle savedInstanceState) {
+        super.initSome(savedInstanceState);
         mPanel = getPanel();
+        checkPanelIsNull();
         mPanel.onCreate(savedInstanceState);
+    }
 
+    @Override
+    protected View initView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container) {
+        return mPanel.getView();
     }
 
     @Override
