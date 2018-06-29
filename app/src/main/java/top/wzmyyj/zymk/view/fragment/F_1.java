@@ -8,6 +8,10 @@ import android.view.ViewGroup;
 
 import top.wzmyyj.zymk.R;
 
+/**
+ * Created by wzm on 2018/06/28. email: 2209011667@qq.com
+ */
+
 public class F_1 extends BaseFragment {
     @Override
     protected View initView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container) {

@@ -4,8 +4,9 @@ import android.content.Context;
 import android.os.Bundle;
 
 /**
- * Created by wzm on 2018/4/23 0023.
+ * Created by wzm on 2018/04/23. email: 2209011667@qq.com
  */
+
 
 public abstract class InitPanel extends Panel {
 

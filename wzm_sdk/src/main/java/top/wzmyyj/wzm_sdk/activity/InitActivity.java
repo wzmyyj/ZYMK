@@ -5,6 +5,11 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+/**
+ * Created by wzm on 2018/04/22. email: 2209011667@qq.com
+ */
+
+
 public abstract class InitActivity extends AppCompatActivity {
 
     protected Context context;

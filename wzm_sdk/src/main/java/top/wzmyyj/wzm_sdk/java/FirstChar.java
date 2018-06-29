@@ -1,8 +1,9 @@
 package top.wzmyyj.wzm_sdk.java;
 
 /**
- * Created by Administrator on 2017/6/13 0013.
+ * Created by wzm on 2017/06/12. email: 2209011667@qq.com
  */
+
 
 public class FirstChar {
     // 简体中文的编码范围从B0A1（45217）一直到F7FE（63486）

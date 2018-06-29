@@ -1,9 +1,9 @@
 package top.wzmyyj.zymk.view;
 
 /**
- * Created by 皓然 on 2017/6/15.
+ * Created by wzm on 2018/06/28. email: 2209011667@qq.com
  */
 
 public interface IBaseView {
-    void ShowToast(String t);
+    void showToast(String t);
 }

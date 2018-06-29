@@ -12,8 +12,9 @@ import android.widget.TextView;
 import java.util.List;
 
 /**
- * Created by wzm on 2018/1/19 0019.
+ * Created by wzm on 2018/01/19. email: 2209011667@qq.com
  */
+
 
 public abstract class CommonAdapter<T> extends BaseAdapter {
     protected LayoutInflater mInflater;

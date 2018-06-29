@@ -12,8 +12,9 @@ import top.wzmyyj.wzm_sdk.R;
 import top.wzmyyj.wzm_sdk.tools.L;
 
 /**
- * Created by wzm on 2018/5/4 0004.
+ * Created by wzm on 2018/05/05. email: 2209011667@qq.com
  */
+
 
 public abstract class NestedScrollPanel extends InitPanel {
 

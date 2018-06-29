@@ -7,8 +7,9 @@ import android.view.ViewGroup;
 import java.util.List;
 
 /**
- * Created by wzm on 2017/4/17 0017.
+ * Created by wzm on 2018/04/17. email: 2209011667@qq.com
  */
+
 
 public class ViewTitlePagerAdapter extends PagerAdapter {
     private String[] titles;

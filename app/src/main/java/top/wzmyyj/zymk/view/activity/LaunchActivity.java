@@ -1,16 +1,29 @@
 package top.wzmyyj.zymk.view.activity;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.os.Bundle;
 import android.os.Handler;
 
-public class LaunchActivity extends Activity {
+import top.wzmyyj.zymk.presenter.LaunchPresenter;
+
+
+/**
+ * Created by wzm on 2018/06/24. email: 2209011667@qq.com
+ */
+
+public class LaunchActivity extends BaseActivity<LaunchPresenter> {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void initPresenter() {
 
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return 0;
+    }
+
+    @Override
+    protected void initData() {
         new Handler().postDelayed(new Runnable() {
 
             @Override
@@ -23,5 +36,10 @@ public class LaunchActivity extends Activity {
                         android.R.anim.fade_out);
             }
         }, 1000);
+    }
+
+    @Override
+    protected void initListener() {
+
     }
 }

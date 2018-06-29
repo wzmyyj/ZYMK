@@ -11,8 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 /**
- * Created by wzm on 2018/4/23 0023.
+ * Created by wzm on 2018/04/23. email: 2209011667@qq.com
  */
+
 
 public abstract class InitFragment extends Fragment {
 
@@ -52,5 +53,6 @@ public abstract class InitFragment extends Fragment {
         super.onDestroy();
         context = null;
         activity = null;
+        fragment=null;
     }
 }

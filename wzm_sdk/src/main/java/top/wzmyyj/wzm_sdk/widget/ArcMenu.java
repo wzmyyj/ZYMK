@@ -18,6 +18,9 @@ import android.view.animation.TranslateAnimation;
 
 import top.wzmyyj.wzm_sdk.R;
 
+/**
+ * Created by wzm on 2017/10/23. email: 2209011667@qq.com
+ */
 
 public class ArcMenu extends ViewGroup implements OnClickListener {
 

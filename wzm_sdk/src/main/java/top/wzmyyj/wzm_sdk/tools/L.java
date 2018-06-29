@@ -3,7 +3,7 @@ package top.wzmyyj.wzm_sdk.tools;
 import android.util.Log;
 
 /**
- * Created by wzm on 2018/1/10 0010.
+ * Created by wzm on 2018/01/10. email: 2209011667@qq.com
  */
 
 public class L {

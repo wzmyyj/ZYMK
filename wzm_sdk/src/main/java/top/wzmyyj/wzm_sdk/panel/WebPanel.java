@@ -14,7 +14,7 @@ import android.widget.RelativeLayout;
 import top.wzmyyj.wzm_sdk.R;
 
 /**
- * Created by wzm on 2018/5/9 0009.
+ * Created by wzm on 2018/05/09. email: 2209011667@qq.com
  */
 
 public class WebPanel extends InitPanel {

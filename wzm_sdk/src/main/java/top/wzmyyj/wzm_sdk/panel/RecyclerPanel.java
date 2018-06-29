@@ -21,8 +21,9 @@ import top.wzmyyj.wzm_sdk.inter.IVD;
 import top.wzmyyj.wzm_sdk.tools.L;
 
 /**
- * Created by wzm on 2018/4/23 0023.
+ * Created by wzm on 2018/04/23. email: 2209011667@qq.com
  */
+
 
 public abstract class RecyclerPanel<T> extends InitPanel
         implements MultiItemTypeAdapter.OnItemClickListener {

@@ -5,8 +5,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * Created by wzm on 2018/4/26 0026.
+ * Created by wzm on 2018/04/26. email: 2209011667@qq.com
  */
+
 
 public class TimeUtil {
 

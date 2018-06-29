@@ -9,9 +9,9 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.activity.LaunchActivity"
-            android:configChanges="locale"
-            android:theme="@style/splash_style">
+        <activity
+            android:name=".view.activity.LaunchActivity"
+            android:configChanges="locale">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

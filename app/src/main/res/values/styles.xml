@@ -7,8 +7,7 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
-    <style name="splash_style" parent="@android:style/Theme.NoTitleBar">
-        <item name="android:windowBackground">@mipmap/ic_logo</item>
-        <item name="android:windowNoTitle">true</item>
-    </style>
+    <!--<style name="splash_style" parent="@android:style/Theme.NoTitleBar">-->
+        <!--<item name="android:windowNoTitle">true</item>-->
+    <!--</style>-->
 </resources>

@@ -9,8 +9,9 @@ import android.support.v7.app.AppCompatActivity;
 import top.wzmyyj.wzm_sdk.panel.Panel;
 
 /**
- * Created by wzm on 2018/5/4 0004.
+ * Created by wzm on 2018/05/04. email: 2209011667@qq.com
  */
+
 
 public abstract class PanelActivity extends AppCompatActivity {
 

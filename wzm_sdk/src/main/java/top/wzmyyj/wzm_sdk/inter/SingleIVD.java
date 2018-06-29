@@ -1,8 +1,9 @@
 package top.wzmyyj.wzm_sdk.inter;
 
 /**
- * Created by wzm on 2018/4/29 0029.
+ * Created by wzm on 2018/04/29. email: 2209011667@qq.com
  */
+
 
 public abstract class SingleIVD<T> implements IVD<T> {
     @Override
