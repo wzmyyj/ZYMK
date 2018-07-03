@@ -2,7 +2,6 @@ package top.wzmyyj.wzm_sdk.panel;
 
 import android.content.Context;
 import android.os.Handler;
-import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -31,8 +30,8 @@ public abstract class RecyclerPanel<T> extends InitPanel
     private RecyclerView mRecyclerView;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private FrameLayout mFrameLayout;
-    protected List<T> mData;
-    protected List<IVD<T>> mIVD;
+    protected List<T> mData=new ArrayList<>();
+    protected List<IVD<T>> mIVD=new ArrayList<>();
     protected HeaderAndFooterWrapper mHeaderAndFooterWrapper;
 
     protected View mHeader;
@@ -51,25 +50,22 @@ public abstract class RecyclerPanel<T> extends InitPanel
         mRecyclerView = view.findViewById(R.id.recyclerView);
         mSwipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
         mSwipeRefreshLayout.setColorSchemeColors(context.getResources()
-                .getColor(R.color.colorBlue));
+                .getColor(R.color.colorPrimary));
         mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
 
-        mData = new ArrayList<>();
-        mData = getData(mData);
-
-        mIVD = new ArrayList<>();
-        mIVD = getIVD(mIVD);
+        setData();
+        setIVD(mIVD);
 
         setView(mRecyclerView, mSwipeRefreshLayout, mFrameLayout);
         mHeader = getHeader();
         mFooter = getFooter();
     }
 
-    @NonNull
-    protected abstract List<T> getData(List<T> data);
 
-    @NonNull
-    protected abstract List<IVD<T>> getIVD(List<IVD<T>> ivd);
+    protected abstract void setData();
+
+
+    protected abstract void setIVD(List<IVD<T>> ivd);
 
     protected abstract void setView(RecyclerView rv, SwipeRefreshLayout srl, FrameLayout layout);
 
@@ -130,7 +126,7 @@ public abstract class RecyclerPanel<T> extends InitPanel
 
     protected void update() {
         mData.clear();
-        mData = getData(mData);
+        setData();
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

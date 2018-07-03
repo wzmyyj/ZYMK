@@ -23,6 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:layout_gravity="bottom"
+        android:background="@color/colorWhite"
         android:orientation="horizontal"
         android:textSize="12sp"
         wzm:icon_size="20dp"

@@ -28,6 +28,7 @@ public abstract class NestedScrollPanel extends InitPanel {
         super(context);
     }
 
+
     @Override
     protected void initView() {
         view = mInflater.inflate(R.layout.panel_ns, null);

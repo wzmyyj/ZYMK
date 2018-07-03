@@ -27,7 +27,6 @@ dependencies {
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation 'com.android.support:design:27.1.1'
     testImplementation 'junit:junit:4.12'
-    implementation 'com.zhy:base-rvadapter:3.0.3'
-    implementation 'com.zhy:base-adapter:3.0.3'
-    implementation 'com.yanzhenjie:permission:2.0.0-rc4'
+    api 'com.zhy:base-rvadapter:3.0.3'
+    api 'com.zhy:base-adapter:3.0.3'
 }

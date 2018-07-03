@@ -21,13 +21,6 @@ public abstract class InitFragment extends Fragment {
     protected Context context;
     protected Fragment fragment;
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        this.context = context;
-        this.activity = this.getActivity();
-        this.fragment = this;
-    }
 
     @Nullable
     @Override
@@ -41,7 +34,16 @@ public abstract class InitFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        this.context = context;
+        this.activity = (Activity)context;
+        this.fragment = this;
+    }
+
     protected void initSome(Bundle savedInstanceState) {
+
     }
 
     protected abstract View initView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container);
@@ -58,6 +60,6 @@ public abstract class InitFragment extends Fragment {
         super.onDestroy();
         context = null;
         activity = null;
-        fragment=null;
+        fragment = null;
     }
 }

@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="top.wzmyyj.zymk">
 
+
     <application
         android:name=".app.application.App"
         android:allowBackup="true"

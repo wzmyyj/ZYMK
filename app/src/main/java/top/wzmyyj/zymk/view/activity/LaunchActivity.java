@@ -1,45 +1,34 @@
 package top.wzmyyj.zymk.view.activity;
 
-import android.content.Intent;
-import android.os.Handler;
-
+import top.wzmyyj.zymk.R;
 import top.wzmyyj.zymk.presenter.LaunchPresenter;
+import top.wzmyyj.zymk.view.ILaunchView;
 
 
 /**
  * Created by wzm on 2018/06/24. email: 2209011667@qq.com
  */
 
-public class LaunchActivity extends BaseActivity<LaunchPresenter> {
+public class LaunchActivity extends BaseActivity<LaunchPresenter> implements ILaunchView {
 
     @Override
     protected void initPresenter() {
-
+        mPresenter = new LaunchPresenter(activity, this);
     }
 
     @Override
     protected int getLayoutId() {
-        return 0;
+        return R.layout.activity_launch;
     }
 
     @Override
-    protected void initData() {
-        new Handler().postDelayed(new Runnable() {
-
-            @Override
-            public void run() {
-                Intent i = new Intent();
-                i.setClass(LaunchActivity.this, MainActivity.class);
-                startActivity(i);
-                finish();
-                overridePendingTransition(android.R.anim.fade_in,
-                        android.R.anim.fade_out);
-            }
-        }, 1000);
+    protected void initEvent() {
+        super.initEvent();
+        mPresenter.run();
     }
 
     @Override
-    protected void initListener() {
+    public void showToast(String t) {
 
     }
 }

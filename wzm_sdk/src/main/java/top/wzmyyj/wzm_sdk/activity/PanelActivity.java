@@ -3,6 +3,9 @@ package top.wzmyyj.wzm_sdk.activity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import top.wzmyyj.wzm_sdk.panel.Panel;
 
 /**
@@ -12,64 +15,90 @@ import top.wzmyyj.wzm_sdk.panel.Panel;
 
 public abstract class PanelActivity extends InitActivity {
 
-    protected Panel mPanel;
+    protected List<Panel> mPanelList = new ArrayList<>();
 
-    @NonNull
-    protected abstract Panel getPanel();
+    public void addPanels(@NonNull Panel... panels) {
+        for (int i = 0; i < panels.length; i++)
+            if (panels[i] != null)
+                this.mPanelList.add(panels[i]);
+    }
 
-    private void checkPanelIsNull() {
-        if (mPanel == null) {
-            throw new IllegalStateException("mPanel is null");
-        }
+    protected void initPanelList() {
+
     }
 
     @Override
     protected void initSome(Bundle savedInstanceState) {
         super.initSome(savedInstanceState);
-        mPanel = getPanel();
-        checkPanelIsNull();
-        mPanel.onCreate(savedInstanceState);
+        initPanelList();
+        if (mPanelList == null || mPanelList.size() == 0)
+            return;
+        for (Panel p : mPanelList) {
+            p.onCreate(savedInstanceState);
+        }
     }
 
-    @Override
-    protected void initView() {
-        setContentView(mPanel.getView());
-    }
 
     @Override
-    public void onResume() {
+    protected void onResume() {
         super.onResume();
-        mPanel.onResume();
+        if (mPanelList == null || mPanelList.size() == 0)
+            return;
+        for (Panel p : mPanelList) {
+            p.onResume();
+        }
+
     }
 
     @Override
-    public void onStart() {
+    protected void onStart() {
         super.onStart();
-        mPanel.onStart();
+        if (mPanelList == null || mPanelList.size() == 0)
+            return;
+        for (Panel p : mPanelList) {
+            p.onStart();
+        }
     }
 
     @Override
-    public void onPause() {
+    protected void onPause() {
         super.onPause();
-        mPanel.onPause();
+        if (mPanelList == null || mPanelList.size() == 0)
+            return;
+        for (Panel p : mPanelList) {
+            p.onPause();
+        }
     }
+
 
     @Override
     protected void onStop() {
         super.onStop();
-        mPanel.onStart();
+        if (mPanelList == null || mPanelList.size() == 0)
+            return;
+        for (Panel p : mPanelList) {
+            p.onStop();
+        }
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();
-        mPanel.onRestart();
+        if (mPanelList == null || mPanelList.size() == 0)
+            return;
+        for (Panel p : mPanelList) {
+            p.onRestart();
+        }
     }
 
     @Override
-    public void onDestroy() {
+    protected void onDestroy() {
         super.onDestroy();
-        mPanel.onDestroy();
-        mPanel = null;
+        if (mPanelList == null || mPanelList.size() == 0)
+            return;
+        for (Panel p : mPanelList) {
+            p.onDestroy();
+        }
+        mPanelList.clear();
     }
 }

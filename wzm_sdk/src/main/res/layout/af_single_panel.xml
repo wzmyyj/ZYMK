@@ -8,7 +8,7 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_height="50dp"
         app:titleTextAppearance="@style/MyToolbarTextAppearance"
         app:titleTextColor="@color/colorGray_5">
 
@@ -18,7 +18,6 @@
             android:layout_height="45dp"
             android:layout_gravity="right|center_vertical"
             android:layout_marginRight="10dp"
-            android:background="@drawable/click_bg"
             android:padding="10dp" />
 
         <ImageView
@@ -26,7 +25,6 @@
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:layout_gravity="right|center_vertical"
-            android:background="@drawable/click_bg"
             android:padding="10dp" />
 
     </android.support.v7.widget.Toolbar>

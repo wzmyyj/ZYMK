@@ -3,8 +3,8 @@ package top.wzmyyj.wzm_sdk.panel;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 
@@ -21,8 +21,6 @@ public class Panel {
     protected LayoutInflater mInflater;
     protected Context context;
     protected Activity activity;
-    protected Fragment fragment;
-    protected Panel rootPanel;
     protected View view;
     protected String title = "";
 
@@ -32,14 +30,6 @@ public class Panel {
 
     public Activity getActivity() {
         return activity;
-    }
-
-    public Fragment getFragment() {
-        return fragment;
-    }
-
-    public Panel getRootPanel() {
-        return rootPanel;
     }
 
 
@@ -52,27 +42,11 @@ public class Panel {
     }
 
     public Panel(Context context) {
+        this.activity = (Activity) context;
         this.context = context;
         this.mInflater = LayoutInflater.from(context);
     }
 
-    public Panel(Activity activity) {
-        this((Context) activity);
-        this.activity = activity;
-    }
-
-    public Panel(Fragment fragment) {
-        this(fragment.getActivity());
-        this.fragment = fragment;
-    }
-
-    public Panel(Panel panel) {
-        this(panel.getActivity());
-        this.rootPanel = panel;
-        if (panel.getFragment() != null) {
-            this.fragment = panel.getFragment();
-        }
-    }
 
     public View getView() {
         return view;
@@ -82,23 +56,28 @@ public class Panel {
     // child panels
     protected List<Panel> mPanelList = new ArrayList<>();
 
-    public void addPanels(Panel... panels) {
+    public void addPanels(@NonNull Panel... panels) {
         for (int i = 0; i < panels.length; i++)
             if (panels[i] != null)
                 this.mPanelList.add(panels[i]);
     }
 
-    public List<Panel> getPanelList() {
-        return this.mPanelList;
+    protected void initPanelList() {
+
     }
 
     public void onCreate(Bundle savedInstanceState) {
+        initPanelList();
+        if (mPanelList == null || mPanelList.size() == 0)
+            return;
         for (Panel p : mPanelList) {
             p.onCreate(savedInstanceState);
         }
     }
 
     public void onResume() {
+        if (mPanelList == null || mPanelList.size() == 0)
+            return;
         for (Panel p : mPanelList) {
             p.onResume();
         }
@@ -106,51 +85,62 @@ public class Panel {
 
 
     public void onStart() {
+        if (mPanelList == null || mPanelList.size() == 0)
+            return;
         for (Panel p : mPanelList) {
             p.onStart();
         }
     }
 
     public void onRestart() {
+        if (mPanelList == null || mPanelList.size() == 0)
+            return;
         for (Panel p : mPanelList) {
             p.onRestart();
         }
     }
 
     public void onPause() {
+        if (mPanelList == null || mPanelList.size() == 0)
+            return;
         for (Panel p : mPanelList) {
             p.onPause();
         }
     }
 
     public void onStop() {
+        if (mPanelList == null || mPanelList.size() == 0)
+            return;
         for (Panel p : mPanelList) {
             p.onStop();
         }
     }
 
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        if (mPanelList == null || mPanelList.size() == 0)
+            return;
         for (Panel p : mPanelList) {
             p.onActivityCreated(savedInstanceState);
         }
     }
 
+    public void onDestroyView() {
+        if (mPanelList == null || mPanelList.size() == 0)
+            return;
+        for (Panel p : mPanelList) {
+            p.onDestroyView();
+        }
+    }
 
     public void onDestroy() {
+        if (mPanelList == null || mPanelList.size() == 0)
+            return;
         for (Panel p : mPanelList) {
             p.onDestroy();
         }
         mPanelList.clear();
-    }
-
-    public void onDestroyView() {
-        for (Panel p : mPanelList) {
-            p.onDestroyView();
-        }
         context = null;
         activity = null;
-        fragment = null;
-        rootPanel = null;
     }
 
 
