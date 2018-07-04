@@ -3,6 +3,7 @@
     package="top.wzmyyj.zymk">
 
 
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- 网络通信-->
     <application
         android:name=".app.application.App"
         android:allowBackup="true"

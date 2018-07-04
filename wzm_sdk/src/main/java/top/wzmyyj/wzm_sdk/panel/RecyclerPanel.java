@@ -124,7 +124,7 @@ public abstract class RecyclerPanel<T> extends InitPanel
 
     }
 
-    protected void update() {
+    public void update() {
         mData.clear();
         setData();
         new Handler().postDelayed(new Runnable() {

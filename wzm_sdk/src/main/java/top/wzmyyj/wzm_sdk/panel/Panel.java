@@ -8,9 +8,6 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by wzm on 2018/04/23. email: 2209011667@qq.com
  */
@@ -52,96 +49,66 @@ public class Panel {
         return view;
     }
 
-
     // child panels
-    protected List<Panel> mPanelList = new ArrayList<>();
+
+    protected Panels mPanels = new Panels();
 
     public void addPanels(@NonNull Panel... panels) {
-        for (int i = 0; i < panels.length; i++)
-            if (panels[i] != null)
-                this.mPanelList.add(panels[i]);
+        mPanels.addPanels(panels);
     }
 
-    protected void initPanelList() {
+    public View getPanelView(int i) {
+        return mPanels.getPanelView(i);
+    }
+
+    protected void initPanels() {
 
     }
 
     public void onCreate(Bundle savedInstanceState) {
-        initPanelList();
-        if (mPanelList == null || mPanelList.size() == 0)
-            return;
-        for (Panel p : mPanelList) {
-            p.onCreate(savedInstanceState);
-        }
+        initPanels();
+        mPanels.onCreate(savedInstanceState);
     }
 
     public void onResume() {
-        if (mPanelList == null || mPanelList.size() == 0)
-            return;
-        for (Panel p : mPanelList) {
-            p.onResume();
-        }
+        mPanels.onResume();
     }
 
 
     public void onStart() {
-        if (mPanelList == null || mPanelList.size() == 0)
-            return;
-        for (Panel p : mPanelList) {
-            p.onStart();
-        }
+        mPanels.onStart();
     }
 
     public void onRestart() {
-        if (mPanelList == null || mPanelList.size() == 0)
-            return;
-        for (Panel p : mPanelList) {
-            p.onRestart();
-        }
+        mPanels.onRestart();
     }
 
     public void onPause() {
-        if (mPanelList == null || mPanelList.size() == 0)
-            return;
-        for (Panel p : mPanelList) {
-            p.onPause();
-        }
+        mPanels.onPause();
     }
 
     public void onStop() {
-        if (mPanelList == null || mPanelList.size() == 0)
-            return;
-        for (Panel p : mPanelList) {
-            p.onStop();
-        }
+        mPanels.onStop();
     }
 
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        if (mPanelList == null || mPanelList.size() == 0)
-            return;
-        for (Panel p : mPanelList) {
-            p.onActivityCreated(savedInstanceState);
-        }
+        mPanels.onActivityCreated(savedInstanceState);
     }
 
     public void onDestroyView() {
-        if (mPanelList == null || mPanelList.size() == 0)
-            return;
-        for (Panel p : mPanelList) {
-            p.onDestroyView();
-        }
+        mPanels.onDestroyView();
     }
 
     public void onDestroy() {
-        if (mPanelList == null || mPanelList.size() == 0)
-            return;
-        for (Panel p : mPanelList) {
-            p.onDestroy();
-        }
-        mPanelList.clear();
+        mPanels.onDestroy();
+        mPanels = null;
         context = null;
         activity = null;
     }
 
+
+    public Object f(int i, Object... objects) {
+        return null;
+    }
 
 }

@@ -13,19 +13,33 @@
         app:titleTextColor="@color/colorGray_5">
 
         <ImageView
-            android:id="@+id/img_1"
+            android:id="@+id/img_a"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_gravity="left|center_vertical"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/click_bg"
+            android:paddingRight="14dp"
+            android:src="@mipmap/pic_main_boy" />
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="推荐"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18sp" />
+
+        <ImageView
+            android:id="@+id/img_search"
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:layout_gravity="right|center_vertical"
             android:layout_marginRight="10dp"
-            android:padding="10dp" />
-
-        <ImageView
-            android:id="@+id/img_2"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:layout_gravity="right|center_vertical"
-            android:padding="10dp" />
+            android:background="@drawable/click_bg"
+            android:padding="11.5dp"
+            android:src="@mipmap/ic_search" />
 
     </android.support.v7.widget.Toolbar>
 
@@ -35,7 +49,7 @@
         android:background="@color/colorLine" />
 
     <LinearLayout
-        android:id="@+id/ll_1"
+        android:id="@+id/ll_panel"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"></LinearLayout>

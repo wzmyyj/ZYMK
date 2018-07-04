@@ -1,6 +1,5 @@
 package top.wzmyyj.wzm_sdk.panel;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 
@@ -15,12 +14,6 @@ public abstract class InitPanel extends Panel {
         super(context);
         this.title = "";
     }
-
-    public InitPanel(Activity activity) {
-        super(activity);
-    }
-
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
