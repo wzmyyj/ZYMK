@@ -6,18 +6,8 @@
 
     <FrameLayout
         android:layout_width="match_parent"
+        android:background="@color/colorWhite"
         android:layout_height="45dp">
-
-        <!--<ImageView-->
-        <!--android:id="@+id/img_a"-->
-        <!--android:layout_width="45dp"-->
-        <!--android:layout_height="45dp"-->
-        <!--android:layout_gravity="left"-->
-        <!--android:layout_marginLeft="10dp"-->
-        <!--android:layout_marginRight="10dp"-->
-        <!--android:background="@drawable/click_bg"-->
-        <!--android:padding="7dp"-->
-        <!--android:src="@mipmap/pic_main_boy" />-->
 
         <TextView
             android:layout_width="wrap_content"
@@ -38,6 +28,7 @@
             android:src="@mipmap/ic_search" />
 
     </FrameLayout>
+
 
     <View
         android:layout_width="match_parent"
@@ -94,12 +85,12 @@
         </LinearLayout>
 
         <TextView
-            android:text="m.zymk.cn"
-            android:textColor="@color/colorGray_b"
-            android:textSize="12dp"
             android:layout_width="wrap_content"
             android:layout_height="16dp"
-            android:layout_marginRight="10dp" />
+            android:layout_marginRight="10dp"
+            android:text="m.zymk.cn"
+            android:textColor="@color/colorGray_b"
+            android:textSize="12dp" />
 
         <ImageView
             android:layout_width="13dp"

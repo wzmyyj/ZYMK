@@ -2,4 +2,5 @@
     <string name="app_name">ZYMK</string>
     <string name="launch_tip">本程序仅供学习参考使用，严禁任何商业用途</string>
     <string name="launch_github">copy by wzmyyj 2018 /https://github.com/wzmyyj/ZYMK</string>
+    <string name="mine_github">项目地址：\nhttps://github.com/wzmyyj/ZYMK</string>
 </resources>
