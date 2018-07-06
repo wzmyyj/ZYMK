@@ -2,7 +2,8 @@ package top.wzmyyj.zymk.view.activity;
 
 import top.wzmyyj.zymk.R;
 import top.wzmyyj.zymk.presenter.LaunchPresenter;
-import top.wzmyyj.zymk.view.ILaunchView;
+import top.wzmyyj.zymk.view.activity.base.BaseActivity;
+import top.wzmyyj.zymk.view.iv.ILaunchView;
 
 
 /**

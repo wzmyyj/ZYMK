@@ -2,14 +2,14 @@ package top.wzmyyj.zymk.presenter;
 
 import android.app.Activity;
 
-import top.wzmyyj.zymk.view.iv.IF_1View;
+import top.wzmyyj.zymk.view.iv.IF_2View;
 
 /**
  * Created by wzm on 2018/06/29. email: 2209011667@qq.com
  */
 
-public class HomePresenter extends BasePresenter<IF_1View> {
-    public HomePresenter(Activity activity, IF_1View iv) {
+public class TypePresenter extends BasePresenter<IF_2View> {
+    public TypePresenter(Activity activity, IF_2View iv) {
         super(activity, iv);
     }
 }

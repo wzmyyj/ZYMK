@@ -1,4 +1,4 @@
-package top.wzmyyj.zymk.view.panel;
+package top.wzmyyj.zymk.view.panel.base;
 
 import android.content.Context;
 

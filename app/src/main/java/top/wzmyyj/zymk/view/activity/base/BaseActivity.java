@@ -1,4 +1,4 @@
-package top.wzmyyj.zymk.view.activity;
+package top.wzmyyj.zymk.view.activity.base;
 
 import android.os.Bundle;
 

@@ -9,7 +9,7 @@
     <color name="colorText2">#999999</color>
 
     <color name="colorClarity">#0000</color>
-    <color name="colorGray">#666666</color>
+    <color name="colorGray_6">#666666</color>
     <color name="colorWhite">#ffffff</color>
 
     <color name="colorWhite_1">#eeeeee</color>
@@ -40,6 +40,6 @@
 
     <color name="colorAhp_Black">#77000000</color>>
 
-    <color name="black_overlay">#66000000</color>
+    <color name="black_overlay">#55000000</color>
 
 </resources>

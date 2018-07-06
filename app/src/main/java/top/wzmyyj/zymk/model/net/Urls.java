@@ -1,4 +1,4 @@
-package top.wzmyyj.zymk.app.constant;
+package top.wzmyyj.zymk.model.net;
 
 /**
  * Created by wzm on 2018/06/23. email: 2209011667@qq.com

@@ -1,4 +1,4 @@
-package top.wzmyyj.zymk.view.fragment;
+package top.wzmyyj.zymk.view.fragment.base;
 
 import android.content.Context;
 import android.os.Bundle;

@@ -1,25 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        app:titleTextAppearance="@style/MyToolbarTextAppearance"
-        app:titleTextColor="@color/colorGray_5">
+        android:layout_height="45dp">
 
         <ImageView
             android:id="@+id/img_a"
             android:layout_width="45dp"
             android:layout_height="45dp"
-            android:layout_gravity="left|center_vertical"
+            android:layout_gravity="left"
             android:layout_marginRight="10dp"
             android:background="@drawable/click_bg"
-            android:paddingRight="14dp"
+            android:padding="7dp"
+            android:layout_marginLeft="10dp"
             android:src="@mipmap/pic_main_boy" />
 
         <TextView
@@ -41,7 +38,7 @@
             android:padding="11.5dp"
             android:src="@mipmap/ic_search" />
 
-    </android.support.v7.widget.Toolbar>
+    </FrameLayout>
 
     <View
         android:layout_width="match_parent"

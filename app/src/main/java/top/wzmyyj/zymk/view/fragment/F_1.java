@@ -1,13 +1,15 @@
 package top.wzmyyj.zymk.view.fragment;
 
-import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import butterknife.BindView;
+import top.wzmyyj.wzm_sdk.tools.T;
 import top.wzmyyj.zymk.R;
 import top.wzmyyj.zymk.presenter.HomePresenter;
-import top.wzmyyj.zymk.view.IF_1View;
+import top.wzmyyj.zymk.view.fragment.base.BaseFragment;
+import top.wzmyyj.zymk.view.iv.IF_1View;
 import top.wzmyyj.zymk.view.panel.HomeRecyclerPanel;
 
 /**
@@ -41,8 +43,6 @@ public class F_1 extends BaseFragment<HomePresenter> implements IF_1View {
 
     @BindView(R.id.ll_panel)
     LinearLayout layout;
-    @BindView(R.id.toolbar)
-    Toolbar mToolbar;
     @BindView(R.id.img_a)
     ImageView img_a;
     @BindView(R.id.img_search)
@@ -55,7 +55,16 @@ public class F_1 extends BaseFragment<HomePresenter> implements IF_1View {
         layout.addView(getPanelView(0));
     }
 
-
+    @Override
+    protected void initListener() {
+        super.initListener();
+        img_search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                T.s("搜索");
+            }
+        });
+    }
 }
 
 

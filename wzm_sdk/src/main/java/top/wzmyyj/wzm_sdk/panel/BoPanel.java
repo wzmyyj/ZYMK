@@ -26,6 +26,7 @@ public abstract class BoPanel extends InitPanel {
     protected TextView mTV;
     private LinearLayout mLL;
     private int size = 3;
+    private int point_size = 20;
 
     public BoPanel(Context context) {
         super(context);
@@ -42,8 +43,13 @@ public abstract class BoPanel extends InitPanel {
     @Override
     protected void initData() {
         size = getSize();
+        point_size = getPointSize();
         initBo();
         setBoData();
+    }
+
+    protected int getPointSize() {
+        return point_size;
     }
 
     private int lastPosition;
@@ -82,6 +88,7 @@ public abstract class BoPanel extends InitPanel {
 
 
     private void initBo() {
+        int ps = point_size;
         mImageList = new ArrayList<>();
         mDosc = new String[size];
         try {
@@ -90,7 +97,7 @@ public abstract class BoPanel extends InitPanel {
                 mImageList.add(image);
                 ImageView point = new ImageView(getActivity());
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                        20, 20);
+                        ps, ps);
                 params.rightMargin = 15;
                 point.setLayoutParams(params);
                 point.setBackgroundResource(R.drawable.point_bg);

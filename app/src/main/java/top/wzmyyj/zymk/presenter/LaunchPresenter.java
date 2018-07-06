@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Handler;
 
-import top.wzmyyj.zymk.view.ILaunchView;
+import top.wzmyyj.zymk.view.iv.ILaunchView;
 import top.wzmyyj.zymk.view.activity.MainActivity;
 
 /**
@@ -15,8 +15,8 @@ public class LaunchPresenter extends BasePresenter<ILaunchView> {
 
     private Handler mHandler = new Handler();
 
-    public LaunchPresenter(Activity activity, ILaunchView iLaunchView) {
-        super(activity, iLaunchView);
+    public LaunchPresenter(Activity activity, ILaunchView iv) {
+        super(activity, iv);
     }
 
     public void CheckPermission() {

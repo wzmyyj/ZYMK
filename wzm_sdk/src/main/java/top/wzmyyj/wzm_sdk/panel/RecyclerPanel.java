@@ -30,8 +30,8 @@ public abstract class RecyclerPanel<T> extends InitPanel
     private RecyclerView mRecyclerView;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private FrameLayout mFrameLayout;
-    protected List<T> mData=new ArrayList<>();
-    protected List<IVD<T>> mIVD=new ArrayList<>();
+    protected List<T> mData = new ArrayList<>();
+    protected List<IVD<T>> mIVD = new ArrayList<>();
     protected HeaderAndFooterWrapper mHeaderAndFooterWrapper;
 
     protected View mHeader;
@@ -57,8 +57,8 @@ public abstract class RecyclerPanel<T> extends InitPanel
         setIVD(mIVD);
 
         setView(mRecyclerView, mSwipeRefreshLayout, mFrameLayout);
-        mHeader = getHeader();
-        mFooter = getFooter();
+        setHeader();
+        setFooter();
     }
 
 
@@ -67,11 +67,16 @@ public abstract class RecyclerPanel<T> extends InitPanel
 
     protected abstract void setIVD(List<IVD<T>> ivd);
 
-    protected abstract void setView(RecyclerView rv, SwipeRefreshLayout srl, FrameLayout layout);
+    protected void setView(RecyclerView rv, SwipeRefreshLayout srl, FrameLayout layout) {
+    }
 
-    protected abstract View getHeader();
 
-    protected abstract View getFooter();
+    protected void setHeader() {
+    }
+
+
+    protected void setFooter() {
+    }
 
 
     @Override

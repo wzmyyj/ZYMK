@@ -2,7 +2,7 @@ package top.wzmyyj.zymk.presenter;
 
 import android.app.Activity;
 
-import top.wzmyyj.zymk.view.IBaseView;
+import top.wzmyyj.zymk.view.iv.base.IBaseView;
 
 /**
  * Created by wzm on 2018/06/28. email: 2209011667@qq.com
