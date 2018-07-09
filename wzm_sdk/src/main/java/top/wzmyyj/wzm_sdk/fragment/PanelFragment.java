@@ -25,9 +25,14 @@ public abstract class PanelFragment extends InitFragment {
         return mPanels.getPanelView(i);
     }
 
+    public Panel getPanel(int i) {
+        return mPanels.get(i);
+    }
+
     protected void initPanels() {
 
     }
+
     @Override
     protected void initSome(Bundle savedInstanceState) {
         super.initSome(savedInstanceState);

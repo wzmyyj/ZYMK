@@ -13,7 +13,7 @@ import com.zhy.adapter.recyclerview.base.ViewHolder;
 
 import java.util.List;
 
-import top.wzmyyj.wzm_sdk.inter.SingleIVD;
+import top.wzmyyj.wzm_sdk.adapter.ivd.SingleIVD;
 import top.wzmyyj.zymk.R;
 import top.wzmyyj.zymk.app.bean.TypeBean;
 import top.wzmyyj.zymk.view.panel.base.BaseRecyclerPanel;

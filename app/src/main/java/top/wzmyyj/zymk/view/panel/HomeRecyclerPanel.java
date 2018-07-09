@@ -1,6 +1,7 @@
 package top.wzmyyj.zymk.view.panel;
 
 import android.content.Context;
+import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -13,15 +14,15 @@ import com.bumptech.glide.Glide;
 import com.zhy.adapter.recyclerview.CommonAdapter;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import top.wzmyyj.wzm_sdk.inter.IVD;
-import top.wzmyyj.wzm_sdk.inter.SingleIVD;
+import top.wzmyyj.wzm_sdk.adapter.ivd.IVD;
+import top.wzmyyj.wzm_sdk.adapter.ivd.SingleIVD;
 import top.wzmyyj.wzm_sdk.tools.T;
 import top.wzmyyj.zymk.R;
 import top.wzmyyj.zymk.app.bean.BookBean;
 import top.wzmyyj.zymk.app.bean.ItemBean;
+import top.wzmyyj.zymk.presenter.ip.IRecyclePresent;
 import top.wzmyyj.zymk.view.panel.base.BaseRecyclerPanel;
 
 
@@ -32,6 +33,11 @@ import top.wzmyyj.zymk.view.panel.base.BaseRecyclerPanel;
 public class HomeRecyclerPanel extends BaseRecyclerPanel<ItemBean> {
     public HomeRecyclerPanel(Context context) {
         super(context);
+    }
+
+
+    public HomeRecyclerPanel(Context context, IRecyclePresent ip) {
+        super(context, ip);
     }
 
     @Override
@@ -45,6 +51,8 @@ public class HomeRecyclerPanel extends BaseRecyclerPanel<ItemBean> {
         mData.add(new ItemBean());
         mData.add(new ItemBean());
         mData.add(new ItemBean());
+        updateWithView();
+
     }
 
     @Override
@@ -60,6 +68,10 @@ public class HomeRecyclerPanel extends BaseRecyclerPanel<ItemBean> {
                 ImageView img_icon = holder.getView(R.id.img_icon);
                 TextView tv_title = holder.getView(R.id.tv_title);
                 TextView tv_summary = holder.getView(R.id.tv_summary);
+                img_icon.setImageResource(itemBean.getIcon());
+                tv_title.setText(itemBean.getTitle());
+                tv_summary.setText(itemBean.getSummary());
+
                 Button bt_more = holder.getView(R.id.bt_more);
                 bt_more.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -68,17 +80,7 @@ public class HomeRecyclerPanel extends BaseRecyclerPanel<ItemBean> {
                     }
                 });
 
-                List<BookBean> data = new ArrayList<>();
-                data.add(new BookBean());
-                data.add(new BookBean());
-                data.add(new BookBean());
-                data.add(new BookBean());
-                data.add(new BookBean());
-                data.add(new BookBean());
-                data.add(new BookBean());
-                data.add(new BookBean());
-                data.add(new BookBean());
-                data.add(new BookBean());
+                List<BookBean> data = itemBean.getBooks();
 
                 RecyclerView rv_item = holder.getView(R.id.rv_item);
                 rv_item.setRecycledViewPool(viewPool);
@@ -112,6 +114,26 @@ public class HomeRecyclerPanel extends BaseRecyclerPanel<ItemBean> {
         });
     }
 
+    @Override
+    public void update() {
+        mPresenter.loadData();
+    }
+
+    @Override
+    public Object f(int i, Object... objects) {
+        mData.clear();
+        List<ItemBean> itemBeans = (List<ItemBean>) objects[0];
+        for (ItemBean item : itemBeans) {
+            mData.add(item);
+        }
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                notifyDataSetChanged();
+            }
+        }, 600);
+        return super.f(i, objects);
+    }
 
     @Override
     protected void initPanels() {

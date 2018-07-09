@@ -23,6 +23,9 @@ public abstract class PanelActivity extends InitActivity {
     public View getPanelView(int i) {
         return mPanels.getPanelView(i);
     }
+    public Panel getPanel(int i) {
+        return mPanels.get(i);
+    }
 
     protected void initPanels() {
 

@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import top.wzmyyj.wzm_sdk.R;
-import top.wzmyyj.wzm_sdk.inter.IVD;
+import top.wzmyyj.wzm_sdk.adapter.ivd.IVD;
 import top.wzmyyj.wzm_sdk.tools.L;
 
 /**
@@ -111,22 +111,25 @@ public abstract class RecyclerPanel<T> extends InitPanel
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                mSwipeRefreshLayout.setRefreshing(true);
-                try {
-                    update();
-                    L.e("update data success");
-                } catch (Exception e) {
-                }
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        mSwipeRefreshLayout.setRefreshing(false);
-                    }
-                }, 1000);
-
+                updateWithView();
             }
         });
 
+    }
+
+    public void updateWithView() {
+        mSwipeRefreshLayout.setRefreshing(true);
+        try {
+            update();
+            L.e("update data success");
+        } catch (Exception e) {
+        }
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mSwipeRefreshLayout.setRefreshing(false);
+            }
+        }, 1000);
     }
 
     public void update() {

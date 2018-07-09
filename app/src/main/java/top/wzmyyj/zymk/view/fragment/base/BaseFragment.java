@@ -3,15 +3,15 @@ package top.wzmyyj.zymk.view.fragment.base;
 import android.content.Context;
 import android.os.Bundle;
 
-import butterknife.ButterKnife;
-import top.wzmyyj.wzm_sdk.fragment.PanelFragment;
-import top.wzmyyj.zymk.presenter.BasePresenter;
+import top.wzmyyj.wzm_sdk.tools.T;
+import top.wzmyyj.zymk.presenter.p.base.BasePresenter;
+import top.wzmyyj.zymk.view.iv.base.IBaseView;
 
 /**
  * Created by wzm on 2018/06/28. email: 2209011667@qq.com
  */
 
-public abstract class BaseFragment<P extends BasePresenter> extends PanelFragment {
+public abstract class BaseFragment<P extends BasePresenter> extends BasePanelFragment implements IBaseView {
     protected P mPresenter;
 
     @Override
@@ -21,25 +21,8 @@ public abstract class BaseFragment<P extends BasePresenter> extends PanelFragmen
         checkPresenterIsNull();
     }
 
-    @Override
-    protected void initView() {
-        mVRoot = mInflater.inflate(getLayoutId(), null);
-        ButterKnife.bind(this, mVRoot);
-    }
-
-    @Override
-    protected void initData() {
-
-    }
-
-    @Override
-    protected void initListener() {
-
-    }
 
     protected abstract void initPresenter();
-
-    protected abstract int getLayoutId();
 
     private void checkPresenterIsNull() {
         if (mPresenter == null) {
@@ -69,7 +52,11 @@ public abstract class BaseFragment<P extends BasePresenter> extends PanelFragmen
     public void onDestroy() {
         super.onDestroy();
         mPresenter.onDestroy();
+        mPresenter = null;
     }
 
-
+    @Override
+    public void showToast(String t) {
+        T.s(t);
+    }
 }

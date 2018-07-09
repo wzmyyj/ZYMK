@@ -1,4 +1,4 @@
-package top.wzmyyj.wzm_sdk.inter;
+package top.wzmyyj.wzm_sdk.adapter.ivd;
 
 /**
  * Created by wzm on 2018/04/29. email: 2209011667@qq.com

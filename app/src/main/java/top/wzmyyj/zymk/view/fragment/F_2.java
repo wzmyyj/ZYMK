@@ -15,7 +15,7 @@ import top.wzmyyj.wzm_sdk.tools.T;
 import top.wzmyyj.zymk.R;
 import top.wzmyyj.zymk.app.bean.TypeBean;
 import top.wzmyyj.zymk.app.data.ComicType;
-import top.wzmyyj.zymk.presenter.TypePresenter;
+import top.wzmyyj.zymk.presenter.p.TypePresenter;
 import top.wzmyyj.zymk.view.fragment.base.BaseFragment;
 import top.wzmyyj.zymk.view.iv.IF_2View;
 import top.wzmyyj.zymk.view.panel.TypeRecyclePanel;

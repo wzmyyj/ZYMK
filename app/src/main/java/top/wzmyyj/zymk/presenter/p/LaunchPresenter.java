@@ -1,11 +1,12 @@
-package top.wzmyyj.zymk.presenter;
+package top.wzmyyj.zymk.presenter.p;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Handler;
 
-import top.wzmyyj.zymk.view.iv.ILaunchView;
+import top.wzmyyj.zymk.presenter.p.base.BasePresenter;
 import top.wzmyyj.zymk.view.activity.MainActivity;
+import top.wzmyyj.zymk.view.iv.ILaunchView;
 
 /**
  * Created by wzm on 2018/06/29. email: 2209011667@qq.com

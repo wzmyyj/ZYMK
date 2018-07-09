@@ -32,7 +32,7 @@ public class Urls {
     // 霸总
     public static String ZYMK_Book_10357="http://m.zymk.cn/book/10357.html";
     // 活动列表
-    public static String ZYMK_Activity="http://activity.zymk.cn/find/";
+    public static String ZYMK_Activity="https://activity.zymk.cn/find/";
     // 天猫商城
     public static String ZYMK_Tmall="https://zymk.m.tmall.com/";
     // 图片

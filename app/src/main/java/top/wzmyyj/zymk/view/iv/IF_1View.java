@@ -7,4 +7,5 @@ import top.wzmyyj.zymk.view.iv.base.IBaseView;
  */
 
 public interface IF_1View extends IBaseView {
+    void update(Object... objs);
 }

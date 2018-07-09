@@ -7,7 +7,7 @@ import android.widget.LinearLayout;
 import butterknife.BindView;
 import top.wzmyyj.wzm_sdk.tools.T;
 import top.wzmyyj.zymk.R;
-import top.wzmyyj.zymk.presenter.HomePresenter;
+import top.wzmyyj.zymk.presenter.p.HomePresenter;
 import top.wzmyyj.zymk.view.fragment.base.BaseFragment;
 import top.wzmyyj.zymk.view.iv.IF_1View;
 import top.wzmyyj.zymk.view.panel.HomeRecyclerPanel;
@@ -38,7 +38,7 @@ public class F_1 extends BaseFragment<HomePresenter> implements IF_1View {
     @Override
     protected void initPanels() {
         super.initPanels();
-        addPanels(new HomeRecyclerPanel(activity));
+        addPanels(new HomeRecyclerPanel(activity, mPresenter));
     }
 
     @BindView(R.id.ll_panel)
@@ -64,6 +64,11 @@ public class F_1 extends BaseFragment<HomePresenter> implements IF_1View {
                 T.s("搜索");
             }
         });
+    }
+
+    @Override
+    public void update(Object... objs) {
+        getPanel(0).f(0, objs);
     }
 }
 

@@ -1,4 +1,4 @@
-package top.wzmyyj.wzm_sdk.java;
+package top.wzmyyj.zymk.common.java;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

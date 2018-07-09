@@ -3,7 +3,7 @@ package top.wzmyyj.zymk.view.activity.base;
 import android.os.Bundle;
 
 import top.wzmyyj.wzm_sdk.activity.ViewPagerFragmentActivity;
-import top.wzmyyj.wzm_sdk.utils.StatusBarUtil;
+import top.wzmyyj.zymk.common.utils.StatusBarUtil;
 
 /**
  * Created by wzm on 2018/06/24. email: 2209011667@qq.com

@@ -1,7 +1,8 @@
-package top.wzmyyj.zymk.presenter;
+package top.wzmyyj.zymk.presenter.p;
 
 import android.app.Activity;
 
+import top.wzmyyj.zymk.presenter.p.base.BasePresenter;
 import top.wzmyyj.zymk.view.iv.IF_4View;
 
 /**

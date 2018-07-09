@@ -1,4 +1,4 @@
-package top.wzmyyj.wzm_sdk.inter;
+package top.wzmyyj.wzm_sdk.adapter.ivd;
 
 import com.zhy.adapter.recyclerview.base.ItemViewDelegate;
 
