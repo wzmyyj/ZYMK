@@ -1,7 +1,7 @@
 package top.wzmyyj.zymk.common.java;
 
 /**
- * Created by wzm on 2017/06/12. email: 2209011667@qq.com
+ * Created by yyj on 2017/06/12. email: 2209011667@qq.com
  */
 
 

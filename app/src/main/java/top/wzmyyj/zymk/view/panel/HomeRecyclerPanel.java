@@ -1,7 +1,6 @@
 package top.wzmyyj.zymk.view.panel;
 
 import android.content.Context;
-import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -27,7 +26,7 @@ import top.wzmyyj.zymk.view.panel.base.BaseRecyclerPanel;
 
 
 /**
- * Created by wzm on 2018/07/04. email: 2209011667@qq.com
+ * Created by yyj on 2018/07/04. email: 2209011667@qq.com
  */
 
 public class HomeRecyclerPanel extends BaseRecyclerPanel<ItemBean> {
@@ -126,12 +125,7 @@ public class HomeRecyclerPanel extends BaseRecyclerPanel<ItemBean> {
         for (ItemBean item : itemBeans) {
             mData.add(item);
         }
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                notifyDataSetChanged();
-            }
-        }, 600);
+        notifyDataSetChanged();
         return super.f(i, objects);
     }
 

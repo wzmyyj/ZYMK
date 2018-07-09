@@ -7,7 +7,7 @@ import top.wzmyyj.zymk.presenter.ip.IRecyclePresent;
 
 
 /**
- * Created by wzm on 2018/07/06. email: 2209011667@qq.com
+ * Created by yyj on 2018/07/06. email: 2209011667@qq.com
  */
 
 public abstract class BaseRecyclerPanel<T> extends RecyclerPanel<T> {

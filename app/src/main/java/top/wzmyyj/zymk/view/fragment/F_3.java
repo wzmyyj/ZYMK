@@ -15,7 +15,7 @@ import top.wzmyyj.zymk.view.fragment.base.BaseFragment;
 import top.wzmyyj.zymk.view.iv.IF_3View;
 
 /**
- * Created by wzm on 2018/07/06. email: 2209011667@qq.com
+ * Created by yyj on 2018/07/06. email: 2209011667@qq.com
  */
 
 public class F_3 extends BaseFragment<FindPresenter> implements IF_3View {

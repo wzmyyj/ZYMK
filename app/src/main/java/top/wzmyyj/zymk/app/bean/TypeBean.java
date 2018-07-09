@@ -1,7 +1,7 @@
 package top.wzmyyj.zymk.app.bean;
 
 /**
- * Created by wzm on 2018/07/06. email: 2209011667@qq.com
+ * Created by yyj on 2018/07/06. email: 2209011667@qq.com
  */
 
 public class TypeBean {

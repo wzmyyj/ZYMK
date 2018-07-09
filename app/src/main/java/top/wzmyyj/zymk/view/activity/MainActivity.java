@@ -10,7 +10,7 @@ import top.wzmyyj.zymk.view.fragment.F_3;
 import top.wzmyyj.zymk.view.fragment.F_4;
 
 /**
- * Created by wzm on 2018/06/24. email: 2209011667@qq.com
+ * Created by yyj on 2018/06/24. email: 2209011667@qq.com
  */
 
 public class MainActivity extends BaseMainActivity {

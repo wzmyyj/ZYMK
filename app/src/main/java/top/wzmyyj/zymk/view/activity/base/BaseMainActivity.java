@@ -6,7 +6,7 @@ import top.wzmyyj.wzm_sdk.activity.ViewPagerFragmentActivity;
 import top.wzmyyj.zymk.common.utils.StatusBarUtil;
 
 /**
- * Created by wzm on 2018/06/24. email: 2209011667@qq.com
+ * Created by yyj on 2018/06/24. email: 2209011667@qq.com
  */
 
 public abstract class BaseMainActivity extends ViewPagerFragmentActivity {

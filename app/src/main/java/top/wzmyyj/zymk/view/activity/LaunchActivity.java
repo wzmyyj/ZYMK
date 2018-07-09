@@ -7,7 +7,7 @@ import top.wzmyyj.zymk.view.iv.ILaunchView;
 
 
 /**
- * Created by wzm on 2018/06/24. email: 2209011667@qq.com
+ * Created by yyj on 2018/06/24. email: 2209011667@qq.com
  */
 
 public class LaunchActivity extends BaseActivity<LaunchPresenter> implements ILaunchView{

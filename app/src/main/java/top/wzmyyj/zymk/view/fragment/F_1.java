@@ -13,7 +13,7 @@ import top.wzmyyj.zymk.view.iv.IF_1View;
 import top.wzmyyj.zymk.view.panel.HomeRecyclerPanel;
 
 /**
- * Created by wzm on 2018/06/28. email: 2209011667@qq.com
+ * Created by yyj on 2018/06/28. email: 2209011667@qq.com
  */
 
 public class F_1 extends BaseFragment<HomePresenter> implements IF_1View {

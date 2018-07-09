@@ -6,7 +6,7 @@ import top.wzmyyj.zymk.view.fragment.base.BaseFragment;
 import top.wzmyyj.zymk.view.iv.IF_4View;
 
 /**
- * Created by wzm on 2018/06/29. email: 2209011667@qq.com
+ * Created by yyj on 2018/06/29. email: 2209011667@qq.com
  */
 
 public class F_4 extends BaseFragment<MinePresenter> implements IF_4View {

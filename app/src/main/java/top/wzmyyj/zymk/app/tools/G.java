@@ -1,4 +1,4 @@
-package top.wzmyyj.zymk.model.net;
+package top.wzmyyj.zymk.app.tools;
 
 import android.content.Context;
 import android.widget.ImageView;
@@ -8,10 +8,10 @@ import com.bumptech.glide.Glide;
 import top.wzmyyj.zymk.R;
 
 /**
- * Created by wzm on 2018/07/09. email: 2209011667@qq.com
+ * Created by yyj on 2018/07/09. email: 2209011667@qq.com
  */
 
-public class GlideUtil {
+public class G {
 
     public static void img(Context context, String url, ImageView img) {
         Glide.with(context)

@@ -5,7 +5,7 @@ import top.wzmyyj.wzm_sdk.activity.PanelActivity;
 
 
 /**
- * Created by wzm on 2018/07/07. email: 2209011667@qq.com
+ * Created by yyj on 2018/07/07. email: 2209011667@qq.com
  */
 
 public abstract class BasePanelActivity extends PanelActivity {

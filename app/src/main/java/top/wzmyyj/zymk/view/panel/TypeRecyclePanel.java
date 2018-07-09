@@ -19,7 +19,7 @@ import top.wzmyyj.zymk.app.bean.TypeBean;
 import top.wzmyyj.zymk.view.panel.base.BaseRecyclerPanel;
 
 /**
- * Created by wzm on 2018/07/06. email: 2209011667@qq.com
+ * Created by yyj on 2018/07/06. email: 2209011667@qq.com
  */
 
 public abstract class TypeRecyclePanel extends BaseRecyclerPanel<TypeBean> {
