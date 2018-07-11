@@ -1,10 +1,10 @@
-package top.wzmyyj.zymk.app.data;
+package top.wzmyyj.zymk.model.data;
 
 /**
  * Created by yyj on 2018/07/05. email: 2209011667@qq.com
  */
 
-public class ComicType {
+public class TypeData {
     public static String[] type = new String[]{
             "题材",
             "进度",

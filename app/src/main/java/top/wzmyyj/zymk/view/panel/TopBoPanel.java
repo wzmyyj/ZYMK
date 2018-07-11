@@ -1,10 +1,13 @@
 package top.wzmyyj.zymk.view.panel;
 
 import android.content.Context;
+import android.view.View;
 
-import com.bumptech.glide.Glide;
+import java.util.List;
 
-import top.wzmyyj.zymk.R;
+import top.wzmyyj.wzm_sdk.tools.T;
+import top.wzmyyj.zymk.app.bean.BoBean;
+import top.wzmyyj.zymk.app.tools.G;
 import top.wzmyyj.zymk.view.panel.base.BaseBoPanel;
 
 
@@ -28,39 +31,28 @@ public class TopBoPanel extends BaseBoPanel {
     }
 
     @Override
-    public void setBoData() {
-        Glide.with(context)
-                .load("https://image.zymkcdn.com/file/news/000/001/064.jpg-1920x560.webp")
-                .centerCrop()
-                .error(R.mipmap.ic_error)
-                .into(mImageList.get(0));
+    protected void initBoData() {
+    }
 
-        Glide.with(context)
-                .load("https://image.zymkcdn.com/file/news/000/001/122.jpg-1920x560.webp")
-                .centerCrop()
-                .error(R.mipmap.ic_error)
-                .into(mImageList.get(1));
-        Glide.with(context)
-                .load("https://image.zymkcdn.com/file/news/000/001/118.jpg-1920x560.webp")
-                .centerCrop()
-                .error(R.mipmap.ic_error)
-                .into(mImageList.get(2));
-        Glide.with(context)
-                .load("https://image.zymkcdn.com/file/news/000/001/104.jpg-1920x560.webp")
-                .centerCrop()
-                .error(R.mipmap.ic_error)
-                .into(mImageList.get(3));
-        Glide.with(context)
-                .load("https://image.zymkcdn.com/file/news/000/001/112.jpg-1920x560.webp")
-                .centerCrop()
-                .error(R.mipmap.ic_error)
-                .into(mImageList.get(4));
-        Glide.with(context)
-                .load("https://image.zymkcdn.com/file/news/000/001/143.jpg-1920x560.webp")
-                .centerCrop()
-                .error(R.mipmap.ic_error)
-                .into(mImageList.get(5));
 
-        mTV.setText(mDosc[mViewPager.getCurrentItem()]);
+    @Override
+    public Object f(int w, Object... objects) {
+        List<BoBean> bos = (List<BoBean>) objects[0];
+        if (bos == null || bos.size() < size)
+            return null;
+        for (int i = 0; i < size; i++) {
+            BoBean bo = bos.get(i);
+            G.img(context, bo.getData_src(), mImageList.get(i));
+            mDosc[i] = bo.getTitle();
+            final String url = bo.getHref();
+            mImageList.get(i).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    T.s(url);
+                }
+            });
+        }
+        mTV.setText(mDosc[mViewPager.getCurrentItem() % size]);
+        return super.f(w, objects);
     }
 }

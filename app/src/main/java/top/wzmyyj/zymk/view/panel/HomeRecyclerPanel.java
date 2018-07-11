@@ -9,18 +9,20 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.zhy.adapter.recyclerview.CommonAdapter;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import top.wzmyyj.wzm_sdk.adapter.ivd.IVD;
 import top.wzmyyj.wzm_sdk.adapter.ivd.SingleIVD;
 import top.wzmyyj.wzm_sdk.tools.T;
 import top.wzmyyj.zymk.R;
+import top.wzmyyj.zymk.app.bean.BoBean;
 import top.wzmyyj.zymk.app.bean.BookBean;
 import top.wzmyyj.zymk.app.bean.ItemBean;
+import top.wzmyyj.zymk.app.tools.G;
 import top.wzmyyj.zymk.presenter.ip.IRecyclePresent;
 import top.wzmyyj.zymk.view.panel.base.BaseRecyclerPanel;
 
@@ -66,7 +68,7 @@ public class HomeRecyclerPanel extends BaseRecyclerPanel<ItemBean> {
             public void convert(ViewHolder holder, ItemBean itemBean, int position) {
                 ImageView img_icon = holder.getView(R.id.img_icon);
                 TextView tv_title = holder.getView(R.id.tv_title);
-                TextView tv_summary = holder.getView(R.id.tv_summary);
+                final TextView tv_summary = holder.getView(R.id.tv_summary);
                 img_icon.setImageResource(itemBean.getIcon());
                 tv_title.setText(itemBean.getTitle());
                 tv_summary.setText(itemBean.getSummary());
@@ -79,7 +81,8 @@ public class HomeRecyclerPanel extends BaseRecyclerPanel<ItemBean> {
                     }
                 });
 
-                List<BookBean> data = itemBean.getBooks();
+                List<BookBean> data = itemBean.getBooks() != null
+                        ? itemBean.getBooks() : new ArrayList<BookBean>();
 
                 RecyclerView rv_item = holder.getView(R.id.rv_item);
                 rv_item.setRecycledViewPool(viewPool);
@@ -89,14 +92,24 @@ public class HomeRecyclerPanel extends BaseRecyclerPanel<ItemBean> {
                     protected void convert(ViewHolder holder, BookBean bookBean, int position) {
                         ImageView img_book = holder.getView(R.id.img_book);
                         TextView tv_star = holder.getView(R.id.tv_star);
-                        TextView tv_last = holder.getView(R.id.tv_last);
+                        TextView tv_chapter = holder.getView(R.id.tv_chapter);
                         TextView tv_title = holder.getView(R.id.tv_title);
                         TextView tv_desc = holder.getView(R.id.tv_desc);
 
-                        Glide.with(context)
-                                .load("https://image.zymkcdn.com/file/cover/000/000/700.jpg-300x400.webp")
-                                .error(R.mipmap.ic_error)
-                                .into(img_book);
+                        tv_star.setText(bookBean.getStar() + "分");
+                        tv_title.setText(bookBean.getTitle());
+                        tv_chapter.setText(bookBean.getChapter());
+                        tv_desc.setText(bookBean.getDesc());
+
+                        G.img(context, bookBean.getData_src(), img_book);
+
+                        final String s = bookBean.getStar();
+                        img_book.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                T.s(s);
+                            }
+                        });
                     }
 
                     @Override
@@ -119,14 +132,17 @@ public class HomeRecyclerPanel extends BaseRecyclerPanel<ItemBean> {
     }
 
     @Override
-    public Object f(int i, Object... objects) {
+    public Object f(int w, Object... objects) {
+        List<BoBean> bos = (List<BoBean>) objects[0];
+        mPanels.get(0).f(w, bos);
+
         mData.clear();
-        List<ItemBean> itemBeans = (List<ItemBean>) objects[0];
+        List<ItemBean> itemBeans = (List<ItemBean>) objects[1];
         for (ItemBean item : itemBeans) {
             mData.add(item);
         }
         notifyDataSetChanged();
-        return super.f(i, objects);
+        return super.f(w, objects);
     }
 
     @Override

@@ -8,34 +8,41 @@ import android.widget.ImageView;
 import java.util.List;
 
 public class ImageViewPagerAdapter extends PagerAdapter {
-	private List<ImageView> imageList;
+    private List<ImageView> imageList;
 
-	public ImageViewPagerAdapter(List<ImageView> imageList) {
-		this.imageList = imageList;
-	}
+    public ImageViewPagerAdapter(List<ImageView> imageList) {
+        this.imageList = imageList;
+    }
 
-	public int getCount() {
-		return Integer.MAX_VALUE;
-	}
+    public int getCount() {
+        return Integer.MAX_VALUE;
+    }
 
-	public Object instantiateItem(ViewGroup container, int position) {
+    public Object instantiateItem(ViewGroup container, int position) {
 
-		container.addView(imageList.get(position % imageList.size()));
-		return imageList.get(position % imageList.size());
-	}
+        View v = imageList.get(position % imageList.size());
 
-	public boolean isViewFromObject(View view, Object object) {
-		if (view == object) {
-			return true;
-		} else {
-			return false;
-		}
-	}
+        ViewGroup parent = (ViewGroup) v.getParent();
+        if (parent != null) {
+            parent.removeAllViews();
+        }
 
-	public void destroyItem(ViewGroup container, int position, Object object) {
-		container.removeView((View) object);
-		object = null;
-	}
+        container.addView(v);
+        return imageList.get(position % imageList.size());
+    }
+
+    public boolean isViewFromObject(View view, Object object) {
+        if (view == object) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public void destroyItem(ViewGroup container, int position, Object object) {
+        container.removeView((View) object);
+        object = null;
+    }
 
 
 }

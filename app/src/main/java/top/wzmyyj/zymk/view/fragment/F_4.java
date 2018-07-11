@@ -21,8 +21,4 @@ public class F_4 extends BaseFragment<MinePresenter> implements IF_4View {
         return R.layout.fragment_4;
     }
 
-    @Override
-    public void showToast(String t) {
-
-    }
 }

@@ -31,11 +31,6 @@ public class F_1 extends BaseFragment<HomePresenter> implements IF_1View {
 
 
     @Override
-    public void showToast(String t) {
-
-    }
-
-    @Override
     protected void initPanels() {
         super.initPanels();
         addPanels(new HomeRecyclerPanel(activity, mPresenter));

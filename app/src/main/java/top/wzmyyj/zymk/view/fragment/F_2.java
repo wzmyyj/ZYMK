@@ -13,8 +13,6 @@ import top.wzmyyj.wzm_sdk.adapter.ViewTitlePagerAdapter;
 import top.wzmyyj.wzm_sdk.panel.Panel;
 import top.wzmyyj.wzm_sdk.tools.T;
 import top.wzmyyj.zymk.R;
-import top.wzmyyj.zymk.app.bean.TypeBean;
-import top.wzmyyj.zymk.app.data.ComicType;
 import top.wzmyyj.zymk.presenter.p.TypePresenter;
 import top.wzmyyj.zymk.view.fragment.base.BaseFragment;
 import top.wzmyyj.zymk.view.iv.IF_2View;
@@ -36,10 +34,6 @@ public class F_2 extends BaseFragment<TypePresenter> implements IF_2View {
         return R.layout.fragment_2;
     }
 
-    @Override
-    public void showToast(String t) {
-
-    }
 
     @Override
     protected void initPanels() {
@@ -47,33 +41,29 @@ public class F_2 extends BaseFragment<TypePresenter> implements IF_2View {
         addPanels(new TypeRecyclePanel(activity) {
             @Override
             protected void setData() {
-                for (int i = 0; i < ComicType.type_0.length; i++)
-                    mData.add(new TypeBean(ComicType.type[0],
-                            ComicType.type_0[i], ComicType.pic_0[i]));
+                this.title = F_2.this.mPresenter.getTitle(0);
+                mData.addAll(F_2.this.mPresenter.getData(0));
             }
         });
         addPanels(new TypeRecyclePanel(activity) {
             @Override
             protected void setData() {
-                for (int i = 0; i < ComicType.type_1.length; i++)
-                    mData.add(new TypeBean(ComicType.type[1],
-                            ComicType.type_1[i], ComicType.pic_1[i]));
+                this.title = F_2.this.mPresenter.getTitle(1);
+                mData.addAll(F_2.this.mPresenter.getData(1));
             }
         });
         addPanels(new TypeRecyclePanel(activity) {
             @Override
             protected void setData() {
-                for (int i = 0; i < ComicType.type_2.length; i++)
-                    mData.add(new TypeBean(ComicType.type[2],
-                            ComicType.type_2[i], ComicType.pic_2[i]));
+                this.title = F_2.this.mPresenter.getTitle(2);
+                mData.addAll(F_2.this.mPresenter.getData(2));
             }
         });
         addPanels(new TypeRecyclePanel(activity) {
             @Override
             protected void setData() {
-                for (int i = 0; i < ComicType.type_3.length; i++)
-                    mData.add(new TypeBean(ComicType.type[3],
-                            ComicType.type_3[i], ComicType.pic_3[i]));
+                this.title = F_2.this.mPresenter.getTitle(3);
+                mData.addAll(F_2.this.mPresenter.getData(3));
             }
         });
     }
@@ -92,13 +82,8 @@ public class F_2 extends BaseFragment<TypePresenter> implements IF_2View {
         List<String> titles = new ArrayList<>();
         for (Panel p : mPanels.getPanelList()) {
             viewList.add(p.getView());
+            titles.add(p.getTitle());
         }
-
-        titles.add(ComicType.type[0]);
-        titles.add(ComicType.type[1]);
-        titles.add(ComicType.type[2]);
-        titles.add(ComicType.type[3]);
-
         ViewTitlePagerAdapter pagerAdapter = new ViewTitlePagerAdapter(viewList, titles);
         mViewPager.setAdapter(pagerAdapter);
         mTabLayout.setupWithViewPager(mViewPager);

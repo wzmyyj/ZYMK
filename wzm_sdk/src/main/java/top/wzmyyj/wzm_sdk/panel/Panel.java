@@ -112,7 +112,7 @@ public class Panel {
     }
 
 
-    public Object f(int i, Object... objects) {
+    public Object f(int w, Object... objects) {
         return null;
     }
 

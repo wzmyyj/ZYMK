@@ -13,7 +13,7 @@ public class ItemBean {
     private int icon;
     private String title;
     private String summary;
-    private String url;
+    private String href;
     private List<BookBean> books;
 
     public ItemBean() {
@@ -34,18 +34,18 @@ public class ItemBean {
         return icons[i];
     }
 
-    public ItemBean(String title, String summary, String url) {
+    public ItemBean(String title, String summary, String href) {
         this.icon = icon();
         this.title = title;
         this.summary = summary;
-        this.url = url;
+        this.href = href;
     }
 
-    public ItemBean(String title, String summary, String url, List<BookBean> books) {
+    public ItemBean(String title, String summary, String href, List<BookBean> books) {
         this.icon = icon();
         this.title = title;
         this.summary = summary;
-        this.url = url;
+        this.href = href;
         this.books = books;
     }
 
@@ -74,12 +74,13 @@ public class ItemBean {
         this.summary = summary;
     }
 
-    public String getUrl() {
-        return url;
+
+    public String getHref() {
+        return href;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setHref(String href) {
+        this.href = href;
     }
 
     public List<BookBean> getBooks() {

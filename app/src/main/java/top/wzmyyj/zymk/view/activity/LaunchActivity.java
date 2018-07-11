@@ -25,6 +25,6 @@ public class LaunchActivity extends BaseActivity<LaunchPresenter> implements ILa
     @Override
     protected void initEvent() {
         super.initEvent();
-        mPresenter.run();
+        mPresenter.go();
     }
 }

@@ -20,7 +20,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="55dp"
+        android:layout_height="50dp"
         android:orientation="horizontal"
         android:paddingLeft="15dp"
         android:paddingRight="15dp">
@@ -37,8 +37,8 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:src="@mipmap/icon_new" />
 
             <TextView
@@ -47,7 +47,7 @@
                 android:layout_marginLeft="15dp"
                 android:text="更新"
                 android:textColor="@color/colorGray_7"
-                android:textSize="16sp" />
+                android:textSize="15sp" />
 
         </LinearLayout>
 
@@ -63,8 +63,8 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:src="@mipmap/icon_ranking" />
 
             <TextView
@@ -73,7 +73,7 @@
                 android:layout_marginLeft="15dp"
                 android:text="排行"
                 android:textColor="@color/colorGray_7"
-                android:textSize="16sp" />
+                android:textSize="15sp" />
 
         </LinearLayout>
 

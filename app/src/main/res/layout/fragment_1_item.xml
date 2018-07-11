@@ -10,7 +10,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="35dp"
+        android:layout_height="37dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingLeft="15dp"
@@ -20,7 +20,7 @@
             android:id="@+id/img_icon"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:background="@mipmap/svg_pic_list_jd" />
+            android:padding="2dp" />
 
         <TextView
             android:id="@+id/tv_title"
@@ -28,7 +28,6 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="5dp"
-            android:text="经典"
             android:textColor="@color/colorGray_5"
             android:textSize="15sp"
             android:textStyle="bold" />
@@ -41,7 +40,6 @@
             android:layout_marginRight="10dp"
             android:layout_marginTop="5dp"
             android:layout_weight="1"
-            android:text="团结，友爱。"
             android:textColor="@color/colorGray_9"
             android:textSize="13sp" />
 
@@ -63,7 +61,7 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_item"
         android:layout_width="match_parent"
-        android:layout_height="170dp"
+        android:layout_height="180dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp">
 

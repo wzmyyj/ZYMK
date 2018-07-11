@@ -25,7 +25,7 @@ public abstract class BoPanel extends InitPanel {
     protected ViewPager mViewPager;
     protected TextView mTV;
     private LinearLayout mLL;
-    private int size = 3;
+    protected int size = 3;
     private int point_size = 20;
 
     public BoPanel(Context context) {
@@ -45,7 +45,7 @@ public abstract class BoPanel extends InitPanel {
         size = getSize();
         point_size = getPointSize();
         initBo();
-        setBoData();
+        initBoData();
     }
 
     protected int getPointSize() {
@@ -80,7 +80,7 @@ public abstract class BoPanel extends InitPanel {
 
     protected abstract int getSize();
 
-    public abstract void setBoData();
+    protected abstract void initBoData();
 
     protected List<ImageView> mImageList;
 
@@ -106,7 +106,7 @@ public abstract class BoPanel extends InitPanel {
                 } else {
                     point.setEnabled(false);
                 }
-                mDosc[i] = "这是第" + i + "张图的描述。。";
+                mDosc[i] = "this is pic " + i;
                 mLL.addView(point);
             }
             mTV.setText(mDosc[0]);

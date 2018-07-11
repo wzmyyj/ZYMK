@@ -1,11 +1,10 @@
 package top.wzmyyj.zymk.presenter.p;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Handler;
 
+import top.wzmyyj.zymk.app.tools.I;
 import top.wzmyyj.zymk.presenter.p.base.BasePresenter;
-import top.wzmyyj.zymk.view.activity.MainActivity;
 import top.wzmyyj.zymk.view.iv.ILaunchView;
 
 /**
@@ -28,14 +27,12 @@ public class LaunchPresenter extends BasePresenter<ILaunchView> {
 
     }
 
-    public void run() {
+    public void go() {
         mHandler.postDelayed(new Runnable() {
 
             @Override
             public void run() {
-                Intent i = new Intent();
-                i.setClass(mActivity, MainActivity.class);
-                mActivity.startActivity(i);
+                I.toMainActivity(mActivity);
                 mActivity.finish();
                 mActivity.overridePendingTransition(android.R.anim.fade_in,
                         android.R.anim.fade_out);
