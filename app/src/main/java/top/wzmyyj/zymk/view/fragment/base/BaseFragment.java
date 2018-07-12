@@ -4,7 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 
 import top.wzmyyj.wzm_sdk.tools.T;
-import top.wzmyyj.zymk.presenter.p.base.BasePresenter;
+import top.wzmyyj.zymk.presenter.base.BasePresenter;
 import top.wzmyyj.zymk.view.iv.base.IBaseView;
 
 /**

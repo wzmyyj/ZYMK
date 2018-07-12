@@ -5,9 +5,9 @@ import android.view.View;
 
 import java.util.List;
 
-import top.wzmyyj.wzm_sdk.tools.T;
 import top.wzmyyj.zymk.app.bean.BoBean;
 import top.wzmyyj.zymk.app.tools.G;
+import top.wzmyyj.zymk.presenter.HomePresenter;
 import top.wzmyyj.zymk.view.panel.base.BaseBoPanel;
 
 
@@ -15,9 +15,9 @@ import top.wzmyyj.zymk.view.panel.base.BaseBoPanel;
  * Created by yyj on 2018/07/04. email: 2209011667@qq.com
  */
 
-public class TopBoPanel extends BaseBoPanel {
-    public TopBoPanel(Context context) {
-        super(context);
+public class TopBoPanel extends BaseBoPanel<HomePresenter> {
+    public TopBoPanel(Context context, HomePresenter p) {
+        super(context, p);
     }
 
     @Override
@@ -44,11 +44,11 @@ public class TopBoPanel extends BaseBoPanel {
             BoBean bo = bos.get(i);
             G.img(context, bo.getData_src(), mImageList.get(i));
             mDosc[i] = bo.getTitle();
-            final String url = bo.getHref();
+            final String href = bo.getHref();
             mImageList.get(i).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    T.s(url);
+                    mPresenter.goDetails(href);
                 }
             });
         }

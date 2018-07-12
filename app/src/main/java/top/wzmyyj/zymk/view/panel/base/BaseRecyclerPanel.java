@@ -3,23 +3,20 @@ package top.wzmyyj.zymk.view.panel.base;
 import android.content.Context;
 
 import top.wzmyyj.wzm_sdk.panel.RecyclerPanel;
-import top.wzmyyj.zymk.presenter.ip.IRecyclePresent;
+import top.wzmyyj.zymk.presenter.base.IBasePresent;
 
 
 /**
  * Created by yyj on 2018/07/06. email: 2209011667@qq.com
  */
 
-public abstract class BaseRecyclerPanel<T> extends RecyclerPanel<T> {
-    public BaseRecyclerPanel(Context context) {
-        super(context);
-    }
+public abstract class BaseRecyclerPanel<T,P extends IBasePresent> extends RecyclerPanel<T> {
 
-    protected IRecyclePresent mPresenter;
+    protected P mPresenter;
 
-    public BaseRecyclerPanel(Context context, IRecyclePresent ip) {
+    public BaseRecyclerPanel(Context context, P p) {
         super(context);
-        this.mPresenter = ip;
+        this.mPresenter = p;
         checkPresenterIsNull();
     }
 

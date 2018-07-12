@@ -1,4 +1,4 @@
-package top.wzmyyj.zymk.presenter.ip.base;
+package top.wzmyyj.zymk.presenter.base;
 
 import top.wzmyyj.wzm_sdk.inter.ip.ILogPresent;
 
@@ -14,4 +14,8 @@ public interface IBasePresent extends ILogPresent {
     void onPause();
 
     void onDestroy();
+
+    void finish();
+
+
 }

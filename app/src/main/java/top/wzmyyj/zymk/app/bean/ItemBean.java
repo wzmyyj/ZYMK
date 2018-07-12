@@ -15,6 +15,7 @@ public class ItemBean {
     private String summary;
     private String href;
     private List<BookBean> books;
+    private int type;
 
     public ItemBean() {
     }
@@ -34,19 +35,44 @@ public class ItemBean {
         return icons[i];
     }
 
+    private int icon(String title) {
+        if (title.equals("经典")) return icons[0];
+        if (title.equals("独家")) return icons[5];
+        if (title.equals("霸总")) return icons[2];
+        if (title.equals("新番")) return icons[3];
+        if (title.equals("燃")) return icons[1];
+        if (title.equals("萌")) return icons[0];
+        if (title.equals("锐")) return icons[5];
+        if (title.equals("幻")) return icons[4];
+        if (title.equals("完结")) return icons[5];
+        if (title.equals("最新上架")) return icons[1];
+        if (title.equals("最新更新")) return icons[4];
+        return icons[0];
+    }
+
+
     public ItemBean(String title, String summary, String href) {
-        this.icon = icon();
+        this.icon = icon(title);
         this.title = title;
         this.summary = summary;
         this.href = href;
     }
 
+
     public ItemBean(String title, String summary, String href, List<BookBean> books) {
-        this.icon = icon();
+        this.icon = icon(title);
         this.title = title;
         this.summary = summary;
         this.href = href;
         this.books = books;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 
     public int getIcon() {

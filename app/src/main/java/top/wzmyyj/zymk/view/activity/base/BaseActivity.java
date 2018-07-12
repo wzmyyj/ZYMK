@@ -4,7 +4,7 @@ import android.os.Bundle;
 
 import top.wzmyyj.wzm_sdk.tools.T;
 import top.wzmyyj.zymk.common.utils.StatusBarUtil;
-import top.wzmyyj.zymk.presenter.ip.base.IBasePresent;
+import top.wzmyyj.zymk.presenter.base.IBasePresent;
 import top.wzmyyj.zymk.view.iv.base.IBaseView;
 
 /**
@@ -17,10 +17,10 @@ public abstract class BaseActivity<P extends IBasePresent> extends BasePanelActi
 
     @Override
     protected void initSome(Bundle savedInstanceState) {
-        super.initSome(savedInstanceState);
-        StatusBarUtil.initStatusBar(activity, false, true, true);
         initPresenter();
         checkPresenterIsNull();
+        super.initSome(savedInstanceState);
+        StatusBarUtil.initStatusBar(activity, false, true, true);
     }
 
     protected abstract void initPresenter();

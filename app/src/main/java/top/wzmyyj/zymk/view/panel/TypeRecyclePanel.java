@@ -1,10 +1,7 @@
 package top.wzmyyj.zymk.view.panel;
 
 import android.content.Context;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,15 +13,18 @@ import java.util.List;
 import top.wzmyyj.wzm_sdk.adapter.ivd.SingleIVD;
 import top.wzmyyj.zymk.R;
 import top.wzmyyj.zymk.app.bean.TypeBean;
+import top.wzmyyj.zymk.presenter.TypePresenter;
 import top.wzmyyj.zymk.view.panel.base.BaseRecyclerPanel;
 
 /**
  * Created by yyj on 2018/07/06. email: 2209011667@qq.com
  */
 
-public abstract class TypeRecyclePanel extends BaseRecyclerPanel<TypeBean> {
-    public TypeRecyclePanel(Context context) {
-        super(context);
+public abstract class TypeRecyclePanel extends BaseRecyclerPanel<TypeBean,TypePresenter> {
+
+
+    public TypeRecyclePanel(Context context, TypePresenter p) {
+        super(context, p);
     }
 
     @Override
@@ -49,8 +49,8 @@ public abstract class TypeRecyclePanel extends BaseRecyclerPanel<TypeBean> {
     }
 
     @Override
-    protected void setView(RecyclerView rv, SwipeRefreshLayout srl, FrameLayout layout) {
-        super.setView(rv, srl, layout);
-        rv.setLayoutManager(new GridLayoutManager(context, 3));
+    protected void initView() {
+        super.initView();
+        mRecyclerView.setLayoutManager(new GridLayoutManager(context, 3));
     }
 }

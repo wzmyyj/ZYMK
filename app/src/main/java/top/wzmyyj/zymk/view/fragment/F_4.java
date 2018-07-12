@@ -1,7 +1,7 @@
 package top.wzmyyj.zymk.view.fragment;
 
 import top.wzmyyj.zymk.R;
-import top.wzmyyj.zymk.presenter.p.MinePresenter;
+import top.wzmyyj.zymk.presenter.MinePresenter;
 import top.wzmyyj.zymk.view.fragment.base.BaseFragment;
 import top.wzmyyj.zymk.view.iv.IF_4View;
 

@@ -17,7 +17,7 @@ public class G {
         Glide.with(context)
                 .load(url)
                 .centerCrop()
-                .placeholder(R.mipmap.ic_progress)
+//                .placeholder(R.mipmap.ic_progress)
                 .error(R.mipmap.ic_error)
                 .into(img);
     }

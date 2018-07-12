@@ -2,8 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="top.wzmyyj.zymk">
 
+    <uses-permission android:name="android.permission.INTERNET" />
 
-    <uses-permission android:name="android.permission.INTERNET" /> <!-- 网络通信-->
+    <!-- 网络通信 -->
     <application
         android:name=".app.application.App"
         android:allowBackup="true"
@@ -21,7 +22,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".view.activity.MainActivity" />
-
+        <activity android:name=".view.activity.MoreActivity" />
+        <activity android:name=".view.activity.DetailsActivity"></activity>
     </application>
 
 </manifest>

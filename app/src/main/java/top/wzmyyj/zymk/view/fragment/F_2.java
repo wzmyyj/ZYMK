@@ -13,7 +13,7 @@ import top.wzmyyj.wzm_sdk.adapter.ViewTitlePagerAdapter;
 import top.wzmyyj.wzm_sdk.panel.Panel;
 import top.wzmyyj.wzm_sdk.tools.T;
 import top.wzmyyj.zymk.R;
-import top.wzmyyj.zymk.presenter.p.TypePresenter;
+import top.wzmyyj.zymk.presenter.TypePresenter;
 import top.wzmyyj.zymk.view.fragment.base.BaseFragment;
 import top.wzmyyj.zymk.view.iv.IF_2View;
 import top.wzmyyj.zymk.view.panel.TypeRecyclePanel;
@@ -35,31 +35,32 @@ public class F_2 extends BaseFragment<TypePresenter> implements IF_2View {
     }
 
 
+
     @Override
     protected void initPanels() {
         super.initPanels();
-        addPanels(new TypeRecyclePanel(activity) {
+        addPanels(new TypeRecyclePanel(activity,mPresenter) {
             @Override
             protected void setData() {
                 this.title = F_2.this.mPresenter.getTitle(0);
                 mData.addAll(F_2.this.mPresenter.getData(0));
             }
         });
-        addPanels(new TypeRecyclePanel(activity) {
+        addPanels(new TypeRecyclePanel(activity,mPresenter) {
             @Override
             protected void setData() {
                 this.title = F_2.this.mPresenter.getTitle(1);
                 mData.addAll(F_2.this.mPresenter.getData(1));
             }
         });
-        addPanels(new TypeRecyclePanel(activity) {
+        addPanels(new TypeRecyclePanel(activity,mPresenter) {
             @Override
             protected void setData() {
                 this.title = F_2.this.mPresenter.getTitle(2);
                 mData.addAll(F_2.this.mPresenter.getData(2));
             }
         });
-        addPanels(new TypeRecyclePanel(activity) {
+        addPanels(new TypeRecyclePanel(activity,mPresenter) {
             @Override
             protected void setData() {
                 this.title = F_2.this.mPresenter.getTitle(3);

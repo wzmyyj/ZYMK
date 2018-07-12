@@ -10,6 +10,9 @@ import java.util.List;
 import top.wzmyyj.zymk.app.bean.BoBean;
 import top.wzmyyj.zymk.app.bean.BookBean;
 import top.wzmyyj.zymk.app.bean.ItemBean;
+import top.wzmyyj.zymk.common.java.RandomSort;
+import top.wzmyyj.zymk.model.box.HomeBox;
+import top.wzmyyj.zymk.model.box.MoreBox;
 
 /**
  * Created by yyj on 2018/07/09. email: 2209011667@qq.com
@@ -18,8 +21,8 @@ import top.wzmyyj.zymk.app.bean.ItemBean;
 public class DocUtil {
 
     public static List<ItemBean> transToItem(Document doc) {
-        List<ItemBean> data = new ArrayList<>();
-
+        if (doc == null) return null;
+        List<ItemBean> items = new ArrayList<>();
         Elements elements = doc.getElementsByClass("mk-floor");
         int l = elements.size();
         elements.remove(l - 1);
@@ -41,12 +44,15 @@ public class DocUtil {
                 books.add(book);
             }
 
+            RandomSort.sort(books);
+
             item.setBooks(books);
-            data.add(item);
+            items.add(item);
 
         }
-
-        return data;
+        RandomSort.sort(items, 0, 3);
+        RandomSort.sort(items, 4, items.size() - 2);
+        return items;
     }
 
 
@@ -66,6 +72,7 @@ public class DocUtil {
 
 
     public static List<BoBean> transToBo(Document doc) {
+        if (doc == null) return null;
         List<BoBean> data = new ArrayList<>();
         Elements elements = doc.getElementsByClass("swiper-slide");
         for (Element element : elements) {
@@ -78,4 +85,64 @@ public class DocUtil {
     }
 
 
+    public static HomeBox transToHome(Document doc) {
+        List<ItemBean> items = transToItem(doc);
+        List<BoBean> bos = transToBo(doc);
+        HomeBox home = new HomeBox(bos, items);
+        return home;
+    }
+
+
+    public static MoreBox transToMore(Document doc) {
+
+        MoreBox more = new MoreBox();
+        more.setHref(doc.baseUri());
+
+        String top = doc.getElementsByClass("mk-crumb").get(0)
+                .getElementsByTag("strong").text();
+        String figure = doc.getElementsByClass("figure").attr("data-src");
+        String content = doc.getElementsByClass("book-desc").get(0)
+                .getElementsByClass("content").text();
+
+        more.setTitle(top);
+        more.setFigure(figure);
+        more.setContent(content);
+
+        List<BookBean> books = new ArrayList<>();
+
+        Elements elements = doc.getElementsByClass("item");
+        for (Element element : elements) {
+            Element a = element.getElementsByTag("a").get(0);
+            String href = a.absUrl("href");
+            String title = a.attr("title");
+            String data_src = a.getElementsByTag("img").get(0)
+                    .absUrl("data-src");
+
+            String star = a.getElementsByTag("span").get(0).text();
+
+            String desc = element.getElementsByClass("content").text();
+
+            BookBean book = new BookBean();
+            book.setHref(href);
+            book.setTitle(title);
+            book.setData_src(data_src);
+            book.setStar(star);
+            book.setDesc(desc);
+
+            List<String> ts = new ArrayList<>();
+
+            Elements tags = element.getElementsByClass("tags-txt");
+            for (Element tag : tags) {
+                String t = tag.text();
+                ts.add(t);
+            }
+
+            book.setTags(ts);
+            books.add(book);
+        }
+        RandomSort.sort(books);
+        more.setBookList(books);
+        return more;
+
+    }
 }

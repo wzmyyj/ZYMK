@@ -27,9 +27,9 @@ import top.wzmyyj.wzm_sdk.tools.L;
 public abstract class RecyclerPanel<T> extends InitPanel
         implements MultiItemTypeAdapter.OnItemClickListener {
 
-    private RecyclerView mRecyclerView;
-    private SwipeRefreshLayout mSwipeRefreshLayout;
-    private FrameLayout mFrameLayout;
+    protected RecyclerView mRecyclerView;
+    protected SwipeRefreshLayout mSwipeRefreshLayout;
+    protected FrameLayout mFrameLayout;
     protected List<T> mData = new ArrayList<>();
     protected List<IVD<T>> mIVD = new ArrayList<>();
     protected HeaderAndFooterWrapper mHeaderAndFooterWrapper;
@@ -55,8 +55,6 @@ public abstract class RecyclerPanel<T> extends InitPanel
 
         setData();
         setIVD(mIVD);
-
-        setView(mRecyclerView, mSwipeRefreshLayout, mFrameLayout);
         setHeader();
         setFooter();
     }
@@ -66,9 +64,6 @@ public abstract class RecyclerPanel<T> extends InitPanel
 
 
     protected abstract void setIVD(List<IVD<T>> ivd);
-
-    protected void setView(RecyclerView rv, SwipeRefreshLayout srl, FrameLayout layout) {
-    }
 
 
     protected void setHeader() {

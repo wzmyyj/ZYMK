@@ -1,4 +1,4 @@
-package top.wzmyyj.zymk.presenter.p;
+package top.wzmyyj.zymk.presenter;
 
 import android.app.Activity;
 
@@ -7,7 +7,7 @@ import java.util.List;
 
 import top.wzmyyj.zymk.app.bean.TypeBean;
 import top.wzmyyj.zymk.model.data.TypeData;
-import top.wzmyyj.zymk.presenter.p.base.BasePresenter;
+import top.wzmyyj.zymk.presenter.base.BasePresenter;
 import top.wzmyyj.zymk.view.iv.IF_2View;
 
 /**

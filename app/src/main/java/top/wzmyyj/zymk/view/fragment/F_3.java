@@ -7,7 +7,7 @@ import android.widget.LinearLayout;
 import butterknife.BindView;
 import top.wzmyyj.wzm_sdk.tools.T;
 import top.wzmyyj.zymk.R;
-import top.wzmyyj.zymk.presenter.p.FindPresenter;
+import top.wzmyyj.zymk.presenter.FindPresenter;
 import top.wzmyyj.zymk.view.fragment.base.BaseFragment;
 import top.wzmyyj.zymk.view.iv.IF_3View;
 

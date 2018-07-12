@@ -1,10 +1,10 @@
-package top.wzmyyj.zymk.presenter.p;
+package top.wzmyyj.zymk.presenter;
 
 import android.app.Activity;
 
 import top.wzmyyj.zymk.app.tools.I;
 import top.wzmyyj.zymk.model.net.Urls;
-import top.wzmyyj.zymk.presenter.p.base.BasePresenter;
+import top.wzmyyj.zymk.presenter.base.BasePresenter;
 import top.wzmyyj.zymk.view.iv.IF_3View;
 
 /**

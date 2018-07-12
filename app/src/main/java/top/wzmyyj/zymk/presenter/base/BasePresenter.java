@@ -1,9 +1,8 @@
-package top.wzmyyj.zymk.presenter.p.base;
+package top.wzmyyj.zymk.presenter.base;
 
 import android.app.Activity;
 
 import top.wzmyyj.wzm_sdk.tools.L;
-import top.wzmyyj.zymk.presenter.ip.base.IBasePresent;
 import top.wzmyyj.zymk.view.iv.base.IBaseView;
 
 /**
@@ -36,6 +35,11 @@ public class BasePresenter<V extends IBaseView> implements IBasePresent {
     public void onDestroy() {
         this.mActivity = null;
         this.mView = null;
+    }
+
+    @Override
+    public void finish() {
+        mActivity.finish();
     }
 
     @Override

@@ -1,50 +1,43 @@
-package top.wzmyyj.zymk.view.fragment;
+package top.wzmyyj.zymk.view.activity;
 
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import butterknife.BindView;
-import top.wzmyyj.wzm_sdk.tools.T;
 import top.wzmyyj.zymk.R;
-import top.wzmyyj.zymk.presenter.HomePresenter;
-import top.wzmyyj.zymk.view.fragment.base.BaseFragment;
-import top.wzmyyj.zymk.view.iv.IF_1View;
-import top.wzmyyj.zymk.view.panel.HomeRecyclerPanel;
+import top.wzmyyj.zymk.presenter.MorePresenter;
+import top.wzmyyj.zymk.view.activity.base.BaseActivity;
+import top.wzmyyj.zymk.view.iv.IMoreView;
+import top.wzmyyj.zymk.view.panel.MoreRecyclerPanel;
 
-/**
- * Created by yyj on 2018/06/28. email: 2209011667@qq.com
- */
-
-public class F_1 extends BaseFragment<HomePresenter> implements IF_1View {
-
+public class MoreActivity extends BaseActivity<MorePresenter> implements IMoreView {
 
     @Override
     protected void initPresenter() {
-        mPresenter = new HomePresenter(activity, this);
+        mPresenter = new MorePresenter(activity, this);
     }
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_1;
+        return R.layout.activity_more;
     }
-
 
     @Override
     protected void initPanels() {
         super.initPanels();
-        addPanels(new HomeRecyclerPanel(activity, mPresenter));
+        addPanels(new MoreRecyclerPanel(activity, mPresenter));
     }
 
     @BindView(R.id.ll_panel)
     LinearLayout layout;
-    @BindView(R.id.img_a)
-    ImageView img_a;
-    @BindView(R.id.img_search)
-    ImageView img_search;
+    @BindView(R.id.img_back)
+    ImageView img_back;
+    @BindView(R.id.tv_title)
+    TextView tv_title;
     @BindView(R.id.ll_top)
     LinearLayout ll_top;
-
 
     @Override
     protected void initView() {
@@ -56,10 +49,10 @@ public class F_1 extends BaseFragment<HomePresenter> implements IF_1View {
     @Override
     protected void initListener() {
         super.initListener();
-        img_search.setOnClickListener(new View.OnClickListener() {
+        img_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                T.s("搜索");
+                mPresenter.finish();
             }
         });
     }
@@ -68,7 +61,10 @@ public class F_1 extends BaseFragment<HomePresenter> implements IF_1View {
     public void update(int w, Object... objs) {
         getPanel(0).f(0, objs);
     }
+
+    @Override
+    public void setTitle(String s) {
+        if (tv_title != null)
+            tv_title.setText(s);
+    }
 }
-
-
-

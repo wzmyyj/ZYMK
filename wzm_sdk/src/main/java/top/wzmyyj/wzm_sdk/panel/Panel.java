@@ -8,6 +8,9 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by wzm on 2018/04/23. email: 2209011667@qq.com
  */
@@ -114,6 +117,14 @@ public class Panel {
 
     public Object f(int w, Object... objects) {
         return null;
+    }
+
+    protected List<View> viewList = new ArrayList<>();
+
+    public void bingViews(View... views) {
+        for (int i = 0; i < views.length; i++) {
+            viewList.add(views[i]);
+        }
     }
 
 }

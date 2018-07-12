@@ -23,7 +23,7 @@ import top.wzmyyj.zymk.app.bean.BoBean;
 import top.wzmyyj.zymk.app.bean.BookBean;
 import top.wzmyyj.zymk.app.bean.ItemBean;
 import top.wzmyyj.zymk.app.tools.G;
-import top.wzmyyj.zymk.presenter.ip.IRecyclePresent;
+import top.wzmyyj.zymk.presenter.HomePresenter;
 import top.wzmyyj.zymk.view.panel.base.BaseRecyclerPanel;
 
 
@@ -31,29 +31,37 @@ import top.wzmyyj.zymk.view.panel.base.BaseRecyclerPanel;
  * Created by yyj on 2018/07/04. email: 2209011667@qq.com
  */
 
-public class HomeRecyclerPanel extends BaseRecyclerPanel<ItemBean> {
-    public HomeRecyclerPanel(Context context) {
-        super(context);
-    }
+public class HomeRecyclerPanel extends BaseRecyclerPanel<ItemBean, HomePresenter> {
 
-
-    public HomeRecyclerPanel(Context context, IRecyclePresent ip) {
-        super(context, ip);
+    public HomeRecyclerPanel(Context context, HomePresenter p) {
+        super(context, p);
     }
 
     @Override
     protected void setData() {
-        mData.add(new ItemBean());
-        mData.add(new ItemBean());
-        mData.add(new ItemBean());
-        mData.add(new ItemBean());
-        mData.add(new ItemBean());
-        mData.add(new ItemBean());
-        mData.add(new ItemBean());
-        mData.add(new ItemBean());
-        mData.add(new ItemBean());
+        mPresenter.addEmptyData(mData);
         updateWithView();
+    }
 
+    @Override
+    protected void initEvent() {
+        super.initEvent();
+        mRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+
+            int mDistance = 0;
+            int maxDistance = 300;//当距离在[0,maxDistance]变化时，透明度在[0,255之间变化]
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                mDistance += dy;
+                float percent = mDistance * 1f / maxDistance;//百分比
+
+                if (viewList.size() == 0) return;
+                View top = viewList.get(0);
+                top.setAlpha(percent);
+            }
+        });
     }
 
     @Override
@@ -73,11 +81,12 @@ public class HomeRecyclerPanel extends BaseRecyclerPanel<ItemBean> {
                 tv_title.setText(itemBean.getTitle());
                 tv_summary.setText(itemBean.getSummary());
 
+                final String href = itemBean.getHref();
                 Button bt_more = holder.getView(R.id.bt_more);
                 bt_more.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        T.s("你点击了更多！");
+                        mPresenter.goMore(href);
                     }
                 });
 
@@ -103,19 +112,16 @@ public class HomeRecyclerPanel extends BaseRecyclerPanel<ItemBean> {
 
                         G.img(context, bookBean.getData_src(), img_book);
 
-                        final String s = bookBean.getStar();
+                        final String href1 = bookBean.getHref();
                         img_book.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                T.s(s);
+                                mPresenter.goDetails(href1);
                             }
                         });
                     }
 
-                    @Override
-                    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
-                        super.setOnItemClickListener(onItemClickListener);
-                    }
+
                 });
 
 
@@ -148,7 +154,7 @@ public class HomeRecyclerPanel extends BaseRecyclerPanel<ItemBean> {
     @Override
     protected void initPanels() {
         super.initPanels();
-        addPanels(new TopBoPanel(activity));
+        addPanels(new TopBoPanel(activity, mPresenter));
     }
 
     @Override

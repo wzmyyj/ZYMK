@@ -1,5 +1,7 @@
 package top.wzmyyj.zymk.app.bean;
 
+import java.util.List;
+
 /**
  * Created by yyj on 2018/07/05. email: 2209011667@qq.com
  */
@@ -13,7 +15,17 @@ public class BookBean {
     private String href;
     private String desc;
 
+    private List<String> tags;
+
     public BookBean() {
+    }
+
+    public BookBean(String title, String data_src, String star, String href, String desc) {
+        this.title = title;
+        this.data_src = data_src;
+        this.star = star;
+        this.href = href;
+        this.desc = desc;
     }
 
     public BookBean(String title, String data_src, String star, String chapter, String href, String desc) {
@@ -71,5 +83,13 @@ public class BookBean {
 
     public void setDesc(String desc) {
         this.desc = desc;
+    }
+
+    public List<String> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<String> tags) {
+        this.tags = tags;
     }
 }

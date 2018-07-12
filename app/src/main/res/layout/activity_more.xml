@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/ll_panel"
@@ -14,15 +15,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:alpha="0"
+        android:background="@color/colorWhite"
         android:orientation="vertical">
 
         <TextView
-
+            android:id="@+id/tv_title"
             android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:background="@color/colorWhite"
             android:gravity="center"
-            android:text="推荐"
             android:textColor="@color/colorPrimary"
             android:textSize="18sp" />
 
@@ -37,27 +37,16 @@
         android:layout_height="45dp">
 
         <ImageView
-            android:id="@+id/img_a"
+            android:id="@+id/img_back"
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:layout_gravity="left"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:background="@drawable/click_bg"
-            android:padding="7dp"
-            android:src="@mipmap/pic_main_boy" />
-
-        <ImageView
-            android:id="@+id/img_search"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:layout_gravity="right|center_vertical"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/click_bg"
-            android:padding="11.5dp"
-            android:src="@mipmap/ic_search" />
+            android:padding="11dp"
+            android:src="@mipmap/svg_red_nav_bar_back" />
 
     </FrameLayout>
-
 
 </FrameLayout>
