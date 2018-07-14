@@ -16,7 +16,7 @@ import top.wzmyyj.zymk.R;
 import top.wzmyyj.zymk.presenter.TypePresenter;
 import top.wzmyyj.zymk.view.fragment.base.BaseFragment;
 import top.wzmyyj.zymk.view.iv.IF_2View;
-import top.wzmyyj.zymk.view.panel.TypeRecyclePanel;
+import top.wzmyyj.zymk.view.panel.TypeRecyclerPanel;
 
 /**
  * Created by yyj on 2018/06/29. email: 2209011667@qq.com
@@ -39,28 +39,28 @@ public class F_2 extends BaseFragment<TypePresenter> implements IF_2View {
     @Override
     protected void initPanels() {
         super.initPanels();
-        addPanels(new TypeRecyclePanel(activity,mPresenter) {
+        addPanels(new TypeRecyclerPanel(activity,mPresenter) {
             @Override
             protected void setData() {
                 this.title = F_2.this.mPresenter.getTitle(0);
                 mData.addAll(F_2.this.mPresenter.getData(0));
             }
         });
-        addPanels(new TypeRecyclePanel(activity,mPresenter) {
+        addPanels(new TypeRecyclerPanel(activity,mPresenter) {
             @Override
             protected void setData() {
                 this.title = F_2.this.mPresenter.getTitle(1);
                 mData.addAll(F_2.this.mPresenter.getData(1));
             }
         });
-        addPanels(new TypeRecyclePanel(activity,mPresenter) {
+        addPanels(new TypeRecyclerPanel(activity,mPresenter) {
             @Override
             protected void setData() {
                 this.title = F_2.this.mPresenter.getTitle(2);
                 mData.addAll(F_2.this.mPresenter.getData(2));
             }
         });
-        addPanels(new TypeRecyclePanel(activity,mPresenter) {
+        addPanels(new TypeRecyclerPanel(activity,mPresenter) {
             @Override
             protected void setData() {
                 this.title = F_2.this.mPresenter.getTitle(3);
@@ -79,7 +79,7 @@ public class F_2 extends BaseFragment<TypePresenter> implements IF_2View {
     @Override
     protected void initData() {
         super.initData();
-        List<View> viewList = new ArrayList<View>();
+        List<View> viewList = new ArrayList<>();
         List<String> titles = new ArrayList<>();
         for (Panel p : mPanels.getPanelList()) {
             viewList.add(p.getView());

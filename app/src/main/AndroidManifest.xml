@@ -23,7 +23,9 @@
         </activity>
         <activity android:name=".view.activity.MainActivity" />
         <activity android:name=".view.activity.MoreActivity" />
-        <activity android:name=".view.activity.DetailsActivity"></activity>
+        <activity android:name=".view.activity.NewActivity" />
+        <activity android:name=".view.activity.RankActivity" />
+        <activity android:name=".view.activity.DetailsActivity"/>
     </application>
 
 </manifest>

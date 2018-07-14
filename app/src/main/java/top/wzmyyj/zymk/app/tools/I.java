@@ -7,6 +7,8 @@ import android.net.Uri;
 import top.wzmyyj.wzm_sdk.tools.T;
 import top.wzmyyj.zymk.view.activity.MainActivity;
 import top.wzmyyj.zymk.view.activity.MoreActivity;
+import top.wzmyyj.zymk.view.activity.NewActivity;
+import top.wzmyyj.zymk.view.activity.RankActivity;
 
 /**
  * Created by yyj on 2018/07/09. email: 2209011667@qq.com
@@ -42,5 +44,15 @@ public class I {
 //        intent.putExtra("href", href);
 //        context.startActivity(intent);
         T.s(href);
+    }
+
+    public static void toNewActivity(Activity context) {
+        Intent intent = new Intent(context, NewActivity.class);
+        context.startActivity(intent);
+    }
+
+    public static void toRankActivity(Activity context) {
+        Intent intent = new Intent(context, RankActivity.class);
+        context.startActivity(intent);
     }
 }

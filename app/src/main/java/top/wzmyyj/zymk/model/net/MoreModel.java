@@ -24,7 +24,7 @@ public class MoreModel {
 
     public static Map<String, Document> DMap = new HashMap<>();
 
-    public void getData(final String url, Observer<MoreBox> observer) {
+    public void getMoreData(final String url, Observer<MoreBox> observer) {
         Observable.create(new ObservableOnSubscribe<MoreBox>() {
             @Override
             public void subscribe(@NonNull ObservableEmitter<MoreBox> observableEmitter) throws Exception {

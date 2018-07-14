@@ -20,10 +20,10 @@ import top.wzmyyj.zymk.view.panel.base.BaseRecyclerPanel;
  * Created by yyj on 2018/07/06. email: 2209011667@qq.com
  */
 
-public abstract class TypeRecyclePanel extends BaseRecyclerPanel<TypeBean,TypePresenter> {
+public abstract class TypeRecyclerPanel extends BaseRecyclerPanel<TypeBean,TypePresenter> {
 
 
-    public TypeRecyclePanel(Context context, TypePresenter p) {
+    public TypeRecyclerPanel(Context context, TypePresenter p) {
         super(context, p);
     }
 

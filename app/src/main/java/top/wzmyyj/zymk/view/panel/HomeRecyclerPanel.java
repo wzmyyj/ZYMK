@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.zhy.adapter.recyclerview.CommonAdapter;
+import com.zhy.adapter.recyclerview.MultiItemTypeAdapter;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
 
 import java.util.ArrayList;
@@ -17,13 +17,12 @@ import java.util.List;
 
 import top.wzmyyj.wzm_sdk.adapter.ivd.IVD;
 import top.wzmyyj.wzm_sdk.adapter.ivd.SingleIVD;
-import top.wzmyyj.wzm_sdk.tools.T;
 import top.wzmyyj.zymk.R;
 import top.wzmyyj.zymk.app.bean.BoBean;
 import top.wzmyyj.zymk.app.bean.BookBean;
 import top.wzmyyj.zymk.app.bean.ItemBean;
-import top.wzmyyj.zymk.app.tools.G;
 import top.wzmyyj.zymk.presenter.HomePresenter;
+import top.wzmyyj.zymk.view.adapter.BookAdapter;
 import top.wzmyyj.zymk.view.panel.base.BaseRecyclerPanel;
 
 
@@ -90,38 +89,24 @@ public class HomeRecyclerPanel extends BaseRecyclerPanel<ItemBean, HomePresenter
                     }
                 });
 
-                List<BookBean> data = itemBean.getBooks() != null
+                final List<BookBean> data = itemBean.getBooks() != null
                         ? itemBean.getBooks() : new ArrayList<BookBean>();
 
                 RecyclerView rv_item = holder.getView(R.id.rv_item);
                 rv_item.setRecycledViewPool(viewPool);
                 rv_item.setLayoutManager(new LinearLayoutManager(context, LinearLayout.HORIZONTAL, false));
-                rv_item.setAdapter(new CommonAdapter<BookBean>(context, R.layout.layout_book, data) {
+                BookAdapter bookAdapter = new BookAdapter(context, R.layout.layout_book, data);
+                rv_item.setAdapter(bookAdapter);
+                bookAdapter.setOnItemClickListener(new MultiItemTypeAdapter.OnItemClickListener() {
                     @Override
-                    protected void convert(ViewHolder holder, BookBean bookBean, int position) {
-                        ImageView img_book = holder.getView(R.id.img_book);
-                        TextView tv_star = holder.getView(R.id.tv_star);
-                        TextView tv_chapter = holder.getView(R.id.tv_chapter);
-                        TextView tv_title = holder.getView(R.id.tv_title);
-                        TextView tv_desc = holder.getView(R.id.tv_desc);
-
-                        tv_star.setText(bookBean.getStar() + "分");
-                        tv_title.setText(bookBean.getTitle());
-                        tv_chapter.setText(bookBean.getChapter());
-                        tv_desc.setText(bookBean.getDesc());
-
-                        G.img(context, bookBean.getData_src(), img_book);
-
-                        final String href1 = bookBean.getHref();
-                        img_book.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                mPresenter.goDetails(href1);
-                            }
-                        });
+                    public void onItemClick(View view, RecyclerView.ViewHolder holder, int position) {
+                        mPresenter.goDetails(data.get(position).getHref());
                     }
 
-
+                    @Override
+                    public boolean onItemLongClick(View view, RecyclerView.ViewHolder holder, int position) {
+                        return false;
+                    }
                 });
 
 
@@ -168,13 +153,13 @@ public class HomeRecyclerPanel extends BaseRecyclerPanel<ItemBean, HomePresenter
         ll_h_1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                T.s("你点击了更新！");
+                mPresenter.goNew();
             }
         });
         ll_h_2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                T.s("你点击了排行！");
+                mPresenter.goRank();
             }
         });
     }

@@ -39,7 +39,7 @@ public class MorePresenter extends BasePresenter<IMoreView> {
 
     public void loadData() {
         String url = mActivity.getIntent().getStringExtra("href");
-        mModel.getData(url, new Observer<MoreBox>() {
+        mModel.getMoreData(url, new Observer<MoreBox>() {
             @Override
             public void onSubscribe(Disposable d) {
 

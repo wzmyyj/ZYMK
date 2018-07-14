@@ -14,6 +14,8 @@ public class BookBean {
     private String chapter;
     private String href;
     private String desc;
+    private String num;
+    private String ift;
 
     private List<String> tags;
 
@@ -26,6 +28,15 @@ public class BookBean {
         this.star = star;
         this.href = href;
         this.desc = desc;
+    }
+
+    public BookBean(String title, String data_src, String href, String num, String ift, List<String> tags) {
+        this.title = title;
+        this.data_src = data_src;
+        this.href = href;
+        this.num = num;
+        this.ift = ift;
+        this.tags = tags;
     }
 
     public BookBean(String title, String data_src, String star, String chapter, String href, String desc) {
@@ -91,5 +102,21 @@ public class BookBean {
 
     public void setTags(List<String> tags) {
         this.tags = tags;
+    }
+
+    public String getNum() {
+        return num;
+    }
+
+    public void setNum(String num) {
+        this.num = num;
+    }
+
+    public String getIft() {
+        return ift;
+    }
+
+    public void setIft(String ift) {
+        this.ift = ift;
     }
 }
