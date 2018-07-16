@@ -21,10 +21,10 @@
     <TextView
         android:id="@+id/tv_1"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="wrap_content"
+        android:minHeight="50dp"
         android:layout_weight="1"
         android:padding="10dp"
-        android:lines="2"
         android:textColor="@color/colorGray_7"
         android:textSize="13sp" />
 

@@ -1,15 +1,25 @@
 package top.wzmyyj.zymk.view.activity;
 
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-
 import top.wzmyyj.zymk.R;
+import top.wzmyyj.zymk.presenter.DetailsPresenter;
+import top.wzmyyj.zymk.view.activity.base.BaseActivity;
+import top.wzmyyj.zymk.view.iv.IDetailsView;
 
-public class DetailsActivity extends AppCompatActivity {
+public class DetailsActivity extends BaseActivity<DetailsPresenter> implements IDetailsView {
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_details);
+    protected void initPresenter() {
+        mPresenter = new DetailsPresenter(activity, this);
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_details;
+    }
+
+    @Override
+    public void update(int w, Object... objs) {
+
     }
 }

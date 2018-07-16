@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 
-import top.wzmyyj.wzm_sdk.tools.T;
+import top.wzmyyj.zymk.view.activity.DetailsActivity;
 import top.wzmyyj.zymk.view.activity.MainActivity;
 import top.wzmyyj.zymk.view.activity.MoreActivity;
 import top.wzmyyj.zymk.view.activity.NewActivity;
@@ -40,10 +40,9 @@ public class I {
     }
 
     public static void toDetailsActivity(Activity context, String href) {
-//        Intent intent = new Intent(context, MoreActivity.class);
-//        intent.putExtra("href", href);
-//        context.startActivity(intent);
-        T.s(href);
+        Intent intent = new Intent(context, DetailsActivity.class);
+        intent.putExtra("href", href);
+        context.startActivity(intent);
     }
 
     public static void toNewActivity(Activity context) {

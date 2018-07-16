@@ -21,6 +21,7 @@ import top.wzmyyj.zymk.R;
 import top.wzmyyj.zymk.app.bean.BoBean;
 import top.wzmyyj.zymk.app.bean.BookBean;
 import top.wzmyyj.zymk.app.bean.ItemBean;
+import top.wzmyyj.zymk.common.utils.DensityUtil;
 import top.wzmyyj.zymk.presenter.HomePresenter;
 import top.wzmyyj.zymk.view.adapter.BookAdapter;
 import top.wzmyyj.zymk.view.panel.base.BaseRecyclerPanel;
@@ -48,16 +49,19 @@ public class HomeRecyclerPanel extends BaseRecyclerPanel<ItemBean, HomePresenter
         mRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
 
             int mDistance = 0;
-            int maxDistance = 300;//当距离在[0,maxDistance]变化时，透明度在[0,255之间变化]
+            int maxDistance = DensityUtil.dp2px(context, 155);//当距离在[0,maxDistance]变化时，透明度在[0,255之间变化]
 
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                mDistance += dy;
-                float percent = mDistance * 1f / maxDistance;//百分比
 
                 if (viewList.size() == 0) return;
                 View top = viewList.get(0);
+
+                mDistance += dy;
+                float percent = mDistance * 1f / maxDistance;//百分比
+
+
                 top.setAlpha(percent);
             }
         });

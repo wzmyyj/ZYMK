@@ -7,10 +7,17 @@ import org.jsoup.select.Elements;
 import java.util.ArrayList;
 import java.util.List;
 
+import top.wzmyyj.zymk.app.bean.AuthorBean;
 import top.wzmyyj.zymk.app.bean.BoBean;
 import top.wzmyyj.zymk.app.bean.BookBean;
+import top.wzmyyj.zymk.app.bean.FansBean;
+import top.wzmyyj.zymk.app.bean.HuaBean;
 import top.wzmyyj.zymk.app.bean.ItemBean;
+import top.wzmyyj.zymk.app.bean.MuBean;
+import top.wzmyyj.zymk.app.bean.XiBean;
+import top.wzmyyj.zymk.app.bean.ZiBean;
 import top.wzmyyj.zymk.common.java.RandomSort;
+import top.wzmyyj.zymk.model.box.DetailsBox;
 import top.wzmyyj.zymk.model.box.HomeBox;
 import top.wzmyyj.zymk.model.box.MoreBox;
 import top.wzmyyj.zymk.model.box.NewBox;
@@ -67,6 +74,11 @@ public class DocUtil {
         String chapter = slide.getElementsByTag("span").get(0).text();
         String desc = slide.getElementsByClass("desc").text();
 
+        if (!star.contains(".")) {
+            StringBuffer sb = new StringBuffer(star);
+            sb.insert(1, ".");
+            star = sb.toString();
+        }
 
         BookBean book = new BookBean(title, data_src, star, chapter, href, desc);
         return book;
@@ -232,4 +244,160 @@ public class DocUtil {
         return box;
 
     }
+
+    // details
+
+    public static DetailsBox transToDetails(Document doc) {
+        Element mk = doc.getElementsByClass("mk-detail").get(0);
+        // .getElementsByTag("strong").text();
+        String title = mk.getElementsByClass("name").text();
+        String author = mk.getElementsByClass("author").text();
+        String data_src = mk.getElementsByTag("img").get(0).attr("data-src");
+
+        String href = mk.getElementsByClass("read").get(0).absUrl("href");
+        String star = mk.getElementsByClass("ift-xing").text();
+        String ift = mk.getElementsByClass("hasread").text();
+        Elements tags = mk.getElementsByClass("tags");
+        List<String> ts = new ArrayList<>();
+        for (Element tag : tags) {
+            String t = tag.text();
+            ts.add(t);
+        }
+
+        BookBean mainBook = new BookBean();
+        mainBook.setTitle(title);
+        mainBook.setAuthor(author);
+        mainBook.setStar(star);
+        mainBook.setIft(ift);
+        mainBook.setData_src(data_src);
+        mainBook.setHref(href);
+        mainBook.setTags(ts);
+
+
+        Elements swipers = doc.getElementsByClass("tab-item");
+        XiBean xi = getXi(swipers.get(0));
+        MuBean mu = getMu(swipers.get(1));
+        ZiBean zi = getZi(swipers.get(2));
+
+        // //////////////
+        List<BookBean> bookList = new ArrayList<>();
+        Element mk2 = doc.getElementsByClass("mk-recommend").get(0);
+        Elements items = mk2.getElementsByClass("comic-item");
+        if (items != null || items.size() > 0) {
+            for (Element item : items) {
+                bookList.add(getBook(item));
+            }
+        }
+
+        DetailsBox box = new DetailsBox(mainBook, xi, mu, zi, bookList);
+
+        return box;
+    }
+
+
+    private static XiBean getXi(Element element) {
+
+        String juqing = element.getElementsByClass("comic-detail").get(0)
+                .getElementsByClass("content").text();
+        Element info = element.getElementsByClass("author-info").get(0);
+        String author_avatar =
+                info.getElementsByClass("author-avatar").get(0)
+                        .absUrl("data-src");
+        String author_name = info.getElementsByClass("author-name").text();
+        String fans_num = info.getElementsByClass("fans-num").text();
+
+        String author_say = element.getElementsByClass("content").get(2).text();
+        List<BookBean> books = new ArrayList<>();
+        Elements items = element.getElementsByClass("comic-item");
+        if (items != null || items.size() > 0) {
+            for (Element item : items) {
+                BookBean book = getBook(item);
+                books.add(book);
+            }
+        }
+        AuthorBean author = new AuthorBean(author_avatar, author_name, fans_num, author_say, books);
+        XiBean xi = new XiBean(author, juqing);
+        return xi;
+    }
+
+    private static MuBean getMu(Element element) {
+        Element update = element.getElementById("updateTime");
+        long time = Long.parseLong(update.attr("datetime"));
+        String time_desc = update.text();
+
+        List<HuaBean> huas = new ArrayList<>();
+        Elements items = element.getElementsByClass("item");
+        if (items != null || items.size() > 0) {
+            for (Element item : items) {
+
+                long uptime = Long.parseLong(item.attr("data-uptime"));
+                String href = item.getElementsByClass("chapterBtn").get(0)
+                        .absUrl("href");
+                String title = item.getElementsByClass("chapterBtn").get(0)
+                        .attr("title");
+                boolean isLock;
+                Elements lock = item.getElementsByClass("lockIcon");
+                isLock = lock != null && lock.size() > 0;
+                HuaBean hua = new HuaBean(title, href, uptime, isLock);
+                huas.add(hua);
+            }
+        }
+        MuBean mu = new MuBean(time_desc, time, huas);
+        return mu;
+    }
+
+    private static ZiBean getZi(Element element) {
+        Element support = element.getElementsByClass("support").get(0);
+        Elements nums = support.getElementsByClass("num");
+
+        String[] su = new String[]{
+                nums.get(0).text(),
+                nums.get(1).text(),
+                nums.get(2).text(),
+                nums.get(3).text(),
+                nums.get(4).text(),
+                nums.get(5).text(),
+        };
+
+
+        List<FansBean> fs = new ArrayList<>();
+        Element influence = element.getElementsByClass("mk-influencerank-tabs")
+                .get(0);
+
+        Element top1 = influence.getElementsByClass("rank-1st").get(0);
+        Element top2 = influence.getElementsByClass("rank-2nd").get(0);
+        Element top3 = influence.getElementsByClass("rank-3rd").get(0);
+
+        fs.add(getFans(top1));
+        fs.add(getFans(top2));
+        fs.add(getFans(top3));
+
+        Elements items = influence.getElementsByClass("item");
+        if (items != null || items.size() > 0) {
+            for (Element item : items) {
+                fs.add(getFans2(item));
+            }
+        }
+        ZiBean zi = new ZiBean(fs, su);
+        return zi;
+    }
+
+    private static FansBean getFans(Element ele) {
+        String data_src = ele.getElementsByTag("img").get(0).absUrl("data-src");
+        String name = ele.getElementsByClass("name").text();
+        String num = ele.getElementsByTag("span").get(0).text();
+        FansBean fans = new FansBean(data_src, name, num);
+        return fans;
+
+    }
+
+    private static FansBean getFans2(Element ele) {
+        String data_src = ele.getElementsByTag("img").get(0).absUrl("data-src");
+        String name = ele.getElementsByClass("name").text();
+        String num = ele.getElementsByClass("num").get(0).text();
+        FansBean fans = new FansBean(data_src, name, num);
+        return fans;
+
+    }
+
 }

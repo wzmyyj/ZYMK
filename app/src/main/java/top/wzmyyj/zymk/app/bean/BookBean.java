@@ -16,6 +16,7 @@ public class BookBean {
     private String desc;
     private String num;
     private String ift;
+    private String author;
 
     private List<String> tags;
 
@@ -118,5 +119,13 @@ public class BookBean {
 
     public void setIft(String ift) {
         this.ift = ift;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
     }
 }
