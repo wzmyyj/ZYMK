@@ -9,10 +9,10 @@ import java.util.Date;
  */
 
 
-public class TimeUtil {
+public class Vanessa {
 
 
-    public static String changeToString(long l, String format) {
+    public static String long2str(long l, String format) {
         if (l == 0) {
             return "";
         }
@@ -21,7 +21,7 @@ public class TimeUtil {
         return s;
     }
 
-    public static long changeToLong(String time, String format) {
+    public static long str2long(String time, String format) {
         SimpleDateFormat sdf = new SimpleDateFormat(format);
         long l = 0;
         try {

@@ -3,10 +3,8 @@ package top.wzmyyj.wzm_sdk.panel;
 import android.content.Context;
 import android.os.Handler;
 import android.support.v4.view.ViewPager;
-import android.view.animation.Interpolator;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Scroller;
 import android.widget.TextView;
 
 import java.lang.reflect.Field;
@@ -15,6 +13,7 @@ import java.util.List;
 
 import top.wzmyyj.wzm_sdk.R;
 import top.wzmyyj.wzm_sdk.adapter.ImageViewPagerAdapter;
+import top.wzmyyj.wzm_sdk.widget.FixedSpeedScroller;
 
 /**
  * Created by wzm on 2018/07/03. email: 2209011667@qq.com
@@ -128,34 +127,7 @@ public abstract class BoPanel extends InitPanel {
         }
     }
 
-    class FixedSpeedScroller extends Scroller {
-        private int mDuration = 1000;
 
-        public FixedSpeedScroller(Context context) {
-            super(context);
-        }
-
-        public FixedSpeedScroller(Context context, int duration) {
-            super(context);
-            this.mDuration = duration;
-        }
-
-        public FixedSpeedScroller(Context context, Interpolator interpolator) {
-            super(context, interpolator);
-        }
-
-        @Override
-        public void startScroll(int startX, int startY, int dx, int dy, int duration) {
-            // Ignore received duration, use fixed one instead
-            super.startScroll(startX, startY, dx, dy, mDuration);
-        }
-
-        @Override
-        public void startScroll(int startX, int startY, int dx, int dy) {
-            // Ignore received duration, use fixed one instead
-            super.startScroll(startX, startY, dx, dy, mDuration);
-        }
-    }
 
     private Handler mHandler = new Handler();
     private MyRunnable myRunnable = new MyRunnable();
