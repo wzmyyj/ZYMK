@@ -1,5 +1,11 @@
 package top.wzmyyj.zymk.view.iv;
 
+import java.util.List;
+
+import top.wzmyyj.zymk.app.bean.BookBean;
+import top.wzmyyj.zymk.app.bean.MuBean;
+import top.wzmyyj.zymk.app.bean.XiBean;
+import top.wzmyyj.zymk.app.bean.ZiBean;
 import top.wzmyyj.zymk.view.iv.base.IBaseView;
 import top.wzmyyj.zymk.view.iv.base.IUpdateView;
 
@@ -8,5 +14,13 @@ import top.wzmyyj.zymk.view.iv.base.IUpdateView;
  */
 
 public interface IDetailsView extends IBaseView, IUpdateView {
+    void setBook(BookBean book);
 
+    void setXi(XiBean xi);
+
+    void setMu(MuBean mu);
+
+    void setZi(ZiBean zi);
+
+    void setBookList(List<BookBean> list);
 }

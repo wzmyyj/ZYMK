@@ -47,8 +47,8 @@ public class HomePresenter extends BasePresenter<IF_1View> {
             }
 
             @Override
-            public void onNext(HomeBox homeBean) {
-                mView.update(0, homeBean.getBoList(), homeBean.getItemList());
+            public void onNext(HomeBox box) {
+                mView.update(0, box.getBoList(), box.getItemList());
 //                mView.showToast("加载成功");
             }
 

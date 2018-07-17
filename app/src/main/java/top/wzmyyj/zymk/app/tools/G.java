@@ -5,6 +5,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 
+import jp.wasabeef.glide.transformations.BlurTransformation;
 import top.wzmyyj.zymk.R;
 
 /**
@@ -19,6 +20,18 @@ public class G {
                 .centerCrop()
 //                .placeholder(R.mipmap.ic_progress)
                 .error(R.mipmap.ic_error)
+                .crossFade(100)
+                .into(img);
+    }
+
+    public static void imgBlur(Context context, String url, ImageView img, int r) {
+        Glide.with(context)
+                .load(url)
+//                .centerCrop()
+//                .placeholder(R.mipmap.ic_progress)
+                .error(R.mipmap.ic_error)
+                .crossFade(200)
+                .bitmapTransform(new BlurTransformation(context, r, 4))
                 .into(img);
     }
 
@@ -26,8 +39,9 @@ public class G {
         Glide.with(context)
                 .load(res_id)
                 .centerCrop()
-                .placeholder(R.mipmap.ic_progress)
+//                .placeholder(R.mipmap.ic_progress)
                 .error(R.mipmap.ic_error)
+                .crossFade()
                 .into(img);
     }
 }

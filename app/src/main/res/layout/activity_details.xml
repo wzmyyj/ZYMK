@@ -10,28 +10,6 @@
         <include layout="@layout/layout_details" />
     </top.wzmyyj.zymk.common.widget.AceNestedScrollView>
 
-    <LinearLayout
-        android:id="@+id/ll_top"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:alpha="0"
-        android:background="@color/colorWhite"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/tv_title"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:gravity="center"
-            android:textColor="@color/colorPrimary"
-            android:textSize="18sp" />
-
-        <!--<View-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="0.1dp"-->
-            <!--android:background="@color/colorLine" />-->
-    </LinearLayout>
-
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="45dp">
