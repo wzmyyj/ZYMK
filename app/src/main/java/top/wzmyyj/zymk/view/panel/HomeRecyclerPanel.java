@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.zhy.adapter.recyclerview.MultiItemTypeAdapter;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
 
 import java.util.ArrayList;
@@ -79,7 +78,7 @@ public class HomeRecyclerPanel extends BaseRecyclerPanel<ItemBean, HomePresenter
             public void convert(ViewHolder holder, ItemBean itemBean, int position) {
                 ImageView img_icon = holder.getView(R.id.img_icon);
                 TextView tv_title = holder.getView(R.id.tv_title);
-                final TextView tv_summary = holder.getView(R.id.tv_summary);
+                TextView tv_summary = holder.getView(R.id.tv_summary);
                 img_icon.setImageResource(itemBean.getIcon());
                 tv_title.setText(itemBean.getTitle());
                 tv_summary.setText(itemBean.getSummary());
@@ -96,22 +95,12 @@ public class HomeRecyclerPanel extends BaseRecyclerPanel<ItemBean, HomePresenter
                 final List<BookBean> data = itemBean.getBooks() != null
                         ? itemBean.getBooks() : new ArrayList<BookBean>();
 
+
                 RecyclerView rv_item = holder.getView(R.id.rv_item);
                 rv_item.setRecycledViewPool(viewPool);
                 rv_item.setLayoutManager(new LinearLayoutManager(context, LinearLayout.HORIZONTAL, false));
                 BookAdapter bookAdapter = new BookAdapter(context, R.layout.layout_book, data);
                 rv_item.setAdapter(bookAdapter);
-                bookAdapter.setOnItemClickListener(new MultiItemTypeAdapter.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(View view, RecyclerView.ViewHolder holder, int position) {
-                        mPresenter.goDetails(data.get(position).getHref());
-                    }
-
-                    @Override
-                    public boolean onItemLongClick(View view, RecyclerView.ViewHolder holder, int position) {
-                        return false;
-                    }
-                });
 
 
             }
@@ -120,6 +109,7 @@ public class HomeRecyclerPanel extends BaseRecyclerPanel<ItemBean, HomePresenter
 
         });
     }
+
 
     @Override
     public void update() {

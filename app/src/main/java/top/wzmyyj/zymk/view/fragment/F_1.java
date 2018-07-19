@@ -1,6 +1,7 @@
 package top.wzmyyj.zymk.view.fragment;
 
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -42,15 +43,15 @@ public class F_1 extends BaseFragment<HomePresenter> implements IF_1View {
     ImageView img_a;
     @BindView(R.id.img_search)
     ImageView img_search;
-    @BindView(R.id.ll_top)
-    LinearLayout ll_top;
+    @BindView(R.id.fl_top)
+    FrameLayout fl_top;
 
 
     @Override
     protected void initView() {
         super.initView();
         layout.addView(getPanelView(0));
-        getPanel(0).bingViews(ll_top);
+        getPanel(0).bingViews(fl_top);
     }
 
     @Override

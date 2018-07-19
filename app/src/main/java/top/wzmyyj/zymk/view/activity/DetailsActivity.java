@@ -81,7 +81,7 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
         tv_book_title.setText(book.getTitle());
         tv_book_author.setText(book.getAuthor());
         tv_book_ift.setText(book.getIft());
-        tv_book_star.setText(book.getStar());
+        tv_book_star.setText(book.getStar()+"分");
 
         tl_book_tag.cleanTags();
 

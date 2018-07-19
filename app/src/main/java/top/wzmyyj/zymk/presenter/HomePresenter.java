@@ -69,6 +69,10 @@ public class HomePresenter extends BasePresenter<IF_1View> {
     }
 
     public void goDetails(String href) {
+        if (href == null) {
+            mView.showToast("空值");
+            return;
+        }
         if (href.contains(Urls.ZYMK_HomePage)) {
             I.toDetailsActivity(mActivity, href);
         } else {

@@ -10,7 +10,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.widget.TextView;
 
 import java.lang.reflect.Field;
 
@@ -24,7 +23,7 @@ import top.wzmyyj.wzm_sdk.widget.FixedSpeedScroller;
 public class AceNestedScrollView extends NestedScrollView {
 
     private FrameLayout mWapper;
-    private View mTop;
+    private ViewGroup mTop;
     private ViewGroup mTab;
     private View mBg;
     private View mContent;
@@ -35,7 +34,6 @@ public class AceNestedScrollView extends NestedScrollView {
     private int mUpHeight;
     private boolean once;
     private boolean isOpen = true;
-    private TextView mTv;
 
     public AceNestedScrollView(@NonNull Context context) {
         this(context, null, 0);
@@ -76,9 +74,7 @@ public class AceNestedScrollView extends NestedScrollView {
             mBg = mWapper.getChildAt(0);
             mContent = mWapper.getChildAt(1);
             mTab = (ViewGroup) mWapper.getChildAt(2);
-            mTop = mWapper.getChildAt(3);
-
-            mTv = (TextView) mTab.getChildAt(0);
+            mTop = (ViewGroup) mWapper.getChildAt(3);
 
             int h = getMeasuredHeight();
             int t = mTop.getMeasuredHeight();
@@ -97,7 +93,7 @@ public class AceNestedScrollView extends NestedScrollView {
         switch (action) {
             case MotionEvent.ACTION_UP:
                 int scrollY = getScrollY();
-                if (scrollY > mUpHeight) break;
+                if (scrollY >= mUpHeight) break;
 
                 if (isOpen) {
                     if (scrollY > mUpHeight / 5) {
@@ -184,7 +180,7 @@ public class AceNestedScrollView extends NestedScrollView {
         mBg.setTranslationY(t / 2);
 
         mTop.setTranslationY(t);
-        mTop.setAlpha(scale);
+        mTop.getChildAt(1).setAlpha(scale);
 
         if (t >= mUpHeight) {
             mTab.setTranslationY(t - mUpHeight);

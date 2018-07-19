@@ -5,6 +5,7 @@ import android.view.View;
 
 import java.util.List;
 
+import top.wzmyyj.zymk.R;
 import top.wzmyyj.zymk.app.bean.BoBean;
 import top.wzmyyj.zymk.app.tools.G;
 import top.wzmyyj.zymk.presenter.HomePresenter;
@@ -27,7 +28,7 @@ public class TopBoPanel extends BaseBoPanel<HomePresenter> {
 
     @Override
     protected int getPointSize() {
-        return 25;
+        return 10;
     }
 
     @Override
@@ -40,11 +41,13 @@ public class TopBoPanel extends BaseBoPanel<HomePresenter> {
         List<BoBean> bos = (List<BoBean>) objects[0];
         if (bos == null || bos.size() < size)
             return null;
+
         for (int i = 0; i < size; i++) {
             BoBean bo = bos.get(i);
             G.img(context, bo.getData_src(), mImageList.get(i));
             mDosc[i] = bo.getTitle();
             final String href = bo.getHref();
+            mImageList.get(i).setBackgroundResource(R.mipmap.ico_bg);
             mImageList.get(i).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

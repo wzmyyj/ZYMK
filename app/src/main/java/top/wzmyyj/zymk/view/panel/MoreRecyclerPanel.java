@@ -104,7 +104,7 @@ public class MoreRecyclerPanel extends BaseRecyclerPanel<BookBean, MorePresenter
     @Override
     public void onItemClick(View view, RecyclerView.ViewHolder holder, int position) {
         super.onItemClick(view, holder, position);
-        mPresenter.goDetails(mData.get(position).getHref());
+        mPresenter.goDetails(mData.get(position - 1).getHref());
     }
 
     @Override

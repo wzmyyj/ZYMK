@@ -3,6 +3,7 @@ package top.wzmyyj.wzm_sdk.panel;
 import android.content.Context;
 import android.os.Handler;
 import android.support.v4.view.ViewPager;
+import android.util.TypedValue;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -25,7 +26,7 @@ public abstract class BoPanel extends InitPanel {
     protected TextView mTV;
     private LinearLayout mLL;
     protected int size = 3;
-    private int point_size = 20;
+    private int point_size = 10;
 
     public BoPanel(Context context) {
         super(context);
@@ -87,7 +88,8 @@ public abstract class BoPanel extends InitPanel {
 
 
     private void initBo() {
-        int ps = point_size;
+        int ps = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+                point_size, context.getResources().getDisplayMetrics());
         mImageList = new ArrayList<>();
         mDosc = new String[size];
         try {
@@ -126,7 +128,6 @@ public abstract class BoPanel extends InitPanel {
 
         }
     }
-
 
 
     private Handler mHandler = new Handler();

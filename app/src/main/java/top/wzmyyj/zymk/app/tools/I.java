@@ -1,6 +1,7 @@
 package top.wzmyyj.zymk.app.tools;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 
@@ -15,7 +16,7 @@ import top.wzmyyj.zymk.view.activity.RankActivity;
  */
 
 public class I {
-    public static void toMainActivity(Activity context) {
+    public static void toMainActivity(Context context) {
         Intent intent = new Intent(context, MainActivity.class);
         context.startActivity(intent);
     }
@@ -25,7 +26,7 @@ public class I {
         context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
     }
 
-    public static void toBrowser(Activity context, String url) {
+    public static void toBrowser(Context context, String url) {
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_VIEW);
         Uri u = Uri.parse(url);
@@ -33,24 +34,24 @@ public class I {
         context.startActivity(intent);
     }
 
-    public static void toMoreActivity(Activity context, String href) {
+    public static void toMoreActivity(Context context, String href) {
         Intent intent = new Intent(context, MoreActivity.class);
         intent.putExtra("href", href);
         context.startActivity(intent);
     }
 
-    public static void toDetailsActivity(Activity context, String href) {
+    public static void toDetailsActivity(Context context, String href) {
         Intent intent = new Intent(context, DetailsActivity.class);
         intent.putExtra("href", href);
         context.startActivity(intent);
     }
 
-    public static void toNewActivity(Activity context) {
+    public static void toNewActivity(Context context) {
         Intent intent = new Intent(context, NewActivity.class);
         context.startActivity(intent);
     }
 
-    public static void toRankActivity(Activity context) {
+    public static void toRankActivity(Context context) {
         Intent intent = new Intent(context, RankActivity.class);
         context.startActivity(intent);
     }

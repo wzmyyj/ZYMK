@@ -1,6 +1,7 @@
 package top.wzmyyj.zymk.view.activity;
 
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -36,14 +37,14 @@ public class MoreActivity extends BaseActivity<MorePresenter> implements IMoreVi
     ImageView img_back;
     @BindView(R.id.tv_title)
     TextView tv_title;
-    @BindView(R.id.ll_top)
-    LinearLayout ll_top;
+    @BindView(R.id.fl_top)
+    FrameLayout fl_top;
 
     @Override
     protected void initView() {
         super.initView();
         layout.addView(getPanelView(0));
-        getPanel(0).bingViews(ll_top);
+        getPanel(0).bingViews(fl_top);
     }
 
     @Override

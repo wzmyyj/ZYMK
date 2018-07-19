@@ -9,12 +9,42 @@
         android:layout_height="match_parent"
         android:orientation="vertical"></LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/ll_top"
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp">
+
+        <ImageView
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_gravity="left"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:padding="7dp"
+            android:src="@drawable/black_oval_bg" />
+
+        <ImageView
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_gravity="right|center_vertical"
+            android:layout_marginRight="10dp"
+            android:padding="7dp"
+            android:src="@drawable/black_oval_bg" />
+
+        <ImageView
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_gravity="right|center_vertical"
+            android:layout_marginRight="10dp"
+            android:padding="13dp"
+            android:src="@mipmap/svg_white_nav_bar_search" />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/fl_top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:alpha="0"
-        android:orientation="vertical">
+        android:alpha="0">
 
         <TextView
 
@@ -26,27 +56,6 @@
             android:textColor="@color/colorPrimary"
             android:textSize="18sp" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.1dp"
-            android:background="@color/colorLine" />
-    </LinearLayout>
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="45dp">
-
-        <ImageView
-            android:id="@+id/img_a"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:layout_gravity="left"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/click_bg"
-            android:padding="7dp"
-            android:src="@mipmap/pic_main_boy" />
-
         <ImageView
             android:id="@+id/img_search"
             android:layout_width="45dp"
@@ -54,10 +63,27 @@
             android:layout_gravity="right|center_vertical"
             android:layout_marginRight="10dp"
             android:background="@drawable/click_bg"
-            android:padding="11.5dp"
-            android:src="@mipmap/ic_search" />
+            android:padding="13dp"
+            android:src="@mipmap/svg_red_nav_bar_search" />
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:layout_gravity="bottom"
+            android:background="@color/colorLine" />
     </FrameLayout>
+
+
+    <ImageView
+        android:id="@+id/img_a"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_gravity="left"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/click_bg"
+        android:padding="7.5dp"
+        android:src="@mipmap/pic_main_boy" />
 
 
 </FrameLayout>
