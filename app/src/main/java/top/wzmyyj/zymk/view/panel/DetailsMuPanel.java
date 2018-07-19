@@ -2,6 +2,7 @@ package top.wzmyyj.zymk.view.panel;
 
 import android.content.Context;
 
+import top.wzmyyj.zymk.R;
 import top.wzmyyj.zymk.presenter.DetailsPresenter;
 import top.wzmyyj.zymk.view.panel.base.BasePanel;
 
@@ -15,17 +16,8 @@ public class DetailsMuPanel extends BasePanel<DetailsPresenter> {
     }
 
     @Override
-    protected void initView() {
-
+    protected int getLayoutId() {
+        return R.layout.panel_details_mu;
     }
 
-    @Override
-    protected void initData() {
-
-    }
-
-    @Override
-    protected void initListener() {
-
-    }
 }

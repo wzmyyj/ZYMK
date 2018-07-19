@@ -14,7 +14,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="60dp"
         android:layout_marginLeft="130dp"
         android:layout_marginTop="45dp"
         android:orientation="vertical">
@@ -22,7 +22,7 @@
         <TextView
             android:id="@+id/tv_book_title"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="25dp"
             android:gravity="center_vertical"
             android:textColor="@color/colorWhite"
             android:textSize="18sp" />
@@ -30,7 +30,7 @@
         <TextView
             android:id="@+id/tv_book_author"
             android:layout_width="match_parent"
-            android:layout_height="20dp"
+            android:layout_height="15dp"
             android:gravity="center_vertical"
             android:textColor="@color/colorWhite_1"
             android:textSize="12sp" />
@@ -51,33 +51,30 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="bottom"
-            android:layout_marginBottom="5dp"
-            android:gravity="bottom"
+            android:layout_height="20dp"
+            android:layout_marginBottom="4dp"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
 
             <TextView
                 android:layout_width="15dp"
                 android:layout_height="15dp"
-                android:layout_marginRight="4dp"
+                android:layout_marginRight="3dp"
                 android:background="@mipmap/icon_comic_human" />
 
             <TextView
                 android:id="@+id/tv_book_ift"
                 android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:gravity="center_vertical"
-                android:singleLine="true"
+                android:layout_height="wrap_content"
                 android:textColor="@color/colorWhite_1"
-                android:textSize="12dp" />
+                android:textSize="12sp" />
         </LinearLayout>
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         android:layout_gravity="bottom"
         android:background="@color/colorWhite"
         android:gravity="center_vertical"
@@ -85,22 +82,28 @@
 
         <Button
             android:id="@+id/bt_save"
+            style="?android:attr/borderlessButtonStyle"
             android:layout_width="0dp"
             android:layout_height="30dp"
             android:layout_marginLeft="130dp"
             android:layout_weight="1"
-            android:background="@color/colorOrange"
-            android:text="离线缓存" />
+            android:background="@drawable/bt_save_selector"
+            android:text="离线缓存"
+            android:textColor="@color/colorOrange"
+            android:textSize="14sp" />
 
         <Button
             android:id="@+id/bt_read"
+            style="?android:attr/borderlessButtonStyle"
             android:layout_width="0dp"
             android:layout_height="30dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_weight="1"
-            android:background="@color/colorOrange"
-            android:text="开始阅读" />
+            android:background="@drawable/bt_read_selector"
+            android:text="开始阅读"
+            android:textColor="@color/colorWhite"
+            android:textSize="14sp" />
     </LinearLayout>
 
     <FrameLayout

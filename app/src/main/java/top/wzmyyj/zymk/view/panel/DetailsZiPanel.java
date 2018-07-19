@@ -2,6 +2,7 @@ package top.wzmyyj.zymk.view.panel;
 
 import android.content.Context;
 
+import top.wzmyyj.zymk.R;
 import top.wzmyyj.zymk.presenter.DetailsPresenter;
 import top.wzmyyj.zymk.view.panel.base.BasePanel;
 
@@ -15,17 +16,7 @@ public class DetailsZiPanel extends BasePanel<DetailsPresenter> {
     }
 
     @Override
-    protected void initView() {
-
-    }
-
-    @Override
-    protected void initData() {
-
-    }
-
-    @Override
-    protected void initListener() {
-
+    protected int getLayoutId() {
+        return R.layout.panel_details_zi;
     }
 }

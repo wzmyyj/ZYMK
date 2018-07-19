@@ -9,7 +9,7 @@
     <android.support.v4.view.ViewPager
         android:id="@+id/vp_content"
         android:layout_width="wrap_content"
-        android:layout_height="400dp">
+        android:layout_height="540dp">
 
     </android.support.v4.view.ViewPager>
 
@@ -23,16 +23,19 @@
         android:layout_height="15dp"
         android:background="@color/colorGray_g" />
 
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:background="@color/colorLine" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
         android:orientation="vertical">
 
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.1dp"
-            android:background="@color/colorLine" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -43,7 +46,6 @@
             android:paddingRight="10dp">
 
             <ImageView
-                android:id="@+id/img_icon"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:padding="2dp"
@@ -54,7 +56,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:text="相关推荐"
-                android:textColor="@color/colorGray_9"
+                android:textColor="@color/colorGray_6"
                 android:textSize="15sp" />
         </LinearLayout>
 
@@ -67,12 +69,13 @@
 
         </android.support.v7.widget.RecyclerView>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.1dp"
-            android:background="@color/colorLine" />
-
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:background="@color/colorLine" />
+
 
     <View
         android:layout_width="match_parent"

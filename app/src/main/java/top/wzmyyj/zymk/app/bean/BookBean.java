@@ -13,6 +13,7 @@ public class BookBean {
     private String star;
     private String chapter;
     private String href;
+    private String comic_href;
     private String desc;
     private String num;
     private String ift;
@@ -127,5 +128,13 @@ public class BookBean {
 
     public void setAuthor(String author) {
         this.author = author;
+    }
+
+    public String getComic_href() {
+        return comic_href;
+    }
+
+    public void setComic_href(String comic_href) {
+        this.comic_href = comic_href;
     }
 }

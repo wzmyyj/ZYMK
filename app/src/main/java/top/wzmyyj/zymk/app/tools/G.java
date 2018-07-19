@@ -25,6 +25,7 @@ public class G {
     }
 
     public static void imgBlur(Context context, String url, ImageView img, int r) {
+        if (url == null) return;
         Glide.with(context)
                 .load(url)
 //                .centerCrop()

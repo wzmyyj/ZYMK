@@ -248,13 +248,14 @@ public class DocUtil {
     // details
 
     public static DetailsBox transToDetails(Document doc) {
+
         Element mk = doc.getElementsByClass("mk-detail").get(0);
         // .getElementsByTag("strong").text();
         String title = mk.getElementsByClass("name").text();
         String author = mk.getElementsByClass("author").text();
         String data_src = mk.getElementsByTag("img").get(0).attr("data-src");
 
-        String href = mk.getElementsByClass("read").get(0).absUrl("href");
+        String comic_href = mk.getElementsByClass("read").get(0).absUrl("href");
         String star = mk.getElementsByClass("ift-xing").text();
         String ift = mk.getElementsByClass("hasread").text();
         Elements tags = mk.getElementsByClass("tags");
@@ -270,7 +271,7 @@ public class DocUtil {
         mainBook.setStar(star);
         mainBook.setIft(ift);
         mainBook.setData_src(data_src);
-        mainBook.setHref(href);
+        mainBook.setComic_href(comic_href);
         mainBook.setTags(ts);
 
 
@@ -279,6 +280,8 @@ public class DocUtil {
         MuBean mu = getMu(swipers.get(1));
         ZiBean zi = getZi(swipers.get(2));
 
+        mainBook.setDesc(xi.getJuqing());
+        xi.getAuthor().getBookList().add(mainBook);
         // //////////////
         List<BookBean> bookList = new ArrayList<>();
         Element mk2 = doc.getElementsByClass("mk-recommend").get(0);
@@ -298,7 +301,7 @@ public class DocUtil {
     private static XiBean getXi(Element element) {
 
         String juqing = element.getElementsByClass("comic-detail").get(0)
-                .getElementsByClass("content").text();
+                .getElementsByClass("content").get(0).text();
         Element info = element.getElementsByClass("author-info").get(0);
         String author_avatar =
                 info.getElementsByClass("author-avatar").get(0)

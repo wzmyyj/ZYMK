@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.NestedScrollView;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -130,7 +131,10 @@ public class AceNestedScrollView extends NestedScrollView {
 
     private class MyRunnable implements Runnable {
 
-        int a = 0, b = 0, c = 15;
+        int a = 0, b = 0;
+        int c = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+                5, getContext().getResources().getDisplayMetrics());
+        ;
 
         public void setAB(int a, int b) {
             this.a = a;
