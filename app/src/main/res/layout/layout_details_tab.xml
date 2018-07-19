@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="45dp"
+    android:layout_marginTop="200dp"
+    android:background="@color/colorWhite">
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_gravity="center"
+        app:tabIndicatorColor="@color/colorPrimary"
+        app:tabIndicatorHeight="1dp"
+        app:tabMode="fixed"
+        app:tabSelectedTextColor="@color/colorPrimary"
+        app:tabTextAppearance="@style/MyTabLayoutTextAppearance1"
+        app:tabTextColor="@color/colorGray_7" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:layout_gravity="bottom"
+        android:background="@color/colorLine" />
+
+</FrameLayout>

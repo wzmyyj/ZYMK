@@ -1,11 +1,17 @@
 package top.wzmyyj.zymk.view.activity;
 
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.dl7.tag.TagLayout;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -17,7 +23,11 @@ import top.wzmyyj.zymk.app.bean.ZiBean;
 import top.wzmyyj.zymk.app.tools.G;
 import top.wzmyyj.zymk.presenter.DetailsPresenter;
 import top.wzmyyj.zymk.view.activity.base.BaseActivity;
+import top.wzmyyj.zymk.view.adapter.BookAdapter;
 import top.wzmyyj.zymk.view.iv.IDetailsView;
+import top.wzmyyj.zymk.view.panel.DetailsMuPanel;
+import top.wzmyyj.zymk.view.panel.DetailsXiPanel;
+import top.wzmyyj.zymk.view.panel.DetailsZiPanel;
 
 public class DetailsActivity extends BaseActivity<DetailsPresenter> implements IDetailsView {
 
@@ -33,10 +43,13 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
     }
 
 
+    // top
     @BindView(R.id.tv_title)
     TextView tv_title;
     @BindView(R.id.img_love)
     ImageView img_love;
+
+    // bg
     @BindView(R.id.img_back)
     ImageView img_bock;
     @BindView(R.id.img_book_bg)
@@ -58,10 +71,36 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
     @BindView(R.id.bt_read)
     Button bt_read;
 
+    // tab
+    @BindView(R.id.tabLayout)
+    TabLayout mTab;
+
+    // content
+    @BindView(R.id.vp_content)
+    ViewPager mVP;
+    @BindView(R.id.rv_books)
+    RecyclerView rv_books;
+
+    @Override
+    protected void initPanels() {
+        super.initPanels();
+        addPanels(
+                new DetailsXiPanel(context, mPresenter).setTitle("详情"),
+                new DetailsMuPanel(context, mPresenter).setTitle("目录"),
+                new DetailsZiPanel(context, mPresenter).setTitle("支持")
+        );
+    }
+
+    private List<BookBean> xgBooks = new ArrayList<>();
+    private BookAdapter bookAdapter;
 
     @Override
     protected void initView() {
         super.initView();
+        rv_books.setLayoutManager(new LinearLayoutManager(context, LinearLayout.HORIZONTAL, false));
+        bookAdapter = new BookAdapter(context, R.layout.layout_book, xgBooks);
+        rv_books.setAdapter(bookAdapter);
+
     }
 
     @Override
@@ -81,7 +120,7 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
         tv_book_title.setText(book.getTitle());
         tv_book_author.setText(book.getAuthor());
         tv_book_ift.setText(book.getIft());
-        tv_book_star.setText(book.getStar()+"分");
+        tv_book_star.setText(book.getStar() + "分");
 
         tl_book_tag.cleanTags();
 
@@ -91,7 +130,7 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
             }
         }
         G.img(context, book.getData_src(), img_book);
-        G.imgBlur(context, book.getData_src(), img_book_bg,23);
+        G.imgBlur(context, book.getData_src(), img_book_bg, 23);
 
     }
 
@@ -110,8 +149,14 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
 
     }
 
+
     @Override
     public void setBookList(List<BookBean> list) {
-
+        if (list == null) return;
+        xgBooks.clear();
+        for (BookBean book : list) {
+            xgBooks.add(book);
+        }
+        bookAdapter.notifyDataSetChanged();
     }
 }

@@ -36,10 +36,10 @@ public class NewActivity extends BaseActivity<NewPresenter> implements INewView 
     @Override
     protected void initPanels() {
         super.initPanels();
-        addPanels(new NewRecyclerPanel(activity, mPresenter));
-        addPanels(new NewRecyclerPanel(activity, mPresenter));
-        getPanel(0).setTitle("最新上架");
-        getPanel(1).setTitle("最新更新");
+        addPanels(
+                new NewRecyclerPanel(context, mPresenter).setTitle("最新上架"),
+                new NewRecyclerPanel(context, mPresenter).setTitle("最新更新")
+        );
     }
 
     @BindView(R.id.tabLayout)

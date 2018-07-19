@@ -36,12 +36,11 @@ public class RankActivity extends BaseActivity<RankPresenter> implements IRankVi
     @Override
     protected void initPanels() {
         super.initPanels();
-        addPanels(new RankRecyclerPanel(activity, mPresenter));
-        addPanels(new RankRecyclerPanel(activity, mPresenter));
-        addPanels(new RankRecyclerPanel(activity, mPresenter));
-        getPanel(0).setTitle("人气榜");
-        getPanel(1).setTitle("打赏榜");
-        getPanel(2).setTitle("月票榜");
+        addPanels(
+                new RankRecyclerPanel(activity, mPresenter).setTitle("人气榜"),
+                new RankRecyclerPanel(activity, mPresenter).setTitle("打赏榜"),
+                new RankRecyclerPanel(activity, mPresenter).setTitle("月票榜")
+        );
     }
 
     @BindView(R.id.tabLayout)

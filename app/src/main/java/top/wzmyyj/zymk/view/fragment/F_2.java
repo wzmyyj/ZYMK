@@ -39,28 +39,28 @@ public class F_2 extends BaseFragment<TypePresenter> implements IF_2View {
     @Override
     protected void initPanels() {
         super.initPanels();
-        addPanels(new TypeRecyclerPanel(activity,mPresenter) {
+        addPanels(new TypeRecyclerPanel(context,mPresenter) {
             @Override
             protected void setData() {
                 this.title = F_2.this.mPresenter.getTitle(0);
                 mData.addAll(F_2.this.mPresenter.getData(0));
             }
         });
-        addPanels(new TypeRecyclerPanel(activity,mPresenter) {
+        addPanels(new TypeRecyclerPanel(context,mPresenter) {
             @Override
             protected void setData() {
                 this.title = F_2.this.mPresenter.getTitle(1);
                 mData.addAll(F_2.this.mPresenter.getData(1));
             }
         });
-        addPanels(new TypeRecyclerPanel(activity,mPresenter) {
+        addPanels(new TypeRecyclerPanel(context,mPresenter) {
             @Override
             protected void setData() {
                 this.title = F_2.this.mPresenter.getTitle(2);
                 mData.addAll(F_2.this.mPresenter.getData(2));
             }
         });
-        addPanels(new TypeRecyclerPanel(activity,mPresenter) {
+        addPanels(new TypeRecyclerPanel(context,mPresenter) {
             @Override
             protected void setData() {
                 this.title = F_2.this.mPresenter.getTitle(3);

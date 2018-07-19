@@ -133,7 +133,7 @@ public class HomeRecyclerPanel extends BaseRecyclerPanel<ItemBean, HomePresenter
     @Override
     protected void initPanels() {
         super.initPanels();
-        addPanels(new TopBoPanel(activity, mPresenter));
+        addPanels(new TopBoPanel(context, mPresenter));
     }
 
     @Override

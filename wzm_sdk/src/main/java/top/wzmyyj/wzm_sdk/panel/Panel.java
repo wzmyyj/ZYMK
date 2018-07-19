@@ -37,8 +37,9 @@ public class Panel {
         return title;
     }
 
-    public void setTitle(String title) {
+    public Panel setTitle(String title) {
         this.title = title;
+        return this;
     }
 
     public Panel(Context context) {

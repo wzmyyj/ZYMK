@@ -34,7 +34,7 @@ public class F_1 extends BaseFragment<HomePresenter> implements IF_1View {
     @Override
     protected void initPanels() {
         super.initPanels();
-        addPanels(new HomeRecyclerPanel(activity, mPresenter));
+        addPanels(new HomeRecyclerPanel(context, mPresenter));
     }
 
     @BindView(R.id.ll_panel)
