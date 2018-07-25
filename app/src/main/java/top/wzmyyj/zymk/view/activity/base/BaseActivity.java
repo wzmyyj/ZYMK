@@ -20,7 +20,7 @@ public abstract class BaseActivity<P extends IBasePresent> extends BasePanelActi
         initPresenter();
         checkPresenterIsNull();
         super.initSome(savedInstanceState);
-        StatusBarUtil.initStatusBar(activity, false, true, true);
+        StatusBarUtil.initStatusBar(activity,false,true,true);
     }
 
     protected abstract void initPresenter();

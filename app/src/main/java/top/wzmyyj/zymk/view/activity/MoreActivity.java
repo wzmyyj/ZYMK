@@ -1,13 +1,15 @@
 package top.wzmyyj.zymk.view.activity;
 
+import android.os.Bundle;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import butterknife.BindView;
 import top.wzmyyj.zymk.R;
+import top.wzmyyj.zymk.app.application.App;
+import top.wzmyyj.zymk.common.utils.StatusBarUtil;
 import top.wzmyyj.zymk.presenter.MorePresenter;
 import top.wzmyyj.zymk.view.activity.base.BaseActivity;
 import top.wzmyyj.zymk.view.iv.IMoreView;
@@ -37,14 +39,27 @@ public class MoreActivity extends BaseActivity<MorePresenter> implements IMoreVi
     ImageView img_back;
     @BindView(R.id.tv_title)
     TextView tv_title;
-    @BindView(R.id.fl_top)
-    FrameLayout fl_top;
+    @BindView(R.id.ll_top)
+    LinearLayout ll_top;
+
+    @BindView(R.id.v_top_0)
+    View v0;
+    @BindView(R.id.v_top_1)
+    View v1;
+
+    @Override
+    protected void initSome(Bundle savedInstanceState) {
+        super.initSome(savedInstanceState);
+        StatusBarUtil.initStatusBar(activity,true,true,true);
+    }
 
     @Override
     protected void initView() {
         super.initView();
+        App.fitsStatusBarView(v0, v1);
+
         layout.addView(getPanelView(0));
-        getPanel(0).bingViews(fl_top);
+        getPanel(0).bingViews(ll_top);
     }
 
     @Override

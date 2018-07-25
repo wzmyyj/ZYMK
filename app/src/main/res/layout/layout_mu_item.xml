@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="55dp"
+    android:layout_gravity="center"
+    android:padding="7dp">
+
+
+    <TextView
+        android:id="@+id/tv_hua_text"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="3dp"
+        android:background="@color/colorGray_g"
+        android:gravity="center"
+        android:text="1话"
+        android:textColor="@color/colorGray_6"
+        android:textSize="12sp" />
+
+    <ImageView
+        android:id="@+id/img_hua_lock"
+        android:layout_width="12dp"
+        android:layout_height="15dp"
+        android:src="@mipmap/icon_chapter_lock"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/img_hua_new"
+        android:layout_width="15dp"
+        android:layout_height="6dp"
+        android:layout_gravity="right"
+        android:paddingLeft="4.5dp"
+        android:paddingRight="4.5dp"
+        android:src="@drawable/new_oval_bg"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/img_hua_reading"
+        android:layout_width="15dp"
+        android:layout_height="9dp"
+        android:layout_gravity="right"
+        android:src="@mipmap/icon_chapter_picture_reading"
+        android:visibility="gone" />
+
+
+</FrameLayout>

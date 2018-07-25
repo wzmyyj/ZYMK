@@ -51,7 +51,7 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
     @BindView(R.id.tv_title)
     TextView tv_title;
 
-//    @BindView(R.id.img_back)
+    //    @BindView(R.id.img_back)
 //    ImageView img_back;
     @OnClick(R.id.img_back)
     void back() {
@@ -121,6 +121,7 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
         ViewTitlePagerAdapter pagerAdapter = new ViewTitlePagerAdapter(viewList, titles);
         mViewPager.setAdapter(pagerAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
+        mViewPager.setCurrentItem(1);
 
     }
 

@@ -10,13 +10,16 @@ public class HuaBean {
     private String href;
     private long uptime;
     private boolean isLock;
+    private boolean isDot;
 
-    public HuaBean(String title, String href, long uptime, boolean isLock) {
+    public HuaBean(String title, String href, long uptime, boolean isLock, boolean isDot) {
         this.title = title;
         this.href = href;
         this.uptime = uptime;
         this.isLock = isLock;
+        this.isDot = isDot;
     }
+
 
     public String getTitle() {
         return title;
@@ -48,5 +51,13 @@ public class HuaBean {
 
     public void setLock(boolean lock) {
         isLock = lock;
+    }
+
+    public boolean isDot() {
+        return isDot;
+    }
+
+    public void setDot(boolean dot) {
+        isDot = dot;
     }
 }

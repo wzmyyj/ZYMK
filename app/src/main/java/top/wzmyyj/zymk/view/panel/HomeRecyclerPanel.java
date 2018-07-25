@@ -17,6 +17,7 @@ import java.util.List;
 import top.wzmyyj.wzm_sdk.adapter.ivd.IVD;
 import top.wzmyyj.wzm_sdk.adapter.ivd.SingleIVD;
 import top.wzmyyj.zymk.R;
+import top.wzmyyj.zymk.app.application.App;
 import top.wzmyyj.zymk.app.bean.BoBean;
 import top.wzmyyj.zymk.app.bean.BookBean;
 import top.wzmyyj.zymk.app.bean.ItemBean;
@@ -48,7 +49,8 @@ public class HomeRecyclerPanel extends BaseRecyclerPanel<ItemBean, HomePresenter
         mRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
 
             int mDistance = 0;
-            int maxDistance = DensityUtil.dp2px(context, 155);//当距离在[0,maxDistance]变化时，透明度在[0,255之间变化]
+            //当距离在[0,maxDistance]变化时，透明度在[0,255之间变化]
+            int maxDistance = DensityUtil.dp2px(context, 155) - App.StatusBarHeight;
 
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {

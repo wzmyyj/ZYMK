@@ -13,6 +13,6 @@ public abstract class BaseMainActivity extends ViewPagerFragmentActivity {
     @Override
     protected void initSome(Bundle savedInstanceState) {
         super.initSome(savedInstanceState);
-        StatusBarUtil.initStatusBar(activity, false, true, true);
+        StatusBarUtil.initStatusBar(activity,true,true,true);
     }
 }

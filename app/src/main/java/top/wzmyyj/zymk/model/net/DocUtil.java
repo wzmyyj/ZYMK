@@ -338,10 +338,11 @@ public class DocUtil {
                         .absUrl("href");
                 String title = item.getElementsByClass("chapterBtn").get(0)
                         .attr("title");
-                boolean isLock;
                 Elements lock = item.getElementsByClass("lockIcon");
-                isLock = lock != null && lock.size() > 0;
-                HuaBean hua = new HuaBean(title, href, uptime, isLock);
+                boolean isLock = lock != null && lock.size() > 0;
+                Elements updot = item.getElementsByClass("updot");
+                boolean isDot = updot != null && updot.size() > 0;
+                HuaBean hua = new HuaBean(title, href, uptime, isLock, isDot);
                 huas.add(hua);
             }
         }

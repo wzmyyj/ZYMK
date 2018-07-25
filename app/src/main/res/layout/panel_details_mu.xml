@@ -1,10 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="400dp">
-    <TextView
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="目录" />
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="最后更新："
+            android:textColor="@color/colorGray_9"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tv_mu_last"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textColor="@color/colorGray_6"
+            android:textSize="14sp" />
+
+
+        <ImageView
+            android:id="@+id/img_mu_xu"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_gravity="bottom"
+            android:src="@mipmap/svg_booklist_down" />
+
+        <TextView
+            android:id="@+id/tv_mu_xu"
+            android:layout_width="35dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="1dp"
+            android:gravity="bottom"
+            android:text="降序"
+            android:textColor="@color/colorGray_9"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_mu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </android.support.v7.widget.RecyclerView>
 </LinearLayout>

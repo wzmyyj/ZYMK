@@ -13,6 +13,7 @@ import top.wzmyyj.wzm_sdk.adapter.ViewTitlePagerAdapter;
 import top.wzmyyj.wzm_sdk.panel.Panel;
 import top.wzmyyj.wzm_sdk.tools.T;
 import top.wzmyyj.zymk.R;
+import top.wzmyyj.zymk.app.application.App;
 import top.wzmyyj.zymk.presenter.TypePresenter;
 import top.wzmyyj.zymk.view.fragment.base.BaseFragment;
 import top.wzmyyj.zymk.view.iv.IF_2View;
@@ -35,32 +36,31 @@ public class F_2 extends BaseFragment<TypePresenter> implements IF_2View {
     }
 
 
-
     @Override
     protected void initPanels() {
         super.initPanels();
-        addPanels(new TypeRecyclerPanel(context,mPresenter) {
+        addPanels(new TypeRecyclerPanel(context, mPresenter) {
             @Override
             protected void setData() {
                 this.title = F_2.this.mPresenter.getTitle(0);
                 mData.addAll(F_2.this.mPresenter.getData(0));
             }
         });
-        addPanels(new TypeRecyclerPanel(context,mPresenter) {
+        addPanels(new TypeRecyclerPanel(context, mPresenter) {
             @Override
             protected void setData() {
                 this.title = F_2.this.mPresenter.getTitle(1);
                 mData.addAll(F_2.this.mPresenter.getData(1));
             }
         });
-        addPanels(new TypeRecyclerPanel(context,mPresenter) {
+        addPanels(new TypeRecyclerPanel(context, mPresenter) {
             @Override
             protected void setData() {
                 this.title = F_2.this.mPresenter.getTitle(2);
                 mData.addAll(F_2.this.mPresenter.getData(2));
             }
         });
-        addPanels(new TypeRecyclerPanel(context,mPresenter) {
+        addPanels(new TypeRecyclerPanel(context, mPresenter) {
             @Override
             protected void setData() {
                 this.title = F_2.this.mPresenter.getTitle(3);
@@ -75,6 +75,14 @@ public class F_2 extends BaseFragment<TypePresenter> implements IF_2View {
     ViewPager mViewPager;
     @BindView(R.id.img_search)
     ImageView img_search;
+    @BindView(R.id.v_top)
+    View v;
+
+    @Override
+    protected void initView() {
+        super.initView();
+        App.fitsStatusBarView(v);
+    }
 
     @Override
     protected void initData() {

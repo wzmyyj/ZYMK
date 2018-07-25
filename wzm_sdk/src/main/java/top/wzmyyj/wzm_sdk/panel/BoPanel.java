@@ -8,13 +8,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
 import top.wzmyyj.wzm_sdk.R;
 import top.wzmyyj.wzm_sdk.adapter.ImageViewPagerAdapter;
-import top.wzmyyj.wzm_sdk.widget.FixedSpeedScroller;
 
 /**
  * Created by wzm on 2018/07/03. email: 2209011667@qq.com
@@ -118,15 +116,15 @@ public abstract class BoPanel extends InitPanel {
         mViewPager.setAdapter(new ImageViewPagerAdapter(mImageList));
 
         //利用反射修改ViewPager切换速度
-        try {
-            Field mField = ViewPager.class.getDeclaredField("mScroller");
-            mField.setAccessible(true);
-            FixedSpeedScroller mScroller =
-                    new FixedSpeedScroller(mViewPager.getContext(), 2 * 1000);
-            mField.set(mViewPager, mScroller);
-        } catch (Exception e) {
-
-        }
+//        try {
+//            Field mField = ViewPager.class.getDeclaredField("mScroller");
+//            mField.setAccessible(true);
+//            FixedSpeedScroller mScroller =
+//                    new FixedSpeedScroller(mViewPager.getContext(), 2 * 1000);
+//            mField.set(mViewPager, mScroller);
+//        } catch (Exception e) {
+//
+//        }
     }
 
 
