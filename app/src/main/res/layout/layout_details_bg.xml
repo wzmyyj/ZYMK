@@ -2,7 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="200dp"
+    android:layout_height="220dp"
     android:background="@color/colorGray_b">
 
     <ImageView
@@ -16,7 +16,7 @@
         android:layout_height="match_parent"
         android:layout_marginBottom="60dp"
         android:layout_marginLeft="130dp"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="65dp"
         android:orientation="vertical">
 
         <TextView
@@ -51,9 +51,9 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="20dp"
+            android:layout_height="match_parent"
             android:layout_marginBottom="4dp"
-            android:gravity="center_vertical"
+            android:gravity="bottom"
             android:orientation="horizontal">
 
             <TextView
@@ -110,7 +110,7 @@
         android:layout_width="108dp"
         android:layout_height="144dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="65dp"
         android:background="@drawable/img_stroke_bg2"
         android:padding="2dp">
 

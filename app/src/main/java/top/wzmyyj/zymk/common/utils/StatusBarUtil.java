@@ -1,9 +1,12 @@
 package top.wzmyyj.zymk.common.utils;
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
+import android.support.annotation.NonNull;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -53,6 +56,35 @@ public class StatusBarUtil {
             window.setStatusBarColor(Color.TRANSPARENT);
         }
 
+    }
+
+
+    public static void initStatusBarHeight(Context context) {
+        StatusBarHeight = getStatusBarHeight(context);
+    }
+
+    public static int StatusBarHeight;
+
+    /**
+     * 获取状态栏高度
+     *
+     * @return 高度（px）
+     */
+    public static int getStatusBarHeight(Context context) {
+        int result = 0;
+        int resultId = context.getResources().getIdentifier("status_bar_height",
+                "dimen", "android");
+        if (resultId > 0) {
+            result = context.getResources().getDimensionPixelSize(resultId);
+        }
+        return result;
+    }
+
+    public static void fitsStatusBarView(@NonNull View... views) {
+        for (int i = 0; i < views.length; i++) {
+            ViewGroup.LayoutParams params = views[i].getLayoutParams();
+            params.height = StatusBarHeight;
+        }
     }
 
 }

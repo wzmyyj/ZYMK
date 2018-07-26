@@ -8,7 +8,6 @@ import android.widget.TextView;
 
 import butterknife.BindView;
 import top.wzmyyj.zymk.R;
-import top.wzmyyj.zymk.app.application.App;
 import top.wzmyyj.zymk.common.utils.StatusBarUtil;
 import top.wzmyyj.zymk.presenter.MorePresenter;
 import top.wzmyyj.zymk.view.activity.base.BaseActivity;
@@ -56,7 +55,7 @@ public class MoreActivity extends BaseActivity<MorePresenter> implements IMoreVi
     @Override
     protected void initView() {
         super.initView();
-        App.fitsStatusBarView(v0, v1);
+        StatusBarUtil.fitsStatusBarView(v0, v1);
 
         layout.addView(getPanelView(0));
         getPanel(0).bingViews(ll_top);

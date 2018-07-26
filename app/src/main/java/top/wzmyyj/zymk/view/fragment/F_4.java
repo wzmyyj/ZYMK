@@ -4,7 +4,7 @@ import android.view.View;
 
 import butterknife.BindView;
 import top.wzmyyj.zymk.R;
-import top.wzmyyj.zymk.app.application.App;
+import top.wzmyyj.zymk.common.utils.StatusBarUtil;
 import top.wzmyyj.zymk.presenter.MinePresenter;
 import top.wzmyyj.zymk.view.fragment.base.BaseFragment;
 import top.wzmyyj.zymk.view.iv.IF_4View;
@@ -31,6 +31,6 @@ public class F_4 extends BaseFragment<MinePresenter> implements IF_4View {
     @Override
     protected void initView() {
         super.initView();
-        App.fitsStatusBarView(v);
+        StatusBarUtil.fitsStatusBarView(v);
     }
 }

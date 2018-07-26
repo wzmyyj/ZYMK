@@ -13,7 +13,7 @@ import top.wzmyyj.wzm_sdk.adapter.ViewTitlePagerAdapter;
 import top.wzmyyj.wzm_sdk.panel.Panel;
 import top.wzmyyj.wzm_sdk.tools.T;
 import top.wzmyyj.zymk.R;
-import top.wzmyyj.zymk.app.application.App;
+import top.wzmyyj.zymk.common.utils.StatusBarUtil;
 import top.wzmyyj.zymk.presenter.TypePresenter;
 import top.wzmyyj.zymk.view.fragment.base.BaseFragment;
 import top.wzmyyj.zymk.view.iv.IF_2View;
@@ -81,7 +81,7 @@ public class F_2 extends BaseFragment<TypePresenter> implements IF_2View {
     @Override
     protected void initView() {
         super.initView();
-        App.fitsStatusBarView(v);
+        StatusBarUtil.fitsStatusBarView(v);
     }
 
     @Override

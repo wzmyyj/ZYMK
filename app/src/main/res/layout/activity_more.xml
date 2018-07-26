@@ -51,7 +51,7 @@
         android:id="@+id/ll_top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:alpha="1"
+        android:alpha="0"
         android:background="@color/colorWhite"
         android:orientation="vertical">
 

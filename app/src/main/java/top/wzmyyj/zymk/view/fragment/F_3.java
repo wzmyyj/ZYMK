@@ -7,7 +7,7 @@ import android.widget.LinearLayout;
 import butterknife.BindView;
 import top.wzmyyj.wzm_sdk.tools.T;
 import top.wzmyyj.zymk.R;
-import top.wzmyyj.zymk.app.application.App;
+import top.wzmyyj.zymk.common.utils.StatusBarUtil;
 import top.wzmyyj.zymk.presenter.FindPresenter;
 import top.wzmyyj.zymk.view.fragment.base.BaseFragment;
 import top.wzmyyj.zymk.view.iv.IF_3View;
@@ -42,7 +42,7 @@ public class F_3 extends BaseFragment<FindPresenter> implements IF_3View {
     @Override
     protected void initView() {
         super.initView();
-        App.fitsStatusBarView(v);
+        StatusBarUtil.fitsStatusBarView(v);
         ll_1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

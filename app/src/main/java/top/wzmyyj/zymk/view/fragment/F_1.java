@@ -7,7 +7,7 @@ import android.widget.LinearLayout;
 import butterknife.BindView;
 import top.wzmyyj.wzm_sdk.tools.T;
 import top.wzmyyj.zymk.R;
-import top.wzmyyj.zymk.app.application.App;
+import top.wzmyyj.zymk.common.utils.StatusBarUtil;
 import top.wzmyyj.zymk.presenter.HomePresenter;
 import top.wzmyyj.zymk.view.fragment.base.BaseFragment;
 import top.wzmyyj.zymk.view.iv.IF_1View;
@@ -56,7 +56,7 @@ public class F_1 extends BaseFragment<HomePresenter> implements IF_1View {
     @Override
     protected void initView() {
         super.initView();
-        App.fitsStatusBarView(v0, v1, v2);
+        StatusBarUtil.fitsStatusBarView(v0, v1, v2);
 
         layout.addView(getPanelView(0));
         getPanel(0).bingViews(ll_top);

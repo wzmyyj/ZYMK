@@ -11,10 +11,13 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
 import java.lang.reflect.Field;
 
 import top.wzmyyj.wzm_sdk.widget.FixedSpeedScroller;
+import top.wzmyyj.zymk.R;
+import top.wzmyyj.zymk.common.utils.StatusBarUtil;
 
 
 /**
@@ -25,9 +28,9 @@ public class AceNestedScrollView extends NestedScrollView {
 
     private FrameLayout mWapper;
     private ViewGroup mTop;
-    private ViewGroup mTab;
+    private FrameLayout mTab;
     private View mBg;
-    private View mContent;
+    private LinearLayout mContent;
 
 
     private int mTopHeight = 50;
@@ -73,16 +76,28 @@ public class AceNestedScrollView extends NestedScrollView {
         if (!once) {
             mWapper = (FrameLayout) getChildAt(0);
             mBg = mWapper.getChildAt(0);
-            mContent = mWapper.getChildAt(1);
-            mTab = (ViewGroup) mWapper.getChildAt(2);
+            mContent = (LinearLayout) mWapper.getChildAt(1);
+            mTab = (FrameLayout) mWapper.getChildAt(2);
             mTop = (ViewGroup) mWapper.getChildAt(3);
+
 
             int h = getMeasuredHeight();
             int t = mTop.getMeasuredHeight();
             int a = mTab.getMeasuredHeight();
             int b = mBg.getMeasuredHeight();
-            mUpHeight = b - t;
+
+            View v0 = this.findViewById(R.id.v_top_0);
+            View v1 = this.findViewById(R.id.v_top_1);
+            StatusBarUtil.fitsStatusBarView(v0, v1);
+            int r = t + StatusBarUtil.StatusBarHeight;
+            mUpHeight = b - r;
 //            mContent.getLayoutParams().height = h - t - a;
+            FrameLayout.LayoutParams params_tab = (FrameLayout.LayoutParams) mTab.getLayoutParams();
+            params_tab.topMargin = b;
+
+            FrameLayout.LayoutParams params_c = (FrameLayout.LayoutParams) mContent.getLayoutParams();
+            params_c.topMargin = b + a;
+
             once = true;
         }
     }
