@@ -291,6 +291,7 @@ public class DocUtil {
                 bookList.add(getBook(item));
             }
         }
+        RandomSort.sort(bookList);
 
         DetailsBox box = new DetailsBox(mainBook, xi, mu, zi, bookList);
 

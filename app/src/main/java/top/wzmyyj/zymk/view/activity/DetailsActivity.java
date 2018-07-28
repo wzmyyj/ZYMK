@@ -1,8 +1,10 @@
 package top.wzmyyj.zymk.view.activity;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -20,6 +22,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import top.wzmyyj.wzm_sdk.adapter.ViewTitlePagerAdapter;
 import top.wzmyyj.wzm_sdk.panel.Panel;
+import top.wzmyyj.wzm_sdk.tools.L;
 import top.wzmyyj.zymk.R;
 import top.wzmyyj.zymk.app.bean.BookBean;
 import top.wzmyyj.zymk.app.bean.MuBean;
@@ -72,6 +75,9 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
     @BindView(R.id.tv_title)
     TextView tv_title;
 
+    @BindView(R.id.srl_details)
+    SwipeRefreshLayout mSwipeRefreshLayout;
+
     //    @BindView(R.id.img_back)
     //    ImageView img_back;
     @OnClick(R.id.img_back)
@@ -117,8 +123,8 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
     protected void initView() {
         super.initView();
 
-
         rv_books.setLayoutManager(new LinearLayoutManager(context, LinearLayout.HORIZONTAL, false));
+        rv_books.setNestedScrollingEnabled(false);
         bookAdapter = new BookAdapter(context, R.layout.layout_book, xgBooks);
         rv_books.setAdapter(bookAdapter);
 
@@ -134,11 +140,44 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
         mTabLayout.setupWithViewPager(mViewPager);
         mViewPager.setCurrentItem(1);
 
+        mSwipeRefreshLayout.setColorSchemeColors(context.getResources()
+                .getColor(top.wzmyyj.wzm_sdk.R.color.colorPrimary));
+
     }
 
     @Override
     protected void initData() {
         super.initData();
+        update();
+    }
+
+    @Override
+    protected void initListener() {
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                updateWithView();
+            }
+        });
+
+    }
+
+    public void updateWithView() {
+        mSwipeRefreshLayout.setRefreshing(true);
+        try {
+            update();
+            L.e("update data success");
+        } catch (Exception e) {
+        }
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mSwipeRefreshLayout.setRefreshing(false);
+            }
+        }, 1000);
+    }
+
+    private void update() {
         mPresenter.loadData();
     }
 
