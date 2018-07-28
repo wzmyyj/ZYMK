@@ -11,6 +11,16 @@ public class MuBean {
     private long time;
     private List<HuaBean> huaList;
 
+    private String reading_href;
+
+    public String getReading_href() {
+        return reading_href;
+    }
+
+    public void setReading_href(String reading_href) {
+        this.reading_href = reading_href;
+    }
+
     public MuBean(String time_desc, long time) {
         this.time_desc = time_desc;
         this.time = time;

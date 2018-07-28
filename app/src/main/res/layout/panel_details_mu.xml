@@ -32,7 +32,7 @@
             android:layout_width="15dp"
             android:layout_height="15dp"
             android:layout_gravity="bottom"
-            android:src="@mipmap/svg_booklist_down" />
+            android:src="@mipmap/svg_booklist_up" />
 
         <TextView
             android:id="@+id/tv_mu_xu"
@@ -40,7 +40,7 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="1dp"
             android:gravity="bottom"
-            android:text="降序"
+            android:text="升序"
             android:textColor="@color/colorGray_9"
             android:textSize="12sp" />
 
@@ -49,8 +49,87 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_mu"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     </android.support.v7.widget.RecyclerView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:paddingBottom="18dp">
+
+        <LinearLayout
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_gravity="center"
+                android:src="@mipmap/svg_booklist_left" />
+
+            <TextView
+                android:id="@+id/tv_left"
+                android:layout_width="0dp"
+                android:gravity="center"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/click_bg"
+                android:text="上一页"
+                android:textColor="@color/colorGray_7"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tl_mu_pager"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            app:tabIndicatorColor="@color/colorPrimary"
+            app:tabIndicatorHeight="0dp"
+            app:tabMaxWidth="45dp"
+            app:tabMode="scrollable"
+            app:tabSelectedTextColor="@color/colorPrimary"
+            app:tabTextAppearance="@style/MyTabLayoutTextAppearance2"
+            app:tabTextColor="@color/colorGray_9">
+
+        </android.support.design.widget.TabLayout>
+
+        <LinearLayout
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_right"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:background="@drawable/click_bg"
+                android:text="上一页"
+                android:textColor="@color/colorGray_7"
+                android:textSize="12sp" />
+
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_gravity="center"
+                android:src="@mipmap/svg_booklist_right" />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
 </LinearLayout>

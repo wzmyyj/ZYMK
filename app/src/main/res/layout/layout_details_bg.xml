@@ -12,11 +12,11 @@
         android:scaleType="fitXY" />
 
     <LinearLayout
+        android:layout_gravity="bottom"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="95dp"
         android:layout_marginBottom="60dp"
         android:layout_marginLeft="130dp"
-        android:layout_marginTop="65dp"
         android:orientation="vertical">
 
         <TextView
@@ -110,7 +110,8 @@
         android:layout_width="108dp"
         android:layout_height="144dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="65dp"
+        android:layout_marginBottom="11dp"
+        android:layout_gravity="bottom"
         android:background="@drawable/img_stroke_bg2"
         android:padding="2dp">
 

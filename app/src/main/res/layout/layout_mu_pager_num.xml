@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="30dp"
+    android:layout_height="30dp">
+
+    <TextView
+        android:id="@+id/tv_mu_pager_num"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_gravity="center"
+        android:background="@drawable/img_stroke_bg"
+        android:gravity="center"
+        android:text="1"
+        android:textColor="@color/colorGray_9"
+        android:textSize="12sp" />
+
+</FrameLayout>

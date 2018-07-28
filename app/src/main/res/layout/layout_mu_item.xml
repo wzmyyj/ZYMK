@@ -19,8 +19,8 @@
 
     <ImageView
         android:id="@+id/img_hua_lock"
-        android:layout_width="12dp"
-        android:layout_height="15dp"
+        android:layout_width="10dp"
+        android:layout_height="13dp"
         android:src="@mipmap/icon_chapter_lock"
         android:visibility="gone" />
 

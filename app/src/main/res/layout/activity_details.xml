@@ -3,11 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <top.wzmyyj.zymk.common.widget.AceNestedScrollView
+    <top.wzmyyj.zymk.app.widget.AceNestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <include layout="@layout/layout_details" />
-    </top.wzmyyj.zymk.common.widget.AceNestedScrollView>
+    </top.wzmyyj.zymk.app.widget.AceNestedScrollView>
 
 </FrameLayout>

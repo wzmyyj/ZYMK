@@ -42,7 +42,7 @@ public class BoViewPager extends ViewPager {
             mFirstLayout.setAccessible(true);
             mFirstLayout.set(this, false);
             getAdapter().notifyDataSetChanged();
-            setCurrentItem(getCurrentItem());
+            setCurrentItem(getCurrentItem(), false);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -1,4 +1,4 @@
-package top.wzmyyj.zymk.common.widget;
+package top.wzmyyj.zymk.app.widget;
 
 import android.content.Context;
 import android.os.Handler;
@@ -17,6 +17,7 @@ import java.lang.reflect.Field;
 
 import top.wzmyyj.wzm_sdk.widget.FixedSpeedScroller;
 import top.wzmyyj.zymk.R;
+import top.wzmyyj.zymk.common.utils.DensityUtil;
 import top.wzmyyj.zymk.common.utils.StatusBarUtil;
 
 
@@ -29,7 +30,7 @@ public class AceNestedScrollView extends NestedScrollView {
     private FrameLayout mWapper;
     private ViewGroup mTop;
     private FrameLayout mTab;
-    private View mBg;
+    private FrameLayout mBg;
     private LinearLayout mContent;
 
 
@@ -75,7 +76,7 @@ public class AceNestedScrollView extends NestedScrollView {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         if (!once) {
             mWapper = (FrameLayout) getChildAt(0);
-            mBg = mWapper.getChildAt(0);
+            mBg = (FrameLayout) mWapper.getChildAt(0);
             mContent = (LinearLayout) mWapper.getChildAt(1);
             mTab = (FrameLayout) mWapper.getChildAt(2);
             mTop = (ViewGroup) mWapper.getChildAt(3);
@@ -84,13 +85,17 @@ public class AceNestedScrollView extends NestedScrollView {
             int h = getMeasuredHeight();
             int t = mTop.getMeasuredHeight();
             int a = mTab.getMeasuredHeight();
-            int b = mBg.getMeasuredHeight();
+            int b = StatusBarUtil.StatusBarHeight + DensityUtil.dp2px(getContext(), 200);
+
+            FrameLayout.LayoutParams params_bg = (FrameLayout.LayoutParams) mBg.getLayoutParams();
+            params_bg.height = b;
 
             View v0 = this.findViewById(R.id.v_top_0);
             View v1 = this.findViewById(R.id.v_top_1);
             StatusBarUtil.fitsStatusBarView(v0, v1);
             int r = t + StatusBarUtil.StatusBarHeight;
             mUpHeight = b - r;
+
 //            mContent.getLayoutParams().height = h - t - a;
             FrameLayout.LayoutParams params_tab = (FrameLayout.LayoutParams) mTab.getLayoutParams();
             params_tab.topMargin = b;
