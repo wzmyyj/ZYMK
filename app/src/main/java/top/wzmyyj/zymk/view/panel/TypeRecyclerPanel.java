@@ -2,10 +2,10 @@ package top.wzmyyj.zymk.view.panel;
 
 import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
 
 import java.util.List;
@@ -13,6 +13,8 @@ import java.util.List;
 import top.wzmyyj.wzm_sdk.adapter.ivd.SingleIVD;
 import top.wzmyyj.zymk.R;
 import top.wzmyyj.zymk.app.bean.TypeBean;
+import top.wzmyyj.zymk.app.tools.G;
+import top.wzmyyj.zymk.app.tools.I;
 import top.wzmyyj.zymk.presenter.TypePresenter;
 import top.wzmyyj.zymk.view.panel.base.BaseRecyclerPanel;
 
@@ -20,11 +22,16 @@ import top.wzmyyj.zymk.view.panel.base.BaseRecyclerPanel;
  * Created by yyj on 2018/07/06. email: 2209011667@qq.com
  */
 
-public abstract class TypeRecyclerPanel extends BaseRecyclerPanel<TypeBean,TypePresenter> {
+public class TypeRecyclerPanel extends BaseRecyclerPanel<TypeBean, TypePresenter> {
 
 
     public TypeRecyclerPanel(Context context, TypePresenter p) {
         super(context, p);
+    }
+
+    @Override
+    protected void setData() {
+        update();
     }
 
     @Override
@@ -39,11 +46,15 @@ public abstract class TypeRecyclerPanel extends BaseRecyclerPanel<TypeBean,TypeP
             public void convert(ViewHolder holder, TypeBean typeBean, int position) {
                 ImageView img_type = holder.getView(R.id.img_type);
                 TextView tv_type = holder.getView(R.id.tv_type);
-                tv_type.setText("- " + typeBean.getName() + " -");
-                Glide.with(context)
-                        .load(typeBean.getUrl())
-                        .error(R.mipmap.ic_error)
-                        .into(img_type);
+                tv_type.setText("- " + typeBean.getTitle() + " -");
+                G.img(context, typeBean.getData_src(), img_type);
+                final String href = typeBean.getHref();
+                img_type.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        I.toTyActivity(context, href);
+                    }
+                });
             }
         });
     }
@@ -52,5 +63,25 @@ public abstract class TypeRecyclerPanel extends BaseRecyclerPanel<TypeBean,TypeP
     protected void initView() {
         super.initView();
         mRecyclerView.setLayoutManager(new GridLayoutManager(context, 3));
+    }
+
+
+    @Override
+    public void update() {
+        mPresenter.loadData();
+
+    }
+
+    @Override
+    public Object f(int w, Object... objects) {
+        List<TypeBean> typeList = (List<TypeBean>) objects[0];
+        if (typeList != null && typeList.size() > 0) {
+            mData.clear();
+            for (TypeBean bean : typeList) {
+                mData.add(bean);
+            }
+            notifyDataSetChanged();
+        }
+        return super.f(w, objects);
     }
 }

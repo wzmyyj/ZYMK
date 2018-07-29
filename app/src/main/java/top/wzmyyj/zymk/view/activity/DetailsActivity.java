@@ -202,7 +202,7 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
             }
         }
         G.img(context, book.getData_src(), img_book);
-        G.imgBlur(context, book.getData_src(), img_book_bg, 20);
+        G.imgBlur(context, book.getData_src(), img_book_bg, 15);
 
     }
 

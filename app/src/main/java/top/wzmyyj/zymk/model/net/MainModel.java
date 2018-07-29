@@ -1,7 +1,7 @@
 package top.wzmyyj.zymk.model.net;
 
 import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
@@ -13,6 +13,7 @@ import io.reactivex.schedulers.Schedulers;
 import top.wzmyyj.zymk.model.box.HomeBox;
 import top.wzmyyj.zymk.model.box.NewBox;
 import top.wzmyyj.zymk.model.box.RankBox;
+import top.wzmyyj.zymk.model.box.TypeBox;
 
 /**
  * Created by yyj on 2018/07/09. email: 2209011667@qq.com
@@ -20,18 +21,17 @@ import top.wzmyyj.zymk.model.box.RankBox;
 
 public class MainModel {
 
-    public static Document mDocument;
+    public static Element mElement;
 
     public void getHomeData(Observer<HomeBox> observer) {
         Observable.create(new ObservableOnSubscribe<HomeBox>() {
             @Override
             public void subscribe(@NonNull ObservableEmitter<HomeBox> observableEmitter) throws Exception {
                 try {
-                    if (mDocument == null) {
-                        mDocument = Jsoup.connect(Urls.ZYMK_HomePage).get();
+                    if (mElement == null) {
+                        mElement = Jsoup.connect(Urls.ZYMK_HomePage).get().body();
                     }
-                    Document doc = mDocument;
-                    HomeBox data = DocUtil.transToHome(doc);
+                    HomeBox data = DocUtil.transToHome(mElement);
                     observableEmitter.onNext(data);
                 } catch (Exception e) {
                     observableEmitter.onError(e);
@@ -55,11 +55,10 @@ public class MainModel {
             @Override
             public void subscribe(@NonNull ObservableEmitter<NewBox> observableEmitter) throws Exception {
                 try {
-                    if (mDocument == null) {
-                        mDocument = Jsoup.connect(Urls.ZYMK_HomePage).get();
+                    if (mElement == null) {
+                        mElement = Jsoup.connect(Urls.ZYMK_HomePage).get().body();
                     }
-                    Document doc = mDocument;
-                    NewBox data = DocUtil.transToNew(doc);
+                    NewBox data = DocUtil.transToNew(mElement);
                     observableEmitter.onNext(data);
                 } catch (Exception e) {
                     observableEmitter.onError(e);
@@ -83,11 +82,37 @@ public class MainModel {
             @Override
             public void subscribe(@NonNull ObservableEmitter<RankBox> observableEmitter) throws Exception {
                 try {
-                    if (mDocument == null) {
-                        mDocument = Jsoup.connect(Urls.ZYMK_HomePage).get();
+                    if (mElement == null) {
+                        mElement = Jsoup.connect(Urls.ZYMK_HomePage).get().body();
                     }
-                    Document doc = mDocument;
-                    RankBox data = DocUtil.transToRank(doc);
+                    RankBox data = DocUtil.transToRank(mElement);
+                    observableEmitter.onNext(data);
+                } catch (Exception e) {
+                    observableEmitter.onError(e);
+                    e.printStackTrace();
+                } finally {
+                    observableEmitter.onComplete();
+                }
+            }
+
+        })
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(observer);
+
+    }
+
+
+    public void getTypeData(Observer<TypeBox> observer) {
+        Observable.create(new ObservableOnSubscribe<TypeBox>() {
+            @Override
+            public void subscribe(@NonNull ObservableEmitter<TypeBox> observableEmitter) throws Exception {
+                try {
+                    if (mElement == null) {
+                        mElement = Jsoup.connect(Urls.ZYMK_HomePage).get().body();
+                    }
+                    TypeBox data = DocUtil.transToType(mElement);
                     observableEmitter.onNext(data);
                 } catch (Exception e) {
                     observableEmitter.onError(e);

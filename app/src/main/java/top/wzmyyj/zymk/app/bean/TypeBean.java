@@ -5,40 +5,42 @@ package top.wzmyyj.zymk.app.bean;
  */
 
 public class TypeBean {
-    private String type;
-    private String name;
-    private String url;
+
+    private String title;
+    private String href;
+    private String data_src;
 
     public TypeBean() {
     }
 
-    public TypeBean(String type, String name, String url) {
-        this.type = type;
-        this.name = name;
-        this.url = url;
+    public TypeBean(String title, String href, String data_src) {
+        this.title = title;
+        this.href = href;
+        this.data_src = data_src;
     }
 
-    public String getType() {
-        return type;
+    public String getTitle() {
+        return title;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getName() {
-        return name;
+    public String getHref() {
+        return href;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setHref(String href) {
+        this.href = href;
     }
 
-    public String getUrl() {
-        return url;
+
+    public String getData_src() {
+        return data_src;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setData_src(String data_src) {
+        this.data_src = data_src;
     }
 }

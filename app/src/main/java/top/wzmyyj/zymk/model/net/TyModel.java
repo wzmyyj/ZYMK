@@ -13,28 +13,27 @@ import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.schedulers.Schedulers;
-import top.wzmyyj.zymk.model.box.MoreBox;
+import top.wzmyyj.zymk.model.box.TyBox;
 
 /**
- * Created by yyj on 2018/07/11. email: 2209011667@qq.com
+ * Created by yyj on 2018/07/29. email: 2209011667@qq.com
  */
 
-public class MoreModel {
-
+public class TyModel {
 
     public static Map<String, Element> DMap = new HashMap<>();
 
-    public void getMoreData(final String url, Observer<MoreBox> observer) {
-        Observable.create(new ObservableOnSubscribe<MoreBox>() {
+    public void getTyData(final String url, Observer<TyBox> observer) {
+        Observable.create(new ObservableOnSubscribe<TyBox>() {
             @Override
-            public void subscribe(@NonNull ObservableEmitter<MoreBox> observableEmitter) throws Exception {
+            public void subscribe(@NonNull ObservableEmitter<TyBox> observableEmitter) throws Exception {
                 try {
                     Element element = DMap.get(url);
                     if (element == null) {
                         element = Jsoup.connect(url).get().body();
                         DMap.put(url, element);
                     }
-                    MoreBox data = DocUtil.transToMore(element);
+                    TyBox data = DocUtil.transToTy(element);
                     observableEmitter.onNext(data);
                 } catch (Exception e) {
                     observableEmitter.onError(e);
@@ -52,5 +51,4 @@ public class MoreModel {
 
 
     }
-
 }

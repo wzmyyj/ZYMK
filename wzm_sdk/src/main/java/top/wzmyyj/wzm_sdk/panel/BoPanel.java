@@ -41,12 +41,12 @@ public abstract class BoPanel extends InitPanel {
     @Override
     protected void initData() {
         size = getSize();
-        point_size = getPointSize();
+        point_size = getPointDP();
         initBo();
         initBoData();
     }
 
-    protected int getPointSize() {
+    protected int getPointDP() {
         return point_size;
     }
 

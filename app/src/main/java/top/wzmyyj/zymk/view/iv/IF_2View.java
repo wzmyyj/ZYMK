@@ -1,10 +1,11 @@
 package top.wzmyyj.zymk.view.iv;
 
 import top.wzmyyj.zymk.view.iv.base.IBaseView;
+import top.wzmyyj.zymk.view.iv.base.IUpdateView;
 
 /**
  * Created by yyj on 2018/06/29. email: 2209011667@qq.com
  */
 
-public interface IF_2View extends IBaseView {
+public interface IF_2View extends IBaseView ,IUpdateView{
 }

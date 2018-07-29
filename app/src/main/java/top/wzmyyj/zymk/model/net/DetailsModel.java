@@ -1,7 +1,7 @@
 package top.wzmyyj.zymk.model.net;
 
 import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,20 +20,19 @@ import top.wzmyyj.zymk.model.box.DetailsBox;
  */
 
 public class DetailsModel {
-    public static Map<String, Document> DMap = new HashMap<>();
+    public static Map<String, Element> DMap = new HashMap<>();
 
     public void getMoreData(final String url, Observer<DetailsBox> observer) {
         Observable.create(new ObservableOnSubscribe<DetailsBox>() {
             @Override
             public void subscribe(@NonNull ObservableEmitter<DetailsBox> observableEmitter) throws Exception {
                 try {
-                    Document mDocument = DMap.get(url);
-                    if (mDocument == null) {
-                        mDocument = Jsoup.connect(url).get();
-                        DMap.put(url, mDocument);
+                    Element element = DMap.get(url);
+                    if (element == null) {
+                        element = Jsoup.connect(url).get().body();
+                        DMap.put(url, element);
                     }
-                    Document doc = mDocument;
-                    DetailsBox data = DocUtil.transToDetails(doc);
+                    DetailsBox data = DocUtil.transToDetails(element);
                     observableEmitter.onNext(data);
                 } catch (Exception e) {
                     observableEmitter.onError(e);

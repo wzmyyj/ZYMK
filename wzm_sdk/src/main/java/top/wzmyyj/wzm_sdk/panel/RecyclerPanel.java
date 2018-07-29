@@ -127,17 +127,7 @@ public abstract class RecyclerPanel<T> extends InitPanel
         }, 1000);
     }
 
-    public void update() {
-        mData.clear();
-        setData();
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                notifyDataSetChanged();
-            }
-        }, 600);
-
-    }
+    public abstract void update();
 
     protected void notifyDataSetChanged() {
         mHeaderAndFooterWrapper.notifyDataSetChanged();

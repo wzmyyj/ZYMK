@@ -1,6 +1,5 @@
 package top.wzmyyj.zymk.model.net;
 
-import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
@@ -14,6 +13,7 @@ import top.wzmyyj.zymk.app.bean.FansBean;
 import top.wzmyyj.zymk.app.bean.HuaBean;
 import top.wzmyyj.zymk.app.bean.ItemBean;
 import top.wzmyyj.zymk.app.bean.MuBean;
+import top.wzmyyj.zymk.app.bean.TypeBean;
 import top.wzmyyj.zymk.app.bean.XiBean;
 import top.wzmyyj.zymk.app.bean.ZiBean;
 import top.wzmyyj.zymk.common.java.RandomSort;
@@ -22,6 +22,8 @@ import top.wzmyyj.zymk.model.box.HomeBox;
 import top.wzmyyj.zymk.model.box.MoreBox;
 import top.wzmyyj.zymk.model.box.NewBox;
 import top.wzmyyj.zymk.model.box.RankBox;
+import top.wzmyyj.zymk.model.box.TyBox;
+import top.wzmyyj.zymk.model.box.TypeBox;
 
 /**
  * Created by yyj on 2018/07/09. email: 2209011667@qq.com
@@ -29,10 +31,13 @@ import top.wzmyyj.zymk.model.box.RankBox;
 
 public class DocUtil {
 
-    public static List<ItemBean> transToItem(Document doc) {
-        if (doc == null) return null;
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////// home
+
+    public static List<ItemBean> transToItem(Element ele) {
+        if (ele == null) return null;
         List<ItemBean> items = new ArrayList<>();
-        Elements elements = doc.getElementsByClass("mk-floor");
+        Elements elements = ele.getElementsByClass("mk-floor");
         int l = elements.size();
         elements.remove(l - 1);
         elements.remove(l - 2);
@@ -85,10 +90,10 @@ public class DocUtil {
     }
 
 
-    public static List<BoBean> transToBo(Document doc) {
-        if (doc == null) return null;
+    public static List<BoBean> transToBo(Element ele) {
+        if (ele == null) return null;
         List<BoBean> data = new ArrayList<>();
-        Elements elements = doc.getElementsByClass("swiper-slide");
+        Elements elements = ele.getElementsByClass("swiper-slide");
         for (Element element : elements) {
             String href = element.absUrl("href");
             String data_src = element.absUrl("data-src");
@@ -99,17 +104,78 @@ public class DocUtil {
     }
 
 
-    public static HomeBox transToHome(Document doc) {
-        List<ItemBean> items = transToItem(doc);
-        List<BoBean> bos = transToBo(doc);
+    public static HomeBox transToHome(Element body) {
+        List<ItemBean> items = transToItem(body);
+        List<BoBean> bos = transToBo(body);
         HomeBox box = new HomeBox(bos, items);
         return box;
     }
 
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////// type
 
-    // new
-    public static NewBox transToNew(Document doc) {
-        Elements elements = doc.getElementsByClass("mk-floor");
+    public static TypeBox transToType(Element body) {
+
+//        Elements tab = body.getElementsByClass("tab-toggle").get(0)
+//                .getElementsByClass("item");
+//        String[] strs = new String[4];
+//        for (int i = 0; i < strs.length; i++) {
+//            strs[i] = tab.get(i).text();
+//        }
+        Elements sw = body.getElementsByClass("mk-class-list");
+
+        List<TypeBean> typeList1 = new ArrayList<>();
+        Elements items1 = sw.get(0).getElementsByClass("item");
+        if (items1 != null || items1.size() > 0) {
+            for (Element item : items1) {
+                typeList1.add(getTypeItem(item));
+            }
+        }
+
+        List<TypeBean> typeList2 = new ArrayList<>();
+        Elements items2 = sw.get(1).getElementsByClass("item");
+        if (items2 != null || items2.size() > 0) {
+            for (Element item : items2) {
+                typeList2.add(getTypeItem(item));
+            }
+        }
+
+        List<TypeBean> typeList3 = new ArrayList<>();
+        Elements items3 = sw.get(2).getElementsByClass("item");
+        if (items3 != null || items3.size() > 0) {
+            for (Element item : items3) {
+                typeList3.add(getTypeItem(item));
+            }
+        }
+
+        List<TypeBean> typeList4 = new ArrayList<>();
+        Elements items4 = sw.get(3).getElementsByClass("item");
+        if (items4 != null || items4.size() > 0) {
+            for (Element item : items4) {
+                typeList4.add(getTypeItem(item));
+            }
+        }
+
+        TypeBox box = new TypeBox(typeList1, typeList2, typeList3, typeList4);
+        return box;
+    }
+
+    private static TypeBean getTypeItem(Element item) {
+        Element a = item.getElementsByTag("a").get(0);
+        String title = a.attr("title");
+        String href = a.absUrl("href");
+        String data_src = item.getElementsByTag("img").get(0)
+                .absUrl("data-src");
+
+        TypeBean bean = new TypeBean(title, href, data_src);
+        return bean;
+
+    }
+
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////// new
+
+    public static NewBox transToNew(Element body) {
+        Elements elements = body.getElementsByClass("mk-floor");
         int l = elements.size();
         // bookList1
         Element e1 = elements.get(l - 2);
@@ -137,10 +203,10 @@ public class DocUtil {
     }
 
 
-    //rank
-    public static RankBox transToRank(Document doc) {
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////rank
+    public static RankBox transToRank(Element body) {
         String[] ifts = new String[]{"ift-fire", "ift-love_money", "ift-ticket"};
-        Elements lists = doc.getElementsByClass("mk-rank-list");
+        Elements lists = body.getElementsByClass("mk-rank-list");
 
         List<BookBean> bookList1 = new ArrayList<>();
         for (Element element : lists.get(0).getElementsByClass("item")) {
@@ -192,16 +258,17 @@ public class DocUtil {
     }
 
 
-    // more
-    public static MoreBox transToMore(Document doc) {
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////// more
+
+    public static MoreBox transToMore(Element body) {
 
         MoreBox box = new MoreBox();
-        box.setHref(doc.baseUri());
+        box.setHref(body.baseUri());
 
-        String top = doc.getElementsByClass("mk-crumb").get(0)
+        String top = body.getElementsByClass("mk-crumb").get(0)
                 .getElementsByTag("strong").text();
-        String figure = doc.getElementsByClass("figure").attr("data-src");
-        String content = doc.getElementsByClass("book-desc").get(0)
+        String figure = body.getElementsByClass("figure").attr("data-src");
+        String content = body.getElementsByClass("book-desc").get(0)
                 .getElementsByClass("content").text();
 
         box.setTitle(top);
@@ -210,7 +277,7 @@ public class DocUtil {
 
         List<BookBean> books = new ArrayList<>();
 
-        Elements elements = doc.getElementsByClass("item");
+        Elements elements = body.getElementsByClass("item");
         for (Element element : elements) {
             Element a = element.getElementsByTag("a").get(0);
             String href = a.absUrl("href");
@@ -245,11 +312,11 @@ public class DocUtil {
 
     }
 
-    // details
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////// details
 
-    public static DetailsBox transToDetails(Document doc) {
+    public static DetailsBox transToDetails(Element body) {
 
-        Element mk = doc.getElementsByClass("mk-detail").get(0);
+        Element mk = body.getElementsByClass("mk-detail").get(0);
         // .getElementsByTag("strong").text();
         String title = mk.getElementsByClass("name").text();
         String author = mk.getElementsByClass("author").text();
@@ -275,7 +342,7 @@ public class DocUtil {
         mainBook.setTags(ts);
 
 
-        Elements swipers = doc.getElementsByClass("tab-item");
+        Elements swipers = body.getElementsByClass("tab-item");
         XiBean xi = getXi(swipers.get(0));
         MuBean mu = getMu(swipers.get(1));
         ZiBean zi = getZi(swipers.get(2));
@@ -284,7 +351,7 @@ public class DocUtil {
         xi.getAuthor().getBookList().add(mainBook);
         // //////////////
         List<BookBean> bookList = new ArrayList<>();
-        Element mk2 = doc.getElementsByClass("mk-recommend").get(0);
+        Element mk2 = body.getElementsByClass("mk-recommend").get(0);
         Elements items = mk2.getElementsByClass("comic-item");
         if (items != null || items.size() > 0) {
             for (Element item : items) {
@@ -403,6 +470,32 @@ public class DocUtil {
         FansBean fans = new FansBean(data_src, name, num);
         return fans;
 
+    }
+
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////// ty
+
+    public static TyBox transToTy(Element body) {
+        String base = body.baseUri();
+        String title = body.getElementsByClass("mk-header").get(0)
+                .getElementsByClass("title").get(0).text();
+
+        String next = body.getElementsByClass("mk-pages").get(0)
+                .getElementsByClass("next").get(0).absUrl("href");
+
+        Element comic_sort = body.getElementsByClass("comic-sort").get(0);
+
+        List<BookBean> books = new ArrayList<>();
+        Elements items = comic_sort.getElementsByClass("comic-item");
+        if (items != null || items.size() > 0) {
+            for (Element item : items) {
+                books.add(getBook(item));
+            }
+        }
+
+        TyBox box = new TyBox(base, title, next, books);
+
+        return box;
     }
 
 }

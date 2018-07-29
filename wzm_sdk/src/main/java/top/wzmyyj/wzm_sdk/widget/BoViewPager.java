@@ -37,15 +37,15 @@ public class BoViewPager extends ViewPager {
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
         //利用反射解决ViewPager在RecyclerView中的Bug。
-        try {
-            Field mFirstLayout = ViewPager.class.getDeclaredField("mFirstLayout");
-            mFirstLayout.setAccessible(true);
-            mFirstLayout.set(this, false);
+//        try {
+//            Field mFirstLayout = ViewPager.class.getDeclaredField("mFirstLayout");
+//            mFirstLayout.setAccessible(true);
+//            mFirstLayout.set(this, false);
             getAdapter().notifyDataSetChanged();
             setCurrentItem(getCurrentItem(), false);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
 
 

@@ -10,6 +10,7 @@ import top.wzmyyj.zymk.view.activity.MainActivity;
 import top.wzmyyj.zymk.view.activity.MoreActivity;
 import top.wzmyyj.zymk.view.activity.NewActivity;
 import top.wzmyyj.zymk.view.activity.RankActivity;
+import top.wzmyyj.zymk.view.activity.TyActivity;
 
 /**
  * Created by yyj on 2018/07/09. email: 2209011667@qq.com
@@ -53,6 +54,12 @@ public class I {
 
     public static void toRankActivity(Context context) {
         Intent intent = new Intent(context, RankActivity.class);
+        context.startActivity(intent);
+    }
+
+    public static void toTyActivity(Context context, String href) {
+        Intent intent = new Intent(context, TyActivity.class);
+        intent.putExtra("href", href);
         context.startActivity(intent);
     }
 }

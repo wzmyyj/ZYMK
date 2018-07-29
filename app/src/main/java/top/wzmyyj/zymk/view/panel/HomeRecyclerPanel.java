@@ -3,6 +3,7 @@ package top.wzmyyj.zymk.view.panel;
 import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -68,8 +69,15 @@ public class HomeRecyclerPanel extends BaseRecyclerPanel<ItemBean, HomePresenter
         });
     }
 
+    RecyclerView.RecycledViewPool viewPool = new RecyclerView.RecycledViewPool();
+    ViewHolder viewHolder;
+
     @Override
     protected void setIVD(List<IVD<ItemBean>> ivd) {
+        viewPool = new RecyclerView.RecycledViewPool();
+        View v = LayoutInflater.from(context).inflate(R.layout.fragment_1_item, null);
+        viewHolder = new ViewHolder(context, v);
+
         ivd.add(new SingleIVD<ItemBean>() {
             @Override
             public int getItemViewLayoutId() {
@@ -78,6 +86,7 @@ public class HomeRecyclerPanel extends BaseRecyclerPanel<ItemBean, HomePresenter
 
             @Override
             public void convert(ViewHolder holder, ItemBean itemBean, int position) {
+
                 ImageView img_icon = holder.getView(R.id.img_icon);
                 TextView tv_title = holder.getView(R.id.tv_title);
                 TextView tv_summary = holder.getView(R.id.tv_summary);
@@ -107,7 +116,6 @@ public class HomeRecyclerPanel extends BaseRecyclerPanel<ItemBean, HomePresenter
 
             }
 
-            RecyclerView.RecycledViewPool viewPool = new RecyclerView.RecycledViewPool();
 
         });
     }

@@ -4,6 +4,8 @@ import android.content.Context;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.bumptech.glide.request.RequestOptions;
 
 import jp.wasabeef.glide.transformations.BlurTransformation;
 import top.wzmyyj.zymk.R;
@@ -17,10 +19,9 @@ public class G {
     public static void img(Context context, String url, ImageView img) {
         Glide.with(context)
                 .load(url)
-                .centerCrop()
+
 //                .placeholder(R.mipmap.ic_progress)
-                .error(R.mipmap.ic_error)
-                .crossFade(100)
+                .apply(new RequestOptions().centerCrop().error(R.mipmap.ic_error))
                 .into(img);
     }
 
@@ -28,21 +29,17 @@ public class G {
         if (url == null) return;
         Glide.with(context)
                 .load(url)
-//                .centerCrop()
-//                .placeholder(R.mipmap.ic_progress)
-                .error(R.mipmap.ic_error)
-                .crossFade(200)
-                .bitmapTransform(new BlurTransformation(context, r, 4))
+                .apply(new RequestOptions().error(R.mipmap.ic_error))
+                .apply(RequestOptions.bitmapTransform(new BlurTransformation(r, 4)))
+                .transition(new DrawableTransitionOptions().crossFade(400))
                 .into(img);
+
     }
 
     public static void img(Context context, int res_id, ImageView img) {
         Glide.with(context)
                 .load(res_id)
-                .centerCrop()
-//                .placeholder(R.mipmap.ic_progress)
-                .error(R.mipmap.ic_error)
-                .crossFade()
+                .apply(new RequestOptions().centerCrop().error(R.mipmap.ic_error))
                 .into(img);
     }
 }

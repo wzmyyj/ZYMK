@@ -39,34 +39,12 @@ public class F_2 extends BaseFragment<TypePresenter> implements IF_2View {
     @Override
     protected void initPanels() {
         super.initPanels();
-        addPanels(new TypeRecyclerPanel(context, mPresenter) {
-            @Override
-            protected void setData() {
-                this.title = F_2.this.mPresenter.getTitle(0);
-                mData.addAll(F_2.this.mPresenter.getData(0));
-            }
-        });
-        addPanels(new TypeRecyclerPanel(context, mPresenter) {
-            @Override
-            protected void setData() {
-                this.title = F_2.this.mPresenter.getTitle(1);
-                mData.addAll(F_2.this.mPresenter.getData(1));
-            }
-        });
-        addPanels(new TypeRecyclerPanel(context, mPresenter) {
-            @Override
-            protected void setData() {
-                this.title = F_2.this.mPresenter.getTitle(2);
-                mData.addAll(F_2.this.mPresenter.getData(2));
-            }
-        });
-        addPanels(new TypeRecyclerPanel(context, mPresenter) {
-            @Override
-            protected void setData() {
-                this.title = F_2.this.mPresenter.getTitle(3);
-                mData.addAll(F_2.this.mPresenter.getData(3));
-            }
-        });
+        addPanels(
+                new TypeRecyclerPanel(context, mPresenter),
+                new TypeRecyclerPanel(context, mPresenter),
+                new TypeRecyclerPanel(context, mPresenter),
+                new TypeRecyclerPanel(context, mPresenter)
+        );
     }
 
     @BindView(R.id.tabLayout)
@@ -91,8 +69,11 @@ public class F_2 extends BaseFragment<TypePresenter> implements IF_2View {
         List<String> titles = new ArrayList<>();
         for (Panel p : mPanels.getPanelList()) {
             viewList.add(p.getView());
-            titles.add(p.getTitle());
         }
+        titles.add("题材");
+        titles.add("进度");
+        titles.add("受众");
+        titles.add("媒体");
         ViewTitlePagerAdapter pagerAdapter = new ViewTitlePagerAdapter(viewList, titles);
         mViewPager.setAdapter(pagerAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
@@ -107,5 +88,13 @@ public class F_2 extends BaseFragment<TypePresenter> implements IF_2View {
                 T.s("搜索");
             }
         });
+    }
+
+    @Override
+    public void update(int w, Object... objs) {
+        getPanel(0).f(w, objs[0]);
+        getPanel(1).f(w, objs[1]);
+        getPanel(2).f(w, objs[2]);
+        getPanel(3).f(w, objs[3]);
     }
 }

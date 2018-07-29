@@ -2,11 +2,10 @@ package top.wzmyyj.zymk.presenter;
 
 import android.app.Activity;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import top.wzmyyj.zymk.app.bean.TypeBean;
-import top.wzmyyj.zymk.model.data.TypeData;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
+import top.wzmyyj.zymk.model.box.TypeBox;
+import top.wzmyyj.zymk.model.net.MainModel;
 import top.wzmyyj.zymk.presenter.base.BasePresenter;
 import top.wzmyyj.zymk.view.iv.IF_2View;
 
@@ -15,39 +14,41 @@ import top.wzmyyj.zymk.view.iv.IF_2View;
  */
 
 public class TypePresenter extends BasePresenter<IF_2View> {
+    private MainModel mModel;
+
     public TypePresenter(Activity activity, IF_2View iv) {
         super(activity, iv);
+        mModel = new MainModel();
     }
 
-    public List<TypeBean> getData(int w) {
-        List<TypeBean> data = new ArrayList<>();
-        switch (w) {
-            case 0:
-                for (int i = 0; i < TypeData.type_0.length; i++)
-                    data.add(new TypeBean(TypeData.type[0],
-                            TypeData.type_0[i], TypeData.pic_0[i]));
-                break;
-            case 1:
-                for (int i = 0; i < TypeData.type_1.length; i++)
-                    data.add(new TypeBean(TypeData.type[1],
-                            TypeData.type_1[i], TypeData.pic_1[i]));
-                break;
-            case 2:
-                for (int i = 0; i < TypeData.type_2.length; i++)
-                    data.add(new TypeBean(TypeData.type[2],
-                            TypeData.type_2[i], TypeData.pic_2[i]));
-                break;
-            case 3:
-                for (int i = 0; i < TypeData.type_3.length; i++)
-                    data.add(new TypeBean(TypeData.type[3],
-                            TypeData.type_3[i], TypeData.pic_3[i]));
-                break;
-        }
-        return data;
+    public void loadData() {
+        mModel.getTypeData(new Observer<TypeBox>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(TypeBox box) {
+                mView.update(0,
+                        box.getTypeList1(),
+                        box.getTypeList2(),
+                        box.getTypeList3(),
+                        box.getTypeList4());
+//                mView.showToast("加载成功");
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                mView.showToast("Error:" + e.getMessage());
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
     }
 
-    public String getTitle(int w) {
-        return TypeData.type[w];
-    }
 
 }
