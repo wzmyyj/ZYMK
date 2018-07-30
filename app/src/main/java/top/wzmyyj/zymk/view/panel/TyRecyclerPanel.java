@@ -33,7 +33,7 @@ public class TyRecyclerPanel extends BaseRecyclerPanel<BookBean, TyPresenter> {
 
     @Override
     protected void setData() {
-        mPresenter.addEmptyData(mData);
+//        mPresenter.addEmptyData(mData);
     }
 
     @Override
@@ -108,7 +108,10 @@ public class TyRecyclerPanel extends BaseRecyclerPanel<BookBean, TyPresenter> {
             return null;
         }
         List<BookBean> beanList = (List<BookBean>) objects[0];
-        if (beanList == null && beanList.size() == 0) return null;
+        if (beanList == null && beanList.size() == 0) {
+            tv_end.setText("-- 没有结果TAT --");
+            return null;
+        }
         String base = (String) objects[1];
         String next = (String) objects[2];
 
@@ -136,7 +139,7 @@ public class TyRecyclerPanel extends BaseRecyclerPanel<BookBean, TyPresenter> {
         super.setFooter();
         mFooter = mInflater.inflate(R.layout.layout_footer, null);
         tv_end = mFooter.findViewById(R.id.tv_end);
-        tv_end.setText("-- 没有了哦 --");
+        tv_end.setText("-- 加载中。。。 --");
         tv_end.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

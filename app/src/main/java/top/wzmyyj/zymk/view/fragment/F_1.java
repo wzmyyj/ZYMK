@@ -78,6 +78,12 @@ public class F_1 extends BaseFragment<HomePresenter> implements IF_1View {
                 T.s("搜索");
             }
         });
+        img_a.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                T.s("这是一个预留按钮>_<");
+            }
+        });
     }
 
     @Override

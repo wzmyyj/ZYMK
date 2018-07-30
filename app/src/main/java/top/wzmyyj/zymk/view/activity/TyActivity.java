@@ -1,8 +1,8 @@
 package top.wzmyyj.zymk.view.activity;
 
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import butterknife.BindView;
@@ -30,8 +30,8 @@ public class TyActivity extends BaseActivity<TyPresenter> implements ITyView {
         addPanels(new TyRecyclerPanel(activity, mPresenter));
     }
 
-    @BindView(R.id.ll_panel)
-    LinearLayout layout;
+    @BindView(R.id.fl_panel)
+    FrameLayout layout;
     @BindView(R.id.img_back)
     ImageView img_back;
     @BindView(R.id.tv_title)

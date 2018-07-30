@@ -29,25 +29,25 @@ public class TyPresenter extends BasePresenter<ITyView> {
 
 
     public void addEmptyData(List<BookBean> data) {
-        data.add(new BookBean());
-        data.add(new BookBean());
-        data.add(new BookBean());
-        data.add(new BookBean());
-
-        data.add(new BookBean());
-        data.add(new BookBean());
-        data.add(new BookBean());
-        data.add(new BookBean());
-
-        data.add(new BookBean());
-        data.add(new BookBean());
-        data.add(new BookBean());
-        data.add(new BookBean());
-
-        data.add(new BookBean());
-        data.add(new BookBean());
-        data.add(new BookBean());
-        data.add(new BookBean());
+//        data.add(new BookBean());
+//        data.add(new BookBean());
+//        data.add(new BookBean());
+//        data.add(new BookBean());
+//
+//        data.add(new BookBean());
+//        data.add(new BookBean());
+//        data.add(new BookBean());
+//        data.add(new BookBean());
+//
+//        data.add(new BookBean());
+//        data.add(new BookBean());
+//        data.add(new BookBean());
+//        data.add(new BookBean());
+//
+//        data.add(new BookBean());
+//        data.add(new BookBean());
+//        data.add(new BookBean());
+//        data.add(new BookBean());
     }
 
 
