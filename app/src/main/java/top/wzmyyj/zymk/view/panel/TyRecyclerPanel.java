@@ -87,15 +87,26 @@ public class TyRecyclerPanel extends BaseRecyclerPanel<BookBean, TyPresenter> {
 
     private String next_href;
 
-    private void loadMore() {
-        if (!TextUtils.isEmpty(next_href)) {
+    @Override
+    protected void loadMore() {
+        super.loadMore();
+        if (!isRuning && !TextUtils.isEmpty(next_href)) {
             mPresenter.loadData(next_href);
-            next_href = null;
+            isRuning = true;
         }
     }
 
+    private boolean isRuning = false;
+
+
     @Override
     public Object f(int w, Object... objects) {
+        isRuning = false;
+        if (w == -1) {
+            tv_end.setText("-- 加载失败,稍后再试 --");
+            notifyDataSetChanged();
+            return null;
+        }
         List<BookBean> beanList = (List<BookBean>) objects[0];
         if (beanList == null && beanList.size() == 0) return null;
         String base = (String) objects[1];
@@ -110,10 +121,10 @@ public class TyRecyclerPanel extends BaseRecyclerPanel<BookBean, TyPresenter> {
         }
         notifyDataSetChanged();
         next_href = next;
-        if(TextUtils.isEmpty(next_href)){
+        if (TextUtils.isEmpty(next_href)) {
             tv_end.setText("-- 没有了哦 --");
-        }else{
-            tv_end.setText("-- 点击加载更多 --");
+        } else {
+            tv_end.setText("-- 加载更多 --");
         }
         return super.f(w, objects);
     }

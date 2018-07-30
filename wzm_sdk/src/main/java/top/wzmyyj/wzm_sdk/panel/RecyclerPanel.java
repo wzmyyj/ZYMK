@@ -1,13 +1,14 @@
 package top.wzmyyj.wzm_sdk.panel;
 
 import android.content.Context;
-import android.os.Handler;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.FrameLayout;
 
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 import com.zhy.adapter.recyclerview.MultiItemTypeAdapter;
 import com.zhy.adapter.recyclerview.base.ItemViewDelegate;
 import com.zhy.adapter.recyclerview.wrapper.HeaderAndFooterWrapper;
@@ -17,7 +18,6 @@ import java.util.List;
 
 import top.wzmyyj.wzm_sdk.R;
 import top.wzmyyj.wzm_sdk.adapter.ivd.IVD;
-import top.wzmyyj.wzm_sdk.tools.L;
 
 /**
  * Created by wzm on 2018/04/23. email: 2209011667@qq.com
@@ -28,7 +28,9 @@ public abstract class RecyclerPanel<T> extends InitPanel
         implements MultiItemTypeAdapter.OnItemClickListener {
 
     protected RecyclerView mRecyclerView;
-    protected SwipeRefreshLayout mSwipeRefreshLayout;
+    protected SmartRefreshLayout mRefreshLayout;
+
+
     protected FrameLayout mFrameLayout;
     protected List<T> mData = new ArrayList<>();
     protected List<IVD<T>> mIVD = new ArrayList<>();
@@ -36,6 +38,8 @@ public abstract class RecyclerPanel<T> extends InitPanel
 
     protected View mHeader;
     protected View mFooter;
+
+    protected int delayed_r = 1500, delayed_l = 1000;
 
 
     public RecyclerPanel(Context context) {
@@ -48,9 +52,10 @@ public abstract class RecyclerPanel<T> extends InitPanel
         view = mInflater.inflate(R.layout.panel_sr, null);
         mFrameLayout = view.findViewById(R.id.frameLayout);
         mRecyclerView = view.findViewById(R.id.recyclerView);
-        mSwipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
-        mSwipeRefreshLayout.setColorSchemeColors(context.getResources()
-                .getColor(R.color.colorPrimary));
+        mRefreshLayout = view.findViewById(R.id.refreshLayout);
+        mRefreshLayout.setHeaderHeight(100);
+        mRefreshLayout.setFooterHeight(100);
+        mRefreshLayout.setPrimaryColorsId(R.color.colorRefresh, R.color.colorWhite);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
 
         setData();
@@ -93,6 +98,32 @@ public abstract class RecyclerPanel<T> extends InitPanel
     }
 
 
+    @Override
+    protected void initListener() {
+        mRefreshLayout.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
+            @Override
+            public void onLoadMore(RefreshLayout refreshLayout) {
+                refreshLayout.finishLoadMore(delayed_l);
+                loadMore();
+            }
+
+            @Override
+            public void onRefresh(RefreshLayout refreshLayout) {
+                refreshLayout.finishRefresh(delayed_r);
+                refresh();
+            }
+        });
+    }
+
+    protected void refresh() {
+        update();
+    }
+
+    protected void loadMore() {
+
+    }
+
+
     public void onItemClick(View view, RecyclerView.ViewHolder holder, int position) {
 
     }
@@ -101,30 +132,10 @@ public abstract class RecyclerPanel<T> extends InitPanel
         return false;
     }
 
-    @Override
-    protected void initListener() {
-        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                updateWithView();
-            }
-        });
-
-    }
-
     public void updateWithView() {
-        mSwipeRefreshLayout.setRefreshing(true);
-        try {
-            update();
-            L.e("update data success");
-        } catch (Exception e) {
-        }
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                mSwipeRefreshLayout.setRefreshing(false);
-            }
-        }, 1000);
+        mRefreshLayout.autoRefresh();
+        refresh();
+        mRefreshLayout.finishRefresh(delayed_r);
     }
 
     public abstract void update();

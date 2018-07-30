@@ -127,6 +127,7 @@ public class HomeRecyclerPanel extends BaseRecyclerPanel<ItemBean, HomePresenter
 
     @Override
     public Object f(int w, Object... objects) {
+        if (w == -1) return null;
         List<BoBean> bos = (List<BoBean>) objects[0];
         mPanels.get(0).f(w, bos);
 

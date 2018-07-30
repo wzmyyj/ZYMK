@@ -7,8 +7,8 @@ import java.util.List;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 import top.wzmyyj.zymk.app.bean.BookBean;
-import top.wzmyyj.zymk.model.box.TyBox;
 import top.wzmyyj.zymk.app.tools.I;
+import top.wzmyyj.zymk.model.box.TyBox;
 import top.wzmyyj.zymk.model.net.TyModel;
 import top.wzmyyj.zymk.model.net.Urls;
 import top.wzmyyj.zymk.presenter.base.BasePresenter;
@@ -51,8 +51,7 @@ public class TyPresenter extends BasePresenter<ITyView> {
     }
 
 
-    // 下滑加载调用这个
-    public void loadData(String url) {
+    public void loadData(String url, final int w) {
         mModel.getTyData(url, new Observer<TyBox>() {
             @Override
             public void onSubscribe(Disposable d) {
@@ -61,12 +60,12 @@ public class TyPresenter extends BasePresenter<ITyView> {
 
             @Override
             public void onNext(TyBox box) {
-                mView.update(1, box.getBooks(), box.getBase(), box.getNext());
-//                mView.showToast("加载成功");
+                mView.update(w, box.getBooks(), box.getBase(), box.getNext());
             }
 
             @Override
             public void onError(Throwable e) {
+                mView.update(-1, e.getMessage());
                 mView.showToast("Error:" + e.getMessage());
             }
 
@@ -77,33 +76,15 @@ public class TyPresenter extends BasePresenter<ITyView> {
         });
     }
 
+    // 下滑加载调用这个
+    public void loadData(String url) {
+        loadData(url, 1);
+    }
 
     // 第一次加载调用这个
     public void loadData() {
         String url = mActivity.getIntent().getStringExtra("href");
-        mModel.getTyData(url, new Observer<TyBox>() {
-            @Override
-            public void onSubscribe(Disposable d) {
-
-            }
-
-            @Override
-            public void onNext(TyBox box) {
-                mView.setTitle(box.getTitle());
-                mView.update(0, box.getBooks(), box.getBase(), box.getNext());
-//                mView.showToast("加载成功");
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                mView.showToast("Error:" + e.getMessage());
-            }
-
-            @Override
-            public void onComplete() {
-
-            }
-        });
+        loadData(url, 0);
     }
 
 

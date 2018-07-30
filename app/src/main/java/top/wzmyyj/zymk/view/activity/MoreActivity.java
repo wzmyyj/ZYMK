@@ -80,7 +80,7 @@ public class MoreActivity extends BaseActivity<MorePresenter> implements IMoreVi
 
     @Override
     public void update(int w, Object... objs) {
-        getPanel(0).f(0, objs);
+        getPanel(0).f(w, objs);
     }
 
     @Override

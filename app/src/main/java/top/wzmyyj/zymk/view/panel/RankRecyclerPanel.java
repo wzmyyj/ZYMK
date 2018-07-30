@@ -104,6 +104,7 @@ public class RankRecyclerPanel extends BaseRecyclerPanel<BookBean, RankPresenter
 
     @Override
     public Object f(int w, Object... objects) {
+        if (w == -1) return null;
         mData.clear();
         List<BookBean> books = (List<BookBean>) objects[0];
         for (BookBean item : books) {

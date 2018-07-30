@@ -22,6 +22,7 @@
     <color name="colorBlue">#0099ff</color>
     <color name="colorPurple">#bb33ee</color>
     <color name="colorPink">#ff3399</color>
+    <color name="colorSky">#00bbff</color>
 
     <color name="colorGolden">#f6c90d</color>
     <color name="colorSilvery">#9b9b9b</color>
@@ -44,6 +45,8 @@
     <color name="colorGray_e">#eeeeee</color>
     <color name="colorGray_g">#f5f5f5</color>>
     <color name="colorGray_h">#fbfbfb</color>>
+
+    <color name="colorRefresh">#e5e5e5</color>>
 
     <color name="colorAhp_Black">#77000000</color>>
 

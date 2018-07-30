@@ -93,6 +93,7 @@ public class DetailsMuPanel extends BasePanel<DetailsPresenter> {
 
     @Override
     public Object f(int w, Object... objects) {
+        if (w == -1) return null;
         MuBean mu = (MuBean) objects[0];
         tv_mu_last.setText(mu.getTime_desc());
 

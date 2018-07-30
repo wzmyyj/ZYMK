@@ -114,6 +114,7 @@ public class MoreRecyclerPanel extends BaseRecyclerPanel<BookBean, MorePresenter
 
     @Override
     public Object f(int w, Object... objects) {
+        if (w == -1) return null;
         String content = (String) objects[0];
         tv_1.setText(content);
         String figure = (String) objects[1];

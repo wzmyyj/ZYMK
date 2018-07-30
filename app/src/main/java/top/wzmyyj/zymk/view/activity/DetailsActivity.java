@@ -1,10 +1,8 @@
 package top.wzmyyj.zymk.view.activity;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -14,6 +12,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.dl7.tag.TagLayout;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +23,6 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import top.wzmyyj.wzm_sdk.adapter.ViewTitlePagerAdapter;
 import top.wzmyyj.wzm_sdk.panel.Panel;
-import top.wzmyyj.wzm_sdk.tools.L;
 import top.wzmyyj.zymk.R;
 import top.wzmyyj.zymk.app.bean.BookBean;
 import top.wzmyyj.zymk.app.bean.MuBean;
@@ -76,10 +76,8 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
     TextView tv_title;
 
     @BindView(R.id.srl_details)
-    SwipeRefreshLayout mSwipeRefreshLayout;
+    SmartRefreshLayout mRefreshLayout;
 
-    //    @BindView(R.id.img_back)
-    //    ImageView img_back;
     @OnClick(R.id.img_back)
     void back() {
         mPresenter.finish();
@@ -123,6 +121,10 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
     protected void initView() {
         super.initView();
 
+        mRefreshLayout.setHeaderHeight(100);
+        mRefreshLayout.setFooterHeight(100);
+        mRefreshLayout.setPrimaryColorsId(R.color.colorRefresh, R.color.colorWhite);
+
         rv_books.setLayoutManager(new LinearLayoutManager(context, LinearLayout.HORIZONTAL, false));
         rv_books.setNestedScrollingEnabled(false);
         bookAdapter = new BookAdapter(context, R.layout.layout_book, xgBooks);
@@ -140,8 +142,6 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
         mTabLayout.setupWithViewPager(mViewPager);
         mViewPager.setCurrentItem(1);
 
-        mSwipeRefreshLayout.setColorSchemeColors(context.getResources()
-                .getColor(top.wzmyyj.wzm_sdk.R.color.colorPrimary));
 
     }
 
@@ -153,28 +153,25 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
 
     @Override
     protected void initListener() {
-        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        mRefreshLayout.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
             @Override
-            public void onRefresh() {
-                updateWithView();
+            public void onLoadMore(RefreshLayout refreshLayout) {
+                refreshLayout.finishLoadMore(1000);
+            }
+
+            @Override
+            public void onRefresh(RefreshLayout refreshLayout) {
+                update();
+                refreshLayout.finishRefresh(1500);
             }
         });
 
     }
 
     public void updateWithView() {
-        mSwipeRefreshLayout.setRefreshing(true);
-        try {
-            update();
-            L.e("update data success");
-        } catch (Exception e) {
-        }
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                mSwipeRefreshLayout.setRefreshing(false);
-            }
-        }, 1000);
+        mRefreshLayout.autoRefresh();
+        update();
+        mRefreshLayout.finishRefresh(1500);
     }
 
     private void update() {

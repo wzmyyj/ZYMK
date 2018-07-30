@@ -44,6 +44,7 @@ public class DetailsPresenter extends BasePresenter<IDetailsView> {
 
             @Override
             public void onError(Throwable e) {
+                mView.update(-1, e.getMessage());
                 mView.showToast("Error:" + e.getMessage());
             }
 

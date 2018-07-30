@@ -79,7 +79,7 @@ public class NewActivity extends BaseActivity<NewPresenter> implements INewView 
 
     @Override
     public void update(int w, Object... objs) {
-        getPanel(0).f(0, objs[0]);
-        getPanel(1).f(0, objs[1]);
+        getPanel(0).f(w, objs[0]);
+        getPanel(1).f(w, objs[1]);
     }
 }

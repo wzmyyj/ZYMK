@@ -76,7 +76,7 @@ public class DetailsZiPanel extends BasePanel<DetailsPresenter> {
                     R.drawable.bg_zi_3, R.drawable.bg_zi_4,
                     R.drawable.bg_zi_5, R.drawable.bg_zi_6};
             int[] color = new int[]{R.color.colorRed, R.color.colorOrange,
-                    R.color.colorPink, R.color.colorGreen,
+                    R.color.colorSky, R.color.colorGreen,
                     R.color.colorBlue, R.color.colorPurple};
             int[] icon = new int[]{R.mipmap.ic_ach_recommend, R.mipmap.ic_ach_award,
                     R.mipmap.ic_ach_month, R.mipmap.ic_ach_gradle,
@@ -116,6 +116,7 @@ public class DetailsZiPanel extends BasePanel<DetailsPresenter> {
 
     @Override
     public Object f(int w, Object... objects) {
+        if (w == -1) return null;
         ZiBean zi = (ZiBean) objects[0];
         if (zi.getFansList() != null && zi.getFansList().size() > 3) {
             setFans(zi.getFansList());

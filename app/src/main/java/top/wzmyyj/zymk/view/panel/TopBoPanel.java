@@ -1,12 +1,14 @@
 package top.wzmyyj.zymk.view.panel;
 
 import android.content.Context;
-import android.view.View;
 
+import com.youth.banner.loader.ImageLoader;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import top.wzmyyj.zymk.app.bean.BoBean;
-import top.wzmyyj.zymk.app.tools.G;
+import top.wzmyyj.zymk.app.utils.GlideImageLoader;
 import top.wzmyyj.zymk.presenter.HomePresenter;
 import top.wzmyyj.zymk.view.panel.base.BaseBoPanel;
 
@@ -21,34 +23,34 @@ public class TopBoPanel extends BaseBoPanel<HomePresenter> {
     }
 
     @Override
-    protected int getSize() {
-        return 6;
+    protected void setData() {
+
     }
 
     @Override
-    protected void initBoData() {
+    protected ImageLoader getImageLoader() {
+        return new GlideImageLoader();
     }
 
 
     @Override
     public Object f(int w, Object... objects) {
-        List<BoBean> bos = (List<BoBean>) objects[0];
-        if (bos == null || bos.size() < size)
-            return null;
+        if (w == -1) return null;
 
-        for (int i = 0; i < size; i++) {
+        List<BoBean> bos = (List<BoBean>) objects[0];
+        if (bos == null || bos.size() < 6) return null;
+
+        List<String> imgs = new ArrayList<>();
+        List<String> strs = new ArrayList<>();
+
+        for (int i = 0; i < 6; i++) {
             BoBean bo = bos.get(i);
-            G.img(context, bo.getData_src(), mImageList.get(i));
-            mDosc[i] = bo.getTitle();
-            final String href = bo.getHref();
-            mImageList.get(i).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mPresenter.goDetails(href);
-                }
-            });
+            imgs.add(bo.getData_src());
+            strs.add(bo.getTitle());
         }
-        mTV.setText(mDosc[mViewPager.getCurrentItem() % size]);
+        mBanner.update(imgs, strs);
         return super.f(w, objects);
     }
+
+
 }

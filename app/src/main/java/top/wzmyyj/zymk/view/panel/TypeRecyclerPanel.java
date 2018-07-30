@@ -48,6 +48,7 @@ public class TypeRecyclerPanel extends BaseRecyclerPanel<TypeBean, TypePresenter
                 TextView tv_type = holder.getView(R.id.tv_type);
                 tv_type.setText("- " + typeBean.getTitle() + " -");
                 G.img(context, typeBean.getData_src(), img_type);
+                final String href = typeBean.getHref();
             }
         });
     }

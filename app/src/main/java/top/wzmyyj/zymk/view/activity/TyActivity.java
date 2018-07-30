@@ -49,6 +49,7 @@ public class TyActivity extends BaseActivity<TyPresenter> implements ITyView {
         mPresenter.loadData();
     }
 
+
     @Override
     protected void initListener() {
         super.initListener();

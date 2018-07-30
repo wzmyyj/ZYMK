@@ -1,18 +1,16 @@
 package top.wzmyyj.wzm_sdk.panel;
 
 import android.content.Context;
-import android.os.Handler;
-import android.support.v4.view.ViewPager;
-import android.util.TypedValue;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+
+import com.youth.banner.Banner;
+import com.youth.banner.BannerConfig;
+import com.youth.banner.Transformer;
+import com.youth.banner.loader.ImageLoader;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import top.wzmyyj.wzm_sdk.R;
-import top.wzmyyj.wzm_sdk.adapter.ImageViewPagerAdapter;
 
 /**
  * Created by wzm on 2018/07/03. email: 2209011667@qq.com
@@ -20,11 +18,10 @@ import top.wzmyyj.wzm_sdk.adapter.ImageViewPagerAdapter;
 
 public abstract class BoPanel extends InitPanel {
 
-    protected ViewPager mViewPager;
-    protected TextView mTV;
-    private LinearLayout mLL;
-    protected int size = 3;
-    private int point_size = 10;
+    protected List images = new ArrayList<>();
+    protected List<String> titles = new ArrayList<>();
+
+    protected Banner mBanner;
 
     public BoPanel(Context context) {
         super(context);
@@ -33,131 +30,62 @@ public abstract class BoPanel extends InitPanel {
     @Override
     protected void initView() {
         view = mInflater.inflate(R.layout.panel_bo, null);
-        mViewPager = view.findViewById(R.id.viewPager);
-        mTV = view.findViewById(R.id.tv_1);
-        mLL = view.findViewById(R.id.ll_1);
+        mBanner = view.findViewById(R.id.banner);
+
+        setData();
+        //设置图片加载器
+        mBanner.setImageLoader(getImageLoader());
+        //设置图片集合
+        mBanner.setImages(images);
+        //设置banner动画效果
+        mBanner.setBannerAnimation(Transformer.Accordion);
+        //设置标题集合（当banner样式有显示title时）
+        mBanner.setBannerTitles(titles);
+        //设置自动轮播，默认为true
+        mBanner.isAutoPlay(true);
+        //设置轮播时间
+        mBanner.setDelayTime(4000);
+        //设置banner样式
+        mBanner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR_TITLE_INSIDE);
+        //设置指示器位置（当banner模式中有指示器时）
+        mBanner.setIndicatorGravity(BannerConfig.RIGHT);
+
+        // 自定义样式
+        setBanner(mBanner);
+        //banner设置方法全部调用完毕时最后调用
+        mBanner.start();
     }
 
-    @Override
-    protected void initData() {
-        size = getSize();
-        point_size = getPointDP();
-        initBo();
-        initBoData();
+    protected void setBanner(Banner banner) {
+
     }
 
-    protected int getPointDP() {
-        return point_size;
-    }
+    protected abstract void setData();
 
-    private int lastPosition;
+    protected abstract ImageLoader getImageLoader();
 
-    @Override
-    protected void initListener() {
-        mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                position = position % size;
-                mTV.setText(mDosc[position]);
-                mLL.getChildAt(position).setEnabled(true);
-                mLL.getChildAt(lastPosition).setEnabled(false);
-                lastPosition = position;
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
-    }
-
-    protected abstract int getSize();
-
-    protected abstract void initBoData();
-
-    protected List<ImageView> mImageList;
-
-    protected String[] mDosc;
-
-
-    private void initBo() {
-        int ps = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-                point_size, context.getResources().getDisplayMetrics());
-        mImageList = new ArrayList<>();
-        mDosc = new String[size];
-        try {
-            for (int i = 0; i < size; i++) {
-                ImageView image = new ImageView(context);
-                mImageList.add(image);
-                ImageView point = new ImageView(getActivity());
-                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                        ps, ps);
-                params.rightMargin = 15;
-                point.setLayoutParams(params);
-                point.setBackgroundResource(R.drawable.point_bg);
-                if (i == 0) {
-                    point.setEnabled(true);
-                } else {
-                    point.setEnabled(false);
-                }
-                mDosc[i] = "this is pic " + i;
-                mLL.addView(point);
-            }
-            mTV.setText(mDosc[0]);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        mViewPager.setAdapter(new ImageViewPagerAdapter(mImageList));
-
-        //利用反射修改ViewPager切换速度
-//        try {
-//            Field mField = ViewPager.class.getDeclaredField("mScroller");
-//            mField.setAccessible(true);
-//            FixedSpeedScroller mScroller =
-//                    new FixedSpeedScroller(mViewPager.getContext(), 2 * 1000);
-//            mField.set(mViewPager, mScroller);
-//        } catch (Exception e) {
-//
-//        }
-    }
-
-
-    private Handler mHandler = new Handler();
-    private MyRunnable myRunnable = new MyRunnable();
-
-    private class MyRunnable implements Runnable {
-
-        @Override
-        public void run() {
-            if (mViewPager != null) {
-                mViewPager.setCurrentItem(mViewPager.getCurrentItem() + 1);
-                mHandler.postDelayed(myRunnable, 4000);
-            }
-        }
-    }
 
     @Override
     public void onStart() {
         super.onStart();
-        mHandler.removeCallbacks(myRunnable);
-        mHandler.postDelayed(myRunnable, 4000);
+        //开始轮播
+        mBanner.startAutoPlay();
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
-        mHandler.removeCallbacks(myRunnable);
+    public void onStop() {
+        super.onStop();
+        //结束轮播
+        mBanner.stopAutoPlay();
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
-        mHandler.removeMessages(0);
+    protected void initData() {
+
+    }
+
+    @Override
+    protected void initListener() {
+
     }
 }

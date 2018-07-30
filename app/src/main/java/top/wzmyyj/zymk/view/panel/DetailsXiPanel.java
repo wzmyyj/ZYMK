@@ -69,6 +69,7 @@ public class DetailsXiPanel extends BasePanel<DetailsPresenter> {
 
     @Override
     public Object f(int w, Object... objects) {
+        if (w == -1) return null;
         XiBean xi = (XiBean) objects[0];
         AuthorBean author = xi.getAuthor();
         setAuthor(author);

@@ -80,8 +80,8 @@ public class RankActivity extends BaseActivity<RankPresenter> implements IRankVi
 
     @Override
     public void update(int w, Object... objs) {
-        getPanel(0).f(0, objs[0]);
-        getPanel(1).f(0, objs[1]);
-        getPanel(2).f(0, objs[2]);
+        getPanel(0).f(w, objs[0]);
+        getPanel(1).f(w, objs[1]);
+        getPanel(2).f(w, objs[2]);
     }
 }
