@@ -64,6 +64,12 @@ public class F_1 extends BaseFragment<HomePresenter> implements IF_1View {
     }
 
     @Override
+    protected void initData() {
+        super.initData();
+        mPresenter.loadData();
+    }
+
+    @Override
     protected void initListener() {
         super.initListener();
         img_search.setOnClickListener(new View.OnClickListener() {

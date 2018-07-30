@@ -62,6 +62,7 @@ public class NewActivity extends BaseActivity<NewPresenter> implements INewView 
         ViewTitlePagerAdapter pagerAdapter = new ViewTitlePagerAdapter(viewList, titles);
         mViewPager.setAdapter(pagerAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
+        mPresenter.loadData();
     }
 
     @Override

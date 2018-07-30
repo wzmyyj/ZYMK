@@ -148,7 +148,7 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
     @Override
     protected void initData() {
         super.initData();
-        update();
+        mPresenter.loadData();
     }
 
     @Override

@@ -31,7 +31,6 @@ public class NewRecyclerPanel extends BaseRecyclerPanel<BookBean, NewPresenter> 
     @Override
     protected void setData() {
         mPresenter.addEmptyData(mData);
-        update();
     }
 
     @Override

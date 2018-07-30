@@ -77,6 +77,7 @@ public class F_2 extends BaseFragment<TypePresenter> implements IF_2View {
         ViewTitlePagerAdapter pagerAdapter = new ViewTitlePagerAdapter(viewList, titles);
         mViewPager.setAdapter(pagerAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
+        mPresenter.loadData();
     }
 
     @Override

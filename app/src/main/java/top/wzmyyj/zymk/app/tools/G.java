@@ -16,10 +16,13 @@ import top.wzmyyj.zymk.R;
 
 public class G {
 
+    public static void clear(Context context, ImageView img) {
+        Glide.with(context).clear(img);
+    }
+
     public static void img(Context context, String url, ImageView img) {
         Glide.with(context)
                 .load(url)
-
 //                .placeholder(R.mipmap.ic_progress)
                 .apply(new RequestOptions().centerCrop().error(R.mipmap.ic_error))
                 .into(img);

@@ -1,6 +1,7 @@
 package top.wzmyyj.zymk.view.adapter;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -52,5 +53,13 @@ public class BookAdapter extends CommonAdapter<BookBean> {
                 I.toDetailsActivity(mContext, href);
             }
         });
+    }
+
+    @Override
+    public void onViewRecycled(@NonNull ViewHolder holder) {
+        super.onViewRecycled(holder);
+        if (holder != null) {
+            G.clear(mContext, (ImageView) holder.getView(R.id.img_book));
+        }
     }
 }

@@ -32,7 +32,6 @@ public class RankRecyclerPanel extends BaseRecyclerPanel<BookBean, RankPresenter
     @Override
     protected void setData() {
         mPresenter.addEmptyData(mData);
-        update();
     }
 
     @Override

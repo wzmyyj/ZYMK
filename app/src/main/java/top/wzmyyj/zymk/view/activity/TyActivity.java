@@ -44,6 +44,12 @@ public class TyActivity extends BaseActivity<TyPresenter> implements ITyView {
     }
 
     @Override
+    protected void initData() {
+        super.initData();
+        mPresenter.loadData();
+    }
+
+    @Override
     protected void initListener() {
         super.initListener();
         img_back.setOnClickListener(new View.OnClickListener() {

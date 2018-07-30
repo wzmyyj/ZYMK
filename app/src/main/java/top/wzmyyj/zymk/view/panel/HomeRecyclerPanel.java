@@ -41,7 +41,6 @@ public class HomeRecyclerPanel extends BaseRecyclerPanel<ItemBean, HomePresenter
     @Override
     protected void setData() {
         mPresenter.addEmptyData(mData);
-        updateWithView();
     }
 
     @Override

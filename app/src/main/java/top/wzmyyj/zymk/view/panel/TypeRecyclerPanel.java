@@ -2,6 +2,7 @@ package top.wzmyyj.zymk.view.panel;
 
 import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -14,7 +15,6 @@ import top.wzmyyj.wzm_sdk.adapter.ivd.SingleIVD;
 import top.wzmyyj.zymk.R;
 import top.wzmyyj.zymk.app.bean.TypeBean;
 import top.wzmyyj.zymk.app.tools.G;
-import top.wzmyyj.zymk.app.tools.I;
 import top.wzmyyj.zymk.presenter.TypePresenter;
 import top.wzmyyj.zymk.view.panel.base.BaseRecyclerPanel;
 
@@ -31,7 +31,7 @@ public class TypeRecyclerPanel extends BaseRecyclerPanel<TypeBean, TypePresenter
 
     @Override
     protected void setData() {
-        update();
+
     }
 
     @Override
@@ -48,15 +48,15 @@ public class TypeRecyclerPanel extends BaseRecyclerPanel<TypeBean, TypePresenter
                 TextView tv_type = holder.getView(R.id.tv_type);
                 tv_type.setText("- " + typeBean.getTitle() + " -");
                 G.img(context, typeBean.getData_src(), img_type);
-                final String href = typeBean.getHref();
-                img_type.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        I.toTyActivity(context, href);
-                    }
-                });
             }
         });
+    }
+
+
+    @Override
+    public void onItemClick(View view, RecyclerView.ViewHolder holder, int position) {
+        super.onItemClick(view, holder, position);
+        mPresenter.goTy(mData.get(position).getHref());
     }
 
     @Override

@@ -4,6 +4,7 @@ import android.app.Activity;
 
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
+import top.wzmyyj.zymk.app.tools.I;
 import top.wzmyyj.zymk.model.box.TypeBox;
 import top.wzmyyj.zymk.model.net.MainModel;
 import top.wzmyyj.zymk.presenter.base.BasePresenter;
@@ -50,5 +51,8 @@ public class TypePresenter extends BasePresenter<IF_2View> {
         });
     }
 
+    public void goTy(String href) {
+        I.toTyActivity(mActivity, href);
+    }
 
 }

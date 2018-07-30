@@ -36,8 +36,6 @@ public class MoreRecyclerPanel extends BaseRecyclerPanel<BookBean, MorePresenter
     @Override
     protected void setData() {
         mPresenter.addEmptyData(mData);
-        updateWithView();
-
     }
 
     @Override

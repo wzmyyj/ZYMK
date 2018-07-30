@@ -34,8 +34,6 @@ public class TyRecyclerPanel extends BaseRecyclerPanel<BookBean, TyPresenter> {
     @Override
     protected void setData() {
         mPresenter.addEmptyData(mData);
-        updateWithView();
-
     }
 
     @Override

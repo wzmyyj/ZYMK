@@ -63,6 +63,7 @@ public class RankActivity extends BaseActivity<RankPresenter> implements IRankVi
         ViewTitlePagerAdapter pagerAdapter = new ViewTitlePagerAdapter(viewList, titles);
         mViewPager.setAdapter(pagerAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
+        mPresenter.loadData();
     }
 
     @Override
