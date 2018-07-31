@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/colorWhite"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+
+        <EditText
+            android:id="@+id/et_text"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="60dp"
+            android:layout_marginRight="60dp"
+            android:background="@drawable/et_stroke_bg"
+            android:hint="可按 漫画名 或 漫画家 搜索"
+            android:lines="1"
+            android:padding="5dp"
+            android:text=""
+            android:textColor="@color/colorPrimary"
+            android:textSize="14sp" />
+
+        <ImageView
+            android:id="@+id/img_back"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_gravity="left"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/click_bg"
+            android:padding="12dp"
+            android:src="@mipmap/svg_red_nav_bar_back" />
+
+        <ImageView
+            android:id="@+id/img_search"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_gravity="right|center_vertical"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/click_bg"
+            android:padding="13dp"
+            android:src="@mipmap/svg_red_nav_bar_search" />
+
+    </FrameLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:background="@color/colorLine" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="33dp"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="10dp"
+                android:text="热门搜索"
+                android:textColor="@color/colorGray_5"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="110dp"
+                android:orientation="vertical">
+
+                <com.dl7.tag.TagLayout
+                    android:id="@+id/tl_tag"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="20dp"
+                    app:tag_layout_border_width="0dp"
+                    app:tag_layout_press_feedback="true"
+                    app:tag_layout_random_color="true"
+                    app:tag_layout_shape="round_rect"
+                    app:tag_view_border_color="@color/colorClarity"
+                    app:tag_view_text_color="@color/colorWhite"
+                    app:tag_view_text_size="12sp">
+
+                </com.dl7.tag.TagLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="35dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="历史搜索"
+                    android:textColor="@color/colorGray_5"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tv_clear"
+                    android:layout_width="55dp"
+                    android:layout_height="35dp"
+                    android:background="@drawable/click_bg"
+                    android:gravity="center"
+                    android:text="清空"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_history"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </android.support.v7.widget.RecyclerView>
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_smart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone">
+
+        </android.support.v7.widget.RecyclerView>
+    </FrameLayout>
+
+</LinearLayout>

@@ -9,9 +9,9 @@ import top.wzmyyj.zymk.view.iv.base.IBaseView;
  */
 
 public interface ISearchView extends IBaseView {
-    void hotSearch(List<String> strs);
+    void hotSearch(List list);
 
-    void historySearch(List<String> strs);
+    void historySearch(List list);
 
-    void smartSearch(List<String> strs);
+    void smartSearch(List list);
 }

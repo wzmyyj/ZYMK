@@ -29,7 +29,7 @@ public class MainModel {
             public void subscribe(@NonNull ObservableEmitter<HomeBox> observableEmitter) throws Exception {
                 try {
                     if (mElement == null) {
-                        mElement = Jsoup.connect(Urls.ZYMK_HomePage).get().body();
+                        mElement = Jsoup.connect(Urls.ZYMK_Base).get().body();
                     }
                     HomeBox data = DocUtil.transToHome(mElement);
                     observableEmitter.onNext(data);
@@ -56,7 +56,7 @@ public class MainModel {
             public void subscribe(@NonNull ObservableEmitter<NewBox> observableEmitter) throws Exception {
                 try {
                     if (mElement == null) {
-                        mElement = Jsoup.connect(Urls.ZYMK_HomePage).get().body();
+                        mElement = Jsoup.connect(Urls.ZYMK_Base).get().body();
                     }
                     NewBox data = DocUtil.transToNew(mElement);
                     observableEmitter.onNext(data);
@@ -83,7 +83,7 @@ public class MainModel {
             public void subscribe(@NonNull ObservableEmitter<RankBox> observableEmitter) throws Exception {
                 try {
                     if (mElement == null) {
-                        mElement = Jsoup.connect(Urls.ZYMK_HomePage).get().body();
+                        mElement = Jsoup.connect(Urls.ZYMK_Base).get().body();
                     }
                     RankBox data = DocUtil.transToRank(mElement);
                     observableEmitter.onNext(data);
@@ -110,7 +110,7 @@ public class MainModel {
             public void subscribe(@NonNull ObservableEmitter<TypeBox> observableEmitter) throws Exception {
                 try {
                     if (mElement == null) {
-                        mElement = Jsoup.connect(Urls.ZYMK_HomePage).get().body();
+                        mElement = Jsoup.connect(Urls.ZYMK_Base).get().body();
                     }
                     TypeBox data = DocUtil.transToType(mElement);
                     observableEmitter.onNext(data);

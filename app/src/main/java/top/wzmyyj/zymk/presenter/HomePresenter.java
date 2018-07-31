@@ -73,7 +73,7 @@ public class HomePresenter extends BasePresenter<IF_1View> {
             mView.showToast("空值");
             return;
         }
-        if (href.contains(Urls.ZYMK_HomePage)) {
+        if (href.contains(Urls.ZYMK_Base)) {
             I.toDetailsActivity(mActivity, href);
         } else {
             I.toBrowser(mActivity, href);
@@ -86,6 +86,10 @@ public class HomePresenter extends BasePresenter<IF_1View> {
 
     public void goRank() {
         I.toRankActivity(mActivity);
+    }
+
+    public void goSearch() {
+        I.toSearchActivity(mActivity);
     }
 
 }

@@ -18,7 +18,7 @@ public class FindPresenter extends BasePresenter<IF_3View> {
     }
 
     public void goHomeWeb() {
-        I.toBrowser(mActivity, Urls.ZYMK_HomePage);
+        I.toBrowser(mActivity, Urls.ZYMK_Base);
     }
 
     public void goActivityWeb() {

@@ -1,10 +1,10 @@
 package top.wzmyyj.zymk.view.fragment;
 
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import top.wzmyyj.wzm_sdk.tools.T;
 import top.wzmyyj.zymk.R;
 import top.wzmyyj.zymk.common.utils.StatusBarUtil;
@@ -39,10 +39,17 @@ public class F_1 extends BaseFragment<HomePresenter> implements IF_1View {
 
     @BindView(R.id.ll_panel)
     LinearLayout layout;
-    @BindView(R.id.img_a)
-    ImageView img_a;
-    @BindView(R.id.img_search)
-    ImageView img_search;
+
+    @OnClick(R.id.img_a)
+    public void fff() {
+        T.s("这是一个预留按钮>_<");
+    }
+
+    @OnClick(R.id.img_search)
+    public void search() {
+        mPresenter.goSearch();
+    }
+
     @BindView(R.id.ll_top)
     LinearLayout ll_top;
     @BindView(R.id.v_top_0)
@@ -67,23 +74,6 @@ public class F_1 extends BaseFragment<HomePresenter> implements IF_1View {
     protected void initData() {
         super.initData();
         mPresenter.loadData();
-    }
-
-    @Override
-    protected void initListener() {
-        super.initListener();
-        img_search.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                T.s("搜索");
-            }
-        });
-        img_a.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                T.s("这是一个预留按钮>_<");
-            }
-        });
     }
 
     @Override

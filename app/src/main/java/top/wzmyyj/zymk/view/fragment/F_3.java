@@ -1,11 +1,9 @@
 package top.wzmyyj.zymk.view.fragment;
 
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import butterknife.BindView;
-import top.wzmyyj.wzm_sdk.tools.T;
 import top.wzmyyj.zymk.R;
 import top.wzmyyj.zymk.common.utils.StatusBarUtil;
 import top.wzmyyj.zymk.presenter.FindPresenter;
@@ -34,8 +32,7 @@ public class F_3 extends BaseFragment<FindPresenter> implements IF_3View {
     LinearLayout ll_2;
     @BindView(R.id.ll_3)
     LinearLayout ll_3;
-    @BindView(R.id.img_search)
-    ImageView img_search;
+
     @BindView(R.id.v_top)
     View v;
 
@@ -61,11 +58,6 @@ public class F_3 extends BaseFragment<FindPresenter> implements IF_3View {
                 mPresenter.goTmallWeb();
             }
         });
-        img_search.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                T.s("搜索");
-            }
-        });
+
     }
 }

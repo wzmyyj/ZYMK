@@ -25,8 +25,9 @@
         <activity android:name=".view.activity.MoreActivity" />
         <activity android:name=".view.activity.NewActivity" />
         <activity android:name=".view.activity.RankActivity" />
-        <activity android:name=".view.activity.DetailsActivity"/>
-        <activity android:name=".view.activity.TyActivity"/>
+        <activity android:name=".view.activity.DetailsActivity" />
+        <activity android:name=".view.activity.TyActivity" />
+        <activity android:name=".view.activity.SearchActivity" />
     </application>
 
 </manifest>

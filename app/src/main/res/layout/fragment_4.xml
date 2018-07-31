@@ -23,15 +23,6 @@
             android:textColor="@color/colorPrimary"
             android:textSize="18sp" />
 
-        <ImageView
-            android:id="@+id/img_search"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:layout_gravity="right|center_vertical"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/click_bg"
-            android:padding="13dp"
-            android:src="@mipmap/svg_red_nav_bar_search" />
 
     </FrameLayout>
 

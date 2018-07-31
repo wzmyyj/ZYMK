@@ -54,5 +54,7 @@ public class TypePresenter extends BasePresenter<IF_2View> {
     public void goTy(String href) {
         I.toTyActivity(mActivity, href);
     }
-
+    public void goSearch() {
+        I.toSearchActivity(mActivity);
+    }
 }

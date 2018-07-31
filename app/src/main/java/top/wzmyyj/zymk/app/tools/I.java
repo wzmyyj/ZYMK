@@ -10,6 +10,7 @@ import top.wzmyyj.zymk.view.activity.MainActivity;
 import top.wzmyyj.zymk.view.activity.MoreActivity;
 import top.wzmyyj.zymk.view.activity.NewActivity;
 import top.wzmyyj.zymk.view.activity.RankActivity;
+import top.wzmyyj.zymk.view.activity.SearchActivity;
 import top.wzmyyj.zymk.view.activity.TyActivity;
 
 /**
@@ -60,6 +61,18 @@ public class I {
     public static void toTyActivity(Context context, String href) {
         Intent intent = new Intent(context, TyActivity.class);
         intent.putExtra("href", href);
+        context.startActivity(intent);
+    }
+
+    public static void toTyActivity(Context context, String href, String key) {
+        Intent intent = new Intent(context, TyActivity.class);
+        intent.putExtra("href", href);
+        intent.putExtra("key", key);
+        context.startActivity(intent);
+    }
+
+    public static void toSearchActivity(Context context) {
+        Intent intent = new Intent(context, SearchActivity.class);
         context.startActivity(intent);
     }
 }

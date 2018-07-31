@@ -68,7 +68,7 @@ public class MorePresenter extends BasePresenter<IMoreView> {
     }
 
     public void goDetails(String href) {
-        if (href.contains(Urls.ZYMK_HomePage)) {
+        if (href.contains(Urls.ZYMK_Base)) {
             I.toDetailsActivity(mActivity, href);
         } else {
             I.toBrowser(mActivity, href);

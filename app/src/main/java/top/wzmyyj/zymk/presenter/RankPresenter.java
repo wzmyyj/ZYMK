@@ -63,7 +63,7 @@ public class RankPresenter extends BasePresenter<IRankView> {
     }
 
     public void goDetails(String href) {
-        if (href.contains(Urls.ZYMK_HomePage)) {
+        if (href.contains(Urls.ZYMK_Base)) {
             I.toDetailsActivity(mActivity, href);
         } else {
             I.toBrowser(mActivity, href);

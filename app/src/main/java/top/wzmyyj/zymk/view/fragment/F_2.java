@@ -3,15 +3,14 @@ package top.wzmyyj.zymk.view.fragment;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.view.View;
-import android.widget.ImageView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import top.wzmyyj.wzm_sdk.adapter.ViewTitlePagerAdapter;
 import top.wzmyyj.wzm_sdk.panel.Panel;
-import top.wzmyyj.wzm_sdk.tools.T;
 import top.wzmyyj.zymk.R;
 import top.wzmyyj.zymk.common.utils.StatusBarUtil;
 import top.wzmyyj.zymk.presenter.TypePresenter;
@@ -51,8 +50,12 @@ public class F_2 extends BaseFragment<TypePresenter> implements IF_2View {
     TabLayout mTabLayout;
     @BindView(R.id.viewPager)
     ViewPager mViewPager;
-    @BindView(R.id.img_search)
-    ImageView img_search;
+
+    @OnClick(R.id.img_search)
+    public void search() {
+        mPresenter.goSearch();
+    }
+
     @BindView(R.id.v_top)
     View v;
 
@@ -78,17 +81,6 @@ public class F_2 extends BaseFragment<TypePresenter> implements IF_2View {
         mViewPager.setAdapter(pagerAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
         mPresenter.loadData();
-    }
-
-    @Override
-    protected void initListener() {
-        super.initListener();
-        img_search.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                T.s("搜索");
-            }
-        });
     }
 
     @Override
