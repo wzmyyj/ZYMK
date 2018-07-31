@@ -79,34 +79,39 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="110dp"
+                android:layout_height="130dp"
+                android:padding="5dp"
                 android:orientation="vertical">
 
                 <com.dl7.tag.TagLayout
                     android:id="@+id/tl_tag"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="20dp"
+                    app:tag_layout_bg_color="@color/colorClarity"
                     app:tag_layout_border_width="0dp"
+                    app:tag_layout_horizontal_interval="15dp"
                     app:tag_layout_press_feedback="true"
                     app:tag_layout_random_color="true"
                     app:tag_layout_shape="round_rect"
+                    app:tag_layout_vertical_interval="10dp"
                     app:tag_view_border_color="@color/colorClarity"
                     app:tag_view_text_color="@color/colorWhite"
-                    app:tag_view_text_size="12sp">
+                    app:tag_view_text_size="13sp">
 
                 </com.dl7.tag.TagLayout>
 
             </LinearLayout>
 
             <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/ll_history"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="35dp"
                 android:layout_marginBottom="5dp">
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="35dp"
+                    android:layout_height="30dp"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
                     android:paddingLeft="10dp"
@@ -118,7 +123,7 @@
                 <TextView
                     android:id="@+id/tv_clear"
                     android:layout_width="55dp"
-                    android:layout_height="35dp"
+                    android:layout_height="30dp"
                     android:background="@drawable/click_bg"
                     android:gravity="center"
                     android:text="清空"
@@ -139,6 +144,7 @@
             android:id="@+id/rv_smart"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/colorGray_h"
             android:visibility="gone">
 
         </android.support.v7.widget.RecyclerView>

@@ -2,7 +2,13 @@ package top.wzmyyj.zymk.presenter;
 
 import android.app.Activity;
 
+import java.util.List;
+
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
+import top.wzmyyj.zymk.app.bean.BookBean;
 import top.wzmyyj.zymk.app.tools.I;
+import top.wzmyyj.zymk.model.net.SearchModel;
 import top.wzmyyj.zymk.model.net.Urls;
 import top.wzmyyj.zymk.presenter.base.BasePresenter;
 import top.wzmyyj.zymk.view.iv.ISearchView;
@@ -12,8 +18,11 @@ import top.wzmyyj.zymk.view.iv.ISearchView;
  */
 
 public class SearchPresenter extends BasePresenter<ISearchView> {
+    private SearchModel mModel;
+
     public SearchPresenter(Activity activity, ISearchView iv) {
         super(activity, iv);
+        mModel = new SearchModel();
     }
 
     public void search(String s) {
@@ -21,7 +30,28 @@ public class SearchPresenter extends BasePresenter<ISearchView> {
     }
 
     public void getHotTags() {
+        mModel.getHotSearch(new Observer<List<BookBean>>() {
+            @Override
+            public void onSubscribe(Disposable d) {
 
+            }
+
+            @Override
+            public void onNext(List<BookBean> list) {
+                mView.showHot(list);
+//                mView.showToast("加载成功");
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                mView.showToast("Error:" + e.getMessage());
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
     }
 
     public void getHistory() {
@@ -40,8 +70,29 @@ public class SearchPresenter extends BasePresenter<ISearchView> {
 
     }
 
-    public void smart(String s) {
+    public void smart(String key) {
+        mModel.getSmartSearch(key, new Observer<List<BookBean>>() {
+            @Override
+            public void onSubscribe(Disposable d) {
 
+            }
+
+            @Override
+            public void onNext(List<BookBean> list) {
+                mView.showSmart(list);
+//                mView.showToast("加载成功");
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                mView.showToast("Error:" + e.getMessage());
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
     }
 
 

@@ -10,9 +10,9 @@ public class BookBean {
 
     private String title;
     private String data_src;
+    private String href;
     private String star;
     private String chapter;
-    private String href;
     private String comic_href;
     private String desc;
     private String num;
@@ -22,6 +22,17 @@ public class BookBean {
     private List<String> tags;
 
     public BookBean() {
+    }
+
+    public BookBean(String title, String href) {
+        this.title = title;
+        this.href = href;
+    }
+
+    public BookBean(String title, String href, String chapter) {
+        this.title = title;
+        this.href = href;
+        this.chapter = chapter;
     }
 
     public BookBean(String title, String data_src, String star, String href, String desc) {

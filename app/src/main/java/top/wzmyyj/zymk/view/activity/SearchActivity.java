@@ -8,6 +8,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.dl7.tag.TagLayout;
@@ -69,7 +70,7 @@ public class SearchActivity extends BaseActivity<SearchPresenter> implements ISe
     @BindView(R.id.tl_tag)
     TagLayout tl_tag;
 
-    private List<BookBean> mTagList = new ArrayList<>();
+    private List<BookBean> mHotList = new ArrayList<>();
 
 
     @BindView(R.id.rv_history)
@@ -78,18 +79,21 @@ public class SearchActivity extends BaseActivity<SearchPresenter> implements ISe
     List<String> mHsList = new ArrayList<>();
     CommonAdapter mHsAdapter;
 
+    @BindView(R.id.ll_history)
+    LinearLayout ll_history;
+
 
     @BindView(R.id.rv_smart)
     RecyclerView rv_smart;
 
-    List<String> mSmartList = new ArrayList<>();
+    List<BookBean> mSmartList = new ArrayList<>();
     CommonAdapter mSmartAdapter;
 
     @Override
     protected void initView() {
         super.initView();
         rv_history.setLayoutManager(new LinearLayoutManager(context));
-        mHsAdapter = new CommonAdapter<String>(context, R.layout.layout_search_history_item, mHsList) {
+        mHsAdapter = new CommonAdapter<String>(context, R.layout.layout_search_history, mHsList) {
             @Override
             protected void convert(ViewHolder holder, String s, int position) {
                 TextView tv_text = holder.getView(R.id.tv_title);
@@ -104,8 +108,30 @@ public class SearchActivity extends BaseActivity<SearchPresenter> implements ISe
                 });
             }
         };
-        rv_history.setAdapter(mHsAdapter);
+        rv_smart.setAdapter(mHsAdapter);
 
+        rv_smart.setLayoutManager(new LinearLayoutManager(context));
+        mSmartAdapter = new CommonAdapter<BookBean>(context, R.layout.layout_search_smart, mSmartList) {
+            @Override
+            protected void convert(ViewHolder holder, BookBean book, int position) {
+                TextView tv_num = holder.getView(R.id.tv_num);
+                TextView tv_text = holder.getView(R.id.tv_title);
+                TextView tv_chapter = holder.getView(R.id.tv_chapter);
+
+                tv_num.setText(position + 1 + "");
+                tv_text.setText(book.getTitle());
+                tv_chapter.setText(book.getChapter());
+            }
+        };
+        rv_smart.setAdapter(mSmartAdapter);
+
+    }
+
+    @Override
+    protected void initData() {
+        super.initData();
+        mPresenter.getHotTags();
+        mPresenter.getHistory();
 
     }
 
@@ -125,13 +151,21 @@ public class SearchActivity extends BaseActivity<SearchPresenter> implements ISe
 
             @Override
             public void afterTextChanged(Editable s) {
-                mPresenter.smart(s.toString());
+                if (!TextUtils.isEmpty(s.toString())) {
+                    mPresenter.smart(s.toString());
+                    rv_smart.setVisibility(View.VISIBLE);
+                } else {
+                    rv_smart.setVisibility(View.GONE);
+                    mSmartList.clear();
+                    mSmartAdapter.notifyDataSetChanged();
+                }
+
             }
         });
         tl_tag.setTagClickListener(new TagView.OnTagClickListener() {
             @Override
             public void onTagClick(int i, String s, int i1) {
-                mPresenter.search(mTagList.get(i).getHref());
+                mPresenter.goDetails(mHotList.get(i).getHref());
             }
         });
 
@@ -146,31 +180,58 @@ public class SearchActivity extends BaseActivity<SearchPresenter> implements ISe
                 return false;
             }
         });
-    }
 
-
-    @Override
-    public void hotSearch(List list) {
-
-
-    }
-
-    @Override
-    public void historySearch(List list) {
-        List<BookBean> tags = list;
-        if (tags != null && tags.size() > 0) {
-            mTagList.clear();
-            mTagList.addAll(tags);
-            tl_tag.cleanTags();
-            for (BookBean book : mTagList) {
-                tl_tag.addTag(book.getTitle());
+        mSmartAdapter.setOnItemClickListener(new MultiItemTypeAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, RecyclerView.ViewHolder holder, int position) {
+                mPresenter.goDetails(mSmartList.get(position).getHref());
             }
 
+            @Override
+            public boolean onItemLongClick(View view, RecyclerView.ViewHolder holder, int position) {
+                return false;
+            }
+        });
+    }
+
+
+    @Override
+    public void showHot(List list) {
+        List<BookBean> hots = list;
+        if (hots != null) {
+            mHotList.clear();
+            mHotList.addAll(hots);
+            tl_tag.cleanTags();
+            for (BookBean book : mHotList) {
+                tl_tag.addTag(book.getTitle());
+            }
+        }
+
+    }
+
+
+    @Override
+    public void showSmart(List list) {
+        List<BookBean> smarts = list;
+        if (smarts != null) {
+            mSmartList.clear();
+            mSmartList.addAll(smarts);
+            mSmartAdapter.notifyDataSetChanged();
         }
     }
 
     @Override
-    public void smartSearch(List list) {
+    public void showHistory(List list) {
+        if (list == null && list.size() == 0) {
+            ll_history.setVerticalGravity(View.GONE);
+        } else {
+            ll_history.setVerticalGravity(View.VISIBLE);
+
+
+
+        }
 
     }
+
+
 }

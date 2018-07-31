@@ -11,6 +11,13 @@ public class Urls {
     public static String ZYMK_All = "https://m.zymk.cn/sort/all.html";
     // 搜索
     public static String ZYMK_SearchBase = "http://m.zymk.cn/sort/all.html?key=";
+
+    /////////////////////////// api
+    // 热门搜索
+    public static String ZYMK_HotSearch = "https://api.zymk.cn/app_api/v5/gethotsearch/";
+    // 匹配搜索
+    public static String ZYMK_SmartSearch = "https://api.zymk.cn/app_api/v5/getsortlist_new/";
+
     //    // 经典
 //    public static String ZYMK_Book_1="http://m.zymk.cn/book/1.html";
 //    // 燃

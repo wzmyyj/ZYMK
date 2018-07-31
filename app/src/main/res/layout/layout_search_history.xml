@@ -6,7 +6,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="45dp"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
@@ -25,7 +25,7 @@
             android:layout_weight="1"
             android:text="历史"
             android:textColor="@color/colorGray_7"
-            android:textSize="12sp" />
+            android:textSize="13sp" />
 
         <ImageView
             android:id="@+id/img_fork"
