@@ -108,7 +108,7 @@ public class SearchActivity extends BaseActivity<SearchPresenter> implements ISe
                 });
             }
         };
-        rv_smart.setAdapter(mHsAdapter);
+        rv_history.setAdapter(mHsAdapter);
 
         rv_smart.setLayoutManager(new LinearLayoutManager(context));
         mSmartAdapter = new CommonAdapter<BookBean>(context, R.layout.layout_search_smart, mSmartList) {

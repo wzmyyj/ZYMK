@@ -21,6 +21,7 @@ public class BookBean {
 
     private List<String> tags;
 
+
     public BookBean() {
     }
 

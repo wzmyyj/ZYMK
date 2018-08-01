@@ -6,17 +6,17 @@ package top.wzmyyj.zymk.model.net;
 
 public class Urls {
     // 主页
-    public static String ZYMK_Base = "https://m.zymk.cn/";
+    public final static String ZYMK_Base = "https://m.zymk.cn/";
     // 全部漫画
-    public static String ZYMK_All = "https://m.zymk.cn/sort/all.html";
+    public final static String ZYMK_All = ZYMK_Base + "sort/all.html";
     // 搜索
-    public static String ZYMK_SearchBase = "http://m.zymk.cn/sort/all.html?key=";
 
     /////////////////////////// api
+    public final static String ZYMK_BaseApi = "https://api.zymk.cn/";
     // 热门搜索
-    public static String ZYMK_HotSearch = "https://api.zymk.cn/app_api/v5/gethotsearch/";
+    public final static String API_HotSearch = "app_api/v5/gethotsearch/";
     // 匹配搜索
-    public static String ZYMK_SmartSearch = "https://api.zymk.cn/app_api/v5/getsortlist_new/";
+    public final static String API_SmartSearch = "app_api/v5/getsortlist_new/";
 
     //    // 经典
 //    public static String ZYMK_Book_1="http://m.zymk.cn/book/1.html";

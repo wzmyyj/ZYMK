@@ -2,12 +2,11 @@ package top.wzmyyj.zymk.presenter;
 
 import android.app.Activity;
 
-import java.util.List;
-
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
-import top.wzmyyj.zymk.app.bean.BookBean;
+import top.wzmyyj.wzm_sdk.tools.L;
 import top.wzmyyj.zymk.app.tools.I;
+import top.wzmyyj.zymk.model.box.SearchBox;
 import top.wzmyyj.zymk.model.net.SearchModel;
 import top.wzmyyj.zymk.model.net.Urls;
 import top.wzmyyj.zymk.presenter.base.BasePresenter;
@@ -30,16 +29,20 @@ public class SearchPresenter extends BasePresenter<ISearchView> {
     }
 
     public void getHotTags() {
-        mModel.getHotSearch(new Observer<List<BookBean>>() {
+        mModel.getHotSearch(new Observer<SearchBox>() {
             @Override
             public void onSubscribe(Disposable d) {
 
             }
 
             @Override
-            public void onNext(List<BookBean> list) {
-                mView.showHot(list);
-//                mView.showToast("加载成功");
+            public void onNext(SearchBox box) {
+                int status = box.getStatus();
+                if (status == 0) {
+                    mView.showHot(box.getBookList());
+                } else {
+                    mView.showToast(box.getMsg());
+                }
             }
 
             @Override
@@ -71,20 +74,25 @@ public class SearchPresenter extends BasePresenter<ISearchView> {
     }
 
     public void smart(String key) {
-        mModel.getSmartSearch(key, new Observer<List<BookBean>>() {
+        mModel.getSmartSearch(key, new Observer<SearchBox>() {
             @Override
             public void onSubscribe(Disposable d) {
 
             }
 
             @Override
-            public void onNext(List<BookBean> list) {
-                mView.showSmart(list);
-//                mView.showToast("加载成功");
+            public void onNext(SearchBox box) {
+                int status = box.getStatus();
+                if (status == 0) {
+                    mView.showSmart(box.getBookList());
+                } else {
+                    mView.showToast(box.getMsg());
+                }
             }
 
             @Override
             public void onError(Throwable e) {
+                L.e(e.getMessage());
                 mView.showToast("Error:" + e.getMessage());
             }
 

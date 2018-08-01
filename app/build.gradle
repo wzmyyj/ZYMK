@@ -9,6 +9,11 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        // 解决 More than one file was found with OS independent path 'META-INF/rxjava.properties
+        packagingOptions { // 加上这行。
+            exclude 'META-INF/rxjava.properties'
+        }
     }
     buildTypes {
         release {
@@ -46,6 +51,9 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxjava:2.1.1"
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
     implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.1.0'//转换器，请求结果转换成Model
+//    implementation 'com.squareup.retrofit2:adapter-rxjava:2.1.0'//配合Rxjava 使用
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
 
     implementation 'com.github.Rukey7:TagLayout:1.0.6'
 
