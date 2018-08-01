@@ -1,4 +1,4 @@
-package top.wzmyyj.zymk.model.net;
+package top.wzmyyj.zymk.model.net.utils;
 
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -17,13 +17,13 @@ import top.wzmyyj.zymk.app.bean.TypeBean;
 import top.wzmyyj.zymk.app.bean.XiBean;
 import top.wzmyyj.zymk.app.bean.ZiBean;
 import top.wzmyyj.zymk.common.java.RandomSort;
-import top.wzmyyj.zymk.model.box.DetailsBox;
-import top.wzmyyj.zymk.model.box.HomeBox;
-import top.wzmyyj.zymk.model.box.MoreBox;
-import top.wzmyyj.zymk.model.box.NewBox;
-import top.wzmyyj.zymk.model.box.RankBox;
-import top.wzmyyj.zymk.model.box.TyBox;
-import top.wzmyyj.zymk.model.box.TypeBox;
+import top.wzmyyj.zymk.model.net.box.DetailsBox;
+import top.wzmyyj.zymk.model.net.box.HomeBox;
+import top.wzmyyj.zymk.model.net.box.MoreBox;
+import top.wzmyyj.zymk.model.net.box.NewBox;
+import top.wzmyyj.zymk.model.net.box.RankBox;
+import top.wzmyyj.zymk.model.net.box.TyBox;
+import top.wzmyyj.zymk.model.net.box.TypeBox;
 
 /**
  * Created by yyj on 2018/07/09. email: 2209011667@qq.com

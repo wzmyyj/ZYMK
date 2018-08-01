@@ -10,10 +10,12 @@ import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.schedulers.Schedulers;
-import top.wzmyyj.zymk.model.box.HomeBox;
-import top.wzmyyj.zymk.model.box.NewBox;
-import top.wzmyyj.zymk.model.box.RankBox;
-import top.wzmyyj.zymk.model.box.TypeBox;
+import top.wzmyyj.zymk.model.net.box.HomeBox;
+import top.wzmyyj.zymk.model.net.box.NewBox;
+import top.wzmyyj.zymk.model.net.box.RankBox;
+import top.wzmyyj.zymk.model.net.box.TypeBox;
+import top.wzmyyj.zymk.model.net.utils.DocUtil;
+import top.wzmyyj.zymk.model.net.utils.Urls;
 
 /**
  * Created by yyj on 2018/07/09. email: 2209011667@qq.com

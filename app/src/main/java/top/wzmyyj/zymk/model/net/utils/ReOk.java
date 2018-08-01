@@ -1,4 +1,4 @@
-package top.wzmyyj.zymk.model.net;
+package top.wzmyyj.zymk.model.net.utils;
 
 import com.google.gson.Gson;
 

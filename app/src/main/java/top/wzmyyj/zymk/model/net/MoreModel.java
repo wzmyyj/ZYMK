@@ -13,7 +13,8 @@ import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.schedulers.Schedulers;
-import top.wzmyyj.zymk.model.box.MoreBox;
+import top.wzmyyj.zymk.model.net.box.MoreBox;
+import top.wzmyyj.zymk.model.net.utils.DocUtil;
 
 /**
  * Created by yyj on 2018/07/11. email: 2209011667@qq.com

@@ -8,9 +8,9 @@ import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 import top.wzmyyj.zymk.app.bean.BookBean;
 import top.wzmyyj.zymk.app.tools.I;
-import top.wzmyyj.zymk.model.box.MoreBox;
+import top.wzmyyj.zymk.model.net.box.MoreBox;
 import top.wzmyyj.zymk.model.net.MoreModel;
-import top.wzmyyj.zymk.model.net.Urls;
+import top.wzmyyj.zymk.model.net.utils.Urls;
 import top.wzmyyj.zymk.presenter.base.BasePresenter;
 import top.wzmyyj.zymk.view.iv.IMoreView;
 

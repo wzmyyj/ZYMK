@@ -1,4 +1,4 @@
-package top.wzmyyj.zymk.model.net;
+package top.wzmyyj.zymk.model.net.utils;
 
 /**
  * Created by yyj on 2018/06/23. email: 2209011667@qq.com

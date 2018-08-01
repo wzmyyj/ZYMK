@@ -4,7 +4,7 @@ import android.app.Activity;
 
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
-import top.wzmyyj.zymk.model.box.DetailsBox;
+import top.wzmyyj.zymk.model.net.box.DetailsBox;
 import top.wzmyyj.zymk.model.net.DetailsModel;
 import top.wzmyyj.zymk.presenter.base.BasePresenter;
 import top.wzmyyj.zymk.view.iv.IDetailsView;

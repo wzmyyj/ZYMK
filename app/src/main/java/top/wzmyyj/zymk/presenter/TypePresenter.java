@@ -5,7 +5,7 @@ import android.app.Activity;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 import top.wzmyyj.zymk.app.tools.I;
-import top.wzmyyj.zymk.model.box.TypeBox;
+import top.wzmyyj.zymk.model.net.box.TypeBox;
 import top.wzmyyj.zymk.model.net.MainModel;
 import top.wzmyyj.zymk.presenter.base.BasePresenter;
 import top.wzmyyj.zymk.view.iv.IF_2View;

@@ -8,9 +8,11 @@ import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
-import top.wzmyyj.zymk.model.box.SearchBox;
+import top.wzmyyj.zymk.model.net.box.SearchBox;
 import top.wzmyyj.zymk.model.net.service.HotSearchService;
 import top.wzmyyj.zymk.model.net.service.SmartSearchService;
+import top.wzmyyj.zymk.model.net.utils.ReOk;
+import top.wzmyyj.zymk.model.net.utils.Urls;
 
 /**
  * Created by yyj on 2018/07/30. email: 2209011667@qq.com

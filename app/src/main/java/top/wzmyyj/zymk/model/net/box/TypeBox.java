@@ -1,4 +1,4 @@
-package top.wzmyyj.zymk.model.box;
+package top.wzmyyj.zymk.model.net.box;
 
 import java.util.List;
 
