@@ -2,6 +2,7 @@ package top.wzmyyj.zymk.view.panel;
 
 import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
@@ -13,11 +14,9 @@ import java.util.List;
 
 import top.wzmyyj.wzm_sdk.adapter.ivd.IVD;
 import top.wzmyyj.wzm_sdk.adapter.ivd.SingleIVD;
-import top.wzmyyj.wzm_sdk.tools.T;
 import top.wzmyyj.zymk.R;
 import top.wzmyyj.zymk.app.bean.BookBean;
 import top.wzmyyj.zymk.app.tools.G;
-import top.wzmyyj.zymk.app.tools.I;
 import top.wzmyyj.zymk.presenter.TyPresenter;
 import top.wzmyyj.zymk.view.panel.base.BaseRecyclerPanel;
 
@@ -54,22 +53,16 @@ public class TyRecyclerPanel extends BaseRecyclerPanel<BookBean, TyPresenter> {
                 tv_star.setText(bookBean.getStar() + "分");
                 tv_title.setText(bookBean.getTitle());
                 tv_chapter.setText(bookBean.getChapter());
-
-                final String href = bookBean.getHref();
                 G.img(context, bookBean.getData_src(), img_book);
-                img_book.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (href == null || href.length() == 0) {
-                            T.s("喜欢就收藏哟~");
-                            return;
-                        }
-                        I.toDetailsActivity(context, href);
-                    }
-                });
             }
         });
 
+    }
+
+    @Override
+    public void onItemClick(View view, RecyclerView.ViewHolder holder, int position) {
+        super.onItemClick(view, holder, position);
+        mPresenter.goDetails(mData.get(position).getHref());
     }
 
     @Override

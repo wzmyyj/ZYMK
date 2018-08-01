@@ -84,7 +84,7 @@ public class SearchPresenter extends BasePresenter<ISearchView> {
             public void onNext(SearchBox box) {
                 int status = box.getStatus();
                 if (status == 0) {
-                    mView.showSmart(box.getBookList());
+                    mView.showSmart(box.getKey(), box.getBookList());
                 } else {
                     mView.showToast(box.getMsg());
                 }

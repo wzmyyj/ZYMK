@@ -19,7 +19,7 @@ public class MainActivity extends BaseMainActivity {
     protected void initFTs(List<FT> fts) {
         fts.add(new FT(new F_1(), "主页", R.mipmap.svg_tab_bar_main, R.mipmap.svg_tab_bar_main_hl));
         fts.add(new FT(new F_2(), "分类", R.mipmap.svg_tab_bar_kind, R.mipmap.svg_tab_bar_kind_hl));
-        fts.add(new FT(new F_3(), "发现", R.mipmap.svg_tab_bar_find, R.mipmap.svg_tab_bar_find_hl));
+        fts.add(new FT(new F_3(), "足迹", R.mipmap.svg_tab_bar_find, R.mipmap.svg_tab_bar_find_hl));
         fts.add(new FT(new F_4(), "我的", R.mipmap.svg_tab_bar_mine, R.mipmap.svg_tab_bar_mine_hl));
     }
 

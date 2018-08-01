@@ -1,14 +1,21 @@
 package top.wzmyyj.zymk.view.fragment;
 
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.view.View;
-import android.widget.LinearLayout;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
+import top.wzmyyj.wzm_sdk.adapter.ViewTitlePagerAdapter;
+import top.wzmyyj.wzm_sdk.panel.Panel;
 import top.wzmyyj.zymk.R;
 import top.wzmyyj.zymk.common.utils.StatusBarUtil;
 import top.wzmyyj.zymk.presenter.FindPresenter;
 import top.wzmyyj.zymk.view.fragment.base.BaseFragment;
 import top.wzmyyj.zymk.view.iv.IF_3View;
+import top.wzmyyj.zymk.view.panel.FavorRecyclerPanel;
 
 /**
  * Created by yyj on 2018/07/06. email: 2209011667@qq.com
@@ -25,13 +32,20 @@ public class F_3 extends BaseFragment<FindPresenter> implements IF_3View {
         return R.layout.fragment_3;
     }
 
+    @Override
+    protected void initPanels() {
+        super.initPanels();
+        addPanels(
+                new FavorRecyclerPanel(context, mPresenter),
+                new FavorRecyclerPanel(context, mPresenter),
+                new FavorRecyclerPanel(context, mPresenter)
+        );
+    }
 
-    @BindView(R.id.ll_1)
-    LinearLayout ll_1;
-    @BindView(R.id.ll_2)
-    LinearLayout ll_2;
-    @BindView(R.id.ll_3)
-    LinearLayout ll_3;
+    @BindView(R.id.tabLayout)
+    TabLayout mTabLayout;
+    @BindView(R.id.viewPager)
+    ViewPager mViewPager;
 
     @BindView(R.id.v_top)
     View v;
@@ -40,24 +54,27 @@ public class F_3 extends BaseFragment<FindPresenter> implements IF_3View {
     protected void initView() {
         super.initView();
         StatusBarUtil.fitsStatusBarView(v);
-        ll_1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mPresenter.goHomeWeb();
-            }
-        });
-        ll_2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mPresenter.goActivityWeb();
-            }
-        });
-        ll_3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mPresenter.goTmallWeb();
-            }
-        });
+    }
+
+    @Override
+    protected void initData() {
+        super.initData();
+        List<View> viewList = new ArrayList<>();
+        List<String> titles = new ArrayList<>();
+        for (Panel p : mPanels.getPanelList()) {
+            viewList.add(p.getView());
+        }
+        titles.add("收藏");
+        titles.add("历史");
+        titles.add("下载");
+        ViewTitlePagerAdapter pagerAdapter = new ViewTitlePagerAdapter(viewList, titles);
+        mViewPager.setAdapter(pagerAdapter);
+        mTabLayout.setupWithViewPager(mViewPager);
+        mPresenter.loadData();
+    }
+
+    @Override
+    public void update(int w, Object... objs) {
 
     }
 }

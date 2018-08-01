@@ -11,7 +11,7 @@ import top.wzmyyj.zymk.view.iv.base.IBaseView;
 public interface ISearchView extends IBaseView {
     void showHot(List list);
 
-    void showSmart(List list);
+    void showSmart(String key,List list);
 
     void showHistory(List list);
 

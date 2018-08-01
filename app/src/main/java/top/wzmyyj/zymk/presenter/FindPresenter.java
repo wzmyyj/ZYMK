@@ -17,15 +17,14 @@ public class FindPresenter extends BasePresenter<IF_3View> {
         super(activity, iv);
     }
 
-    public void goHomeWeb() {
-        I.toBrowser(mActivity, Urls.ZYMK_Base);
+    public void loadData() {
     }
 
-    public void goActivityWeb() {
-        I.toBrowser(mActivity, Urls.ZYMK_Activity);
-    }
-
-    public void goTmallWeb() {
-        I.toBrowser(mActivity, Urls.ZYMK_Tmall);
+    public void goDetails(String href) {
+        if (href.contains(Urls.ZYMK_Base)) {
+            I.toDetailsActivity(mActivity, href);
+        } else {
+            I.toBrowser(mActivity, href);
+        }
     }
 }

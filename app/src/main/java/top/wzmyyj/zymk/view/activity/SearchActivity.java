@@ -3,8 +3,11 @@ package top.wzmyyj.zymk.view.activity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
+import android.text.SpannableString;
+import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -22,6 +25,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import io.reactivex.annotations.NonNull;
 import top.wzmyyj.zymk.R;
 import top.wzmyyj.zymk.app.bean.BookBean;
 import top.wzmyyj.zymk.presenter.SearchPresenter;
@@ -112,6 +116,7 @@ public class SearchActivity extends BaseActivity<SearchPresenter> implements ISe
 
         rv_smart.setLayoutManager(new LinearLayoutManager(context));
         mSmartAdapter = new CommonAdapter<BookBean>(context, R.layout.layout_search_smart, mSmartList) {
+
             @Override
             protected void convert(ViewHolder holder, BookBean book, int position) {
                 TextView tv_num = holder.getView(R.id.tv_num);
@@ -119,8 +124,16 @@ public class SearchActivity extends BaseActivity<SearchPresenter> implements ISe
                 TextView tv_chapter = holder.getView(R.id.tv_chapter);
 
                 tv_num.setText(position + 1 + "");
-                tv_text.setText(book.getTitle());
                 tv_chapter.setText(book.getChapter());
+
+                String title = book.getTitle();
+                SpannableString ss = new SpannableString(title);
+                if (title.contains(KEY)) {
+                    int a = title.indexOf(KEY);
+                    ss.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.colorPrimary)),
+                            a, a + KEY.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+                }
+                tv_text.setText(ss);
             }
         };
         rv_smart.setAdapter(mSmartAdapter);
@@ -210,8 +223,14 @@ public class SearchActivity extends BaseActivity<SearchPresenter> implements ISe
     }
 
 
+    @NonNull
+    private String KEY = "";
+
     @Override
-    public void showSmart(List list) {
+    public void showSmart(String key, List list) {
+        if (key != null) {
+            KEY = key;
+        }
         List<BookBean> smarts = list;
         if (smarts != null) {
             mSmartList.clear();
@@ -226,7 +245,6 @@ public class SearchActivity extends BaseActivity<SearchPresenter> implements ISe
             ll_history.setVerticalGravity(View.GONE);
         } else {
             ll_history.setVerticalGravity(View.VISIBLE);
-
 
 
         }

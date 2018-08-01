@@ -88,7 +88,7 @@
             android:layout_marginLeft="130dp"
             android:layout_weight="1"
             android:background="@drawable/bt_save_selector"
-            android:text="离线缓存"
+            android:text="离线保存"
             android:textColor="@color/colorOrange"
             android:textSize="14sp" />
 

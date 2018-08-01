@@ -41,6 +41,14 @@ public class SearchBox {
         this.bookList = bookList;
     }
 
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
     public int getStatus() {
         return status;
     }
