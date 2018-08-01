@@ -12,6 +12,7 @@ public class Urls {
     // 搜索
 
     /////////////////////////// api
+
     public final static String ZYMK_BaseApi = "https://api.zymk.cn/";
     // 热门搜索
     public final static String API_HotSearch = "app_api/v5/gethotsearch/";
