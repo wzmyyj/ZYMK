@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import top.wzmyyj.zymk.app.bean.BookBean;
-import top.wzmyyj.zymk.model.net.utils.Urls;
+import top.wzmyyj.zymk.model.net.Urls;
 
 /**
  * Created by yyj on 2018/07/31. email: 2209011667@qq.com

@@ -15,7 +15,6 @@ import top.wzmyyj.zymk.model.net.box.NewBox;
 import top.wzmyyj.zymk.model.net.box.RankBox;
 import top.wzmyyj.zymk.model.net.box.TypeBox;
 import top.wzmyyj.zymk.model.net.utils.DocUtil;
-import top.wzmyyj.zymk.model.net.utils.Urls;
 
 /**
  * Created by yyj on 2018/07/09. email: 2209011667@qq.com
