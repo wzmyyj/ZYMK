@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import top.wzmyyj.zymk.app.bean.BookBean;
-import top.wzmyyj.zymk.model.net.Urls;
 
 /**
  * Created by yyj on 2018/07/31. email: 2209011667@qq.com
@@ -91,10 +90,13 @@ public class SearchBox {
             for (int i = 0; i < array.size(); i++) {
                 JsonObject obj = array.get(i).getAsJsonObject();
                 String title = obj.get("comic_name").getAsString();
-                String href = Urls.ZYMK_Base + obj.get("comic_id").getAsString();
+                int id = obj.get("comic_id").getAsInt();
                 String chapter = obj.get("last_chapter").getAsJsonObject()
                         .get("name").toString();
-                BookBean bean = new BookBean(title, href, chapter);
+                BookBean bean = new BookBean();
+                bean.setTitle(title);
+                bean.setId(id);
+                bean.setChapter(chapter);
                 list.add(bean);
             }
 
@@ -123,10 +125,13 @@ public class SearchBox {
             for (int i = 0; i < array.size(); i++) {
                 JsonObject obj = array.get(i).getAsJsonObject();
                 String title = obj.get("comic_name").getAsString();
-                String href = Urls.ZYMK_Base + obj.get("comic_id").getAsString();
+                int id = obj.get("comic_id").getAsInt();
                 String chapter = obj.get("last_chapter").getAsJsonObject()
                         .get("name").toString();
-                BookBean bean = new BookBean(title, href, chapter);
+                BookBean bean = new BookBean();
+                bean.setTitle(title);
+                bean.setId(id);
+                bean.setChapter(chapter);
                 list.add(bean);
             }
 

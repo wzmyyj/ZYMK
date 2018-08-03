@@ -2,15 +2,17 @@ package top.wzmyyj.zymk.app.bean;
 
 import java.util.List;
 
+import top.wzmyyj.zymk.app.data.Urls;
+
 /**
  * Created by yyj on 2018/07/05. email: 2209011667@qq.com
  */
 
 public class BookBean {
 
+    private int id;
     private String title;
     private String data_src;
-    private String href;
     private String star;
     private String chapter;
     private String comic_href;
@@ -18,6 +20,7 @@ public class BookBean {
     private String num;
     private String ift;
     private String author;
+    private long update_time;
 
     private List<String> tags;
 
@@ -25,41 +28,45 @@ public class BookBean {
     public BookBean() {
     }
 
-    public BookBean(String title, String href) {
-        this.title = title;
-        this.href = href;
-    }
-
-    public BookBean(String title, String href, String chapter) {
-        this.title = title;
-        this.href = href;
-        this.chapter = chapter;
-    }
-
-    public BookBean(String title, String data_src, String star, String href, String desc) {
-        this.title = title;
+    public void setData_src(String data_src) {
         this.data_src = data_src;
-        this.star = star;
-        this.href = href;
-        this.desc = desc;
     }
 
-    public BookBean(String title, String data_src, String href, String num, String ift, List<String> tags) {
-        this.title = title;
-        this.data_src = data_src;
-        this.href = href;
-        this.num = num;
-        this.ift = ift;
-        this.tags = tags;
+    public String getHref() {
+        if (id == 0) return null;
+        return Urls.ZYMK_Base + id;
     }
 
-    public BookBean(String title, String data_src, String star, String chapter, String href, String desc) {
-        this.title = title;
-        this.data_src = data_src;
-        this.star = star;
-        this.chapter = chapter;
-        this.href = href;
-        this.desc = desc;
+    public String getData_src() {
+        if (data_src != null) {
+            return data_src;
+        }
+        if (id == 0) return null;
+        String s = "" + id;
+        while (s.length() < 9) {
+            s = "0" + s;
+        }
+        StringBuffer sb = new StringBuffer(s);
+        sb.insert(6, '/');
+        sb.insert(3, '/');
+        String src = Urls.ZYMK_Image.replace("?", sb.toString());
+        return src;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public long getUpdate_time() {
+        return update_time;
+    }
+
+    public void setUpdate_time(long update_time) {
+        this.update_time = update_time;
     }
 
     public String getTitle() {
@@ -70,13 +77,6 @@ public class BookBean {
         this.title = title;
     }
 
-    public String getData_src() {
-        return data_src;
-    }
-
-    public void setData_src(String data_src) {
-        this.data_src = data_src;
-    }
 
     public String getStar() {
         return star;
@@ -92,14 +92,6 @@ public class BookBean {
 
     public void setChapter(String chapter) {
         this.chapter = chapter;
-    }
-
-    public String getHref() {
-        return href;
-    }
-
-    public void setHref(String href) {
-        this.href = href;
     }
 
     public String getDesc() {

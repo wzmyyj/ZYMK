@@ -72,7 +72,7 @@ public class DocUtil {
 
     private static BookBean getBook(Element slide) {
         Element a = slide.getElementsByTag("a").get(0);
-        String href = a.absUrl("href");
+        int id = Integer.parseInt(a.getElementsByTag("img").attr("data-id"));
         String data_src = a.getElementsByTag("img").attr("data-src");
         String title = slide.getElementsByClass("title").text();
         String star = slide.getElementsByTag("span").get(1).text();
@@ -85,7 +85,13 @@ public class DocUtil {
             star = sb.toString();
         }
 
-        BookBean book = new BookBean(title, data_src, star, chapter, href, desc);
+        BookBean book = new BookBean();
+        book.setId(id);
+        book.setData_src(data_src);
+        book.setTitle(title);
+        book.setChapter(chapter);
+        book.setDesc(desc);
+        book.setStar(star);
         return book;
     }
 
@@ -233,7 +239,8 @@ public class DocUtil {
 
     private static BookBean getRankBook(Element element, String iftClass) {
         Element a = element.getElementsByTag("a").get(0);
-        String href = a.absUrl("href");
+        int id = Integer.parseInt(a.getElementsByTag("img").get(0)
+                .absUrl("data-id"));
 
         String data_src = a.getElementsByTag("img").get(0)
                 .absUrl("data-src");
@@ -253,7 +260,13 @@ public class DocUtil {
             ts.add(t);
         }
 
-        BookBean book = new BookBean(title, data_src, href, num, ift, ts);
+        BookBean book = new BookBean();
+        book.setId(id);
+        book.setData_src(data_src);
+        book.setTitle(title);
+        book.setNum(num);
+        book.setIft(ift);
+        book.setTags(ts);
         return book;
     }
 
@@ -279,7 +292,8 @@ public class DocUtil {
         Elements elements = body.getElementsByClass("item");
         for (Element element : elements) {
             Element a = element.getElementsByTag("a").get(0);
-            String href = a.absUrl("href");
+            int id = Integer.parseInt(a.getElementsByTag("img").get(0)
+                    .absUrl("data-id"));
             String data_src = a.getElementsByTag("img").get(0)
                     .absUrl("data-src");
 
@@ -288,7 +302,7 @@ public class DocUtil {
             String desc = element.getElementsByClass("content").text();
 
             BookBean book = new BookBean();
-            book.setHref(href);
+            book.setId(id);
             book.setTitle(title);
             book.setData_src(data_src);
             book.setStar(star);
@@ -400,6 +414,7 @@ public class DocUtil {
         if (items != null || items.size() > 0) {
             for (Element item : items) {
 
+                int id = Integer.parseInt(item.attr("data-id"));
                 long uptime = Long.parseLong(item.attr("data-uptime"));
                 String href = item.getElementsByClass("chapterBtn").get(0)
                         .absUrl("href");
@@ -409,7 +424,7 @@ public class DocUtil {
                 boolean isLock = lock != null && lock.size() > 0;
                 Elements updot = item.getElementsByClass("updot");
                 boolean isDot = updot != null && updot.size() > 0;
-                HuaBean hua = new HuaBean(title, href, uptime, isLock, isDot);
+                HuaBean hua = new HuaBean(id, title, href, uptime, isLock, isDot);
                 huas.add(hua);
             }
         }

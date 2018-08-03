@@ -1,4 +1,4 @@
-package top.wzmyyj.zymk.model.net;
+package top.wzmyyj.zymk.app.data;
 
 /**
  * Created by yyj on 2018/06/23. email: 2209011667@qq.com
@@ -16,7 +16,12 @@ public class Urls {
     // 热门搜索
     public final static String API_HotSearch = "app_api/v5/gethotsearch/";
     // 匹配搜索
-    public final static String API_SmartSearch = "app_api/v5/getsortlist_new/";
+    public final static String API_SmartSearch = "app_api/v5/getsortlist_new/"; // kry
+    // 漫画信息
+    public final static String API_GetComic = "app_api/v5/getcomic/"; // comic_id
+    // 漫画详细信息
+    public final static String API_GetComicInfo = "app_api/v5/getcomicinfo/"; // comic_id
+
 
     //    // 经典
 //    public static String ZYMK_Book_1="http://m.zymk.cn/book/1.html";
@@ -42,6 +47,8 @@ public class Urls {
     public static String ZYMK_Tmall = "https://zymk.m.tmall.com/";
     // 图片
     public static String ZYMK_Pic = "http://mhpic.zymkcdn.com/comic/";
+    // 封面
+    public static String ZYMK_Image = "https://image.zymkcdn.com/file/cover/?.jpg-300x400.webp";
 
 
 }

@@ -10,7 +10,7 @@ import top.wzmyyj.zymk.app.bean.BookBean;
 import top.wzmyyj.zymk.app.tools.I;
 import top.wzmyyj.zymk.model.net.box.NewBox;
 import top.wzmyyj.zymk.model.net.MainModel;
-import top.wzmyyj.zymk.model.net.Urls;
+import top.wzmyyj.zymk.app.data.Urls;
 import top.wzmyyj.zymk.presenter.base.BasePresenter;
 import top.wzmyyj.zymk.view.iv.INewView;
 

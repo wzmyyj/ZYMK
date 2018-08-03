@@ -8,9 +8,9 @@ import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
+import top.wzmyyj.zymk.app.data.Urls;
 import top.wzmyyj.zymk.model.net.box.SearchBox;
-import top.wzmyyj.zymk.model.net.service.HotSearchService;
-import top.wzmyyj.zymk.model.net.service.SmartSearchService;
+import top.wzmyyj.zymk.model.net.service.SearchService;
 import top.wzmyyj.zymk.model.net.utils.ReOk;
 
 /**
@@ -23,7 +23,7 @@ public class SearchModel {
 
         Gson gson = new GsonBuilder().registerTypeAdapter(SearchBox.class, new SearchBox.Deserializer()).create();
         Retrofit retrofit = ReOk.bind(Urls.ZYMK_BaseApi, gson);
-        HotSearchService service = retrofit.create(HotSearchService.class);
+        SearchService service = retrofit.create(SearchService.class);
         Observable<SearchBox> observable = service.getHotSearch();
         observable.subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
@@ -35,7 +35,7 @@ public class SearchModel {
     public void getSmartSearch(final String key, Observer<SearchBox> observer) {
         Gson gson = new GsonBuilder().registerTypeAdapter(SearchBox.class, new SearchBox.Deserializer2()).create();
         Retrofit retrofit = ReOk.bind(Urls.ZYMK_BaseApi, gson);
-        SmartSearchService service = retrofit.create(SmartSearchService.class);
+        SearchService service = retrofit.create(SearchService.class);
         Observable<SearchBox> observable = service.getSmartSearch(key);
         observable.subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())

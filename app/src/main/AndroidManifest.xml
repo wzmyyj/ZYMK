@@ -9,8 +9,8 @@
         android:name=".app.application.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:roundIcon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
@@ -29,6 +29,7 @@
         <activity android:name=".view.activity.DetailsActivity" />
         <activity android:name=".view.activity.TyActivity" />
         <activity android:name=".view.activity.SearchActivity" />
+        <activity android:name=".view.activity.ComicActivity" />
     </application>
 
 </manifest>
