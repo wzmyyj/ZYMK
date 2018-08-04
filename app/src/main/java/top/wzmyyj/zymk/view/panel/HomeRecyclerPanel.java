@@ -173,6 +173,6 @@ public class HomeRecyclerPanel extends BaseRecyclerPanel<ItemBean, HomePresenter
         super.setFooter();
         mFooter = mInflater.inflate(R.layout.layout_footer, null);
         TextView tv = mFooter.findViewById(R.id.tv_end);
-        tv.setText("-- 没有了哦 --");
+        tv.setText("-- 到底部了哦 --");
     }
 }

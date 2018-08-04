@@ -50,5 +50,10 @@ public class Urls {
     // 封面
     public static String ZYMK_Image = "https://image.zymkcdn.com/file/cover/?.jpg-300x400.webp";
 
+    // GitHub
+    public static String YYJ_GitHub = "https://github.com/wzmyyj/ZYMK";
+
+
+
 
 }

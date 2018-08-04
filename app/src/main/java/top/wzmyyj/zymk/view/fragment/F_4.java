@@ -3,6 +3,7 @@ package top.wzmyyj.zymk.view.fragment;
 import android.view.View;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import top.wzmyyj.zymk.R;
 import top.wzmyyj.zymk.common.utils.StatusBarUtil;
 import top.wzmyyj.zymk.presenter.MinePresenter;
@@ -27,6 +28,24 @@ public class F_4 extends BaseFragment<MinePresenter> implements IF_4View {
 
     @BindView(R.id.v_top)
     View v;
+
+    @OnClick(R.id.ll_info)
+    public void github(){
+        mPresenter.goGitHubWeb();
+    }
+
+    @OnClick(R.id.ll_1)
+    public void web1(){
+        mPresenter.goHomeWeb();
+    }
+    @OnClick(R.id.ll_2)
+    public void web2(){
+        mPresenter.goActivityWeb();
+    }
+    @OnClick(R.id.ll_3)
+    public void web3(){
+        mPresenter.goTmallWeb();
+    }
 
     @Override
     protected void initView() {

@@ -17,6 +17,10 @@ public class MinePresenter extends BasePresenter<IF_4View> {
         super(activity, iv);
     }
 
+    public void goGitHubWeb() {
+        I.toBrowser(mActivity, Urls.YYJ_GitHub);
+    }
+
     public void goHomeWeb() {
         I.toBrowser(mActivity, Urls.ZYMK_Base);
     }
@@ -28,4 +32,6 @@ public class MinePresenter extends BasePresenter<IF_4View> {
     public void goTmallWeb() {
         I.toBrowser(mActivity, Urls.ZYMK_Tmall);
     }
+
+
 }
