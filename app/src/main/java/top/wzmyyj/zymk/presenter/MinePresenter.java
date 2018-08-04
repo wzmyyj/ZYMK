@@ -2,8 +2,9 @@ package top.wzmyyj.zymk.presenter;
 
 import android.app.Activity;
 
-import top.wzmyyj.zymk.app.tools.I;
+import top.wzmyyj.wzm_sdk.tools.T;
 import top.wzmyyj.zymk.app.data.Urls;
+import top.wzmyyj.zymk.app.tools.I;
 import top.wzmyyj.zymk.presenter.base.BasePresenter;
 import top.wzmyyj.zymk.view.iv.IF_4View;
 
@@ -33,5 +34,7 @@ public class MinePresenter extends BasePresenter<IF_4View> {
         I.toBrowser(mActivity, Urls.ZYMK_Tmall);
     }
 
-
+    public void goSetting() {
+        T.s("设置");
+    }
 }

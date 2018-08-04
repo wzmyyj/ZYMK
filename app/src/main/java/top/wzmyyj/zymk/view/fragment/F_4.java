@@ -30,21 +30,28 @@ public class F_4 extends BaseFragment<MinePresenter> implements IF_4View {
     View v;
 
     @OnClick(R.id.ll_info)
-    public void github(){
+    public void goGitHub() {
         mPresenter.goGitHubWeb();
     }
 
     @OnClick(R.id.ll_1)
-    public void web1(){
+    public void goWeb1() {
         mPresenter.goHomeWeb();
     }
+
     @OnClick(R.id.ll_2)
-    public void web2(){
+    public void goWeb2() {
         mPresenter.goActivityWeb();
     }
+
     @OnClick(R.id.ll_3)
-    public void web3(){
+    public void goWeb3() {
         mPresenter.goTmallWeb();
+    }
+
+    @OnClick(R.id.ll_4)
+    public void goSetting() {
+        mPresenter.goSetting();
     }
 
     @Override
