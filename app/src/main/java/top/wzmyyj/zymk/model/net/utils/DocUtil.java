@@ -209,7 +209,7 @@ public class DocUtil {
     }
 
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////rank
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////  rank
     public static RankBox transToRank(Element body) {
         String[] ifts = new String[]{"ift-fire", "ift-love_money", "ift-ticket"};
         Elements lists = body.getElementsByClass("mk-rank-list");
@@ -240,7 +240,7 @@ public class DocUtil {
     private static BookBean getRankBook(Element element, String iftClass) {
         Element a = element.getElementsByTag("a").get(0);
         int id = Integer.parseInt(a.getElementsByTag("img").get(0)
-                .absUrl("data-id"));
+                .attr("data-id"));
 
         String data_src = a.getElementsByTag("img").get(0)
                 .absUrl("data-src");
@@ -293,7 +293,7 @@ public class DocUtil {
         for (Element element : elements) {
             Element a = element.getElementsByTag("a").get(0);
             int id = Integer.parseInt(a.getElementsByTag("img").get(0)
-                    .absUrl("data-id"));
+                    .attr("data-id"));
             String data_src = a.getElementsByTag("img").get(0)
                     .absUrl("data-src");
 
