@@ -32,7 +32,7 @@
             android:layout_width="15dp"
             android:layout_height="15dp"
             android:layout_gravity="bottom"
-            android:src="@mipmap/svg_booklist_up" />
+            android:src="@mipmap/svg_booklist_down" />
 
         <TextView
             android:id="@+id/tv_mu_xu"
@@ -40,7 +40,7 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="1dp"
             android:gravity="bottom"
-            android:text="升序"
+            android:text="降序"
             android:textColor="@color/colorGray_9"
             android:textSize="12sp" />
 
@@ -76,11 +76,11 @@
             <TextView
                 android:id="@+id/tv_left"
                 android:layout_width="0dp"
-                android:gravity="center"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/click_bg"
+                android:gravity="center"
                 android:text="上一页"
                 android:textColor="@color/colorGray_7"
                 android:textSize="12sp" />
@@ -116,8 +116,8 @@
                 android:layout_height="match_parent"
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
-                android:gravity="center"
                 android:background="@drawable/click_bg"
+                android:gravity="center"
                 android:text="上一页"
                 android:textColor="@color/colorGray_7"
                 android:textSize="12sp" />

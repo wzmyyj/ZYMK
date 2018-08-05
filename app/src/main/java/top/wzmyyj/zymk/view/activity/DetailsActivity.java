@@ -140,7 +140,6 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
         ViewTitlePagerAdapter pagerAdapter = new ViewTitlePagerAdapter(viewList, titles);
         mViewPager.setAdapter(pagerAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
-        mViewPager.setCurrentItem(1);
 
 
     }

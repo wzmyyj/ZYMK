@@ -110,7 +110,7 @@ public class DetailsMuPanel extends BasePanel<DetailsPresenter> {
                 tl_mu_pager.addTab(tl_mu_pager.newTab().setText(i + 1 + ""));
             }
 
-            sort(mALLHuaList, 1);//倒序排列
+            sort(mALLHuaList, -1);//降序排列
             setData(read_href);
         } else {
             T.s("加载失败");
@@ -157,7 +157,7 @@ public class DetailsMuPanel extends BasePanel<DetailsPresenter> {
     }
 
 
-    @OnClick(R.id.tv_mu_xu)
+    @OnClick({R.id.tv_mu_xu, R.id.img_mu_xu})
     public void xu() {
         if (sort_xu == 1) {
             sort_xu = -1;
