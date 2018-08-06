@@ -11,7 +11,6 @@ import com.zhy.adapter.recyclerview.base.ViewHolder;
 
 import java.util.List;
 
-import top.wzmyyj.wzm_sdk.tools.T;
 import top.wzmyyj.zymk.R;
 import top.wzmyyj.zymk.app.bean.BookBean;
 import top.wzmyyj.zymk.app.tools.G;
@@ -46,10 +45,6 @@ public class BookAdapter extends CommonAdapter<BookBean> {
         img_book.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (href == null || href.length() == 0) {
-                    T.s("喜欢就收藏哟~");
-                    return;
-                }
                 I.toDetailsActivity(mContext, href);
             }
         });

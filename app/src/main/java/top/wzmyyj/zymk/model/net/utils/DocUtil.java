@@ -333,7 +333,11 @@ public class DocUtil {
         // .getElementsByTag("strong").text();
         String title = mk.getElementsByClass("name").text();
         String author = mk.getElementsByClass("author").text();
-        String data_src = mk.getElementsByTag("img").get(0).attr("data-src");
+
+        Element ci = mk.getElementsByClass("comic-item").get(0);
+        int id = Integer.parseInt(ci.getElementsByTag("img").get(0)
+                .attr("data-id"));
+        String data_src = ci.getElementsByTag("img").get(0).attr("data-src");
 
         String comic_href = mk.getElementsByClass("read").get(0).absUrl("href");
         String star = mk.getElementsByClass("ift-xing").text();
@@ -346,6 +350,7 @@ public class DocUtil {
         }
 
         BookBean mainBook = new BookBean();
+        mainBook.setId(id);
         mainBook.setTitle(title);
         mainBook.setAuthor(author);
         mainBook.setStar(star);

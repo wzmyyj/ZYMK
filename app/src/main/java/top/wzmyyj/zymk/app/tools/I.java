@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 
+import top.wzmyyj.zymk.view.activity.ComicActivity;
 import top.wzmyyj.zymk.view.activity.DetailsActivity;
 import top.wzmyyj.zymk.view.activity.MainActivity;
 import top.wzmyyj.zymk.view.activity.MoreActivity;
@@ -73,6 +74,19 @@ public class I {
 
     public static void toSearchActivity(Context context) {
         Intent intent = new Intent(context, SearchActivity.class);
+        context.startActivity(intent);
+    }
+
+    public static void toComicActivity(Context context, int comic_id) {
+        Intent intent = new Intent(context, ComicActivity.class);
+        intent.putExtra("comic_id", comic_id);
+        context.startActivity(intent);
+    }
+
+    public static void toComicActivity(Context context, int comic_id, int chapter_id) {
+        Intent intent = new Intent(context, ComicActivity.class);
+        intent.putExtra("comic_id", comic_id);
+        intent.putExtra("chapter_id", chapter_id);
         context.startActivity(intent);
     }
 }

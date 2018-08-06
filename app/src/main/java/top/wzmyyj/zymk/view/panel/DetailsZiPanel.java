@@ -32,7 +32,7 @@ public class DetailsZiPanel extends BasePanel<DetailsPresenter> {
 
     @Override
     protected int getLayoutId() {
-        return R.layout.panel_details_zi;
+        return R.layout.layout_details_zi;
     }
 
     @BindView(R.id.rv_zi_1)

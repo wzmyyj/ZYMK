@@ -33,7 +33,7 @@ public class DetailsMuPanel extends BasePanel<DetailsPresenter> {
 
     @Override
     protected int getLayoutId() {
-        return R.layout.panel_details_mu;
+        return R.layout.layout_details_mu;
     }
 
     @BindView(R.id.tv_mu_last)

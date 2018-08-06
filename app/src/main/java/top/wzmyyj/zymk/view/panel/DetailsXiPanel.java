@@ -36,7 +36,7 @@ public class DetailsXiPanel extends BasePanel<DetailsPresenter> {
 
     @Override
     protected int getLayoutId() {
-        return R.layout.panel_details_xi;
+        return R.layout.layout_details_xi;
     }
 
     @BindView(R.id.tv_book_juqing)

@@ -75,11 +75,29 @@ public class ComicBox {
                 }
             }
 
+            List<BookBean> relationList = new ArrayList<>();
+            JsonArray relation_list = data.getAsJsonArray("relation_list");
+            if (relation_list != null && relation_list.size() > 0) {
+                for (int i = 0; i < relation_list.size(); i++) {
+                    JsonObject obj = relation_list.get(i).getAsJsonObject();
+                    int r_id = obj.get("comic_id").getAsInt();
+                    String r_name = obj.get("comic_name").getAsString();
+                    String r_desc = obj.get("comic_feature").getAsString();
+                    String r_chapter = obj.get("last_chapter").getAsJsonObject()
+                            .get("name").toString();
+                    int r_score = data.get("score").getAsInt() / 10;
+                    BookBean bean = new BookBean();
+                    bean.setId(r_id);
+                    bean.setTitle(r_name);
+                    bean.setDesc(r_desc);
+                    bean.setStar("" + r_score);
+                    bean.setChapter(r_chapter);
+                    relationList.add(bean);
+                }
+            }
 
-
-
-
-            return null;
+            ComicBox box = new ComicBox(status, msg, book, chapterList, relationList);
+            return box;
         }
     }
 
