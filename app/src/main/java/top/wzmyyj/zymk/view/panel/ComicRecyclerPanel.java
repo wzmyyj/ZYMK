@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import top.wzmyyj.wzm_sdk.adapter.ivd.IVD;
@@ -119,6 +120,7 @@ public class ComicRecyclerPanel extends BaseRecyclerPanel<ComicBean, ComicPresen
         List<ChapterBean> chapterList = (List<ChapterBean>) objects[1];
         if (chapterList != null && chapterList.size() > 0) {
             mChapterList.addAll(chapterList);
+            Collections.reverse(mChapterList);
         }
 
         List<BookBean> bookList = (List<BookBean>) objects[2];
