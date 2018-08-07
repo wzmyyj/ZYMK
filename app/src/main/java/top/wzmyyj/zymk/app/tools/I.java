@@ -83,7 +83,7 @@ public class I {
         context.startActivity(intent);
     }
 
-    public static void toComicActivity(Context context, int comic_id, int chapter_id) {
+    public static void toComicActivity(Context context, int comic_id, long chapter_id) {
         Intent intent = new Intent(context, ComicActivity.class);
         intent.putExtra("comic_id", comic_id);
         intent.putExtra("chapter_id", chapter_id);

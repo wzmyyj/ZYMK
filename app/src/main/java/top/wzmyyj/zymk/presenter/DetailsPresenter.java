@@ -4,8 +4,9 @@ import android.app.Activity;
 
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
-import top.wzmyyj.zymk.model.net.box.DetailsBox;
+import top.wzmyyj.zymk.app.tools.I;
 import top.wzmyyj.zymk.model.net.DetailsModel;
+import top.wzmyyj.zymk.model.net.box.DetailsBox;
 import top.wzmyyj.zymk.presenter.base.BasePresenter;
 import top.wzmyyj.zymk.view.iv.IDetailsView;
 
@@ -53,5 +54,13 @@ public class DetailsPresenter extends BasePresenter<IDetailsView> {
 
             }
         });
+    }
+
+    public void goComic(int comic_id, long chapter_id) {
+        I.toComicActivity(mActivity, comic_id, chapter_id);
+    }
+
+    public void goComic(int comic_id) {
+        I.toComicActivity(mActivity, comic_id);
     }
 }

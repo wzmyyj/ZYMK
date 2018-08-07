@@ -24,9 +24,9 @@ public class HuaAdapter extends CommonAdapter<HuaBean> {
         super(context, layoutId, datas);
     }
 
-    private String read = "xx";
+    private long read = 0;
 
-    public void setRead(String read) {
+    public void setRead(long read) {
         this.read = read;
         notifyDataSetChanged();
     }
@@ -51,7 +51,7 @@ public class HuaAdapter extends CommonAdapter<HuaBean> {
             img_new.setVisibility(View.GONE);
         }
 
-        if (huaBean.getHref().equals(read)) {
+        if (huaBean.getId()==read) {
             img_reading.setVisibility(View.VISIBLE);
         } else {
             img_reading.setVisibility(View.GONE);

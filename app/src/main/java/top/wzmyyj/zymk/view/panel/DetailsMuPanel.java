@@ -4,8 +4,11 @@ import android.content.Context;
 import android.support.design.widget.TabLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.zhy.adapter.recyclerview.MultiItemTypeAdapter;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -87,8 +90,20 @@ public class DetailsMuPanel extends BasePanel<DetailsPresenter> {
 
             }
         });
+        mAdapter.setOnItemClickListener(new MultiItemTypeAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, RecyclerView.ViewHolder holder, int position) {
+                mPresenter.goComic(mBookID, mData.get(position).getId());
+            }
+
+            @Override
+            public boolean onItemLongClick(View view, RecyclerView.ViewHolder holder, int position) {
+                return false;
+            }
+        });
     }
 
+    private int mBookID;
     private List<HuaBean> mALLHuaList = new ArrayList<>();
 
     @Override
@@ -97,7 +112,8 @@ public class DetailsMuPanel extends BasePanel<DetailsPresenter> {
         MuBean mu = (MuBean) objects[0];
         tv_mu_last.setText(mu.getTime_desc());
 
-        read_href = mu.getReading_href();
+        mBookID = mu.getBook_id();
+        read_chapter_id = mu.getReading_id();
 
         if (mu.getHuaList() != null) {
             mALLHuaList.clear();
@@ -110,8 +126,7 @@ public class DetailsMuPanel extends BasePanel<DetailsPresenter> {
                 tl_mu_pager.addTab(tl_mu_pager.newTab().setText(i + 1 + ""));
             }
 
-            sort(mALLHuaList, -1);//降序排列
-            setData(read_href);
+            xu();
         } else {
             T.s("加载失败");
         }
@@ -122,21 +137,21 @@ public class DetailsMuPanel extends BasePanel<DetailsPresenter> {
         Collections.sort(list, new HuaComparator(k));
     }
 
-    private String read_href;
+    private long read_chapter_id;
     private int pager_size;
-    private int sort_xu = 1;
+    private int sort_xu = -1;
 
-    private void setData(String reading_href) {
+    private void setData(long chapter_id) {
 
-        if (reading_href == null) {
+        if (chapter_id == 0) {
             setData(1);
             return;
         }
         int p = 1;
         int i = mALLHuaList.size() - 1;
         for (HuaBean hua : mALLHuaList) {
-            if (hua.getHref().equals(reading_href)) {
-                mAdapter.setRead(reading_href);
+            if (hua.getId() == chapter_id) {
+                mAdapter.setRead(chapter_id);
                 p = i / 32 + 1;
                 break;
             }
@@ -170,7 +185,7 @@ public class DetailsMuPanel extends BasePanel<DetailsPresenter> {
         }
 
         sort(mALLHuaList, sort_xu);
-        setData(read_href);
+        setData(read_chapter_id);
 
     }
 

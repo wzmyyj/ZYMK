@@ -10,15 +10,16 @@ public class MuBean {
     private String time_desc;
     private long time;
     private List<HuaBean> huaList;
+    private int book_id;
 
-    private String reading_href;
+    private long reading_id;
 
-    public String getReading_href() {
-        return reading_href;
+    public long getReading_id() {
+        return reading_id;
     }
 
-    public void setReading_href(String reading_href) {
-        this.reading_href = reading_href;
+    public void setReading_id(long reading_id) {
+        this.reading_id = reading_id;
     }
 
     public MuBean(String time_desc, long time) {
@@ -33,6 +34,14 @@ public class MuBean {
         this.time_desc = time_desc;
         this.time = time;
         this.huaList = huaList;
+    }
+
+    public int getBook_id() {
+        return book_id;
+    }
+
+    public void setBook_id(int book_id) {
+        this.book_id = book_id;
     }
 
     public String getTime_desc() {

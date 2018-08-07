@@ -23,8 +23,8 @@ public class ComicPresenter extends BasePresenter<IComicView> {
         mModel = new ComicModel();
     }
 
-    public int getChapter_id() {
-        return mActivity.getIntent().getIntExtra("chapter_id", 0);
+    public long getChapter_id() {
+        return mActivity.getIntent().getLongExtra("chapter_id", 0);
     }
 
 

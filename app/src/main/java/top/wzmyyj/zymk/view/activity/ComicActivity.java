@@ -42,6 +42,12 @@ public class ComicActivity extends BaseActivity<ComicPresenter> implements IComi
     }
 
     @Override
+    protected void initData() {
+        super.initData();
+        mPresenter.loadData();
+    }
+
+    @Override
     public void update(int w, Object... objs) {
         getPanel(0).f(w, objs);
     }

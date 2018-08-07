@@ -367,6 +367,8 @@ public class DocUtil {
 
         mainBook.setDesc(xi.getJuqing());
         xi.getAuthor().getBookList().add(mainBook);
+
+        mu.setBook_id(mainBook.getId());
         // //////////////
         List<BookBean> bookList = new ArrayList<>();
         Element mk2 = body.getElementsByClass("mk-recommend").get(0);
@@ -419,17 +421,17 @@ public class DocUtil {
         if (items != null || items.size() > 0) {
             for (Element item : items) {
 
-                int id = Integer.parseInt(item.attr("data-id"));
+                long id = Long.parseLong(item.attr("data-id"));
                 long uptime = Long.parseLong(item.attr("data-uptime"));
-                String href = item.getElementsByClass("chapterBtn").get(0)
-                        .absUrl("href");
+//                String href = item.getElementsByClass("chapterBtn").get(0)
+//                        .absUrl("href");
                 String title = item.getElementsByClass("chapterBtn").get(0)
                         .attr("title");
                 Elements lock = item.getElementsByClass("lockIcon");
                 boolean isLock = lock != null && lock.size() > 0;
                 Elements updot = item.getElementsByClass("updot");
                 boolean isDot = updot != null && updot.size() > 0;
-                HuaBean hua = new HuaBean(id, title, href, uptime, isLock, isDot);
+                HuaBean hua = new HuaBean(id, title, uptime, isLock, isDot);
                 huas.add(hua);
             }
         }

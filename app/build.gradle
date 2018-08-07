@@ -57,5 +57,7 @@ dependencies {
 
     implementation 'com.github.Rukey7:TagLayout:1.0.6'
 
+    implementation 'org.greenrobot:eventbus:3.1.1'
+
 
 }

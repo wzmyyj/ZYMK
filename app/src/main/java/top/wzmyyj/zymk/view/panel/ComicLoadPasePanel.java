@@ -11,7 +11,6 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.OnClick;
 import top.wzmyyj.zymk.R;
-import top.wzmyyj.zymk.app.tools.G;
 import top.wzmyyj.zymk.presenter.ComicPresenter;
 import top.wzmyyj.zymk.view.panel.base.BasePanel;
 
@@ -41,6 +40,7 @@ public class ComicLoadPasePanel extends BasePanel<ComicPresenter> {
             mHandler.sendEmptyMessageDelayed(1, 500);
             mPresenter.loadData();
             tv_loadpose.setText("正在加载中。。。");
+            tv_loadpose.setTextColor(context.getResources().getColor(R.color.colorPrimary));
         }
     }
 
@@ -48,9 +48,10 @@ public class ComicLoadPasePanel extends BasePanel<ComicPresenter> {
     @Override
     protected void initData() {
         super.initData();
-        mHandler.sendEmptyMessageDelayed(1, 500);
-        mPresenter.loadData();
+        mHandler.sendEmptyMessageDelayed(1, 200);
+        t = 0;
     }
+
 
     @SuppressLint("HandlerLeak")
     private Handler mHandler = new Handler() {
@@ -59,29 +60,38 @@ public class ComicLoadPasePanel extends BasePanel<ComicPresenter> {
             super.handleMessage(msg);
             int w = msg.what;
             if (w == 1) {
-                G.img(context, R.mipmap.pic_loadpose1, img_loadpose);
-                mHandler.sendEmptyMessageDelayed(2, 500);
+                img_loadpose.setImageResource(R.mipmap.pic_loadpose1);
+//                G.img(context, R.mipmap.pic_loadpose1, img_loadpose);
+                mHandler.sendEmptyMessageDelayed(2, 200);
             } else if (w == 2) {
-                G.img(context, R.mipmap.pic_loadpose2, img_loadpose);
-                mHandler.sendEmptyMessageDelayed(1, 500);
+                img_loadpose.setImageResource(R.mipmap.pic_loadpose2);
+//                G.img(context, R.mipmap.pic_loadpose2, img_loadpose);
+                mHandler.sendEmptyMessageDelayed(1, 200);
             } else {
                 mHandler.removeMessages(1);
                 mHandler.removeMessages(2);
             }
+            t++;
+            if (status == 0 && t > 10) {
+                mHandler.sendEmptyMessage(0);
+                view.setVisibility(View.GONE);
+            }
         }
     };
 
-    private int status = 0;
+    private int t = 0;
+    private int status = -1;
 
     @Override
     public Object f(int w, Object... objects) {
         status = w;
-        mHandler.sendEmptyMessage(0);
         if (w == -1) {
             tv_loadpose.setText("加载失败，点击重试！");
+            tv_loadpose.setTextColor(context.getResources().getColor(R.color.colorRed));
+            img_loadpose.setImageResource(R.mipmap.pic_fail);
+            mHandler.sendEmptyMessage(0);
             return null;
         }
-        view.setVisibility(View.GONE);
         return super.f(w, objects);
     }
 

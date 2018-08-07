@@ -1,5 +1,6 @@
 package top.wzmyyj.zymk.app.application;
 
+import top.wzmyyj.wzm_sdk.tools.L;
 import top.wzmyyj.zymk.common.utils.StatusBarUtil;
 
 /**
@@ -13,5 +14,6 @@ public class App extends BaseApplication {
     public void onCreate() {
         super.onCreate();
         StatusBarUtil.initStatusBarHeight(this);
+        L.setTAG("ZZZZZZ");
     }
 }

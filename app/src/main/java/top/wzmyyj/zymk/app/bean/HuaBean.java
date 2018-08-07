@@ -6,23 +6,21 @@ package top.wzmyyj.zymk.app.bean;
 
 public class HuaBean {
 
-    private int id;
+    private long id;
     private String title;
-    private String href;
     private long uptime;
     private boolean isLock;
     private boolean isDot;
 
-    public HuaBean(int id,String title, String href, long uptime, boolean isLock, boolean isDot) {
+    public HuaBean(long id,String title,long uptime, boolean isLock, boolean isDot) {
         this.id=id;
         this.title = title;
-        this.href = href;
         this.uptime = uptime;
         this.isLock = isLock;
         this.isDot = isDot;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -36,14 +34,6 @@ public class HuaBean {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getHref() {
-        return href;
-    }
-
-    public void setHref(String href) {
-        this.href = href;
     }
 
     public long getUptime() {
