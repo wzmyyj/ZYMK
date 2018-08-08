@@ -1,9 +1,11 @@
 package top.wzmyyj.zymk.view.activity;
 
+import android.os.Bundle;
 import android.widget.FrameLayout;
 
 import butterknife.BindView;
 import top.wzmyyj.zymk.R;
+import top.wzmyyj.zymk.common.utils.StatusBarUtil;
 import top.wzmyyj.zymk.presenter.ComicPresenter;
 import top.wzmyyj.zymk.view.activity.base.BaseActivity;
 import top.wzmyyj.zymk.view.iv.IComicView;
@@ -31,6 +33,11 @@ public class ComicActivity extends BaseActivity<ComicPresenter> implements IComi
         addPanels(new ComicRecyclerPanel(context, mPresenter));
     }
 
+    @Override
+    protected void initSome(Bundle savedInstanceState) {
+        super.initSome(savedInstanceState);
+        StatusBarUtil.fullScreen(this);
+    }
 
     @BindView(R.id.fl_panel)
     FrameLayout fl_panel;

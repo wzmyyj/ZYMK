@@ -9,6 +9,7 @@ public class ComicBean {
     private String chapter_name;
     private String chapter_title;
     private int var;
+    private int var_size;
     private String img_low;
     private String img_middle;
     private String img_high;
@@ -44,6 +45,14 @@ public class ComicBean {
 
     public void setVar(int var) {
         this.var = var;
+    }
+
+    public int getVar_size() {
+        return var_size;
+    }
+
+    public void setVar_size(int var_size) {
+        this.var_size = var_size;
     }
 
     public String getImg_low() {

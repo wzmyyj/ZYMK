@@ -87,4 +87,13 @@ public class StatusBarUtil {
         }
     }
 
+    public static void fullScreen(Activity context) {
+        context.getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN); //隐藏状态栏
+    }
+
+    public static void notfullScreen(Activity context) {
+        context.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);//显示状态栏
+    }
+
+
 }

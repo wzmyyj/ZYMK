@@ -2,6 +2,7 @@ package top.wzmyyj.zymk.view.panel;
 
 import android.content.Context;
 
+import com.youth.banner.listener.OnBannerListener;
 import com.youth.banner.loader.ImageLoader;
 
 import java.util.ArrayList;
@@ -37,7 +38,7 @@ public class TopBoPanel extends BaseBoPanel<HomePresenter> {
     public Object f(int w, Object... objects) {
         if (w == -1) return null;
 
-        List<BoBean> bos = (List<BoBean>) objects[0];
+        final List<BoBean> bos = (List<BoBean>) objects[0];
         if (bos == null || bos.size() < 6) return null;
 
         List<String> imgs = new ArrayList<>();
@@ -49,6 +50,13 @@ public class TopBoPanel extends BaseBoPanel<HomePresenter> {
             strs.add(bo.getTitle());
         }
         mBanner.update(imgs, strs);
+
+        mBanner.setOnBannerListener(new OnBannerListener() {
+            @Override
+            public void OnBannerClick(int position) {
+                mPresenter.goDetails(bos.get(position).getHref());
+            }
+        });
         return super.f(w, objects);
     }
 
