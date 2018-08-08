@@ -1,6 +1,8 @@
 package top.wzmyyj.zymk.view.panel;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
 
 import com.zhy.adapter.recyclerview.base.ViewHolder;
@@ -73,22 +75,63 @@ public class ComicRecyclerPanel extends BaseRecyclerPanel<ComicBean, ComicPresen
 
             @Override
             public void convert(ViewHolder holder, ComicBean comicBean, int position) {
+
+                if (position >= load_position) {
+                    return;
+                }
                 ImageView img_comic = holder.getView(R.id.img_comic);
+
+                if (comicBean.getChapter_id() == -1) {
+                    G.imgfix(context, R.mipmap.pic_comic_end, img_comic);
+                    return;
+                }
+
 
                 if (comicBean.getPrice() == 0) {
                     switch (Definition) {
                         case Definition_Low:
-                            G.img(context, comicBean.getImg_low(), img_comic);
+                            G.imgfix(context, comicBean.getImg_low(), img_comic);
                             break;
                         case Definition_Middle:
-                            G.img(context, comicBean.getImg_middle(), img_comic);
+                            G.imgfix(context, comicBean.getImg_middle(), img_comic);
                             break;
                         case Definition_High:
-                            G.img(context, comicBean.getImg_high(), img_comic);
+                            G.imgfix(context, comicBean.getImg_high(), img_comic);
                             break;
                     }
                 } else {
-                    G.img(context, R.mipmap.pic_need_money, img_comic);
+                    G.imgfix(context, R.mipmap.pic_need_money, img_comic);
+                }
+
+
+            }
+        });
+    }
+
+
+    @Override
+    public void viewRecycled(@NonNull ViewHolder holder) {
+        if (holder != null) {
+            G.clear(context, (ImageView) holder.getView(R.id.img_comic));
+        }
+        super.viewRecycled(holder);
+    }
+
+    private int load_position = 10;
+
+    @Override
+    protected void initListener() {
+        super.initListener();
+        mRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+                int p = mRecyclerView.getChildAdapterPosition(mRecyclerView.getChildAt(0)) + 10;
+                if (p >= load_position - 10 + 1 && p <= mData.size() - 10) {
+                    load_position = p + 10;
+                    notifyDataSetChanged();
                 }
 
             }
@@ -136,6 +179,16 @@ public class ComicRecyclerPanel extends BaseRecyclerPanel<ComicBean, ComicPresen
     private void setComicData() {
         mData.clear();
         for (ChapterBean chapter : mChapterList) {
+            if (chapter.getPrice() > 0) {
+                ComicBean comic = new ComicBean();
+                comic.setChapter_id(chapter.getChapter_id());
+                comic.setChapter_name(chapter.getChapter_name());
+                comic.setChapter_title(chapter.getChapter_title());
+                comic.setPrice(chapter.getPrice());
+                mData.add(comic);
+                notifyDataSetChanged();
+                return;
+            }
             int start = chapter.getStart_var();
             int end = chapter.getEnd_var();
             for (int i = start; i <= end; i++) {
@@ -151,9 +204,10 @@ public class ComicRecyclerPanel extends BaseRecyclerPanel<ComicBean, ComicPresen
             }
 
         }
-
+        ComicBean comic = new ComicBean();
+        comic.setChapter_id(-1);
+        mData.add(comic);
         notifyDataSetChanged();
-
 
     }
 }

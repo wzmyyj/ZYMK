@@ -29,7 +29,7 @@ public class HuaComparator implements Comparator {
         HuaBean a = (HuaBean) lhs;
         HuaBean b = (HuaBean) rhs;
 
-        if (a.getId() > b.getId()) {
+        if (a.getIndex() < b.getIndex()) {
             return k;
         } else {
             return -k;

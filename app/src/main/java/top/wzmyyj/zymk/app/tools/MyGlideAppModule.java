@@ -1,0 +1,11 @@
+package top.wzmyyj.zymk.app.tools;
+
+import com.bumptech.glide.annotation.GlideModule;
+import com.bumptech.glide.module.AppGlideModule;
+
+/**
+ * Created by yyj on 2018/08/08. email: 2209011667@qq.com
+ */
+
+@GlideModule
+public class MyGlideAppModule extends AppGlideModule {}

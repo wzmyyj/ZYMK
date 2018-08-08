@@ -6,6 +6,7 @@ package top.wzmyyj.zymk.app.bean;
 
 public class HuaBean {
 
+    private int index;
     private long id;
     private String title;
     private long uptime;
@@ -20,13 +21,22 @@ public class HuaBean {
         this.isDot = isDot;
     }
 
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
     public long getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getTitle() {
         return title;

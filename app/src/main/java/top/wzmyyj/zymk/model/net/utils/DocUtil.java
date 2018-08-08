@@ -419,8 +419,9 @@ public class DocUtil {
         List<HuaBean> huas = new ArrayList<>();
         Elements items = element.getElementsByClass("item");
         if (items != null || items.size() > 0) {
-            for (Element item : items) {
-
+            int size = items.size();
+            for (int i = size - 1; i >= 0; i--) {
+                Element item = items.get(i);
                 long id = Long.parseLong(item.attr("data-id"));
                 long uptime = Long.parseLong(item.attr("data-uptime"));
 //                String href = item.getElementsByClass("chapterBtn").get(0)
@@ -432,9 +433,12 @@ public class DocUtil {
                 Elements updot = item.getElementsByClass("updot");
                 boolean isDot = updot != null && updot.size() > 0;
                 HuaBean hua = new HuaBean(id, title, uptime, isLock, isDot);
+                hua.setIndex(i);
                 huas.add(hua);
             }
         }
+
+
         MuBean mu = new MuBean(time_desc, time, huas);
         return mu;
     }

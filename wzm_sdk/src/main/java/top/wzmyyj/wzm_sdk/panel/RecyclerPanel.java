@@ -1,6 +1,7 @@
 package top.wzmyyj.wzm_sdk.panel;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -11,6 +12,7 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 import com.zhy.adapter.recyclerview.MultiItemTypeAdapter;
 import com.zhy.adapter.recyclerview.base.ItemViewDelegate;
+import com.zhy.adapter.recyclerview.base.ViewHolder;
 import com.zhy.adapter.recyclerview.wrapper.HeaderAndFooterWrapper;
 
 import java.util.ArrayList;
@@ -82,7 +84,13 @@ public abstract class RecyclerPanel<T> extends InitPanel
     @Override
     protected void initData() {
 
-        MultiItemTypeAdapter mAdapter = new MultiItemTypeAdapter(context, mData);
+        MultiItemTypeAdapter mAdapter = new MultiItemTypeAdapter(context, mData) {
+            @Override
+            public void onViewRecycled(@NonNull RecyclerView.ViewHolder holder) {
+                super.onViewRecycled(holder);
+                viewRecycled((ViewHolder) holder);
+            }
+        };
 
         for (ItemViewDelegate<T> ivd : mIVD) {
             mAdapter.addItemViewDelegate(ivd);
@@ -97,6 +105,9 @@ public abstract class RecyclerPanel<T> extends InitPanel
         mRecyclerView.setAdapter(mHeaderAndFooterWrapper);
     }
 
+    public void viewRecycled(@NonNull ViewHolder holder) {
+
+    }
 
     @Override
     protected void initListener() {

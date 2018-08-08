@@ -37,7 +37,7 @@ public class ComicLoadPasePanel extends BasePanel<ComicPresenter> {
     @OnClick(R.id.tv_loadpose)
     public void reLoad() {
         if (status == -1) {
-            mHandler.sendEmptyMessageDelayed(1, 500);
+            mHandler.sendEmptyMessage(1);
             mPresenter.loadData();
             tv_loadpose.setText("正在加载中。。。");
             tv_loadpose.setTextColor(context.getResources().getColor(R.color.colorPrimary));
@@ -48,31 +48,34 @@ public class ComicLoadPasePanel extends BasePanel<ComicPresenter> {
     @Override
     protected void initData() {
         super.initData();
-        mHandler.sendEmptyMessageDelayed(1, 200);
+        mHandler.sendEmptyMessage(1);
         t = 0;
     }
 
 
     @SuppressLint("HandlerLeak")
     private Handler mHandler = new Handler() {
+
+        private int k = 1;
+
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             int w = msg.what;
             if (w == 1) {
-                img_loadpose.setImageResource(R.mipmap.pic_loadpose1);
-//                G.img(context, R.mipmap.pic_loadpose1, img_loadpose);
-                mHandler.sendEmptyMessageDelayed(2, 200);
-            } else if (w == 2) {
-                img_loadpose.setImageResource(R.mipmap.pic_loadpose2);
-//                G.img(context, R.mipmap.pic_loadpose2, img_loadpose);
+                if (k == 1) {
+                    k = 2;
+                    img_loadpose.setImageResource(R.mipmap.pic_loadpose2);
+                } else {
+                    k = 1;
+                    img_loadpose.setImageResource(R.mipmap.pic_loadpose1);
+                }
                 mHandler.sendEmptyMessageDelayed(1, 200);
             } else {
                 mHandler.removeMessages(1);
-                mHandler.removeMessages(2);
             }
             t++;
-            if (status == 0 && t > 10) {
+            if (status == 0 && t > 7) {
                 mHandler.sendEmptyMessage(0);
                 view.setVisibility(View.GONE);
             }
