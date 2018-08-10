@@ -10,9 +10,11 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SimpleItemAnimator;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.Animation;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.xw.repo.BubbleSeekBar;
@@ -31,6 +33,7 @@ import top.wzmyyj.zymk.R;
 import top.wzmyyj.zymk.app.bean.BookBean;
 import top.wzmyyj.zymk.app.bean.ChapterBean;
 import top.wzmyyj.zymk.app.bean.ComicBean;
+import top.wzmyyj.zymk.app.tools.A;
 import top.wzmyyj.zymk.app.tools.G;
 import top.wzmyyj.zymk.presenter.ComicPresenter;
 import top.wzmyyj.zymk.view.panel.base.BasePanel;
@@ -397,24 +400,27 @@ public class ComicRecyclerPanel extends BaseRecyclerPanel<ComicBean, ComicPresen
         ImageView img_auto;
 
         ///////////////////////////////////////////////////// menu 3，设置画质。
-        @OnClick(R.id.ll_menu_3)
-        public void menu_3(View v) {
-            showMenuDefinition(v);
-        }
 
         @BindView(R.id.img_definition)
         ImageView img_definition;
 
+        @OnClick(R.id.ll_menu_3)
         public void showMenuDefinition(View v) {
 
         }
 
+        @OnClick(R.id.rl_definition)
         public void closeMenuDefinition() {
 
         }
 
+        @BindView(R.id.rl_definition)
+        RelativeLayout rl_definition;
+        @BindView(R.id.ll_definition)
+        LinearLayout ll_definition;
 
         // 流畅画质
+        @OnClick(R.id.img_definition_low)
         public void setDefinitionLow() {
             Definition = Definition_Low;
             T.s("已切换到流畅画质");
@@ -424,6 +430,7 @@ public class ComicRecyclerPanel extends BaseRecyclerPanel<ComicBean, ComicPresen
         }
 
         // 标清画质
+        @OnClick(R.id.img_definition_middle)
         public void setDefinitionMiddle() {
             Definition = Definition_Middle;
             T.s("已切换到标清画质");
@@ -433,6 +440,7 @@ public class ComicRecyclerPanel extends BaseRecyclerPanel<ComicBean, ComicPresen
         }
 
         // 高清画质
+        @OnClick(R.id.img_definition_high)
         public void setDefinitionHigh() {
             Definition = Definition_High;
             T.s("已切换到高清画质");
@@ -463,12 +471,12 @@ public class ComicRecyclerPanel extends BaseRecyclerPanel<ComicBean, ComicPresen
         @BindView(R.id.tv_chapter_var2)
         TextView tv_chapter_var2;
 
-
         @Override
         protected void initView() {
             super.initView();
-            view.setVisibility(View.GONE);
-            View menuDefinitionView = mInflater.inflate(R.layout.layout_menu_definition, null);
+            fl_top.setVisibility(View.INVISIBLE);
+            ll_bottom.setVisibility(View.INVISIBLE);
+            rl_definition.setVisibility(View.GONE);
         }
 
         // 标记mBsb是非被触碰。
@@ -551,14 +559,74 @@ public class ComicRecyclerPanel extends BaseRecyclerPanel<ComicBean, ComicPresen
         public void show() {
             if (isShow) return;
             isShow = true;
-            view.setVisibility(View.VISIBLE);
-
+            toggleMenu(300);
         }
 
         public void close() {
             if (!isShow) return;
             isShow = false;
-            view.setVisibility(View.GONE);
+            toggleMenu(300);
+        }
+
+        private void toggleMenu(int duration) {
+            fl_top.setVisibility(View.VISIBLE);
+            ll_bottom.setVisibility(View.VISIBLE);
+            int th = fl_top.getHeight();
+            int bh = ll_bottom.getHeight();
+
+            int fromY1 = 0, toY1 = 0, fromY2 = 0, toY2 = 0;
+            if (isShow) {
+                fromY1 = -th;
+                fromY2 = bh;
+            } else {
+                toY1 = -th;
+                toY2 = bh;
+            }
+            A.create()
+                    .t(0, 0, fromY1, toY1)
+                    .fillAfter(true)
+                    .duration(duration)
+                    .listener(new Animation.AnimationListener() {
+                        @Override
+                        public void onAnimationStart(Animation animation) {
+
+                        }
+
+                        @Override
+                        public void onAnimationEnd(Animation animation) {
+
+                        }
+
+                        @Override
+                        public void onAnimationRepeat(Animation animation) {
+                            if (!isShow)
+                                fl_top.setVisibility(View.GONE);
+                        }
+                    })
+                    .into(fl_top);
+
+            A.create()
+                    .t(0, 0, fromY2, toY2)
+                    .fillAfter(true)
+                    .duration(duration)
+                    .listener(new Animation.AnimationListener() {
+                        @Override
+                        public void onAnimationStart(Animation animation) {
+
+                        }
+
+                        @Override
+                        public void onAnimationEnd(Animation animation) {
+
+                        }
+
+                        @Override
+                        public void onAnimationRepeat(Animation animation) {
+                            if (!isShow)
+                                ll_bottom.setVisibility(View.GONE);
+                        }
+                    })
+                    .into(ll_bottom);
         }
     }
 }

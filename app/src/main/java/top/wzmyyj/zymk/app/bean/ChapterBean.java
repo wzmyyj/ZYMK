@@ -17,6 +17,13 @@ public class ChapterBean {
     private String image_suffix;
     private Chapter_image chapter_image;
 
+    public ChapterBean() {
+    }
+
+    public ChapterBean(long chapter_id) {
+        this.chapter_id = chapter_id;
+    }
+
     public void setChapter_id(long chapter_id) {
         this.chapter_id = chapter_id;
     }

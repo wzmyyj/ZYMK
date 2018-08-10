@@ -1,4 +1,5 @@
-package top.wzmyyj.zymk.app.tools;
+package top.wzmyyj.zymk.app.utils;
+
 
 import com.bumptech.glide.annotation.GlideModule;
 import com.bumptech.glide.module.AppGlideModule;
@@ -9,4 +10,5 @@ import com.bumptech.glide.module.AppGlideModule;
  */
 
 @GlideModule
-public class MyGlideAppModule extends AppGlideModule {}
+public class MyGlideAppModule extends AppGlideModule {
+}

@@ -234,6 +234,10 @@
 
     </LinearLayout>
 
+
+    <include layout="@layout/layout_menu_definition" />
+
+
     <View
         android:id="@+id/v_brightness"
         android:layout_width="match_parent"

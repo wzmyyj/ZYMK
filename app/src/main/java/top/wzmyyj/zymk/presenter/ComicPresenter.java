@@ -50,6 +50,7 @@ public class ComicPresenter extends BasePresenter<IComicView> {
                     List<ChapterBean> chapterList = box.getChapterList();
                     Collections.reverse(chapterList);// 反序
                     List<ComicBean> comicList = getComicData(chapterList);
+                    chapterList.add(new ChapterBean(-1));//增加一章结束语。
                     mView.update(0, box.getBook(), chapterList, box.getBookList(), comicList);
                 } else {
                     mView.update(-1, box.getMsg());
@@ -96,7 +97,7 @@ public class ComicPresenter extends BasePresenter<IComicView> {
             }
 
         }
-        ComicBean comic = new ComicBean();
+        ComicBean comic = new ComicBean();//增加一张结束语。
         comic.setChapter_id(-1);
         comic.setVar(1);
         comic.setVar_size(1);

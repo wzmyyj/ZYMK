@@ -1,32 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="250dp"
-    android:layout_height="60dp"
-    android:background="@drawable/bg_menu"
-    android:orientation="horizontal"
-    android:padding="5dp">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_definition"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/img_definition_low"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:padding="15dp"
-        android:src="@mipmap/ic_read_definition_low" />
+    <LinearLayout
+        android:id="@+id/ll_definition"
+        android:layout_width="250dp"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="150dp"
+        android:background="@drawable/bg_menu"
+        android:orientation="horizontal"
+        android:padding="5dp">
 
-    <ImageView
-        android:id="@+id/img_definition_middle"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:padding="15dp"
-        android:src="@mipmap/ic_read_definition_middle" />
+        <ImageView
+            android:id="@+id/img_definition_low"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="15dp"
+            android:src="@mipmap/ic_read_definition_low" />
 
-    <ImageView
-        android:id="@+id/img_definition_high"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:padding="15dp"
-        android:src="@mipmap/ic_read_definition_high" />
-</LinearLayout>
+        <ImageView
+            android:id="@+id/img_definition_middle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="15dp"
+            android:src="@mipmap/ic_read_definition_middle" />
+
+        <ImageView
+            android:id="@+id/img_definition_high"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="15dp"
+            android:src="@mipmap/ic_read_definition_high" />
+    </LinearLayout>
+</RelativeLayout>

@@ -20,6 +20,7 @@ import com.bumptech.glide.request.transition.Transition;
 
 import jp.wasabeef.glide.transformations.BlurTransformation;
 import top.wzmyyj.zymk.R;
+import top.wzmyyj.zymk.app.utils.GlideApp;
 import top.wzmyyj.zymk.common.utils.MockUtil;
 
 /**

@@ -1,17 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/colorWhite"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:id="@+id/ll_panel"
+    <com.youth.banner.Banner
+        android:id="@+id/banner"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:orientation="vertical">
+        app:banner_default_image="@color/colorGray_e"
+        app:indicator_drawable_selected="@mipmap/point_0"
+        app:indicator_drawable_unselected="@mipmap/point_1"
+        app:indicator_height="9dp"
+        app:indicator_margin="3dp"
+        app:indicator_width="9dp"
+        app:scroll_time="1000"
+        app:title_background="@color/black_overlay"
+        app:title_height="25dp"
+        app:title_textcolor="@color/colorWhite"
+        app:title_textsize="12dp">
 
-    </LinearLayout>
+    </com.youth.banner.Banner>
 
     <View
         android:layout_width="match_parent"

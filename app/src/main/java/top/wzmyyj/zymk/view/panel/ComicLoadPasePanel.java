@@ -75,7 +75,7 @@ public class ComicLoadPasePanel extends BasePanel<ComicPresenter> {
                 mHandler.removeMessages(1);
             }
             t++;
-            if (status == 0 && t > 7) {
+            if (status == 0 && t > 10) {
                 mHandler.sendEmptyMessage(0);
                 view.setVisibility(View.GONE);
             }

@@ -69,14 +69,14 @@ public abstract class BoPanel extends InitPanel {
     public void onStart() {
         super.onStart();
         //开始轮播
-        mBanner.startAutoPlay();
+//        mBanner.startAutoPlay();
     }
 
     @Override
     public void onStop() {
         super.onStop();
         //结束轮播
-        mBanner.stopAutoPlay();
+//        mBanner.stopAutoPlay();
     }
 
     @Override
