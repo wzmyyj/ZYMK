@@ -80,6 +80,7 @@
                 android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:text="1/9"
                 android:textColor="@color/colorGray_e"
                 android:textSize="12sp" />
 
@@ -232,6 +233,49 @@
         </LinearLayout>
 
     </LinearLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/rl_definition"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black_overlay"
+        android:clickable="true"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="240dp"
+            android:layout_height="60dp"
+            android:layout_centerInParent="true"
+            android:background="@color/colorAhp_Black"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <ImageView
+                android:id="@+id/img_definition_low"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:padding="15dp"
+                android:src="@mipmap/ic_read_definition_low" />
+
+            <ImageView
+                android:id="@+id/img_definition_middle"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:padding="15dp"
+                android:src="@mipmap/ic_read_definition_middle" />
+
+            <ImageView
+                android:id="@+id/img_definition_high"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:padding="15dp"
+                android:src="@mipmap/ic_read_definition_high" />
+        </LinearLayout>
+    </RelativeLayout>
 
 
 </FrameLayout>

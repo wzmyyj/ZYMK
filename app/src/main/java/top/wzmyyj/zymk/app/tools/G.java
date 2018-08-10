@@ -24,6 +24,7 @@ import top.wzmyyj.zymk.common.utils.MockUtil;
 
 /**
  * Created by yyj on 2018/07/09. email: 2209011667@qq.com
+ * Glide 图片加载器的封装类。
  */
 
 public class G {
@@ -97,6 +98,8 @@ public class G {
                         img.setLayoutParams(new RelativeLayout.LayoutParams(ScreenWidth, (int) (scale * ScreenWidth)));
                         GlideApp.with(context)
                                 .load(url)
+                                .dontAnimate()
+                                .skipMemoryCache(false)
                                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                                 .into(img);
                     }
@@ -118,6 +121,7 @@ public class G {
                         img.setLayoutParams(new RelativeLayout.LayoutParams(ScreenWidth, (int) (scale * ScreenWidth)));
                         GlideApp.with(context)
                                 .load(res_id)
+                                .dontAnimate()
                                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                                 .into(img);
                     }

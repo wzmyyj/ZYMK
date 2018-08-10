@@ -6,9 +6,11 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.xw.repo.BubbleSeekBar;
@@ -22,6 +24,7 @@ import butterknife.OnClick;
 import top.wzmyyj.wzm_sdk.adapter.ivd.IVD;
 import top.wzmyyj.wzm_sdk.adapter.ivd.SingleIVD;
 import top.wzmyyj.wzm_sdk.tools.L;
+import top.wzmyyj.wzm_sdk.tools.T;
 import top.wzmyyj.zymk.R;
 import top.wzmyyj.zymk.app.bean.BookBean;
 import top.wzmyyj.zymk.app.bean.ChapterBean;
@@ -202,7 +205,7 @@ public class ComicRecyclerPanel extends BaseRecyclerPanel<ComicBean, ComicPresen
     public Object f(int w, Object... objects) {
         L.d(w + "");
 
-        getPanel(1).f(w, null);
+        getPanel(1).f(w, objects);
         if (w == -1) {
             return null;
         }
@@ -330,6 +333,8 @@ public class ComicRecyclerPanel extends BaseRecyclerPanel<ComicBean, ComicPresen
         mHandler.sendEmptyMessage(0);
     }
 
+
+    // 内部类panel.菜单面板。
     public class ComicMeunPanel extends BasePanel<ComicPresenter> {
 
         public ComicMeunPanel(Context context, ComicPresenter p) {
@@ -358,28 +363,87 @@ public class ComicRecyclerPanel extends BaseRecyclerPanel<ComicBean, ComicPresen
         @BindView(R.id.ll_bottom)
         LinearLayout ll_bottom;
 
+        ///////////////////////////////////////////////////// menu 1，跳转到设置页面。
         @OnClick(R.id.ll_menu_1)
-        public void menu_1() {
+        public void showMenu1() {
 
         }
 
+        ///////////////////////////////////////////////////// menu 2，设置自动滑动和停止。
         @OnClick(R.id.ll_menu_2)
-        public void menu_2() {
+        public void showMenu2() {
 
         }
 
+        ///////////////////////////////////////////////////// menu 3，设置画质。
         @OnClick(R.id.ll_menu_3)
-        public void menu_3() {
-
+        public void showMenu3() {
+            rl_definition.setVisibility(View.VISIBLE);
         }
 
+        @OnClick(R.id.rl_definition)
+        public void closeMenu3() {
+            rl_definition.setVisibility(View.GONE);
+        }
+
+        @BindView(R.id.img_definition)
+        ImageView img_definition;
+        @BindView(R.id.rl_definition)
+        RelativeLayout rl_definition;
+
+        // 流畅画质
+        @OnClick(R.id.img_definition_low)
+        public void setDefinitionLow() {
+            Definition = Definition_Low;
+            T.s("已切换到流畅画质");
+            // 只刷新当前显示的item，防止图片跳闪。
+            mHeaderAndFooterWrapper.notifyItemRangeChanged(
+                    mRecyclerView.getChildAdapterPosition(mRecyclerView.getChildAt(0)),
+                    mRecyclerView.getChildAdapterPosition(mRecyclerView.getChildAt(mRecyclerView.getChildCount() - 1))
+            );
+            img_definition.setImageResource(R.mipmap.ic_read_definition_low);
+            closeMenu3();
+        }
+
+        // 标清画质
+        @OnClick(R.id.img_definition_middle)
+        public void setDefinitionMiddle() {
+            Definition = Definition_Middle;
+            T.s("已切换到标清画质");
+            // 只刷新当前显示的item，防止图片跳闪。
+            mHeaderAndFooterWrapper.notifyItemRangeChanged(
+                    mRecyclerView.getChildAdapterPosition(mRecyclerView.getChildAt(0)),
+                    mRecyclerView.getChildAdapterPosition(mRecyclerView.getChildAt(mRecyclerView.getChildCount() - 1))
+            );
+            img_definition.setImageResource(R.mipmap.ic_read_definition_middle);
+            closeMenu3();
+        }
+
+        // 高清画质
+        @OnClick(R.id.img_definition_high)
+        public void setDefinitionHigh() {
+            Definition = Definition_High;
+            T.s("已切换到高清画质");
+            // 只刷新当前显示的item，防止图片跳闪。
+            mHeaderAndFooterWrapper.notifyItemRangeChanged(
+                    mRecyclerView.getChildAdapterPosition(mRecyclerView.getChildAt(0)),
+                    mRecyclerView.getChildAdapterPosition(mRecyclerView.getChildAt(mRecyclerView.getChildCount() - 1))
+            );
+            img_definition.setImageResource(R.mipmap.ic_read_definition_high);
+            closeMenu3();
+        }
+
+
+
+        ///////////////////////////////////////////////////// menu 4，设置亮度
         @OnClick(R.id.ll_menu_4)
-        public void menu_4() {
+        public void showMenu4() {
 
         }
 
+        ///////////////////////////////////////////////////// menu 5，显示章节目录。
         @OnClick(R.id.ll_menu_5)
-        public void menu_5() {
+        public void showMenu5() {
 
         }
 
@@ -391,9 +455,6 @@ public class ComicRecyclerPanel extends BaseRecyclerPanel<ComicBean, ComicPresen
 
         @BindView(R.id.img_auto)
         ImageView img_auto;
-
-        @BindView(R.id.img_definition)
-        ImageView img_definition;
 
 
     }

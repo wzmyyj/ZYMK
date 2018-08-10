@@ -16,6 +16,7 @@ import top.wzmyyj.zymk.view.activity.TyActivity;
 
 /**
  * Created by yyj on 2018/07/09. email: 2209011667@qq.com
+ * Intent 页面跳转的统一封装类。
  */
 
 public class I {
