@@ -6,4 +6,6 @@ package top.wzmyyj.zymk.app.anim;
  */
 
 public class AppAnimation {
+
+
 }

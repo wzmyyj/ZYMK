@@ -5,12 +5,14 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SimpleItemAnimator;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.xw.repo.BubbleSeekBar;
@@ -61,6 +63,9 @@ public class ComicRecyclerPanel extends BaseRecyclerPanel<ComicBean, ComicPresen
         super.initView();
         mFrameLayout.addView(getPanelView(0));
         mFrameLayout.addView(getPanelView(1));
+
+        // 消除mRecyclerView刷新的动画。
+        ((SimpleItemAnimator) mRecyclerView.getItemAnimator()).setSupportsChangeAnimations(false);
     }
 
     private long mChapterId = 0;
@@ -136,18 +141,24 @@ public class ComicRecyclerPanel extends BaseRecyclerPanel<ComicBean, ComicPresen
     protected void initListener() {
         super.initListener();
         mRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
-
+            // 当前屏幕显示最上面一行的position。
             private int load_position_now = 0;
 
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
 
+                if (dy > 10) {
+                    mMeunPanel.close();
+                } else if (dy < -10) {
+                    mMeunPanel.show();
+                }
+
                 int p = mRecyclerView.getChildAdapterPosition(mRecyclerView.getChildAt(0));
 
                 if (p == load_position_now) return;
                 load_position_now = p;
-                setMenu(p);
+                mMeunPanel.setMenu(mData.get(p));
                 if (load_position_now < 3) {
                     mHandler.sendEmptyMessage(1);
                 } else if (load_position_now > mData.size() - 5) {
@@ -157,6 +168,7 @@ public class ComicRecyclerPanel extends BaseRecyclerPanel<ComicBean, ComicPresen
             }
         });
     }
+
 
     @SuppressLint("HandlerLeak")
     private Handler mHandler = new Handler() {
@@ -175,17 +187,6 @@ public class ComicRecyclerPanel extends BaseRecyclerPanel<ComicBean, ComicPresen
         }
     };
 
-    private void setMenu(int p) {
-        mMeunPanel.tv_chapter_name.setText(mData.get(p).getChapter_name());
-        String var = mData.get(p).getVar() + "/" + mData.get(p).getVar_size();
-        mMeunPanel.tv_chapter_var.setText(var);
-        mMeunPanel.tv_chapter_var2.setText(var);
-        mMeunPanel.bsb_1.getConfigBuilder()
-                .max(mData.get(p).getVar_size())
-                .min(1)
-                .progress(mData.get(p).getVar())
-                .build();
-    }
 
     @Override
     public void update() {
@@ -237,7 +238,7 @@ public class ComicRecyclerPanel extends BaseRecyclerPanel<ComicBean, ComicPresen
         return super.f(w, objects);
     }
 
-    // 第一次添加数据
+    // 第一次添加数据。
     private void addOnce() {
         if (mChapterId == 0) {
             mChapterId = mChapterList.get(0).getChapter_id();
@@ -256,7 +257,7 @@ public class ComicRecyclerPanel extends BaseRecyclerPanel<ComicBean, ComicPresen
         mData.clear();
         mData.addAll(0, comicList);
         notifyDataSetChanged();
-        setMenu(0);
+        mMeunPanel.setMenu(mData.get(0));
 
         // 找上一章和下一章的ID
         for (int i = 0; i < mChapterList.size(); i++) {
@@ -273,7 +274,7 @@ public class ComicRecyclerPanel extends BaseRecyclerPanel<ComicBean, ComicPresen
 
     }
 
-
+    // 向前加载一章。
     private void addPrevious() {
         if (chapter_id_previous == 0) return;
         long previous = chapter_id_previous;
@@ -300,6 +301,7 @@ public class ComicRecyclerPanel extends BaseRecyclerPanel<ComicBean, ComicPresen
         }
     }
 
+    // 向后加载一章。
     private void addAfter() {
         if (chapter_id_after == 0) return;
 
@@ -325,6 +327,22 @@ public class ComicRecyclerPanel extends BaseRecyclerPanel<ComicBean, ComicPresen
             }
         }
 
+    }
+
+
+    public void notifyItemShoewRangeChanged() {
+        // 只刷新当前显示的item，防止图片跳闪。
+        int a = mRecyclerView.getChildAdapterPosition(mRecyclerView.getChildAt(0));
+        int b = mRecyclerView.getChildAdapterPosition(mRecyclerView.getChildAt(mRecyclerView.getChildCount() - 1));
+        if (a == -1 || b == -1) return;
+        mHeaderAndFooterWrapper.notifyItemRangeChanged(a, b);
+    }
+
+    // mRecyclerView滑到指定position的位置。
+    public void scrollTo(int p) {
+        if (p < 0 || p > mData.size() - 1) return;// 防止越界。
+        LinearLayoutManager mLayoutManager = (LinearLayoutManager) mRecyclerView.getLayoutManager();
+        mLayoutManager.scrollToPositionWithOffset(p, 0);
     }
 
     @Override
@@ -365,97 +383,182 @@ public class ComicRecyclerPanel extends BaseRecyclerPanel<ComicBean, ComicPresen
 
         ///////////////////////////////////////////////////// menu 1，跳转到设置页面。
         @OnClick(R.id.ll_menu_1)
-        public void showMenu1() {
+        public void menu_1() {
 
         }
 
         ///////////////////////////////////////////////////// menu 2，设置自动滑动和停止。
         @OnClick(R.id.ll_menu_2)
-        public void showMenu2() {
+        public void menu_2() {
 
         }
-
-        ///////////////////////////////////////////////////// menu 3，设置画质。
-        @OnClick(R.id.ll_menu_3)
-        public void showMenu3() {
-            rl_definition.setVisibility(View.VISIBLE);
-        }
-
-        @OnClick(R.id.rl_definition)
-        public void closeMenu3() {
-            rl_definition.setVisibility(View.GONE);
-        }
-
-        @BindView(R.id.img_definition)
-        ImageView img_definition;
-        @BindView(R.id.rl_definition)
-        RelativeLayout rl_definition;
-
-        // 流畅画质
-        @OnClick(R.id.img_definition_low)
-        public void setDefinitionLow() {
-            Definition = Definition_Low;
-            T.s("已切换到流畅画质");
-            // 只刷新当前显示的item，防止图片跳闪。
-            mHeaderAndFooterWrapper.notifyItemRangeChanged(
-                    mRecyclerView.getChildAdapterPosition(mRecyclerView.getChildAt(0)),
-                    mRecyclerView.getChildAdapterPosition(mRecyclerView.getChildAt(mRecyclerView.getChildCount() - 1))
-            );
-            img_definition.setImageResource(R.mipmap.ic_read_definition_low);
-            closeMenu3();
-        }
-
-        // 标清画质
-        @OnClick(R.id.img_definition_middle)
-        public void setDefinitionMiddle() {
-            Definition = Definition_Middle;
-            T.s("已切换到标清画质");
-            // 只刷新当前显示的item，防止图片跳闪。
-            mHeaderAndFooterWrapper.notifyItemRangeChanged(
-                    mRecyclerView.getChildAdapterPosition(mRecyclerView.getChildAt(0)),
-                    mRecyclerView.getChildAdapterPosition(mRecyclerView.getChildAt(mRecyclerView.getChildCount() - 1))
-            );
-            img_definition.setImageResource(R.mipmap.ic_read_definition_middle);
-            closeMenu3();
-        }
-
-        // 高清画质
-        @OnClick(R.id.img_definition_high)
-        public void setDefinitionHigh() {
-            Definition = Definition_High;
-            T.s("已切换到高清画质");
-            // 只刷新当前显示的item，防止图片跳闪。
-            mHeaderAndFooterWrapper.notifyItemRangeChanged(
-                    mRecyclerView.getChildAdapterPosition(mRecyclerView.getChildAt(0)),
-                    mRecyclerView.getChildAdapterPosition(mRecyclerView.getChildAt(mRecyclerView.getChildCount() - 1))
-            );
-            img_definition.setImageResource(R.mipmap.ic_read_definition_high);
-            closeMenu3();
-        }
-
-
-
-        ///////////////////////////////////////////////////// menu 4，设置亮度
-        @OnClick(R.id.ll_menu_4)
-        public void showMenu4() {
-
-        }
-
-        ///////////////////////////////////////////////////// menu 5，显示章节目录。
-        @OnClick(R.id.ll_menu_5)
-        public void showMenu5() {
-
-        }
-
-        @BindView(R.id.bsb_1)
-        BubbleSeekBar bsb_1;
-
-        @BindView(R.id.tv_chapter_var2)
-        TextView tv_chapter_var2;
 
         @BindView(R.id.img_auto)
         ImageView img_auto;
 
+        ///////////////////////////////////////////////////// menu 3，设置画质。
+        @OnClick(R.id.ll_menu_3)
+        public void menu_3(View v) {
+            showMenuDefinition(v);
+        }
 
+        @BindView(R.id.img_definition)
+        ImageView img_definition;
+
+        public void showMenuDefinition(View v) {
+
+        }
+
+        public void closeMenuDefinition() {
+
+        }
+
+
+        // 流畅画质
+        public void setDefinitionLow() {
+            Definition = Definition_Low;
+            T.s("已切换到流畅画质");
+            notifyItemShoewRangeChanged();
+            img_definition.setImageResource(R.mipmap.ic_read_definition_low);
+            closeMenuDefinition();
+        }
+
+        // 标清画质
+        public void setDefinitionMiddle() {
+            Definition = Definition_Middle;
+            T.s("已切换到标清画质");
+            notifyItemShoewRangeChanged();
+            img_definition.setImageResource(R.mipmap.ic_read_definition_middle);
+            closeMenuDefinition();
+        }
+
+        // 高清画质
+        public void setDefinitionHigh() {
+            Definition = Definition_High;
+            T.s("已切换到高清画质");
+            notifyItemShoewRangeChanged();
+            img_definition.setImageResource(R.mipmap.ic_read_definition_high);
+            closeMenuDefinition();
+        }
+
+
+        ///////////////////////////////////////////////////// menu 4，设置亮度
+        @OnClick(R.id.ll_menu_4)
+        public void menu_4() {
+
+        }
+
+        @BindView(R.id.v_brightness)
+        View v_brightness;
+
+        ///////////////////////////////////////////////////// menu 5，显示章节目录。
+        @OnClick(R.id.ll_menu_5)
+        public void menu_5() {
+
+        }
+
+        @BindView(R.id.bsb_1)
+        BubbleSeekBar mBsb;
+
+        @BindView(R.id.tv_chapter_var2)
+        TextView tv_chapter_var2;
+
+
+        @Override
+        protected void initView() {
+            super.initView();
+            view.setVisibility(View.GONE);
+            View menuDefinitionView = mInflater.inflate(R.layout.layout_menu_definition, null);
+        }
+
+        // 标记mBsb是非被触碰。
+        private boolean isBsbOnTouch = false;
+
+        @Override
+        protected void initListener() {
+            super.initListener();
+            mBsb.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    switch (event.getAction()) {
+                        case MotionEvent.ACTION_DOWN:
+                        case MotionEvent.ACTION_MOVE:
+                            isBsbOnTouch = true;
+                            break;
+                        case MotionEvent.ACTION_UP:
+                        case MotionEvent.ACTION_CANCEL:
+                            isBsbOnTouch = false;
+                            break;
+
+                    }
+                    return false;
+                }
+            });
+            mBsb.setOnProgressChangedListener(new BubbleSeekBar.OnProgressChangedListener() {
+                @Override
+                public void onProgressChanged(BubbleSeekBar bubbleSeekBar, int progress, float progressFloat) {
+                    if (isBsbOnTouch) {// 被点击时，判断是否由于自身被触摸而引发的改变。
+                        progressChanged(progress);
+                    }
+                }
+
+                @Override
+                public void getProgressOnActionUp(BubbleSeekBar bubbleSeekBar, int progress, float progressFloat) {
+
+                }
+
+                @Override
+                public void getProgressOnFinally(BubbleSeekBar bubbleSeekBar, int progress, float progressFloat) {
+
+                }
+            });
+        }
+
+        public void setMenu(ComicBean comic) {
+            int max = comic.getVar_size();
+            int p = comic.getVar();
+
+            tv_chapter_name.setText(comic.getChapter_name());
+
+            String var = p + "/" + max;
+            tv_chapter_var.setText(var);
+            tv_chapter_var2.setText(var);
+
+            if (isBsbOnTouch) return;// bsb_1正在被点击时，不设置它。
+            mBsb.getConfigBuilder()
+                    .max(max)
+                    .min(1)
+                    .progress(p)
+                    .build();
+        }
+
+        // mBsb主动控制mRecyclerView滑动。
+        public void progressChanged(int p) {
+            // 滑很快的话，holder可能等于null。返回NO_POSITION=-1。
+            int a = mRecyclerView.getChildAdapterPosition(mRecyclerView.getChildAt(0));
+            if (a == -1) return;// 防止越界。
+            ComicBean comic = mData.get(a);
+            int var = comic.getVar();
+            int g = p - var;
+            if (g == 0) return;// 防止无意义操作。
+            int c = a + g;
+            scrollTo(c);
+        }
+
+
+        private boolean isShow = false;
+
+        public void show() {
+            if (isShow) return;
+            isShow = true;
+            view.setVisibility(View.VISIBLE);
+
+        }
+
+        public void close() {
+            if (!isShow) return;
+            isShow = false;
+            view.setVisibility(View.GONE);
+        }
     }
 }
