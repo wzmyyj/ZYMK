@@ -137,7 +137,7 @@ public class AceNestedScrollView extends NestedScrollView {
                 return true;
             case MotionEvent.ACTION_DOWN:
                 if (getScrollY() > mUpHeight) break;
-                handler.removeMessages(0);
+                handler.removeCallbacks(myRunnable);
                 break;
 
 
@@ -166,7 +166,7 @@ public class AceNestedScrollView extends NestedScrollView {
             if (Math.abs(a - b) < c) {
                 AceNestedScrollView.this.scrollTo(0, b);
                 isOpen = b == 0;
-                handler.removeMessages(0);
+                handler.removeCallbacks(myRunnable);
                 return;
             } else if (a > b) {
                 a -= c;
@@ -212,5 +212,11 @@ public class AceNestedScrollView extends NestedScrollView {
             mTab.setTranslationY(0);
         }
 
+    }
+
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        handler.removeCallbacks(myRunnable);
     }
 }

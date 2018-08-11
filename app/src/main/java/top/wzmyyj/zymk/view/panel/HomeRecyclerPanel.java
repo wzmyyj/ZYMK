@@ -47,6 +47,13 @@ public class HomeRecyclerPanel extends BaseRecyclerPanel<ItemBean, HomePresenter
         mPresenter.addEmptyData(mData);
     }
 
+
+    @Override
+    protected void initView() {
+        super.initView();
+        mRecyclerView.setOverScrollMode(View.OVER_SCROLL_NEVER);
+    }
+
     @Override
     protected void initEvent() {
         super.initEvent();

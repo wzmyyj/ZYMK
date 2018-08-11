@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SimpleItemAnimator;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.Animation;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -33,6 +34,7 @@ import top.wzmyyj.zymk.app.bean.ChapterBean;
 import top.wzmyyj.zymk.app.bean.ComicBean;
 import top.wzmyyj.zymk.app.tools.A;
 import top.wzmyyj.zymk.app.tools.G;
+import top.wzmyyj.zymk.common.utils.DensityUtil;
 import top.wzmyyj.zymk.presenter.ComicPresenter;
 import top.wzmyyj.zymk.view.panel.base.BasePanel;
 import top.wzmyyj.zymk.view.panel.base.BaseRecyclerPanel;
@@ -340,16 +342,52 @@ public class ComicRecyclerPanel extends BaseRecyclerPanel<ComicBean, ComicPresen
     }
 
     // mRecyclerView滑到指定position的位置。
-    public void scrollTo(int p) {
+    public void scrollToPosition(int p) {
         if (p < 0 || p > mData.size() - 1) return;// 防止越界。
         LinearLayoutManager mLayoutManager = (LinearLayoutManager) mRecyclerView.getLayoutManager();
         mLayoutManager.scrollToPositionWithOffset(p, 0);
+    }
+
+    private Handler handler = new Handler();
+    private MyRunnable myRunnable = new MyRunnable();
+
+    private class MyRunnable implements Runnable {
+
+        int a, b, c;
+
+        @Override
+        public void run() {
+            if (a >= b || !mRecyclerView.canScrollVertically(1)) {
+                a = b = c = 0;
+                handler.removeCallbacks(myRunnable);
+                return;
+            } else {
+                a += c;
+            }
+
+            int scroll = mRecyclerView.getScrollY();
+            mRecyclerView.scrollBy(0, scroll + c);
+            handler.postDelayed(myRunnable, speed);
+        }
+
+    }
+
+    private final long speed = 5;
+
+    @Override
+    public void onItemClick(View view, RecyclerView.ViewHolder holder, int position) {
+        super.onItemClick(view, holder, position);
+        myRunnable.a = 0;
+        myRunnable.b = DensityUtil.dp2px(context, 400);
+        myRunnable.c = DensityUtil.dp2px(context, 40);
+        handler.postDelayed(myRunnable, speed);
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
         mHandler.sendEmptyMessage(0);
+        handler.removeCallbacks(myRunnable);
     }
 
 
@@ -391,8 +429,32 @@ public class ComicRecyclerPanel extends BaseRecyclerPanel<ComicBean, ComicPresen
         ///////////////////////////////////////////////////// menu 2，设置自动滑动和停止。
         @OnClick(R.id.ll_menu_2)
         public void menu_2() {
+            if (isAuto) {
+                stopAuto();
+            } else {
+                startAuto();
+            }
+        }
+
+        private void startAuto() {
+            if (isAuto) return;
+            isAuto = true;
+            img_auto.setImageResource(R.mipmap.ic_read_stop);
+            myRunnable.a = 0;
+            myRunnable.b = Integer.MAX_VALUE;
+            myRunnable.c = DensityUtil.dp2px(context, 3);
+            handler.postDelayed(myRunnable, speed);
+        }
+
+        private void stopAuto() {
+            if (!isAuto) return;
+            isAuto = false;
+            img_auto.setImageResource(R.mipmap.ic_read_start);
+            myRunnable.b = 0;
 
         }
+
+        private boolean isAuto = false;
 
         @BindView(R.id.img_auto)
         ImageView img_auto;
@@ -418,14 +480,12 @@ public class ComicRecyclerPanel extends BaseRecyclerPanel<ComicBean, ComicPresen
 
         }
 
-        //        @OnClick(R.id.rl_definition)
         public void closeMenuDefinition() {
             if (!isShowMenuDefinition) return;
             isShowMenuDefinition = false;
             toggleMenuDefinition(300);
 
         }
-
 
         private boolean isShowMenuDefinition = false;
 
@@ -445,8 +505,23 @@ public class ComicRecyclerPanel extends BaseRecyclerPanel<ComicBean, ComicPresen
             A.create()
                     .t(0, 0, fromY, toY)
                     .a(fromA, toA)
-                    .fillAfter(true)
                     .duration(duration)
+                    .listener(new Animation.AnimationListener() {
+                        @Override
+                        public void onAnimationStart(Animation animation) {
+
+                        }
+
+                        @Override
+                        public void onAnimationEnd(Animation animation) {
+
+                        }
+
+                        @Override
+                        public void onAnimationRepeat(Animation animation) {
+                            if (!isShowMenuDefinition) ll_definition.setVisibility(View.GONE);
+                        }
+                    })
                     .into(ll_definition);
         }
 
@@ -487,11 +562,71 @@ public class ComicRecyclerPanel extends BaseRecyclerPanel<ComicBean, ComicPresen
         ///////////////////////////////////////////////////// menu 4，设置亮度
         @OnClick(R.id.ll_menu_4)
         public void menu_4() {
+            if (isShowMenuBrightness) {
+                closeMenuBrightness();
+            } else {
+                showMenuBrightness();
+            }
+        }
+
+        public void showMenuBrightness() {
+            if (isShowMenuBrightness) return;
+            isShowMenuBrightness = true;
+            toggleMenuBrightness(300);
 
         }
 
+        public void closeMenuBrightness() {
+            if (!isShowMenuBrightness) return;
+            isShowMenuBrightness = false;
+            toggleMenuBrightness(300);
+
+        }
+
+        private boolean isShowMenuBrightness = false;
+
+        private void toggleMenuBrightness(int duration) {
+            int h = ll_brightness.getHeight();
+            int fromY = 0, toY = 0;
+            float fromA = 1.0f, toA = 1.0f;
+            if (isShowMenuBrightness) {
+                fromY = -h / 2;
+                fromA = 0.0f;
+                ll_brightness.setVisibility(View.VISIBLE);
+            } else {
+                toY = -h / 2;
+                toA = 0.0f;
+                ll_brightness.setVisibility(View.GONE);
+            }
+            A.create()
+                    .t(0, 0, fromY, toY)
+                    .a(fromA, toA)
+                    .duration(duration)
+                    .listener(new Animation.AnimationListener() {
+                        @Override
+                        public void onAnimationStart(Animation animation) {
+
+                        }
+
+                        @Override
+                        public void onAnimationEnd(Animation animation) {
+
+                        }
+
+                        @Override
+                        public void onAnimationRepeat(Animation animation) {
+                            if (!isShowMenuBrightness) ll_brightness.setVisibility(View.GONE);
+                        }
+                    })
+                    .into(ll_brightness);
+        }
+
+        @BindView(R.id.ll_brightness)
+        LinearLayout ll_brightness;
         @BindView(R.id.v_brightness)
         View v_brightness;
+        @BindView(R.id.bsb_brightness)
+        BubbleSeekBar bsb_brightness;
 
         ///////////////////////////////////////////////////// menu 5，显示章节目录。
         @OnClick(R.id.ll_menu_5)
@@ -501,6 +636,7 @@ public class ComicRecyclerPanel extends BaseRecyclerPanel<ComicBean, ComicPresen
 
         private void closeAllMenu() {
             closeMenuDefinition();
+            closeMenuBrightness();
         }
 
         @BindView(R.id.bsb_1)
@@ -515,6 +651,7 @@ public class ComicRecyclerPanel extends BaseRecyclerPanel<ComicBean, ComicPresen
             fl_top.setVisibility(View.INVISIBLE);
             ll_bottom.setVisibility(View.INVISIBLE);
             ll_definition.setVisibility(View.INVISIBLE);
+            ll_brightness.setVisibility(View.INVISIBLE);
         }
 
         // 标记mBsb是非被触碰。
@@ -558,6 +695,22 @@ public class ComicRecyclerPanel extends BaseRecyclerPanel<ComicBean, ComicPresen
 
                 }
             });
+
+            bsb_brightness.setOnProgressChangedListener(new BubbleSeekBar.OnProgressChangedListener() {
+                @Override
+                public void onProgressChanged(BubbleSeekBar bubbleSeekBar, int progress, float progressFloat) {
+                    v_brightness.setAlpha(1 - progressFloat);
+                }
+
+                @Override
+                public void getProgressOnActionUp(BubbleSeekBar bubbleSeekBar, int progress, float progressFloat) {
+                }
+
+                @Override
+                public void getProgressOnFinally(BubbleSeekBar bubbleSeekBar, int progress, float progressFloat) {
+
+                }
+            });
         }
 
         public void setMenu(ComicBean comic) {
@@ -589,7 +742,7 @@ public class ComicRecyclerPanel extends BaseRecyclerPanel<ComicBean, ComicPresen
             int g = p - var;
             if (g == 0) return;// 防止无意义操作。
             int c = a + g;
-            scrollTo(c);
+            scrollToPosition(c);
         }
 
 
@@ -626,14 +779,44 @@ public class ComicRecyclerPanel extends BaseRecyclerPanel<ComicBean, ComicPresen
             }
             A.create()
                     .t(0, 0, fromY1, toY1)
-                    .fillAfter(true)
                     .duration(duration)
+                    .listener(new Animation.AnimationListener() {
+                        @Override
+                        public void onAnimationStart(Animation animation) {
+
+                        }
+
+                        @Override
+                        public void onAnimationEnd(Animation animation) {
+
+                        }
+
+                        @Override
+                        public void onAnimationRepeat(Animation animation) {
+                            if (!isShow) fl_top.setVisibility(View.GONE);
+                        }
+                    })
                     .into(fl_top);
 
             A.create()
                     .t(0, 0, fromY2, toY2)
-                    .fillAfter(true)
                     .duration(duration)
+                    .listener(new Animation.AnimationListener() {
+                        @Override
+                        public void onAnimationStart(Animation animation) {
+
+                        }
+
+                        @Override
+                        public void onAnimationEnd(Animation animation) {
+
+                        }
+
+                        @Override
+                        public void onAnimationRepeat(Animation animation) {
+                            if (!isShow) ll_bottom.setVisibility(View.GONE);
+                        }
+                    })
                     .into(ll_bottom);
         }
     }

@@ -237,15 +237,14 @@
 
     <include layout="@layout/layout_menu_definition" />
 
+    <include layout="@layout/layout_menu_brightness" />
 
     <View
-        android:visibility="gone"
         android:id="@+id/v_brightness"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:alpha="0"
-        android:background="@color/colorAhp_Black_e"
-        android:clickable="false" />
+        android:background="@color/colorAhp_Black_d" />
 
 
 </FrameLayout>

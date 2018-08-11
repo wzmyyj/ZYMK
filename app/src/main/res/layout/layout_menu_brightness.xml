@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ll_brightness"
+    android:layout_width="180dp"
+    android:layout_height="100dp"
+    android:layout_gravity="center"
+    android:background="@drawable/bg_menu"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <com.xw.repo.BubbleSeekBar
+        android:id="@+id/bsb_brightness"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_weight="1"
+        app:bsb_bubble_color="@color/colorPrimary"
+        app:bsb_max="1"
+        app:bsb_min="0"
+        app:bsb_progress="1"
+        app:bsb_second_track_size="1dp"
+        app:bsb_thumb_color="@color/colorPrimary"
+        app:bsb_track_color="@color/colorGray_b"
+        app:bsb_track_size="1.5dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:gravity="center"
+        android:text="调整亮度"
+        android:textColor="@color/colorWhite"
+        android:textSize="15sp" />
+
+
+</LinearLayout>
