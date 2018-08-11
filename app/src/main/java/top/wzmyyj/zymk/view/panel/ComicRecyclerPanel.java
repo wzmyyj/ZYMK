@@ -10,11 +10,9 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SimpleItemAnimator;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.animation.Animation;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.xw.repo.BubbleSeekBar;
@@ -405,17 +403,53 @@ public class ComicRecyclerPanel extends BaseRecyclerPanel<ComicBean, ComicPresen
         ImageView img_definition;
 
         @OnClick(R.id.ll_menu_3)
-        public void showMenuDefinition(View v) {
+        public void menu_3() {
+            if (isShowMenuDefinition) {
+                closeMenuDefinition();
+            } else {
+                showMenuDefinition();
+            }
+        }
+
+        public void showMenuDefinition() {
+            if (isShowMenuDefinition) return;
+            isShowMenuDefinition = true;
+            toggleMenuDefinition(300);
 
         }
 
-        @OnClick(R.id.rl_definition)
+        //        @OnClick(R.id.rl_definition)
         public void closeMenuDefinition() {
+            if (!isShowMenuDefinition) return;
+            isShowMenuDefinition = false;
+            toggleMenuDefinition(300);
 
         }
 
-        @BindView(R.id.rl_definition)
-        RelativeLayout rl_definition;
+
+        private boolean isShowMenuDefinition = false;
+
+        private void toggleMenuDefinition(int duration) {
+            int h = ll_definition.getHeight();
+            int fromY = 0, toY = 0;
+            float fromA = 1.0f, toA = 1.0f;
+            if (isShowMenuDefinition) {
+                fromY = -h / 2;
+                fromA = 0.0f;
+                ll_definition.setVisibility(View.VISIBLE);
+            } else {
+                toY = -h / 2;
+                toA = 0.0f;
+                ll_definition.setVisibility(View.GONE);
+            }
+            A.create()
+                    .t(0, 0, fromY, toY)
+                    .a(fromA, toA)
+                    .fillAfter(true)
+                    .duration(duration)
+                    .into(ll_definition);
+        }
+
         @BindView(R.id.ll_definition)
         LinearLayout ll_definition;
 
@@ -465,6 +499,10 @@ public class ComicRecyclerPanel extends BaseRecyclerPanel<ComicBean, ComicPresen
 
         }
 
+        private void closeAllMenu() {
+            closeMenuDefinition();
+        }
+
         @BindView(R.id.bsb_1)
         BubbleSeekBar mBsb;
 
@@ -476,7 +514,7 @@ public class ComicRecyclerPanel extends BaseRecyclerPanel<ComicBean, ComicPresen
             super.initView();
             fl_top.setVisibility(View.INVISIBLE);
             ll_bottom.setVisibility(View.INVISIBLE);
-            rl_definition.setVisibility(View.GONE);
+            ll_definition.setVisibility(View.INVISIBLE);
         }
 
         // 标记mBsb是非被触碰。
@@ -536,6 +574,7 @@ public class ComicRecyclerPanel extends BaseRecyclerPanel<ComicBean, ComicPresen
             mBsb.getConfigBuilder()
                     .max(max)
                     .min(1)
+                    .sectionCount(1)
                     .progress(p)
                     .build();
         }
@@ -566,11 +605,10 @@ public class ComicRecyclerPanel extends BaseRecyclerPanel<ComicBean, ComicPresen
             if (!isShow) return;
             isShow = false;
             toggleMenu(300);
+            closeAllMenu();
         }
 
         private void toggleMenu(int duration) {
-            fl_top.setVisibility(View.VISIBLE);
-            ll_bottom.setVisibility(View.VISIBLE);
             int th = fl_top.getHeight();
             int bh = ll_bottom.getHeight();
 
@@ -578,54 +616,24 @@ public class ComicRecyclerPanel extends BaseRecyclerPanel<ComicBean, ComicPresen
             if (isShow) {
                 fromY1 = -th;
                 fromY2 = bh;
+                fl_top.setVisibility(View.VISIBLE);
+                ll_bottom.setVisibility(View.VISIBLE);
             } else {
                 toY1 = -th;
                 toY2 = bh;
+                fl_top.setVisibility(View.GONE);
+                ll_bottom.setVisibility(View.GONE);
             }
             A.create()
                     .t(0, 0, fromY1, toY1)
                     .fillAfter(true)
                     .duration(duration)
-                    .listener(new Animation.AnimationListener() {
-                        @Override
-                        public void onAnimationStart(Animation animation) {
-
-                        }
-
-                        @Override
-                        public void onAnimationEnd(Animation animation) {
-
-                        }
-
-                        @Override
-                        public void onAnimationRepeat(Animation animation) {
-                            if (!isShow)
-                                fl_top.setVisibility(View.GONE);
-                        }
-                    })
                     .into(fl_top);
 
             A.create()
                     .t(0, 0, fromY2, toY2)
                     .fillAfter(true)
                     .duration(duration)
-                    .listener(new Animation.AnimationListener() {
-                        @Override
-                        public void onAnimationStart(Animation animation) {
-
-                        }
-
-                        @Override
-                        public void onAnimationEnd(Animation animation) {
-
-                        }
-
-                        @Override
-                        public void onAnimationRepeat(Animation animation) {
-                            if (!isShow)
-                                ll_bottom.setVisibility(View.GONE);
-                        }
-                    })
                     .into(ll_bottom);
         }
     }
