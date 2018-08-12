@@ -11,6 +11,7 @@ import io.reactivex.disposables.Disposable;
 import top.wzmyyj.zymk.app.bean.ChapterBean;
 import top.wzmyyj.zymk.app.bean.ComicBean;
 import top.wzmyyj.zymk.app.data.Urls;
+import top.wzmyyj.zymk.app.tools.I;
 import top.wzmyyj.zymk.model.net.ComicModel;
 import top.wzmyyj.zymk.model.net.box.ComicBox;
 import top.wzmyyj.zymk.presenter.base.BasePresenter;
@@ -103,5 +104,13 @@ public class ComicPresenter extends BasePresenter<IComicView> {
         comic.setVar_size(1);
         comicList.add(comic);
         return comicList;
+    }
+
+    public void goDetails(String href) {
+        if (href.contains(Urls.ZYMK_Base)) {
+            I.toDetailsActivity2(mActivity, href);
+        } else {
+            I.toBrowser(mActivity, href);
+        }
     }
 }

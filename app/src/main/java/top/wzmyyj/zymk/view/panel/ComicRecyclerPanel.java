@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.xw.repo.BubbleSeekBar;
+import com.zhy.adapter.recyclerview.CommonAdapter;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
 
 import java.util.ArrayList;
@@ -35,6 +36,7 @@ import top.wzmyyj.zymk.app.bean.ComicBean;
 import top.wzmyyj.zymk.app.tools.A;
 import top.wzmyyj.zymk.app.tools.G;
 import top.wzmyyj.zymk.common.utils.DensityUtil;
+import top.wzmyyj.zymk.common.utils.MockUtil;
 import top.wzmyyj.zymk.presenter.ComicPresenter;
 import top.wzmyyj.zymk.view.panel.base.BasePanel;
 import top.wzmyyj.zymk.view.panel.base.BaseRecyclerPanel;
@@ -151,16 +153,19 @@ public class ComicRecyclerPanel extends BaseRecyclerPanel<ComicBean, ComicPresen
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
 
-                if (dy > 10) {
-                    mMeunPanel.close();
-                } else if (dy < -10) {
-                    mMeunPanel.show();
+                if (!mMeunPanel.isAuto) {
+                    if (dy > 10) {
+                        mMeunPanel.closeMenu();
+                    } else if (dy < -10) {
+                        mMeunPanel.showMenu();
+                    }
                 }
 
                 int p = mRecyclerView.getChildAdapterPosition(mRecyclerView.getChildAt(0));
 
-                if (p == load_position_now) return;
+                if (p == -1 || p == load_position_now) return;
                 load_position_now = p;
+                mChapterId = mData.get(p).getChapter_id();
                 mMeunPanel.setMenu(mData.get(p));
                 if (load_position_now < 3) {
                     mHandler.sendEmptyMessage(1);
@@ -377,9 +382,20 @@ public class ComicRecyclerPanel extends BaseRecyclerPanel<ComicBean, ComicPresen
     @Override
     public void onItemClick(View view, RecyclerView.ViewHolder holder, int position) {
         super.onItemClick(view, holder, position);
+        if (mMeunPanel.isShowMenuDefinition
+                || mMeunPanel.isShowMenuBrightness
+                || mMeunPanel.isShowMenuCatalog) {// 有子菜单打开先关闭子菜单。
+            mMeunPanel.closeAllMenu();
+            return;
+        }
+
+        if (mMeunPanel.isAuto) {// 自动播放时。
+            mMeunPanel.changeMenu();
+            return;
+        }
         myRunnable.a = 0;
-        myRunnable.b = DensityUtil.dp2px(context, 400);
-        myRunnable.c = DensityUtil.dp2px(context, 40);
+        myRunnable.b = MockUtil.getScreenHeight(context) / 2;
+        myRunnable.c = MockUtil.getScreenHeight(context) / 20;
         handler.postDelayed(myRunnable, speed);
     }
 
@@ -436,19 +452,28 @@ public class ComicRecyclerPanel extends BaseRecyclerPanel<ComicBean, ComicPresen
             }
         }
 
+        @BindView(R.id.ll_auto)
+        LinearLayout ll_auto;
+        @BindView(R.id.bsb_auto)
+        BubbleSeekBar bsb_auto;
+
         private void startAuto() {
             if (isAuto) return;
             isAuto = true;
+            ll_auto.setVisibility(View.VISIBLE);
+            ll_progress.setVisibility(View.GONE);
             img_auto.setImageResource(R.mipmap.ic_read_stop);
             myRunnable.a = 0;
             myRunnable.b = Integer.MAX_VALUE;
-            myRunnable.c = DensityUtil.dp2px(context, 3);
+            myRunnable.c = DensityUtil.dp2px(context, bsb_auto.getProgressFloat() * 3);
             handler.postDelayed(myRunnable, speed);
         }
 
         private void stopAuto() {
             if (!isAuto) return;
             isAuto = false;
+            ll_auto.setVisibility(View.GONE);
+            ll_progress.setVisibility(View.VISIBLE);
             img_auto.setImageResource(R.mipmap.ic_read_start);
             myRunnable.b = 0;
 
@@ -631,14 +656,111 @@ public class ComicRecyclerPanel extends BaseRecyclerPanel<ComicBean, ComicPresen
         ///////////////////////////////////////////////////// menu 5，显示章节目录。
         @OnClick(R.id.ll_menu_5)
         public void menu_5() {
+            if (!isShowMenuCatalog) {
+                closeMenu();
+                showMenuCatalog();
+            }
+        }
+
+        public void showMenuCatalog() {
+            if (isShowMenuCatalog) return;
+            isShowMenuCatalog = true;
+            toggleMenuCatalog(300);
 
         }
 
+        public void closeMenuCatalog() {
+            if (!isShowMenuCatalog) return;
+            isShowMenuCatalog = false;
+            toggleMenuCatalog(300);
+
+        }
+
+        private boolean isShowMenuCatalog = false;
+
+        private void toggleMenuCatalog(int duration) {
+            int w = ll_catalog.getWidth();
+            int fromX = 0, toX = 0;
+            if (isShowMenuCatalog) {
+                fromX = w;
+                ll_catalog.setVisibility(View.VISIBLE);
+            } else {
+                toX = w;
+                ll_catalog.setVisibility(View.GONE);
+            }
+            A.create()
+                    .t(fromX, toX, 0, 0)
+                    .duration(duration)
+                    .listener(new Animation.AnimationListener() {
+                        @Override
+                        public void onAnimationStart(Animation animation) {
+
+                        }
+
+                        @Override
+                        public void onAnimationEnd(Animation animation) {
+
+                        }
+
+                        @Override
+                        public void onAnimationRepeat(Animation animation) {
+                            if (!isShowMenuCatalog) ll_catalog.setVisibility(View.GONE);
+                        }
+                    })
+                    .into(ll_catalog);
+        }
+
+        @BindView(R.id.ll_catalog)
+        LinearLayout ll_catalog;
+
+        @OnClick({R.id.img_catalog_all, R.id.tv_catalog_all})
+        public void catalog_all() {
+            mPresenter.goDetails(mBook.getHref());
+            mPresenter.finish();
+        }
+
+
+        @BindView(R.id.img_catalog_xu)
+        ImageView img_catalog_xu;
+        @BindView(R.id.tv_catalog_xu)
+        TextView tv_catalog_xu;
+        private int xu = 1;
+
+        @OnClick({R.id.img_catalog_xu, R.id.tv_catalog_xu})
+        public void catalog_xu() {
+            if (xu == 1) {
+                // 转为倒序。
+                xu = -1;
+                img_catalog_xu.setImageResource(R.mipmap.ic_read_catalog_reverse);
+                tv_catalog_xu.setText("倒序");
+
+
+            } else {
+                // 转为正序。
+                xu = 1;
+                img_catalog_xu.setImageResource(R.mipmap.ic_read_catalog_order);
+                tv_catalog_xu.setText("正序");
+
+
+            }
+
+        }
+
+        @BindView(R.id.rv_catalog)
+        RecyclerView rv_catalog;
+
+        List<ChapterBean> mCatalogChapterList = new ArrayList<>();
+        CommonAdapter mCatalogAdapter;
+
+        ////////////////////////////////////////////////////// 总菜单
         private void closeAllMenu() {
             closeMenuDefinition();
             closeMenuBrightness();
+            closeMenuCatalog();
         }
 
+        @BindView(R.id.ll_progress)
+        LinearLayout ll_progress;
         @BindView(R.id.bsb_1)
         BubbleSeekBar mBsb;
 
@@ -652,6 +774,14 @@ public class ComicRecyclerPanel extends BaseRecyclerPanel<ComicBean, ComicPresen
             ll_bottom.setVisibility(View.INVISIBLE);
             ll_definition.setVisibility(View.INVISIBLE);
             ll_brightness.setVisibility(View.INVISIBLE);
+            ll_catalog.setVisibility(View.INVISIBLE);
+        }
+
+        @Override
+        protected void initData() {
+            super.initData();
+            rv_catalog.setLayoutManager(new LinearLayoutManager(context));
+
         }
 
         // 标记mBsb是非被触碰。
@@ -695,6 +825,22 @@ public class ComicRecyclerPanel extends BaseRecyclerPanel<ComicBean, ComicPresen
 
                 }
             });
+            bsb_auto.setOnProgressChangedListener(new BubbleSeekBar.OnProgressChangedListener() {
+                @Override
+                public void onProgressChanged(BubbleSeekBar bubbleSeekBar, int progress, float progressFloat) {
+
+                }
+
+                @Override
+                public void getProgressOnActionUp(BubbleSeekBar bubbleSeekBar, int progress, float progressFloat) {
+                    myRunnable.c = DensityUtil.dp2px(context, (float) 3 * progressFloat);
+                }
+
+                @Override
+                public void getProgressOnFinally(BubbleSeekBar bubbleSeekBar, int progress, float progressFloat) {
+
+                }
+            });
 
             bsb_brightness.setOnProgressChangedListener(new BubbleSeekBar.OnProgressChangedListener() {
                 @Override
@@ -727,7 +873,6 @@ public class ComicRecyclerPanel extends BaseRecyclerPanel<ComicBean, ComicPresen
             mBsb.getConfigBuilder()
                     .max(max)
                     .min(1)
-                    .sectionCount(1)
                     .progress(p)
                     .build();
         }
@@ -748,17 +893,25 @@ public class ComicRecyclerPanel extends BaseRecyclerPanel<ComicBean, ComicPresen
 
         private boolean isShow = false;
 
-        public void show() {
+        public void showMenu() {
             if (isShow) return;
             isShow = true;
             toggleMenu(300);
         }
 
-        public void close() {
+        public void closeMenu() {
             if (!isShow) return;
             isShow = false;
             toggleMenu(300);
             closeAllMenu();
+        }
+
+        public void changeMenu() {
+            if (isShow) {
+                closeMenu();
+            } else {
+                showMenu();
+            }
         }
 
         private void toggleMenu(int duration) {

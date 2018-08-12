@@ -50,6 +50,53 @@
         android:orientation="vertical">
 
         <LinearLayout
+            android:id="@+id/ll_auto"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:gravity="center"
+                android:text="慢"
+                android:textColor="@color/colorGray_e"
+                android:textSize="14sp" />
+
+            <com.xw.repo.BubbleSeekBar
+                android:id="@+id/bsb_auto"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="2dp"
+                android:layout_weight="1"
+                app:bsb_bubble_color="@color/colorBlue"
+                app:bsb_max="1.5"
+                app:bsb_min="0.5"
+                app:bsb_progress="1"
+                app:bsb_second_track_color="@color/colorBlue"
+                app:bsb_second_track_size="1dp"
+                app:bsb_thumb_color="@color/colorBlue"
+                app:bsb_track_color="@color/colorGray_b"
+                app:bsb_track_size="1.5dp" />
+
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:gravity="center"
+                android:text="快"
+                android:textColor="@color/colorGray_e"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/ll_progress"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:gravity="center_vertical"
@@ -70,7 +117,9 @@
                 android:layout_marginTop="2dp"
                 android:layout_weight="1"
                 app:bsb_bubble_color="@color/colorPrimary"
+                app:bsb_second_track_color="@color/colorPrimary"
                 app:bsb_second_track_size="1dp"
+                app:bsb_section_count="1"
                 app:bsb_thumb_color="@color/colorPrimary"
                 app:bsb_track_color="@color/colorGray_b"
                 app:bsb_track_size="1.5dp" />
@@ -238,6 +287,8 @@
     <include layout="@layout/layout_menu_definition" />
 
     <include layout="@layout/layout_menu_brightness" />
+
+    <include layout="@layout/layout_menu_catalog" />
 
     <View
         android:id="@+id/v_brightness"

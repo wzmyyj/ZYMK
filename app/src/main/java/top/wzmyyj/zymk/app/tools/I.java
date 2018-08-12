@@ -50,6 +50,13 @@ public class I {
         context.startActivity(intent);
     }
 
+    public static void toDetailsActivity2(Context context, String href) {
+        Intent intent = new Intent(context, DetailsActivity.class);
+        intent.putExtra("href", href);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        context.startActivity(intent);
+    }
+
     public static void toNewActivity(Context context) {
         Intent intent = new Intent(context, NewActivity.class);
         context.startActivity(intent);

@@ -65,15 +65,16 @@ public class G {
 
         final DiskCacheStrategy cache = DiskCacheStrategy.NONE;
         final int ScreenWidth = MockUtil.getScreenWidth(context);
-        Glide.with(context)
+        GlideApp.with(context)
                 .asBitmap()//强制Glide返回一个Bitmap对象
                 .load(url)
+                .placeholder(R.mipmap.ico_p)
                 .listener(new RequestListener<Bitmap>() {
                     @Override
                     public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Bitmap> target, boolean isFirstResource) {
                         float scale = 1.0f;
                         img.setLayoutParams(new RelativeLayout.LayoutParams(ScreenWidth, (int) (scale * ScreenWidth)));
-                        Glide.with(context)
+                        GlideApp.with(context)
                                 .load(R.mipmap.pic_fail)
                                 .into(img);
                         img.setOnClickListener(new View.OnClickListener() {
@@ -87,6 +88,7 @@ public class G {
 
                     @Override
                     public boolean onResourceReady(Bitmap resource, Object model, Target<Bitmap> target, DataSource dataSource, boolean isFirstResource) {
+                        img.setClickable(false);
                         return false;
                     }
                 })
@@ -110,7 +112,7 @@ public class G {
 
     public static void imgfix(final Context context, final int res_id, final ImageView img) {
         final int ScreenWidth = MockUtil.getScreenWidth(context);
-        Glide.with(context)
+        GlideApp.with(context)
                 .asBitmap()//强制Glide返回一个Bitmap对象
                 .load(res_id)
                 .into(new SimpleTarget<Bitmap>() {
