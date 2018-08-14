@@ -339,7 +339,6 @@ public class DocUtil {
                 .attr("data-id"));
         String data_src = ci.getElementsByTag("img").get(0).attr("data-src");
 
-        String comic_href = mk.getElementsByClass("read").get(0).absUrl("href");
         String star = mk.getElementsByClass("ift-xing").text();
         String ift = mk.getElementsByClass("hasread").text();
         Elements tags = mk.getElementsByClass("tags");
@@ -356,7 +355,6 @@ public class DocUtil {
         mainBook.setStar(star);
         mainBook.setIft(ift);
         mainBook.setData_src(data_src);
-        mainBook.setComic_href(comic_href);
         mainBook.setTags(ts);
 
 

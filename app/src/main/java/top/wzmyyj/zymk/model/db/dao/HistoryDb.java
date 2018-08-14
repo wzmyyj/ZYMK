@@ -14,15 +14,15 @@ public class HistoryDb {
     private String title;
     private long history_chapter_id;
     private String history_chapter_name;
-    private long time;
-    @Generated(hash = 198267613)
+    private long history_read_time;
+    @Generated(hash = 673569480)
     public HistoryDb(int id, String title, long history_chapter_id,
-            String history_chapter_name, long time) {
+            String history_chapter_name, long history_read_time) {
         this.id = id;
         this.title = title;
         this.history_chapter_id = history_chapter_id;
         this.history_chapter_name = history_chapter_name;
-        this.time = time;
+        this.history_read_time = history_read_time;
     }
     @Generated(hash = 1549631443)
     public HistoryDb() {
@@ -32,6 +32,12 @@ public class HistoryDb {
     }
     public void setId(int id) {
         this.id = id;
+    }
+    public String getTitle() {
+        return this.title;
+    }
+    public void setTitle(String title) {
+        this.title = title;
     }
     public long getHistory_chapter_id() {
         return this.history_chapter_id;
@@ -45,18 +51,14 @@ public class HistoryDb {
     public void setHistory_chapter_name(String history_chapter_name) {
         this.history_chapter_name = history_chapter_name;
     }
-    public String getTitle() {
-        return this.title;
+    public long getHistory_read_time() {
+        return this.history_read_time;
     }
-    public void setTitle(String title) {
-        this.title = title;
+    public void setHistory_read_time(long history_read_time) {
+        this.history_read_time = history_read_time;
     }
-    public long getTime() {
-        return this.time;
-    }
-    public void setTime(long time) {
-        this.time = time;
-    }
+
+
 
     
 }

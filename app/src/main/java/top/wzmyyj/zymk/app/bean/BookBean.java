@@ -14,13 +14,14 @@ public class BookBean {
     private String title;
     private String data_src;
     private String star;
-    private String chapter;
-    private String comic_href;
     private String desc;
     private String num;
     private String ift;
     private String author;
     private long update_time;
+
+    private String chapter;// 最新章节name
+    private long chapter_id;// 最新章节ID
 
     private List<String> tags;
 
@@ -134,11 +135,12 @@ public class BookBean {
         this.author = author;
     }
 
-    public String getComic_href() {
-        return comic_href;
+
+    public long getChapter_id() {
+        return chapter_id;
     }
 
-    public void setComic_href(String comic_href) {
-        this.comic_href = comic_href;
+    public void setChapter_id(long chapter_id) {
+        this.chapter_id = chapter_id;
     }
 }

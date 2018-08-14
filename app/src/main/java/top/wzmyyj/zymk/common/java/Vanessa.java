@@ -7,6 +7,7 @@ import java.util.Date;
 /**
  * Created by yyj on 2018/04/26. email: 2209011667@qq.com
  * Vanessa 凡妮莎，第八个七骑士，拥有控制时间的沙漏和魔法。
+ * 时间转换工具类。
  */
 
 
@@ -45,6 +46,31 @@ public class Vanessa {
             SimpleDateFormat sdf = new SimpleDateFormat("MM-dd HH:mm");
             s = sdf.format(new Date(l));
         }
+        return s;
+    }
+
+    public static String getEasyText(long l) {
+        Date d = new Date();
+        String s;
+        long t = Math.abs(d.getTime() - l);
+        if (t <= 5 * 60 * 1000) {
+            s = "刚刚";
+        } else if (t < 60 * 60 * 1000) {
+            int a = (int) (t / (60 * 1000));
+            s = a + "分钟前";
+        } else if (t < 24 * 60 * 60 * 1000) {
+            int a = (int) (t / (60 * 60 * 1000));
+            s = a + "小时前";
+        } else if (t < 30 * 24 * 60 * 60 * 1000) {
+            int a = (int) (t / (24 * 60 * 60 * 1000));
+            s = a + "天前";
+        } else if (t < 12 * 30 * 24 * 60 * 60 * 1000){
+            int a = (int) (t / (30 *24 * 60 * 60 * 1000));
+            s = a + "个月前";
+        }else{
+            s="很久以前";
+        }
+
         return s;
     }
 }
