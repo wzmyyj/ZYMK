@@ -6,14 +6,14 @@
     android:layout_height="match_parent"
     android:layout_gravity="right"
     android:background="@color/colorAhp_Black"
-    android:orientation="vertical"
-    android:padding="5dp">
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="5dp">
 
         <ImageView
             android:id="@+id/img_catalog_all"

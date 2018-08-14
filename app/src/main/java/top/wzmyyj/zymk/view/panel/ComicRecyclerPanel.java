@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.xw.repo.BubbleSeekBar;
 import com.zhy.adapter.recyclerview.CommonAdapter;
+import com.zhy.adapter.recyclerview.MultiItemTypeAdapter;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
 
 import java.util.ArrayList;
@@ -44,6 +45,7 @@ import top.wzmyyj.zymk.view.panel.base.BaseRecyclerPanel;
 
 /**
  * Created by yyj on 2018/08/06. email: 2209011667@qq.com
+ * 漫画阅读主页面。
  */
 
 public class ComicRecyclerPanel extends BaseRecyclerPanel<ComicBean, ComicPresenter> {
@@ -127,7 +129,6 @@ public class ComicRecyclerPanel extends BaseRecyclerPanel<ComicBean, ComicPresen
                     G.imgfix(context, R.mipmap.pic_need_money, img_comic);
                 }
 
-
             }
         });
     }
@@ -140,7 +141,6 @@ public class ComicRecyclerPanel extends BaseRecyclerPanel<ComicBean, ComicPresen
         }
         super.viewRecycled(holder);
     }
-
 
     @Override
     protected void initListener() {
@@ -165,8 +165,14 @@ public class ComicRecyclerPanel extends BaseRecyclerPanel<ComicBean, ComicPresen
 
                 if (p == -1 || p == load_position_now) return;
                 load_position_now = p;
-                mChapterId = mData.get(p).getChapter_id();
+
                 mMeunPanel.setMenu(mData.get(p));
+
+                if (mChapterId != mData.get(p).getChapter_id()) {
+                    mChapterId = mData.get(p).getChapter_id();
+                    mMeunPanel.scrollCatalog();
+                }
+
                 if (load_position_now < 3) {
                     mHandler.sendEmptyMessage(1);
                 } else if (load_position_now > mData.size() - 5) {
@@ -218,6 +224,7 @@ public class ComicRecyclerPanel extends BaseRecyclerPanel<ComicBean, ComicPresen
         if (w == -1) {
             return null;
         }
+
         BookBean book = (BookBean) objects[0];
         if (book != null) {
             mBook = book;
@@ -241,9 +248,22 @@ public class ComicRecyclerPanel extends BaseRecyclerPanel<ComicBean, ComicPresen
             mComicList.addAll(comicList);
         }
 
+        addEnd();
         addOnce();
         mHandler.sendEmptyMessageDelayed(1, 500);
+
+        mMeunPanel.setCatalogChapterList(chapterList);
         return super.f(w, objects);
+    }
+
+    // 增加最后结束语。
+    private void addEnd() {
+        ComicBean comic = new ComicBean();//增加一张结束语。
+        comic.setChapter_id(-1);
+        comic.setVar(1);
+        comic.setVar_size(1);
+        mComicList.add(comic);
+        mChapterList.add(new ChapterBean(-1));//增加一章结束语。
     }
 
     // 第一次添加数据。
@@ -337,6 +357,23 @@ public class ComicRecyclerPanel extends BaseRecyclerPanel<ComicBean, ComicPresen
 
     }
 
+    // 前往指定的章节。
+    private void goChChapterById(long id) {
+        int p = -1;
+        for (int i = 0; i < mData.size(); i++) {// mData中查找指定章节。
+            if (mData.get(i).getChapter_id() == id) {
+                p = i;
+                break;
+            }
+        }
+        if (p == -1) {// mData中没有所需章节。
+            addOnce();
+            return;
+        }
+        // 滑到指定章节。
+        scrollToPosition(p);
+    }
+
 
     public void notifyItemShoewRangeChanged() {
         // 只刷新当前显示的item，防止图片跳闪。
@@ -382,26 +419,21 @@ public class ComicRecyclerPanel extends BaseRecyclerPanel<ComicBean, ComicPresen
     @Override
     public void onItemClick(View view, RecyclerView.ViewHolder holder, int position) {
         super.onItemClick(view, holder, position);
-        if (mMeunPanel.isShowMenuDefinition
-                || mMeunPanel.isShowMenuBrightness
-                || mMeunPanel.isShowMenuCatalog) {// 有子菜单打开先关闭子菜单。
-            mMeunPanel.closeAllMenu();
-            return;
-        }
+        mMeunPanel.clickSome();
+//        T.s(mData.get(position).getChapter_name() + ":" + mData.get(position).getVar());
+    }
 
-        if (mMeunPanel.isAuto) {// 自动播放时。
-            mMeunPanel.changeMenu();
-            return;
-        }
-        myRunnable.a = 0;
-        myRunnable.b = MockUtil.getScreenHeight(context) / 2;
-        myRunnable.c = MockUtil.getScreenHeight(context) / 20;
-        handler.postDelayed(myRunnable, speed);
+    @Override
+    public void onStop() {
+        super.onStop();
+        // 保存阅读记录。
+        mPresenter.saveHistory(mBook, mChapterId);
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
+        // 移除消息。
         mHandler.sendEmptyMessage(0);
         handler.removeCallbacks(myRunnable);
     }
@@ -665,6 +697,7 @@ public class ComicRecyclerPanel extends BaseRecyclerPanel<ComicBean, ComicPresen
         public void showMenuCatalog() {
             if (isShowMenuCatalog) return;
             isShowMenuCatalog = true;
+            scrollCatalog();
             toggleMenuCatalog(300);
 
         }
@@ -674,6 +707,27 @@ public class ComicRecyclerPanel extends BaseRecyclerPanel<ComicBean, ComicPresen
             isShowMenuCatalog = false;
             toggleMenuCatalog(300);
 
+        }
+
+        public void setCatalogChapterList(List<ChapterBean> list) {
+            mCatalogChapterList.clear();
+            mCatalogChapterList.addAll(list);
+            mCatalogAdapter.notifyDataSetChanged();
+        }
+
+        public void scrollCatalog() {
+            mCatalogAdapter.notifyDataSetChanged();
+            int j = mCatalogChapterList.size() - 1;
+            for (int i = 0; i < mCatalogChapterList.size(); i++) {
+                if (mCatalogChapterList.get(i).getChapter_id() == mChapterId) {
+                    j = i;
+                    break;
+                }
+            }
+            int p = j - 3 > 0 ? j - 3 : 0;
+            if (p < 0 || p > mCatalogChapterList.size() - 1) return;// 防止越界。
+            LinearLayoutManager mLayoutManager = (LinearLayoutManager) rv_catalog.getLayoutManager();
+            mLayoutManager.scrollToPositionWithOffset(p, 0);
         }
 
         private boolean isShowMenuCatalog = false;
@@ -753,7 +807,7 @@ public class ComicRecyclerPanel extends BaseRecyclerPanel<ComicBean, ComicPresen
         CommonAdapter mCatalogAdapter;
 
         ////////////////////////////////////////////////////// 总菜单
-        private void closeAllMenu() {
+        private void closeChildMenu() {
             closeMenuDefinition();
             closeMenuBrightness();
             closeMenuCatalog();
@@ -781,6 +835,26 @@ public class ComicRecyclerPanel extends BaseRecyclerPanel<ComicBean, ComicPresen
         protected void initData() {
             super.initData();
             rv_catalog.setLayoutManager(new LinearLayoutManager(context));
+            mCatalogAdapter = new CommonAdapter<ChapterBean>(context, R.layout.layout_catalog_item, mCatalogChapterList) {
+                @Override
+                protected void convert(ViewHolder holder, ChapterBean chapter, int position) {
+                    ImageView img_pic = holder.getView(R.id.img_catalog_pic);
+                    TextView tv_name = holder.getView(R.id.tv_catalog_name);
+                    LinearLayout ll_bg = holder.getView(R.id.ll_catalog_bg);
+                    if (chapter.getChapter_id() == mChapterId) {
+                        ll_bg.setBackgroundResource(R.color.colorPrimary);
+                    } else {
+                        ll_bg.setBackgroundResource(R.color.colorClarity);
+                    }
+                    if (chapter.getPrice() == 0) {
+                        G.img(context, chapter.getImageLow(), img_pic);
+                    } else {
+                        G.img(context, R.mipmap.pic_need_money, img_pic);
+                    }
+                    tv_name.setText(chapter.getChapter_name());
+                }
+            };
+            rv_catalog.setAdapter(mCatalogAdapter);
 
         }
 
@@ -825,6 +899,7 @@ public class ComicRecyclerPanel extends BaseRecyclerPanel<ComicBean, ComicPresen
 
                 }
             });
+
             bsb_auto.setOnProgressChangedListener(new BubbleSeekBar.OnProgressChangedListener() {
                 @Override
                 public void onProgressChanged(BubbleSeekBar bubbleSeekBar, int progress, float progressFloat) {
@@ -857,6 +932,40 @@ public class ComicRecyclerPanel extends BaseRecyclerPanel<ComicBean, ComicPresen
 
                 }
             });
+
+            mCatalogAdapter.setOnItemClickListener(new MultiItemTypeAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(View view, RecyclerView.ViewHolder holder, int position) {
+                    mChapterId = mCatalogChapterList.get(position).getChapter_id();
+                    goChChapterById(mChapterId);
+                    mCatalogAdapter.notifyDataSetChanged();
+                }
+
+                @Override
+                public boolean onItemLongClick(View view, RecyclerView.ViewHolder holder, int position) {
+                    return false;
+                }
+            });
+
+        }
+
+
+        public void clickSome() {
+            if (isShowMenuDefinition
+                    || isShowMenuBrightness
+                    || isShowMenuCatalog) {// 有子菜单打开先关闭子菜单。
+                closeChildMenu();
+                return;
+            }
+
+            if (isAuto) {// 自动播放时。
+                changeMenu();
+                return;
+            }
+            myRunnable.a = 0;
+            myRunnable.b = MockUtil.getScreenHeight(context) / 2;
+            myRunnable.c = MockUtil.getScreenHeight(context) / 20;
+            handler.postDelayed(myRunnable, speed);
         }
 
         public void setMenu(ComicBean comic) {
@@ -897,13 +1006,14 @@ public class ComicRecyclerPanel extends BaseRecyclerPanel<ComicBean, ComicPresen
             if (isShow) return;
             isShow = true;
             toggleMenu(300);
+            closeChildMenu();
         }
 
         public void closeMenu() {
             if (!isShow) return;
             isShow = false;
             toggleMenu(300);
-            closeAllMenu();
+            closeChildMenu();
         }
 
         public void changeMenu() {

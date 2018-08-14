@@ -8,6 +8,7 @@ import java.util.List;
 
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
+import top.wzmyyj.zymk.app.bean.BookBean;
 import top.wzmyyj.zymk.app.bean.ChapterBean;
 import top.wzmyyj.zymk.app.bean.ComicBean;
 import top.wzmyyj.zymk.app.data.Urls;
@@ -51,7 +52,6 @@ public class ComicPresenter extends BasePresenter<IComicView> {
                     List<ChapterBean> chapterList = box.getChapterList();
                     Collections.reverse(chapterList);// 反序
                     List<ComicBean> comicList = getComicData(chapterList);
-                    chapterList.add(new ChapterBean(-1));//增加一章结束语。
                     mView.update(0, box.getBook(), chapterList, box.getBookList(), comicList);
                 } else {
                     mView.update(-1, box.getMsg());
@@ -89,20 +89,15 @@ public class ComicPresenter extends BasePresenter<IComicView> {
                 comic.setChapter_name(chapter.getChapter_name());
                 comic.setChapter_title(chapter.getChapter_title());
                 comic.setPrice(chapter.getPrice());
-                comic.setImg_high(Urls.ZYMK_Comic + chapter.getChapter_image().getHigh().replace("$$", "" + i));
-                comic.setImg_middle(Urls.ZYMK_Comic + chapter.getChapter_image().getMiddle().replace("$$", "" + i));
-                comic.setImg_low(Urls.ZYMK_Comic + chapter.getChapter_image().getLow().replace("$$", "" + i));
+                comic.setImg_high(chapter.getImageHigh(i));
+                comic.setImg_middle(chapter.getImageMiddle(i));
+                comic.setImg_low(chapter.getImageLow(i));
                 comic.setVar(i);
                 comic.setVar_size(end - start + 1);
                 comicList.add(comic);
             }
 
         }
-        ComicBean comic = new ComicBean();//增加一张结束语。
-        comic.setChapter_id(-1);
-        comic.setVar(1);
-        comic.setVar_size(1);
-        comicList.add(comic);
         return comicList;
     }
 
@@ -112,5 +107,10 @@ public class ComicPresenter extends BasePresenter<IComicView> {
         } else {
             I.toBrowser(mActivity, href);
         }
+    }
+
+
+    public void saveHistory(BookBean book, long chapter_id) {
+
     }
 }

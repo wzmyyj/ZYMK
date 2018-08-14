@@ -1,5 +1,7 @@
 package top.wzmyyj.zymk.app.bean;
 
+import top.wzmyyj.zymk.app.data.Urls;
+
 /**
  * Created by yyj on 2018/08/02. email: 2209011667@qq.com
  */
@@ -142,5 +144,29 @@ public class ChapterBean {
             return high;
         }
 
+    }
+
+    public String getImageLow(int i) {
+        return Urls.ZYMK_Comic + this.getChapter_image().getLow().replace("$$", "" + i);
+    }
+
+    public String getImageMiddle(int i) {
+        return Urls.ZYMK_Comic + this.getChapter_image().getMiddle().replace("$$", "" + i);
+    }
+
+    public String getImageHigh(int i) {
+        return Urls.ZYMK_Comic + this.getChapter_image().getHigh().replace("$$", "" + i);
+    }
+
+    public String getImageLow() {
+        return getImageLow(this.start_var);
+    }
+
+    public String getImageMiddle() {
+        return getImageMiddle(this.start_var);
+    }
+
+    public String getImageHigh() {
+        return getImageHigh(this.start_var);
     }
 }

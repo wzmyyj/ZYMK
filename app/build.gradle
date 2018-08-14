@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'org.greenrobot.greendao' // apply plugin
 
 android {
     compileSdkVersion 27
@@ -21,6 +22,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    greendao {
+        schemaVersion 1  //版本
+        daoPackage 'top.wzmyyj.zymk.greendao.gen' // 一般为app包名+生成文件的文件夹名
+        targetGenDir 'src/main/java' //生成文件路径
+    }
 }
 
 dependencies {
@@ -41,8 +48,6 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'
     implementation 'jp.wasabeef:glide-transformations:3.0.1'
 
-    implementation 'com.commit451:PhotoView:1.2.4'
-
     implementation 'com.squareup.okhttp3:okhttp:3.10.0'
 
     implementation 'com.google.code.gson:gson:2.7'
@@ -61,6 +66,8 @@ dependencies {
     implementation 'org.greenrobot:eventbus:3.1.1'
 
     implementation 'com.xw.repo:bubbleseekbar:3.16'
+
+    implementation 'org.greenrobot:greendao:3.2.2' // add library
 
 
 }

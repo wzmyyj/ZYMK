@@ -103,7 +103,7 @@ public class G {
                                 .load(url)
                                 .dontAnimate()
                                 .skipMemoryCache(false)
-                                .diskCacheStrategy(DiskCacheStrategy.NONE)
+//                                .diskCacheStrategy(DiskCacheStrategy.NONE)
                                 .into(img);
                     }
                 });
@@ -125,7 +125,7 @@ public class G {
                         GlideApp.with(context)
                                 .load(res_id)
                                 .dontAnimate()
-                                .diskCacheStrategy(DiskCacheStrategy.NONE)
+//                                .diskCacheStrategy(DiskCacheStrategy.NONE)
                                 .into(img);
                     }
                 });

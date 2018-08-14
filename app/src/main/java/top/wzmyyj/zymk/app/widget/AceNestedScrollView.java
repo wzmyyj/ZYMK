@@ -23,6 +23,7 @@ import top.wzmyyj.zymk.common.utils.StatusBarUtil;
 
 /**
  * Created by yyj on 2018/07/16. email: 2209011667@qq.com
+ * Ace 艾斯，四皇之一，月光岛领主。
  */
 
 public class AceNestedScrollView extends NestedScrollView {
