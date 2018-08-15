@@ -21,6 +21,7 @@ import com.zhy.adapter.recyclerview.MultiItemTypeAdapter;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import butterknife.BindView;
@@ -28,6 +29,8 @@ import butterknife.OnClick;
 import io.reactivex.annotations.NonNull;
 import top.wzmyyj.zymk.R;
 import top.wzmyyj.zymk.app.bean.BookBean;
+import top.wzmyyj.zymk.app.bean.SearchHistoryBean;
+import top.wzmyyj.zymk.app.utils.SearchHistoryComparator;
 import top.wzmyyj.zymk.presenter.SearchPresenter;
 import top.wzmyyj.zymk.view.activity.base.BaseActivity;
 import top.wzmyyj.zymk.view.iv.ISearchView;
@@ -80,8 +83,8 @@ public class SearchActivity extends BaseActivity<SearchPresenter> implements ISe
     @BindView(R.id.rv_history)
     RecyclerView rv_history;
 
-    List<String> mHsList = new ArrayList<>();
-    CommonAdapter mHsAdapter;
+    List<SearchHistoryBean> mShList = new ArrayList<>();
+    CommonAdapter mShAdapter;
 
     @BindView(R.id.ll_history)
     LinearLayout ll_history;
@@ -97,22 +100,22 @@ public class SearchActivity extends BaseActivity<SearchPresenter> implements ISe
     protected void initView() {
         super.initView();
         rv_history.setLayoutManager(new LinearLayoutManager(context));
-        mHsAdapter = new CommonAdapter<String>(context, R.layout.layout_search_history, mHsList) {
+        mShAdapter = new CommonAdapter<SearchHistoryBean>(context, R.layout.layout_search_history, mShList) {
             @Override
-            protected void convert(ViewHolder holder, String s, int position) {
-                TextView tv_text = holder.getView(R.id.tv_title);
+            protected void convert(ViewHolder holder, SearchHistoryBean sh, int position) {
+                TextView tv_text = holder.getView(R.id.tv_text);
                 ImageView img_fork = holder.getView(R.id.img_fork);
-                tv_text.setText(s);
-                final String txt = s;
+                tv_text.setText("" + sh.getWord());
+                final long id = sh.getId();
                 img_fork.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        mPresenter.delHistory(txt);
+                        mPresenter.delHistory(id);
                     }
                 });
             }
         };
-        rv_history.setAdapter(mHsAdapter);
+        rv_history.setAdapter(mShAdapter);
 
         rv_smart.setLayoutManager(new LinearLayoutManager(context));
         mSmartAdapter = new CommonAdapter<BookBean>(context, R.layout.layout_search_smart, mSmartList) {
@@ -178,14 +181,16 @@ public class SearchActivity extends BaseActivity<SearchPresenter> implements ISe
         tl_tag.setTagClickListener(new TagView.OnTagClickListener() {
             @Override
             public void onTagClick(int i, String s, int i1) {
-                mPresenter.goDetails(mHotList.get(i).getHref());
+                String title = mHotList.get(i).getTitle();
+                String href = mHotList.get(i).getHref();
+                mPresenter.goDetails(href, title);
             }
         });
 
-        mHsAdapter.setOnItemClickListener(new MultiItemTypeAdapter.OnItemClickListener() {
+        mShAdapter.setOnItemClickListener(new MultiItemTypeAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, RecyclerView.ViewHolder holder, int position) {
-                mPresenter.search(mHsList.get(position));
+                mPresenter.search(mShList.get(position).getWord());
             }
 
             @Override
@@ -197,7 +202,9 @@ public class SearchActivity extends BaseActivity<SearchPresenter> implements ISe
         mSmartAdapter.setOnItemClickListener(new MultiItemTypeAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, RecyclerView.ViewHolder holder, int position) {
-                mPresenter.goDetails(mSmartList.get(position).getHref());
+                String title = mSmartList.get(position).getTitle();
+                String href = mSmartList.get(position).getHref();
+                mPresenter.goDetails(href, title);
             }
 
             @Override
@@ -207,6 +214,12 @@ public class SearchActivity extends BaseActivity<SearchPresenter> implements ISe
         });
     }
 
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        et_text.setText("");
+    }
 
     @Override
     public void showHot(List list) {
@@ -241,15 +254,57 @@ public class SearchActivity extends BaseActivity<SearchPresenter> implements ISe
 
     @Override
     public void showHistory(List list) {
-        if (list == null && list.size() == 0) {
-            ll_history.setVerticalGravity(View.GONE);
+        if (list == null || list.size() == 0) {
+            ll_history.setVisibility(View.GONE);
+            return;
+        }
+        List<SearchHistoryBean> shList = list;
+        mShList.addAll(shList);
+        notifyHistoryChanged();
+
+
+    }
+
+    private void notifyHistoryChanged() {
+        if (mShList == null || mShList.size() == 0) {
+            ll_history.setVisibility(View.GONE);
         } else {
-            ll_history.setVerticalGravity(View.VISIBLE);
+            ll_history.setVisibility(View.VISIBLE);
+        }
+        Collections.sort(mShList, new SearchHistoryComparator());
+        mShAdapter.notifyDataSetChanged();
+    }
 
+    @Override
+    public void addHistory(SearchHistoryBean bean) {
+        if (bean == null) return;
+        for (SearchHistoryBean b : mShList) {
+            if (bean.getWord().equals(b.getWord())) {
+                mShList.remove(b);
+                mShList.add(bean);
+                notifyHistoryChanged();
+                return;
+            }
+        }
+        mShList.add(bean);
+        notifyHistoryChanged();
+    }
 
+    @Override
+    public void delHistory(long l) {
+        for (SearchHistoryBean bean : mShList) {
+            if (bean.getId() == l) {
+                mShList.remove(bean);
+                notifyHistoryChanged();
+                return;
+            }
         }
 
     }
 
-
+    @Override
+    public void delAllHistory() {
+        mShList.clear();
+        notifyHistoryChanged();
+    }
 }

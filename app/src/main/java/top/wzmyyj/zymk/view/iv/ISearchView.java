@@ -2,6 +2,7 @@ package top.wzmyyj.zymk.view.iv;
 
 import java.util.List;
 
+import top.wzmyyj.zymk.app.bean.SearchHistoryBean;
 import top.wzmyyj.zymk.view.iv.base.IBaseView;
 
 /**
@@ -11,8 +12,15 @@ import top.wzmyyj.zymk.view.iv.base.IBaseView;
 public interface ISearchView extends IBaseView {
     void showHot(List list);
 
-    void showSmart(String key,List list);
+    void showSmart(String key, List list);
 
     void showHistory(List list);
+
+    void addHistory(SearchHistoryBean bean);
+
+    void delHistory(long l);
+
+    void delAllHistory();
+
 
 }

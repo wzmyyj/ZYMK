@@ -34,16 +34,25 @@ public class Vanessa {
         return l;
     }
 
+    public static long getTime() {
+        Date d = new Date();
+        return d.getTime();
+    }
+
 
     public static String getEasyTime(long l) {
         Date d = new Date();
         String s;
+        long t = Math.abs(d.getTime() - l);
         //一天内
-        if (Math.abs(d.getTime() - l) < 24 * 60 * 60 * 1000) {
+        if (t < 24 * 60 * 60 * 1000) {
             SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
             s = sdf.format(new Date(l));
-        } else {
+        } else if (t < 5 * 24 * 60 * 60 * 1000) {// 5天内
             SimpleDateFormat sdf = new SimpleDateFormat("MM-dd HH:mm");
+            s = sdf.format(new Date(l));
+        } else {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             s = sdf.format(new Date(l));
         }
         return s;
@@ -64,11 +73,8 @@ public class Vanessa {
         } else if (t < 30 * 24 * 60 * 60 * 1000) {
             int a = (int) (t / (24 * 60 * 60 * 1000));
             s = a + "天前";
-        } else if (t < 12 * 30 * 24 * 60 * 60 * 1000){
-            int a = (int) (t / (30 *24 * 60 * 60 * 1000));
-            s = a + "个月前";
-        }else{
-            s="很久以前";
+        } else {
+            s = getEasyTime(l);
         }
 
         return s;

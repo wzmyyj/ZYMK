@@ -34,7 +34,7 @@
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:background="@drawable/click_bg"
-            android:padding="10dp"
+            android:padding="13dp"
             android:src="@mipmap/svg_gray_icon_fork" />
 
     </LinearLayout>

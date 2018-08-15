@@ -5,4 +5,6 @@ package top.wzmyyj.zymk.model.db;
  */
 
 public class HistoryModel {
+
+
 }
