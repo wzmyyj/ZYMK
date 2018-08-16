@@ -15,6 +15,7 @@ import com.dl7.tag.TagLayout;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
+import com.zhy.adapter.recyclerview.MultiItemTypeAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -163,6 +164,18 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
             public void onRefresh(RefreshLayout refreshLayout) {
                 update();
                 refreshLayout.finishRefresh(1500);
+            }
+        });
+
+        bookAdapter.setOnItemClickListener(new MultiItemTypeAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, RecyclerView.ViewHolder holder, int position) {
+                mPresenter.goDetails(xgBooks.get(position).getHref());
+            }
+
+            @Override
+            public boolean onItemLongClick(View view, RecyclerView.ViewHolder holder, int position) {
+                return false;
             }
         });
 

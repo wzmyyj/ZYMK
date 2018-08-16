@@ -1,11 +1,9 @@
 package top.wzmyyj.zymk.view.panel;
 
 import android.content.Context;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.support.v4.widget.NestedScrollView;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -13,119 +11,81 @@ import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
 import com.youth.banner.listener.OnBannerListener;
-import com.zhy.adapter.recyclerview.base.ViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import top.wzmyyj.wzm_sdk.adapter.ivd.IVD;
-import top.wzmyyj.wzm_sdk.adapter.ivd.SingleIVD;
+import butterknife.BindView;
 import top.wzmyyj.zymk.R;
 import top.wzmyyj.zymk.app.bean.BoBean;
-import top.wzmyyj.zymk.app.bean.BookBean;
 import top.wzmyyj.zymk.app.bean.ItemBean;
 import top.wzmyyj.zymk.app.utils.GlideImageLoader;
 import top.wzmyyj.zymk.common.utils.DensityUtil;
 import top.wzmyyj.zymk.common.utils.StatusBarUtil;
 import top.wzmyyj.zymk.presenter.HomePresenter;
-import top.wzmyyj.zymk.view.adapter.BookAdapter;
-import top.wzmyyj.zymk.view.panel.base.BaseRecyclerPanel;
+import top.wzmyyj.zymk.view.panel.base.BaseNestedScrollPanel;
 
 
 /**
  * Created by yyj on 2018/07/04. email: 2209011667@qq.com
- * 主页。已改成HomeNestedScrollPanel代替。此类不用了。
+ * 主页。
  */
 
-public class HomeRecyclerPanel extends BaseRecyclerPanel<ItemBean, HomePresenter> {
+public class HomeNestedScrollPanel extends BaseNestedScrollPanel<HomePresenter> {
 
-    public HomeRecyclerPanel(Context context, HomePresenter p) {
+    public HomeNestedScrollPanel(Context context, HomePresenter p) {
         super(context, p);
     }
 
     @Override
-    protected void setData() {
-        mPresenter.addEmptyData(mData);
+    protected void initPanels() {
+        super.initPanels();
+        addPanels(
+                new HomeItemPanel(context, mPresenter),
+                new HomeItemPanel(context, mPresenter),
+                new HomeItemPanel(context, mPresenter),
+                new HomeItemPanel(context, mPresenter),
+                new HomeItemPanel(context, mPresenter),
+                new HomeItemPanel(context, mPresenter),
+                new HomeItemPanel(context, mPresenter),
+                new HomeItemPanel(context, mPresenter),
+                new HomeItemPanel(context, mPresenter)
+        );
     }
 
+    @Override
+    protected int getContentViewId() {
+        return R.layout.layout_home_content;
+    }
 
     @Override
     protected void initView() {
         super.initView();
-        mRecyclerView.setOverScrollMode(View.OVER_SCROLL_NEVER);
+        setHeader();
+        setContent();
+        setFooter();
+
     }
 
     @Override
-    protected void initEvent() {
-        super.initEvent();
-        mRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
-
+    protected void initListener() {
+        super.initListener();
+        mNestedScrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
             int mDistance = 0;
-            //当距离在[0,maxDistance]变化时，透明度在[0,255之间变化]
+            //            //当距离在[0,maxDistance]变化时，透明度在[0,255之间变化]
             int maxDistance = DensityUtil.dp2px(context, 155) - StatusBarUtil.StatusBarHeight;
 
             @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-
+            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
                 if (viewList.size() == 0) return;
                 View top = viewList.get(0);
 
-                mDistance += dy;
+                mDistance = scrollY;
                 float percent = mDistance * 1f / maxDistance;//百分比
-
-
                 top.setAlpha(percent);
             }
         });
-    }
 
-
-    @Override
-    protected void setIVD(List<IVD<ItemBean>> ivd) {
-        ivd.add(new SingleIVD<ItemBean>() {
-            @Override
-            public int getItemViewLayoutId() {
-                return R.layout.layout_home_item;
-            }
-
-            @Override
-            public void convert(ViewHolder holder, ItemBean itemBean, int position) {
-
-                ImageView img_icon = holder.getView(R.id.img_icon);
-                TextView tv_title = holder.getView(R.id.tv_title);
-                TextView tv_summary = holder.getView(R.id.tv_summary);
-                img_icon.setImageResource(itemBean.getIcon());
-                tv_title.setText(itemBean.getTitle());
-                tv_summary.setText(itemBean.getSummary());
-
-                final String href = itemBean.getHref();
-                Button bt_more = holder.getView(R.id.bt_more);
-                bt_more.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        mPresenter.goMore(href);
-                    }
-                });
-
-                final List<BookBean> data = itemBean.getBooks() != null
-                        ? itemBean.getBooks() : new ArrayList<BookBean>();
-
-
-                RecyclerView rv_item = holder.getView(R.id.rv_item);
-                rv_item.setRecycledViewPool(viewPool);
-                rv_item.setLayoutManager(new LinearLayoutManager(context, LinearLayout.HORIZONTAL, false));
-                BookAdapter bookAdapter = new BookAdapter(context, R.layout.layout_book, data);
-                rv_item.setAdapter(bookAdapter);
-
-
-            }
-
-            // 共用view池。
-            RecyclerView.RecycledViewPool viewPool = new RecyclerView.RecycledViewPool();
-
-
-        });
     }
 
 
@@ -139,12 +99,12 @@ public class HomeRecyclerPanel extends BaseRecyclerPanel<ItemBean, HomePresenter
         if (w == -1) return null;
         List<BoBean> bos = (List<BoBean>) objects[0];
         setBanner(bos);
-        mData.clear();
         List<ItemBean> itemBeans = (List<ItemBean>) objects[1];
-        for (ItemBean item : itemBeans) {
-            mData.add(item);
+        if (itemBeans != null && itemBeans.size() == 9) {
+            for (int i = 0; i < 9; i++) {
+                getPanel(i).f(w, itemBeans.get(i));
+            }
         }
-        notifyDataSetChanged();
         return super.f(w, objects);
     }
 
@@ -162,14 +122,47 @@ public class HomeRecyclerPanel extends BaseRecyclerPanel<ItemBean, HomePresenter
         mBanner.stopAutoPlay();
     }
 
-    protected Banner mBanner;
+    @BindView(R.id.fl_panel_0)
+    FrameLayout fl_panel_0;
+    @BindView(R.id.fl_panel_1)
+    FrameLayout fl_panel_1;
+    @BindView(R.id.fl_panel_2)
+    FrameLayout fl_panel_2;
+    @BindView(R.id.fl_panel_3)
+    FrameLayout fl_panel_3;
+    @BindView(R.id.fl_panel_4)
+    FrameLayout fl_panel_4;
+    @BindView(R.id.fl_panel_5)
+    FrameLayout fl_panel_5;
+    @BindView(R.id.fl_panel_6)
+    FrameLayout fl_panel_6;
+    @BindView(R.id.fl_panel_7)
+    FrameLayout fl_panel_7;
+    @BindView(R.id.fl_panel_8)
+    FrameLayout fl_panel_8;
 
-    @Override
+    protected void setContent() {
+        fl_panel_0.addView(getPanelView(0));
+        fl_panel_1.addView(getPanelView(1));
+        fl_panel_2.addView(getPanelView(2));
+        fl_panel_3.addView(getPanelView(3));
+        fl_panel_4.addView(getPanelView(4));
+        fl_panel_5.addView(getPanelView(5));
+        fl_panel_6.addView(getPanelView(6));
+        fl_panel_7.addView(getPanelView(7));
+        fl_panel_8.addView(getPanelView(8));
+    }
+
+
+    @BindView(R.id.ll_h_1)
+    LinearLayout ll_h_1;
+    @BindView(R.id.ll_h_2)
+    LinearLayout ll_h_2;
+
+    @BindView(R.id.banner)
+    Banner mBanner;
+
     protected void setHeader() {
-        super.setHeader();
-        mHeader = mInflater.inflate(R.layout.layout_home_header, null);
-        LinearLayout ll_h_1 = mHeader.findViewById(R.id.ll_h_1);
-        LinearLayout ll_h_2 = mHeader.findViewById(R.id.ll_h_2);
         ll_h_1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -185,7 +178,6 @@ public class HomeRecyclerPanel extends BaseRecyclerPanel<ItemBean, HomePresenter
 
         List images = new ArrayList<>();
         List<String> titles = new ArrayList<>();
-        mBanner = mHeader.findViewById(top.wzmyyj.wzm_sdk.R.id.banner);
         //设置图片加载器
         mBanner.setImageLoader(new GlideImageLoader());
         //设置图片集合
@@ -228,11 +220,10 @@ public class HomeRecyclerPanel extends BaseRecyclerPanel<ItemBean, HomePresenter
         });
     }
 
-    @Override
+    @BindView(R.id.tv_end)
+    TextView tv_end;
+
     protected void setFooter() {
-        super.setFooter();
-        mFooter = mInflater.inflate(R.layout.layout_footer, null);
-        TextView tv = mFooter.findViewById(R.id.tv_end);
-        tv.setText("-- 到底部了哦 --");
+        tv_end.setText("-- 到底部了哦 --");
     }
 }

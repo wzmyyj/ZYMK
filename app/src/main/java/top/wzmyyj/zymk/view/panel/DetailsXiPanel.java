@@ -7,14 +7,18 @@ import android.support.v7.widget.RecyclerView;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.zhy.adapter.recyclerview.MultiItemTypeAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import top.wzmyyj.wzm_sdk.tools.T;
 import top.wzmyyj.zymk.R;
 import top.wzmyyj.zymk.app.bean.AuthorBean;
 import top.wzmyyj.zymk.app.bean.BookBean;
@@ -66,6 +70,24 @@ public class DetailsXiPanel extends BasePanel<DetailsPresenter> {
         rv_author_books.setAdapter(bookAdapter);
     }
 
+    @Override
+    protected void initListener() {
+        super.initListener();
+        bookAdapter.setOnItemClickListener(new MultiItemTypeAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, RecyclerView.ViewHolder holder, int position) {
+                if(position==authorBooks.size()-1){
+                    T.s("喜欢就收藏哦~");
+                }
+                mPresenter.goDetails(authorBooks.get(position).getHref());
+            }
+
+            @Override
+            public boolean onItemLongClick(View view, RecyclerView.ViewHolder holder, int position) {
+                return false;
+            }
+        });
+    }
 
     @Override
     public Object f(int w, Object... objects) {

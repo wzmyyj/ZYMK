@@ -1,15 +1,15 @@
 package top.wzmyyj.wzm_sdk.panel;
 
 import android.content.Context;
-import android.os.Handler;
-import android.support.annotation.NonNull;
 import android.support.v4.widget.NestedScrollView;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.widget.FrameLayout;
 
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
+
 import top.wzmyyj.wzm_sdk.R;
-import top.wzmyyj.wzm_sdk.tools.L;
 
 /**
  * Created by wzm on 2018/05/05. email: 2209011667@qq.com
@@ -19,10 +19,13 @@ import top.wzmyyj.wzm_sdk.tools.L;
 public abstract class NestedScrollPanel extends InitPanel {
 
 
-    private NestedScrollView mNestedScrollView;
-    private SwipeRefreshLayout mSwipeRefreshLayout;
-    private FrameLayout mFrameLayout;
+    protected NestedScrollView mNestedScrollView;
+    protected SmartRefreshLayout mRefreshLayout;
+    protected FrameLayout mFrameLayout;
     protected View contentView;
+
+
+    protected int delayed_r = 1500, delayed_l = 1000;
 
     public NestedScrollPanel(Context context) {
         super(context);
@@ -34,20 +37,16 @@ public abstract class NestedScrollPanel extends InitPanel {
         view = mInflater.inflate(R.layout.panel_ns, null);
         mFrameLayout = view.findViewById(R.id.frameLayout);
         mNestedScrollView = view.findViewById(R.id.nestedScrollView);
-        mSwipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
-        mSwipeRefreshLayout.setColorSchemeColors(context.getResources()
-                .getColor(R.color.colorBlue));
-
-        contentView = getContentView();
+        mRefreshLayout = view.findViewById(R.id.refreshLayout);
+        mRefreshLayout.setHeaderHeight(100);
+        mRefreshLayout.setFooterHeight(100);
+        mRefreshLayout.setPrimaryColorsId(R.color.colorRefresh, R.color.colorWhite);
+        contentView = mInflater.inflate(getContentViewId(), null);
         mNestedScrollView.addView(contentView);
 
-        setView(mNestedScrollView, mSwipeRefreshLayout, mFrameLayout);
     }
 
-    protected abstract void setView(NestedScrollView ns, SwipeRefreshLayout srl, FrameLayout layout);
-
-    @NonNull
-    protected abstract View getContentView();
+    protected abstract int getContentViewId();
 
     @Override
     protected void initData() {
@@ -56,37 +55,41 @@ public abstract class NestedScrollPanel extends InitPanel {
 
     @Override
     protected void initListener() {
-        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        mRefreshLayout.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
             @Override
-            public void onRefresh() {
-                mSwipeRefreshLayout.setRefreshing(true);
-                try {
-                    update();
-                    L.e("update data success");
-                } catch (Exception e) {
-                }
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        mSwipeRefreshLayout.setRefreshing(false);
-                    }
-                }, 1000);
+            public void onLoadMore(RefreshLayout refreshLayout) {
+                refreshLayout.finishLoadMore(delayed_l);
+                loadMore();
+            }
 
+            @Override
+            public void onRefresh(RefreshLayout refreshLayout) {
+                refreshLayout.finishRefresh(delayed_r);
+                refresh();
             }
         });
     }
 
-    protected void update() {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                changeView();
-            }
-        }, 600);
+    protected void refresh() {
+        update();
+    }
+
+    protected void loadMore() {
 
     }
 
-    protected void changeView() {
+    protected void update() {
+
+
+    }
+
+    public void updateWithView() {
+        mRefreshLayout.autoRefresh();
+        refresh();
+        mRefreshLayout.finishRefresh(delayed_r);
+    }
+
+    protected void updateView() {
 
     }
 }

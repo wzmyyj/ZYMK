@@ -4,6 +4,7 @@ import android.app.Activity;
 
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
+import top.wzmyyj.zymk.app.data.Urls;
 import top.wzmyyj.zymk.app.tools.I;
 import top.wzmyyj.zymk.model.net.DetailsModel;
 import top.wzmyyj.zymk.model.net.box.DetailsBox;
@@ -62,5 +63,17 @@ public class DetailsPresenter extends BasePresenter<IDetailsView> {
 
     public void goComic(int comic_id) {
         I.toComicActivity(mActivity, comic_id);
+    }
+
+    public void goDetails(String href) {
+        if (href == null) {
+            mView.showToast("空值");
+            return;
+        }
+        if (href.contains(Urls.ZYMK_Base)) {
+            I.toDetailsActivity(mActivity, href);
+        } else {
+            I.toBrowser(mActivity, href);
+        }
     }
 }

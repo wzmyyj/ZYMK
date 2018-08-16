@@ -11,7 +11,7 @@ import top.wzmyyj.zymk.common.utils.StatusBarUtil;
 import top.wzmyyj.zymk.presenter.HomePresenter;
 import top.wzmyyj.zymk.view.fragment.base.BaseFragment;
 import top.wzmyyj.zymk.view.iv.IF_1View;
-import top.wzmyyj.zymk.view.panel.HomeRecyclerPanel;
+import top.wzmyyj.zymk.view.panel.HomeNestedScrollPanel;
 
 /**
  * Created by yyj on 2018/06/28. email: 2209011667@qq.com
@@ -34,7 +34,7 @@ public class F_1 extends BaseFragment<HomePresenter> implements IF_1View {
     @Override
     protected void initPanels() {
         super.initPanels();
-        addPanels(new HomeRecyclerPanel(context, mPresenter));
+        addPanels(new HomeNestedScrollPanel(context, mPresenter));
     }
 
     @BindView(R.id.ll_panel)
