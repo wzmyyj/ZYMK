@@ -17,6 +17,7 @@ import top.wzmyyj.zymk.R;
 import top.wzmyyj.zymk.app.bean.BookBean;
 import top.wzmyyj.zymk.app.bean.FavorBean;
 import top.wzmyyj.zymk.app.tools.G;
+import top.wzmyyj.zymk.common.java.Vanessa;
 import top.wzmyyj.zymk.presenter.FindPresenter;
 import top.wzmyyj.zymk.view.panel.base.BaseRecyclerPanel;
 
@@ -55,14 +56,24 @@ public class FavorRecyclerPanel extends BaseRecyclerPanel<FavorBean, FindPresent
                 tv_title.setText(bookBean.getTitle());
                 tv_chapter.setText(bookBean.getChapter());
 
+                long update_time = bookBean.getUpdate_time();
+                // 最新更新是否一周内。
+                if (Vanessa.isInDay(update_time, 7)) {
+                    tv_new.setVisibility(View.VISIBLE);
+                } else {
+                    tv_new.setVisibility(View.GONE);
+                }
+                tv_update_time.setText(Vanessa.getEasyText(update_time));
+
                 G.img(context, bookBean.getData_src(), img_book);
 
-                ImageView img_select=holder.getView(R.id.img_select);
-                if(isCanSelect){
+                ImageView img_select = holder.getView(R.id.img_select);
+                if (isCanSelect) {
                     img_select.setVisibility(View.VISIBLE);
-                }else{
+                } else {
                     img_select.setVisibility(View.GONE);
                 }
+
             }
         });
 
@@ -86,6 +97,7 @@ public class FavorRecyclerPanel extends BaseRecyclerPanel<FavorBean, FindPresent
     }
 
     private boolean isCanSelect;
+
     @Override
     protected void setHeader() {
         super.setHeader();
