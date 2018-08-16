@@ -38,7 +38,7 @@ public class HuaAdapter extends CommonAdapter<HuaBean> {
         ImageView img_new = holder.getView(R.id.img_hua_new);
         ImageView img_reading = holder.getView(R.id.img_hua_reading);
 
-        tv_text.setText(huaBean.getTitle());
+        tv_text.setText(huaBean.getName());
         if (huaBean.isLock()) {
             img_lock.setVisibility(View.VISIBLE);
         } else {

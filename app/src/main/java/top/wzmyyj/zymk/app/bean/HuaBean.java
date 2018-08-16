@@ -8,14 +8,14 @@ public class HuaBean {
 
     private int index;
     private long id;
-    private String title;
+    private String name;
     private long uptime;
     private boolean isLock;
     private boolean isDot;
 
-    public HuaBean(long id,String title,long uptime, boolean isLock, boolean isDot) {
+    public HuaBean(long id,String name,long uptime, boolean isLock, boolean isDot) {
         this.id=id;
-        this.title = title;
+        this.name = name;
         this.uptime = uptime;
         this.isLock = isLock;
         this.isDot = isDot;
@@ -38,12 +38,12 @@ public class HuaBean {
     }
 
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setName(String title) {
+        this.name = title;
     }
 
     public long getUptime() {

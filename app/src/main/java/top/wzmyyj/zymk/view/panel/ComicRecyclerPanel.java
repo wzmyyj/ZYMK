@@ -22,6 +22,7 @@ import com.zhy.adapter.recyclerview.MultiItemTypeAdapter;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import butterknife.BindView;
@@ -787,15 +788,15 @@ public class ComicRecyclerPanel extends BaseRecyclerPanel<ComicBean, ComicPresen
                 xu = -1;
                 img_catalog_xu.setImageResource(R.mipmap.ic_read_catalog_reverse);
                 tv_catalog_xu.setText("倒序");
-
-
+                Collections.reverse(mCatalogChapterList);
+                mCatalogAdapter.notifyDataSetChanged();
             } else {
                 // 转为正序。
                 xu = 1;
                 img_catalog_xu.setImageResource(R.mipmap.ic_read_catalog_order);
                 tv_catalog_xu.setText("正序");
-
-
+                Collections.reverse(mCatalogChapterList);
+                mCatalogAdapter.notifyDataSetChanged();
             }
 
         }

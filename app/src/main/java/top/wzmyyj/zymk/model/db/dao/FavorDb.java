@@ -1,32 +1,32 @@
 package top.wzmyyj.zymk.model.db.dao;
 
 import org.greenrobot.greendao.annotation.Entity;
-import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.NotNull;
+import org.greenrobot.greendao.annotation.Generated;
 
 /**
  * Created by yyj on 2018/08/14. email: 2209011667@qq.com
  */
 @Entity
 public class FavorDb {
-    @Id(autoincrement = true)
+    @Id
     private Long id;
     @NotNull
     private String title;
     private long update_time;
     private String chapter_name;
     private long chapter_id;
-    private boolean isReadNew;
-    @Generated(hash = 1780244094)
+    private boolean isUnRead;
+    @Generated(hash = 172177374)
     public FavorDb(Long id, @NotNull String title, long update_time,
-            String chapter_name, long chapter_id, boolean isReadNew) {
+            String chapter_name, long chapter_id, boolean isUnRead) {
         this.id = id;
         this.title = title;
         this.update_time = update_time;
         this.chapter_name = chapter_name;
         this.chapter_id = chapter_id;
-        this.isReadNew = isReadNew;
+        this.isUnRead = isUnRead;
     }
     @Generated(hash = 1955454265)
     public FavorDb() {
@@ -61,11 +61,12 @@ public class FavorDb {
     public void setChapter_id(long chapter_id) {
         this.chapter_id = chapter_id;
     }
-    public boolean getIsReadNew() {
-        return this.isReadNew;
+    public boolean getIsUnRead() {
+        return this.isUnRead;
     }
-    public void setIsReadNew(boolean isReadNew) {
-        this.isReadNew = isReadNew;
+    public void setIsUnRead(boolean isUnRead) {
+        this.isUnRead = isUnRead;
     }
+
 
 }

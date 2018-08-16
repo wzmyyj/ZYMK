@@ -363,6 +363,11 @@ public class DocUtil {
         MuBean mu = getMu(swipers.get(1));
         ZiBean zi = getZi(swipers.get(2));
 
+        HuaBean laseHua=mu.getHuaList().get(0);
+        long chapter_id=laseHua.getId();
+        String chapter_name=laseHua.getName();
+        mainBook.setChapter_id(chapter_id);
+        mainBook.setChapter(chapter_name);
         mainBook.setDesc(xi.getJuqing());
         xi.getAuthor().getBookList().add(mainBook);
 
@@ -424,13 +429,13 @@ public class DocUtil {
                 long uptime = Long.parseLong(item.attr("data-uptime"));
 //                String href = item.getElementsByClass("chapterBtn").get(0)
 //                        .absUrl("href");
-                String title = item.getElementsByClass("chapterBtn").get(0)
+                String name = item.getElementsByClass("chapterBtn").get(0)
                         .attr("title");
                 Elements lock = item.getElementsByClass("lockIcon");
                 boolean isLock = lock != null && lock.size() > 0;
                 Elements updot = item.getElementsByClass("updot");
                 boolean isDot = updot != null && updot.size() > 0;
-                HuaBean hua = new HuaBean(id, title, uptime, isLock, isDot);
+                HuaBean hua = new HuaBean(id, name, uptime, isLock, isDot);
                 hua.setIndex(i);
                 huas.add(hua);
             }

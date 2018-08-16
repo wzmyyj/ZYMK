@@ -29,6 +29,24 @@ public class SearchHistoryModel {
         manager = DaoManager.getInstance(context);
     }
 
+    private List<SearchHistoryBean> db2beanList(List<SearchHistoryDb> DbList) {
+        List<SearchHistoryBean> list = new ArrayList<>();
+        if (DbList != null && DbList.size() > 0) {
+            for (SearchHistoryDb db : DbList) {
+                list.add(db2bean(db));
+            }
+        }
+        return list;
+    }
+
+    private SearchHistoryBean db2bean(SearchHistoryDb db) {
+        SearchHistoryBean bean = new SearchHistoryBean();
+        bean.setId(db.getId());
+        bean.setWord(db.getSearch_word());
+        bean.setTime(db.getSearch_time());
+        return bean;
+    }
+
     public void loadAll(Observer<List<SearchHistoryBean>> observer) {
         Observable.create(new ObservableOnSubscribe<List<SearchHistoryBean>>() {
             @Override
@@ -36,7 +54,7 @@ public class SearchHistoryModel {
                 try {
                     SearchHistoryDbDao searchHistoryDbDao = manager.getDaoSession().getSearchHistoryDbDao();
                     List<SearchHistoryDb> list = searchHistoryDbDao.loadAll();
-                    List<SearchHistoryBean> data = transToSHList(list);
+                    List<SearchHistoryBean> data = db2beanList(list);
                     observableEmitter.onNext(data);
                 } catch (Exception e) {
                     observableEmitter.onError(e);
@@ -53,21 +71,6 @@ public class SearchHistoryModel {
                 .subscribe(observer);
     }
 
-    @NonNull
-    public static List<SearchHistoryBean> transToSHList(List<SearchHistoryDb> DbList) {
-        List<SearchHistoryBean> list = new ArrayList<>();
-        if (DbList != null && DbList.size() > 0) {
-            for (SearchHistoryDb db : DbList) {
-                SearchHistoryBean bean = new SearchHistoryBean();
-                bean.setId(db.getId());
-                bean.setWord(db.getSearch_word());
-                bean.setTime(db.getSearch_time());
-                list.add(bean);
-            }
-
-        }
-        return list;
-    }
 
     public void insert(final String word, Observer<SearchHistoryBean> observer) {
         Observable.create(new ObservableOnSubscribe<SearchHistoryBean>() {
@@ -76,19 +79,17 @@ public class SearchHistoryModel {
                 try {
                     SearchHistoryDbDao searchHistoryDbDao = manager.getDaoSession().getSearchHistoryDbDao();
                     // 查询原来是否已有。
-                    SearchHistoryDb dd=searchHistoryDbDao.queryBuilder().where(SearchHistoryDbDao.Properties.Search_word.eq(word)).unique();
+                    SearchHistoryDb dd = searchHistoryDbDao.queryBuilder().where(SearchHistoryDbDao.Properties.Search_word.eq(word)).unique();
                     // 有的话，将其删除。
-                    if(dd!=null){
+                    if (dd != null) {
                         searchHistoryDbDao.delete(dd);
                     }
                     // 插入。
                     SearchHistoryDb db = new SearchHistoryDb(null, word, Vanessa.getTime());
                     long insert = searchHistoryDbDao.insert(db);
+                    db.setId(insert);
                     // 转化。
-                    SearchHistoryBean bean = new SearchHistoryBean();
-                    bean.setId(insert);
-                    bean.setWord(db.getSearch_word());
-                    bean.setTime(db.getSearch_time());
+                    SearchHistoryBean bean = db2bean(db);
                     observableEmitter.onNext(bean);
                 } catch (Exception e) {
                     observableEmitter.onError(e);

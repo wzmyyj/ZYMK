@@ -10,7 +10,7 @@ import org.greenrobot.greendao.annotation.NotNull;
  */
 @Entity
 public class HistoryDb {
-    @Id(autoincrement = true)
+    @Id
     private Long id;
     @NotNull
     private String title;
