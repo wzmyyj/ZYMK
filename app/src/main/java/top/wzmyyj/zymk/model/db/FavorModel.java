@@ -88,15 +88,15 @@ public class FavorModel {
                     // 有的话，直接返回。
                     if (dd != null) {
                         observableEmitter.onNext(null);
-                        return;
+                    } else {
+                        // 插入。
+                        FavorDb db = new FavorDb((long) book.getId(), book.getTitle(), book.getUpdate_time(),
+                                book.getChapter(), book.getChapter_id(), false);
+                        favorDbDao.insert(db);
+                        // 转化。
+                        FavorBean bean = db2bean(db);
+                        observableEmitter.onNext(bean);
                     }
-                    // 插入。
-                    FavorDb db = new FavorDb((long) book.getId(), book.getTitle(), book.getUpdate_time(),
-                            book.getChapter(), book.getChapter_id(), false);
-                    favorDbDao.insert(db);
-                    // 转化。
-                    FavorBean bean = db2bean(db);
-                    observableEmitter.onNext(bean);
                 } catch (Exception e) {
                     observableEmitter.onError(e);
                     e.printStackTrace();
@@ -111,7 +111,6 @@ public class FavorModel {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer);
     }
-
 
     public void delete(final Long id, Observer<Long> observer) {
         Observable.create(new ObservableOnSubscribe<Long>() {
@@ -146,6 +145,9 @@ public class FavorModel {
                     FavorDb dd = favorDbDao.queryBuilder().where(FavorDbDao.Properties.Id.eq(id)).unique();
                     // 有的话，返回true，否则false。
                     if (dd != null) {
+                        // 设为已读。
+                        dd.setIsUnRead(false);
+                        favorDbDao.update(dd);
                         observableEmitter.onNext(true);
                     } else {
                         observableEmitter.onNext(false);
@@ -165,6 +167,31 @@ public class FavorModel {
                 .subscribe(observer);
     }
 
+
+    //更新数据。
+    public void updateAll(Observer<List<FavorBean>> observer) {
+        Observable.create(new ObservableOnSubscribe<List<FavorBean>>() {
+            @Override
+            public void subscribe(@NonNull ObservableEmitter<List<FavorBean>> observableEmitter) throws Exception {
+                try {
+                    FavorDbDao favorDbDao = manager.getDaoSession().getFavorDbDao();
+                    List<FavorDb> list = favorDbDao.loadAll();
+                    List<FavorBean> data = db2beanList(list);
+                    observableEmitter.onNext(data);
+                } catch (Exception e) {
+                    observableEmitter.onError(e);
+                    e.printStackTrace();
+                } finally {
+                    observableEmitter.onComplete();
+                }
+            }
+
+        })
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(observer);
+    }
 
 }
 

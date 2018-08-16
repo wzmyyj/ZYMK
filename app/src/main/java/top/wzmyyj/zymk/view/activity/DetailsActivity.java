@@ -41,7 +41,6 @@ import top.wzmyyj.zymk.view.panel.DetailsZiPanel;
 
 public class DetailsActivity extends BaseActivity<DetailsPresenter> implements IDetailsView {
 
-
     @Override
     protected void initPresenter() {
         mPresenter = new DetailsPresenter(activity, this);
@@ -84,14 +83,19 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
         mPresenter.finish();
     }
 
-    @BindView(R.id.img_love)
-    ImageView img_love;
+    @OnClick(R.id.img_love)
+    public void favor() {
+        if (mBook == null) return;
+        mPresenter.addFavor(mBook);
+    }
 
     // bg
     @BindView(R.id.img_book_bg)
     ImageView img_book_bg;
     @BindView(R.id.tv_book_title)
     TextView tv_book_title;
+    @BindView(R.id.tv_book_favor)
+    TextView tv_book_favor;
     @BindView(R.id.tv_book_author)
     TextView tv_book_author;
     @BindView(R.id.tl_book_tag)
@@ -196,8 +200,12 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
 
     }
 
+    private BookBean mBook;
+
     @Override
     public void setBook(BookBean book) {
+        if (book == null) return;
+        mBook = book;
         tv_title.setText(book.getTitle());
         tv_book_title.setText(book.getTitle());
         tv_book_author.setText(book.getAuthor());
@@ -213,6 +221,10 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
         }
         G.img(context, book.getData_src(), img_book);
         G.imgBlur(context, book.getData_src(), img_book_bg, 15);
+
+        long id = book.getId();
+        mPresenter.isFavor(id);
+        mPresenter.history(id);
 
     }
 
@@ -240,5 +252,19 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
             xgBooks.add(book);
         }
         bookAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void setIsFavor(boolean isFavor) {
+        if (isFavor) {
+            tv_book_favor.setVisibility(View.VISIBLE);
+        } else {
+            tv_book_favor.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void setHistory(long chapter_id) {
+
     }
 }

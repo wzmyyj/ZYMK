@@ -23,4 +23,9 @@ public interface IDetailsView extends IBaseView, IUpdateView {
     void setZi(ZiBean zi);
 
     void setBookList(List<BookBean> list);
+
+    void setIsFavor(boolean isFavor);
+
+    void setHistory(long chapter_id);
+
 }

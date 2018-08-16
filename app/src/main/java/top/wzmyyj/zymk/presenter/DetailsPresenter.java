@@ -4,8 +4,12 @@ import android.app.Activity;
 
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
+import top.wzmyyj.zymk.app.bean.BookBean;
+import top.wzmyyj.zymk.app.bean.FavorBean;
 import top.wzmyyj.zymk.app.data.Urls;
 import top.wzmyyj.zymk.app.tools.I;
+import top.wzmyyj.zymk.model.db.FavorModel;
+import top.wzmyyj.zymk.model.db.HistoryModel;
 import top.wzmyyj.zymk.model.net.DetailsModel;
 import top.wzmyyj.zymk.model.net.box.DetailsBox;
 import top.wzmyyj.zymk.presenter.base.BasePresenter;
@@ -18,10 +22,14 @@ import top.wzmyyj.zymk.view.iv.IDetailsView;
 
 public class DetailsPresenter extends BasePresenter<IDetailsView> {
     private DetailsModel mModel;
+    private FavorModel favorModel;
+    private HistoryModel historyModel;
 
     public DetailsPresenter(Activity activity, IDetailsView iv) {
         super(activity, iv);
         mModel = new DetailsModel();
+        favorModel = new FavorModel(activity);
+        historyModel = new HistoryModel(activity);
     }
 
 
@@ -76,4 +84,63 @@ public class DetailsPresenter extends BasePresenter<IDetailsView> {
             I.toBrowser(mActivity, href);
         }
     }
+
+    public void isFavor(long id) {
+        favorModel.isFavor(id, new Observer<Boolean>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(Boolean is) {
+                mView.setIsFavor(is);
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                mView.showToast("Error:" + e.getMessage());
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
+    }
+
+    public void addFavor(BookBean book) {
+        favorModel.insert(book, new Observer<FavorBean>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(FavorBean favorBean) {
+                if(favorBean != null){
+                    mView.setIsFavor(true);
+                    mView.showToast("收藏成功！");
+                }else{
+                    mView.setIsFavor(false);
+                    mView.showToast("已经收藏！");
+                }
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                mView.showToast("Error:" + e.getMessage());
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
+    }
+
+    public void history(long id) {
+
+    }
+
 }

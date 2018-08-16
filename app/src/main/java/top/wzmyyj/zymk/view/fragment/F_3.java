@@ -66,7 +66,7 @@ public class F_3 extends BaseFragment<FindPresenter> implements IF_3View {
         }
         titles.add("收藏");
         titles.add("历史");
-        titles.add("下载");
+        titles.add("缓存");
         ViewTitlePagerAdapter pagerAdapter = new ViewTitlePagerAdapter(viewList, titles);
         mViewPager.setAdapter(pagerAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
