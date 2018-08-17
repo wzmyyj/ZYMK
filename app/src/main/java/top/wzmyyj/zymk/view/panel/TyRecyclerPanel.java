@@ -130,7 +130,7 @@ public class TyRecyclerPanel extends BaseRecyclerPanel<BookBean, TyPresenter> {
     @Override
     protected void setFooter() {
         super.setFooter();
-        mFooter = mInflater.inflate(R.layout.layout_footer, null);
+        mFooter = mInflater.inflate(R.layout.layout_footer2, null);
         tv_end = mFooter.findViewById(R.id.tv_end);
         tv_end.setText("-- 加载中。。。 --");
         tv_end.setOnClickListener(new View.OnClickListener() {

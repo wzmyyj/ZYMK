@@ -84,10 +84,10 @@ public class FavorModel {
                 try {
                     FavorDbDao favorDbDao = manager.getDaoSession().getFavorDbDao();
                     // 查询原来是否已有。
-                    FavorDb dd = favorDbDao.queryBuilder().where(FavorDbDao.Properties.Id.eq((long) book.getId())).unique();
+                    FavorDb dd = favorDbDao.load((long)book.getId());
                     // 有的话，直接返回。
                     if (dd != null) {
-                        observableEmitter.onNext(null);
+                        observableEmitter.onNext(new FavorBean());//内容为空的对象。
                     } else {
                         // 插入。
                         FavorDb db = new FavorDb((long) book.getId(), book.getTitle(), book.getUpdate_time(),
@@ -135,6 +135,30 @@ public class FavorModel {
                 .subscribe(observer);
     }
 
+
+    public void deleteSome(final Long[] ids, Observer<Boolean> observer) {
+        Observable.create(new ObservableOnSubscribe<Boolean>() {
+            @Override
+            public void subscribe(@NonNull ObservableEmitter<Boolean> observableEmitter) throws Exception {
+                try {
+                    FavorDbDao favorDbDao = manager.getDaoSession().getFavorDbDao();
+                    favorDbDao.deleteByKeyInTx(ids);
+                    observableEmitter.onNext(true);
+                } catch (Exception e) {
+                    observableEmitter.onError(e);
+                    e.printStackTrace();
+                } finally {
+                    observableEmitter.onComplete();
+                }
+            }
+
+        })
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(observer);
+    }
+
     public void isFavor(final Long id, Observer<Boolean> observer) {
         Observable.create(new ObservableOnSubscribe<Boolean>() {
             @Override
@@ -142,7 +166,7 @@ public class FavorModel {
                 try {
                     FavorDbDao favorDbDao = manager.getDaoSession().getFavorDbDao();
                     // 查询原来是否已有。
-                    FavorDb dd = favorDbDao.queryBuilder().where(FavorDbDao.Properties.Id.eq(id)).unique();
+                    FavorDb dd = favorDbDao.load(id);
                     // 有的话，返回true，否则false。
                     if (dd != null) {
                         // 设为已读。

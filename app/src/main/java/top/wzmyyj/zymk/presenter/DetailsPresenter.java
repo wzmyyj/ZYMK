@@ -2,11 +2,14 @@ package top.wzmyyj.zymk.presenter;
 
 import android.app.Activity;
 
+import org.greenrobot.eventbus.EventBus;
+
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 import top.wzmyyj.zymk.app.bean.BookBean;
 import top.wzmyyj.zymk.app.bean.FavorBean;
 import top.wzmyyj.zymk.app.data.Urls;
+import top.wzmyyj.zymk.app.event.FavorListChangeEvent;
 import top.wzmyyj.zymk.app.tools.I;
 import top.wzmyyj.zymk.model.db.FavorModel;
 import top.wzmyyj.zymk.model.db.HistoryModel;
@@ -118,11 +121,12 @@ public class DetailsPresenter extends BasePresenter<IDetailsView> {
 
             @Override
             public void onNext(FavorBean favorBean) {
-                if(favorBean != null){
+                if (favorBean.getBook() != null) {
                     mView.setIsFavor(true);
                     mView.showToast("收藏成功！");
-                }else{
-                    mView.setIsFavor(false);
+                    EventBus.getDefault().post(new FavorListChangeEvent(true));
+                } else {
+                    mView.setIsFavor(true);
                     mView.showToast("已经收藏！");
                 }
             }

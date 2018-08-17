@@ -363,12 +363,14 @@ public class DocUtil {
         MuBean mu = getMu(swipers.get(1));
         ZiBean zi = getZi(swipers.get(2));
 
-        HuaBean laseHua=mu.getHuaList().get(0);
-        long chapter_id=laseHua.getId();
-        String chapter_name=laseHua.getName();
+        HuaBean laseHua = mu.getHuaList().get(mu.getHuaList().size() - 1);
+        long chapter_id = laseHua.getId();
+        String chapter_name = laseHua.getName();
+        long update_time = laseHua.getUptime();
         mainBook.setChapter_id(chapter_id);
         mainBook.setChapter(chapter_name);
         mainBook.setDesc(xi.getJuqing());
+        mainBook.setUpdate_time(update_time);
         xi.getAuthor().getBookList().add(mainBook);
 
         mu.setBook_id(mainBook.getId());

@@ -22,6 +22,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="25dp"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
 
             <TextView
@@ -35,13 +36,14 @@
 
             <TextView
                 android:id="@+id/tv_book_favor"
-                android:layout_width="40dp"
-                android:layout_height="match_parent"
-                android:layout_marginRight="10dp"
-                android:gravity="center_vertical"
+                android:layout_width="36dp"
+                android:layout_height="15dp"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/bg_favor"
+                android:gravity="center"
                 android:text="已收藏"
                 android:textColor="@color/colorWhite"
-                android:textSize="12sp"
+                android:textSize="10sp"
                 android:visibility="gone" />
         </LinearLayout>
 
