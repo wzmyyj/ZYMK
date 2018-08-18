@@ -75,14 +75,29 @@ public class TypeRecyclerPanel extends BaseRecyclerPanel<TypeBean, TypePresenter
 
     @Override
     public Object f(int w, Object... objects) {
+        if (w == -1) {
+            notifyDataSetChanged();
+            return null;
+        }
         List<TypeBean> typeList = (List<TypeBean>) objects[0];
         if (typeList != null && typeList.size() > 0) {
             mData.clear();
             for (TypeBean bean : typeList) {
                 mData.add(bean);
             }
-            notifyDataSetChanged();
         }
+        notifyDataSetChanged();
         return super.f(w, objects);
     }
+
+    protected TextView tv_empty;
+
+    @Override
+    protected void setEmpty() {
+        mEmpty = mInflater.inflate(R.layout.layout_empty, null);
+        tv_empty = mEmpty.findViewById(R.id.tv_empty_text);
+        mEmpty.setVisibility(View.GONE);
+        tv_empty.setText("下滑刷新，重新加载。");
+    }
+
 }

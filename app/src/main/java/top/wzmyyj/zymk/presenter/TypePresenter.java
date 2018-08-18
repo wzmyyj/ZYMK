@@ -41,6 +41,11 @@ public class TypePresenter extends BasePresenter<IF_2View> {
 
             @Override
             public void onError(Throwable e) {
+                mView.update(-1,
+                        e.getMessage(),
+                        e.getMessage(),
+                        e.getMessage(),
+                        e.getMessage());
                 mView.showToast("Error:" + e.getMessage());
             }
 
@@ -54,6 +59,7 @@ public class TypePresenter extends BasePresenter<IF_2View> {
     public void goTy(String href) {
         I.toTyActivity(mActivity, href);
     }
+
     public void goSearch() {
         I.toSearchActivity(mActivity);
     }

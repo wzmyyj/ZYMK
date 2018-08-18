@@ -12,7 +12,6 @@ import java.util.Collections;
 import java.util.List;
 
 import top.wzmyyj.wzm_sdk.adapter.ivd.IVD;
-import top.wzmyyj.wzm_sdk.adapter.ivd.SingleIVD;
 import top.wzmyyj.zymk.R;
 import top.wzmyyj.zymk.app.bean.BookBean;
 import top.wzmyyj.zymk.app.bean.FavorBean;
@@ -37,10 +36,15 @@ public class FavorRecyclerPanel extends FindRecyclerPanel<FavorBean> {
 
     @Override
     protected void setIVD(List<IVD<FavorBean>> ivd) {
-        ivd.add(new SingleIVD<FavorBean>() {
+        ivd.add(new IVD<FavorBean>() {
             @Override
             public int getItemViewLayoutId() {
                 return R.layout.layout_book_favor;
+            }
+
+            @Override
+            public boolean isForViewType(FavorBean item, int position) {
+                return !isGongge;// 列表形式。
             }
 
             @Override
@@ -81,19 +85,68 @@ public class FavorRecyclerPanel extends FindRecyclerPanel<FavorBean> {
             }
         });
 
+        ivd.add(new IVD<FavorBean>() {
+            @Override
+            public int getItemViewLayoutId() {
+                return R.layout.layout_book_find;
+            }
+
+            @Override
+            public boolean isForViewType(FavorBean item, int position) {
+                return isGongge;// 表格形式。
+            }
+
+            @Override
+            public void convert(ViewHolder holder, FavorBean favorBean, int position) {
+                BookBean bookBean = favorBean.getBook();
+                ImageView img_book = holder.getView(R.id.img_book);
+                TextView tv_new = holder.getView(R.id.tv_new);
+                TextView tv_title = holder.getView(R.id.tv_title);
+                TextView tv_some = holder.getView(R.id.tv_some);
+
+                tv_title.setText(bookBean.getTitle());
+
+
+                long update_time = bookBean.getUpdate_time();
+                // 最新更新是否一周内。
+                if (Vanessa.isInDay(update_time, 7)) {
+                    tv_new.setVisibility(View.VISIBLE);
+                } else {
+                    tv_new.setVisibility(View.GONE);
+                }
+
+                tv_some.setText(bookBean.getChapter());
+
+                G.img(context, bookBean.getData_src(), img_book);
+
+                ImageView img_select = holder.getView(R.id.img_select);
+                if (isCanSelect) {
+                    img_select.setVisibility(View.VISIBLE);
+                } else {
+                    img_select.setVisibility(View.GONE);
+                }
+                if (isSelect(favorBean)) {
+                    img_select.setImageResource(R.mipmap.icon_mine_has_selected);
+                } else {
+                    img_select.setImageResource(R.mipmap.icon_mine_not_select);
+                }
+
+            }
+        });
+
     }
 
     @Override
     public void onItemClick(View view, RecyclerView.ViewHolder holder, int position) {
         super.onItemClick(view, holder, position);
         if (isCanSelect) {
-            if (isSelect(mData.get(position - 1))) {
-                unSelect(mData.get(position - 1));
+            if (isSelect(mData.get(position))) {
+                unSelect(mData.get(position));
             } else {
-                select(mData.get(position - 1));
+                select(mData.get(position));
             }
         } else {
-            mPresenter.goDetails(mData.get(position - 1).getBook().getHref());
+            mPresenter.goDetails(mData.get(position).getBook().getHref());
         }
     }
 

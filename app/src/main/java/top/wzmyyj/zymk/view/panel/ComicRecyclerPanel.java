@@ -498,7 +498,7 @@ public class ComicRecyclerPanel extends BaseRecyclerPanel<ComicBean, ComicPresen
             img_auto.setImageResource(R.mipmap.ic_read_stop);
             myRunnable.a = 0;
             myRunnable.b = Integer.MAX_VALUE;
-            myRunnable.c = DensityUtil.dp2px(context, bsb_auto.getProgressFloat() * 3);
+            myRunnable.c = DensityUtil.dp2px(context, bsb_auto.getProgressFloat() * 2);
             handler.postDelayed(myRunnable, speed);
         }
 
@@ -909,7 +909,7 @@ public class ComicRecyclerPanel extends BaseRecyclerPanel<ComicBean, ComicPresen
 
                 @Override
                 public void getProgressOnActionUp(BubbleSeekBar bubbleSeekBar, int progress, float progressFloat) {
-                    myRunnable.c = DensityUtil.dp2px(context, (float) 3 * progressFloat);
+                    myRunnable.c = DensityUtil.dp2px(context, (float) 2 * progressFloat);
                 }
 
                 @Override
@@ -965,7 +965,7 @@ public class ComicRecyclerPanel extends BaseRecyclerPanel<ComicBean, ComicPresen
             }
             myRunnable.a = 0;
             myRunnable.b = MockUtil.getScreenHeight(context) / 2;
-            myRunnable.c = MockUtil.getScreenHeight(context) / 20;
+            myRunnable.c = MockUtil.getScreenHeight(context) / 30;
             handler.postDelayed(myRunnable, speed);
         }
 

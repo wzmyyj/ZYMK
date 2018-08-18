@@ -41,6 +41,10 @@ public abstract class RecyclerPanel<T> extends InitPanel
     protected View mHeader;
     protected View mFooter;
 
+    protected View mEmpty;
+
+    protected FrameLayout mEmptyLayout;
+
     protected int delayed_r = 1500, delayed_l = 1000;
 
 
@@ -55,6 +59,7 @@ public abstract class RecyclerPanel<T> extends InitPanel
         mFrameLayout = view.findViewById(R.id.frameLayout);
         mRecyclerView = view.findViewById(R.id.recyclerView);
         mRefreshLayout = view.findViewById(R.id.refreshLayout);
+        mEmptyLayout = view.findViewById(R.id.fl_empty);
         mRefreshLayout.setHeaderHeight(100);
         mRefreshLayout.setFooterHeight(100);
         mRefreshLayout.setPrimaryColorsId(R.color.colorRefresh, R.color.colorWhite);
@@ -64,6 +69,10 @@ public abstract class RecyclerPanel<T> extends InitPanel
         setIVD(mIVD);
         setHeader();
         setFooter();
+        setEmpty();
+        if (mEmpty != null) {
+            mEmptyLayout.addView(mEmpty);
+        }
     }
 
 
@@ -80,6 +89,9 @@ public abstract class RecyclerPanel<T> extends InitPanel
     protected void setFooter() {
     }
 
+    protected void setEmpty() {
+
+    }
 
     @Override
     protected void initData() {
@@ -151,13 +163,35 @@ public abstract class RecyclerPanel<T> extends InitPanel
 
     public abstract void update();
 
+
+    // 排序
+    protected void sort() {
+
+    }
+
     protected void notifyDataSetChanged() {
+        sort();
         mHeaderAndFooterWrapper.notifyDataSetChanged();
         upHeaderAndFooter();
+        upEmpty();
     }
 
     protected void upHeaderAndFooter() {
+        if (mFooter == null) return;
+        if (mData.size() == 0) {
+            mFooter.setVisibility(View.GONE);
+        } else {
+            mFooter.setVisibility(View.VISIBLE);
+        }
+    }
 
+    protected void upEmpty() {
+        if (mEmpty == null) return;
+        if (mData.size() == 0) {
+            mEmpty.setVisibility(View.VISIBLE);
+        } else {
+            mEmpty.setVisibility(View.GONE);
+        }
     }
 
 

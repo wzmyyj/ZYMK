@@ -102,7 +102,7 @@ public class TyRecyclerPanel extends BaseRecyclerPanel<BookBean, TyPresenter> {
         }
         List<BookBean> beanList = (List<BookBean>) objects[0];
         if (beanList == null && beanList.size() == 0) {
-            tv_end.setText("-- 没有结果TAT --");
+            notifyDataSetChanged();
             return null;
         }
         String base = (String) objects[1];
@@ -115,13 +115,8 @@ public class TyRecyclerPanel extends BaseRecyclerPanel<BookBean, TyPresenter> {
         for (BookBean book : beanList) {
             mData.add(book);
         }
-        notifyDataSetChanged();
         next_href = next;
-        if (TextUtils.isEmpty(next_href)) {
-            tv_end.setText("-- 没有了哦 --");
-        } else {
-            tv_end.setText("-- 加载更多 --");
-        }
+        notifyDataSetChanged();
         return super.f(w, objects);
     }
 
@@ -132,12 +127,31 @@ public class TyRecyclerPanel extends BaseRecyclerPanel<BookBean, TyPresenter> {
         super.setFooter();
         mFooter = mInflater.inflate(R.layout.layout_footer2, null);
         tv_end = mFooter.findViewById(R.id.tv_end);
-        tv_end.setText("-- 加载中。。。 --");
         tv_end.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 loadMore();
             }
         });
+    }
+
+    protected TextView tv_empty;
+
+    @Override
+    protected void setEmpty() {
+        mEmpty = mInflater.inflate(R.layout.layout_empty, null);
+        tv_empty = mEmpty.findViewById(R.id.tv_empty_text);
+        mEmpty.setVisibility(View.GONE);
+        tv_empty.setText("什么都没有哦。。。");
+    }
+
+    @Override
+    protected void upHeaderAndFooter() {
+        super.upHeaderAndFooter();
+        if (TextUtils.isEmpty(next_href)) {
+            tv_end.setText("-- 没有了哦 --");
+        } else {
+            tv_end.setText("-- 加载更多 --");
+        }
     }
 }
