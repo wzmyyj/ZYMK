@@ -12,8 +12,10 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+import top.wzmyyj.zymk.app.bean.AuthorBean;
 import top.wzmyyj.zymk.app.bean.BookBean;
 import top.wzmyyj.zymk.app.bean.ChapterBean;
+import top.wzmyyj.zymk.app.bean.FansBean;
 
 /**
  * Created by yyj on 2018/08/02. email: 2209011667@qq.com
@@ -25,6 +27,10 @@ public class ComicBox {
     private BookBean book;
     private List<ChapterBean> chapterList;
     private List<BookBean> bookList;
+
+    private AuthorBean author;
+
+    private List<FansBean> fansList;
 
 
     // 定义静态内部类-->序列化器
@@ -101,6 +107,48 @@ public class ComicBox {
         }
     }
 
+
+    public static class Deserializer2 implements JsonDeserializer<ComicBox> {
+
+        @Override
+        public ComicBox deserialize(JsonElement json, Type arg1,
+                                    JsonDeserializationContext arg2) throws JsonParseException {
+
+            JsonObject jsonObject = json.getAsJsonObject();
+            int status = jsonObject.get("status").getAsInt();
+            String msg = jsonObject.get("msg").getAsString();
+            List<BookBean> list = new ArrayList<>();
+
+            JsonObject data = jsonObject.getAsJsonArray("data").get(0).getAsJsonObject();
+            BookBean book = new BookBean();
+            int id = data.get("comicid").getAsInt();
+            String title = data.get("comicname").getAsString();
+            float score = 1.0f * (int)data.get("pingfen").getAsDouble() / 10;
+            List<String> tags = new ArrayList<>();
+            JsonArray ts = data.getAsJsonArray("comic_type");
+            if (ts != null && ts.size() > 0) {
+                for (int i = 0; i < ts.size(); i++) {
+                    JsonObject t = ts.get(i).getAsJsonObject();
+                    String tag = t.get("name").getAsString();
+                    tags.add(tag);
+                }
+            }
+            JsonObject last_chapter =data.getAsJsonObject("last_chapter");
+            long chapter_id=last_chapter.get("id").getAsLong();
+            String chapter_name=last_chapter.get("name").getAsString();
+
+
+            book.setTitle(title);
+            book.setId(id);
+            book.setStar("" + score);
+            book.setTags(tags);
+            book.setChapter_id(chapter_id);
+            book.setChapter(chapter_name);
+
+            ComicBox box = new ComicBox(status, msg, book);
+            return box;
+        }
+    }
 
     public ComicBox(int status, String msg, BookBean book) {
         this.status = status;

@@ -141,26 +141,6 @@ public class DetailsMuPanel extends BasePanel<DetailsPresenter> {
     private int pager_size;
     private int sort_xu = -1;
 
-    private void setData(long chapter_id) {
-
-        if (chapter_id == 0) {
-            setData(1);
-            return;
-        }
-        int p = 1;
-        int i = mALLHuaList.size() - 1;
-        for (HuaBean hua : mALLHuaList) {
-            if (hua.getId() == chapter_id) {
-                mAdapter.setRead(chapter_id);
-                p = i / 32 + 1;
-                break;
-            }
-            i--;
-        }
-
-        setData(p);
-    }
-
     @OnClick(R.id.tv_left)
     public void left() {
         setData(tl_mu_pager.getSelectedTabPosition());
@@ -187,6 +167,25 @@ public class DetailsMuPanel extends BasePanel<DetailsPresenter> {
         sort(mALLHuaList, sort_xu);
         setData(read_chapter_id);
 
+    }
+    private void setData(long chapter_id) {
+
+        if (chapter_id == 0) {
+            setData(1);
+            return;
+        }
+        int p = 1;
+        int i = mALLHuaList.size() - 1;
+        for (HuaBean hua : mALLHuaList) {
+            if (hua.getId() == chapter_id) {
+                mAdapter.setRead(chapter_id);
+                p = i / 32 + 1;
+                break;
+            }
+            i--;
+        }
+
+        setData(p);
     }
 
     private void setData(int p) {

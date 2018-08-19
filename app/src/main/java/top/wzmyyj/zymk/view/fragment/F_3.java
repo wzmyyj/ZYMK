@@ -77,7 +77,9 @@ public class F_3 extends BaseFragment<FindPresenter> implements IF_3View {
         ViewTitlePagerAdapter pagerAdapter = new ViewTitlePagerAdapter(viewList, titles);
         mViewPager.setAdapter(pagerAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
-        mPresenter.loadFavor();
+//        mPresenter.loadFavor();
+
+        mPresenter.updateLoadFavor();
     }
 
 
@@ -102,9 +104,11 @@ public class F_3 extends BaseFragment<FindPresenter> implements IF_3View {
 
     @Subscribe
     public void onEvent(FavorListChangeEvent event) {
-        if (event.isChange())
+        if (event.isChange()) {
             mPresenter.loadFavor();
+        }
     }
+
 
     @Override
     public void onDestroy() {

@@ -1,6 +1,10 @@
 package top.wzmyyj.zymk.model.db;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,22 +15,30 @@ import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
+import retrofit2.Retrofit;
 import top.wzmyyj.zymk.app.bean.BookBean;
 import top.wzmyyj.zymk.app.bean.FavorBean;
+import top.wzmyyj.zymk.app.data.Urls;
+import top.wzmyyj.zymk.common.java.Vanessa;
 import top.wzmyyj.zymk.greendao.gen.FavorDbDao;
 import top.wzmyyj.zymk.model.db.dao.FavorDb;
 import top.wzmyyj.zymk.model.db.utils.DaoManager;
+import top.wzmyyj.zymk.model.net.box.ComicBox;
+import top.wzmyyj.zymk.model.net.service.ComicService;
+import top.wzmyyj.zymk.model.net.utils.ReOk;
 
 /**
  * Created by yyj on 2018/08/01. email: 2209011667@qq.com
  */
 
 public class FavorModel {
-    private DaoManager manager;
+
+    private FavorDbDao mDao;
 
     public FavorModel(Context context) {
-        manager = DaoManager.getInstance(context);
+        mDao = DaoManager.getInstance(context).getDaoSession().getFavorDbDao();
     }
 
     private List<FavorBean> db2beanList(List<FavorDb> DbList) {
@@ -57,8 +69,7 @@ public class FavorModel {
             @Override
             public void subscribe(@NonNull ObservableEmitter<List<FavorBean>> observableEmitter) throws Exception {
                 try {
-                    FavorDbDao favorDbDao = manager.getDaoSession().getFavorDbDao();
-                    List<FavorDb> list = favorDbDao.loadAll();
+                    List<FavorDb> list = mDao.loadAll();
                     List<FavorBean> data = db2beanList(list);
                     observableEmitter.onNext(data);
                 } catch (Exception e) {
@@ -82,9 +93,8 @@ public class FavorModel {
             @Override
             public void subscribe(@NonNull ObservableEmitter<FavorBean> observableEmitter) throws Exception {
                 try {
-                    FavorDbDao favorDbDao = manager.getDaoSession().getFavorDbDao();
                     // 查询原来是否已有。
-                    FavorDb dd = favorDbDao.load((long)book.getId());
+                    FavorDb dd = mDao.load((long) book.getId());
                     // 有的话，直接返回。
                     if (dd != null) {
                         observableEmitter.onNext(new FavorBean());//内容为空的对象。
@@ -92,7 +102,7 @@ public class FavorModel {
                         // 插入。
                         FavorDb db = new FavorDb((long) book.getId(), book.getTitle(), book.getUpdate_time(),
                                 book.getChapter(), book.getChapter_id(), false);
-                        favorDbDao.insert(db);
+                        mDao.insert(db);
                         // 转化。
                         FavorBean bean = db2bean(db);
                         observableEmitter.onNext(bean);
@@ -112,37 +122,12 @@ public class FavorModel {
                 .subscribe(observer);
     }
 
-    public void delete(final Long id, Observer<Long> observer) {
-        Observable.create(new ObservableOnSubscribe<Long>() {
-            @Override
-            public void subscribe(@NonNull ObservableEmitter<Long> observableEmitter) throws Exception {
-                try {
-                    FavorDbDao favorDbDao = manager.getDaoSession().getFavorDbDao();
-                    favorDbDao.deleteByKey(id);
-                    observableEmitter.onNext(id);
-                } catch (Exception e) {
-                    observableEmitter.onError(e);
-                    e.printStackTrace();
-                } finally {
-                    observableEmitter.onComplete();
-                }
-            }
-
-        })
-                .subscribeOn(Schedulers.io())
-                .unsubscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(observer);
-    }
-
-
-    public void deleteSome(final Long[] ids, Observer<Boolean> observer) {
+    public void delete(final Long[] ids, Observer<Boolean> observer) {
         Observable.create(new ObservableOnSubscribe<Boolean>() {
             @Override
             public void subscribe(@NonNull ObservableEmitter<Boolean> observableEmitter) throws Exception {
                 try {
-                    FavorDbDao favorDbDao = manager.getDaoSession().getFavorDbDao();
-                    favorDbDao.deleteByKeyInTx(ids);
+                    mDao.deleteByKeyInTx(ids);
                     observableEmitter.onNext(true);
                 } catch (Exception e) {
                     observableEmitter.onError(e);
@@ -164,14 +149,13 @@ public class FavorModel {
             @Override
             public void subscribe(@NonNull ObservableEmitter<Boolean> observableEmitter) throws Exception {
                 try {
-                    FavorDbDao favorDbDao = manager.getDaoSession().getFavorDbDao();
                     // 查询原来是否已有。
-                    FavorDb dd = favorDbDao.load(id);
+                    FavorDb dd = mDao.load(id);
                     // 有的话，返回true，否则false。
                     if (dd != null) {
                         // 设为已读。
                         dd.setIsUnRead(false);
-                        favorDbDao.update(dd);
+                        mDao.update(dd);
                         observableEmitter.onNext(true);
                     } else {
                         observableEmitter.onNext(false);
@@ -193,24 +177,48 @@ public class FavorModel {
 
 
     //更新数据。
-    public void updateAll(Observer<List<FavorBean>> observer) {
-        Observable.create(new ObservableOnSubscribe<List<FavorBean>>() {
-            @Override
-            public void subscribe(@NonNull ObservableEmitter<List<FavorBean>> observableEmitter) throws Exception {
-                try {
-                    FavorDbDao favorDbDao = manager.getDaoSession().getFavorDbDao();
-                    List<FavorDb> list = favorDbDao.loadAll();
-                    List<FavorBean> data = db2beanList(list);
-                    observableEmitter.onNext(data);
-                } catch (Exception e) {
-                    observableEmitter.onError(e);
-                    e.printStackTrace();
-                } finally {
-                    observableEmitter.onComplete();
-                }
-            }
 
-        })
+    @SuppressLint("CheckResult")
+    public void updateAll(Observer<FavorBean> observer) {
+
+        Observable.just(0)
+                .flatMap(new Function<Integer, Observable<FavorBean>>() {
+                    @Override
+                    public Observable<FavorBean> apply(Integer integer) throws Exception {
+                        List<FavorDb> list = mDao.loadAll();
+                        List<FavorBean> data = db2beanList(list);
+                        return Observable.fromIterable(data);
+                    }
+                })
+                .map(new Function<FavorBean, ComicBox>() {
+                    @Override
+                    public ComicBox apply(FavorBean favorBean) throws Exception {
+                        int comic_id = favorBean.getBook().getId();
+                        Gson gson = new GsonBuilder().registerTypeAdapter(ComicBox.class, new ComicBox.Deserializer2()).create();
+                        Retrofit retrofit = ReOk.bind(Urls.ZYMK_BaseApi, gson);
+                        ComicService service = retrofit.create(ComicService.class);
+                        Observable<ComicBox> observable = service.getComic(comic_id);
+                        return observable.blockingFirst();
+                    }
+                })
+                .map(new Function<ComicBox, FavorBean>() {
+                    @Override
+                    public FavorBean apply(ComicBox comicBox) throws Exception {
+                        BookBean book = comicBox.getBook();
+                        FavorDb db = new FavorDb((long) book.getId(), book.getTitle(), Vanessa.getTime(),
+                                book.getChapter(), book.getChapter_id(), false);
+
+                        FavorDb dd = mDao.load((long) book.getId());
+                        if (dd.getChapter_id() != db.getChapter_id()) {// 最新章节ID不一样则更新数据。
+                            mDao.update(db);
+                            FavorBean bean = db2bean(db);
+                            return bean;
+                        } else {
+                            FavorBean bean = db2bean(dd);
+                            return bean;
+                        }
+                    }
+                })
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

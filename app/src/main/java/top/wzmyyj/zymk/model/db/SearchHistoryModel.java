@@ -23,10 +23,10 @@ import top.wzmyyj.zymk.model.db.utils.DaoManager;
  */
 
 public class SearchHistoryModel {
-    private DaoManager manager;
+    private SearchHistoryDbDao mDao;
 
     public SearchHistoryModel(Context context) {
-        manager = DaoManager.getInstance(context);
+        mDao = DaoManager.getInstance(context).getDaoSession().getSearchHistoryDbDao();
     }
 
     private List<SearchHistoryBean> db2beanList(List<SearchHistoryDb> DbList) {
@@ -52,8 +52,7 @@ public class SearchHistoryModel {
             @Override
             public void subscribe(@NonNull ObservableEmitter<List<SearchHistoryBean>> observableEmitter) throws Exception {
                 try {
-                    SearchHistoryDbDao searchHistoryDbDao = manager.getDaoSession().getSearchHistoryDbDao();
-                    List<SearchHistoryDb> list = searchHistoryDbDao.loadAll();
+                    List<SearchHistoryDb> list = mDao.loadAll();
                     List<SearchHistoryBean> data = db2beanList(list);
                     observableEmitter.onNext(data);
                 } catch (Exception e) {
@@ -77,16 +76,15 @@ public class SearchHistoryModel {
             @Override
             public void subscribe(@NonNull ObservableEmitter<SearchHistoryBean> observableEmitter) throws Exception {
                 try {
-                    SearchHistoryDbDao searchHistoryDbDao = manager.getDaoSession().getSearchHistoryDbDao();
                     // 查询原来是否已有。
-                    SearchHistoryDb dd = searchHistoryDbDao.queryBuilder().where(SearchHistoryDbDao.Properties.Search_word.eq(word)).unique();
+                    SearchHistoryDb dd = mDao.queryBuilder().where(SearchHistoryDbDao.Properties.Search_word.eq(word)).unique();
                     // 有的话，将其删除。
                     if (dd != null) {
-                        searchHistoryDbDao.delete(dd);
+                        mDao.delete(dd);
                     }
                     // 插入。
                     SearchHistoryDb db = new SearchHistoryDb(null, word, Vanessa.getTime());
-                    long insert = searchHistoryDbDao.insert(db);
+                    long insert = mDao.insert(db);
                     db.setId(insert);
                     // 转化。
                     SearchHistoryBean bean = db2bean(db);
@@ -111,8 +109,7 @@ public class SearchHistoryModel {
             @Override
             public void subscribe(@NonNull ObservableEmitter<Long> observableEmitter) throws Exception {
                 try {
-                    SearchHistoryDbDao searchHistoryDbDao = manager.getDaoSession().getSearchHistoryDbDao();
-                    searchHistoryDbDao.deleteByKey(id);
+                    mDao.deleteByKey(id);
                     observableEmitter.onNext(id);
                 } catch (Exception e) {
                     observableEmitter.onError(e);
@@ -134,8 +131,7 @@ public class SearchHistoryModel {
             @Override
             public void subscribe(@NonNull ObservableEmitter<Long> observableEmitter) throws Exception {
                 try {
-                    SearchHistoryDbDao searchHistoryDbDao = manager.getDaoSession().getSearchHistoryDbDao();
-                    searchHistoryDbDao.deleteAll();
+                    mDao.deleteAll();
                     observableEmitter.onNext(null);
                 } catch (Exception e) {
                     observableEmitter.onError(e);

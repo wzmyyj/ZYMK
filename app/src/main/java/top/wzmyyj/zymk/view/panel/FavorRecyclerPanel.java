@@ -54,7 +54,6 @@ public class FavorRecyclerPanel extends FindRecyclerPanel<FavorBean> {
                 TextView tv_new = holder.getView(R.id.tv_new);
                 TextView tv_chapter = holder.getView(R.id.tv_chapter);
                 TextView tv_title = holder.getView(R.id.tv_title);
-                TextView tv_update_time = holder.getView(R.id.tv_update_time);
 
                 tv_title.setText(bookBean.getTitle());
                 tv_chapter.setText(bookBean.getChapter());
@@ -66,7 +65,6 @@ public class FavorRecyclerPanel extends FindRecyclerPanel<FavorBean> {
                 } else {
                     tv_new.setVisibility(View.GONE);
                 }
-                tv_update_time.setText(Vanessa.getEasyText(update_time));
 
                 G.img(context, bookBean.getData_src(), img_book);
 

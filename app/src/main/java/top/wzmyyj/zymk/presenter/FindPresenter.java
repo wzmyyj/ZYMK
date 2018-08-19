@@ -2,6 +2,7 @@ package top.wzmyyj.zymk.presenter;
 
 import android.app.Activity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Observer;
@@ -37,6 +38,32 @@ public class FindPresenter extends BasePresenter<IF_3View> {
         }
     }
 
+
+    List<FavorBean>  favorList=new ArrayList<>();
+    public void updateLoadFavor(){
+        favorModel.updateAll(new Observer<FavorBean>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+                favorList.clear();
+            }
+
+            @Override
+            public void onNext(FavorBean favorBean) {
+                favorList.add(favorBean);
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                mView.showToast("Error:" + e.getMessage());
+            }
+
+            @Override
+            public void onComplete() {
+                mView.loadFavor(favorList);
+            }
+        });
+    }
+
     public void loadFavor() {
         favorModel.loadAll(new Observer<List<FavorBean>>() {
             @Override
@@ -62,7 +89,7 @@ public class FindPresenter extends BasePresenter<IF_3View> {
     }
 
     public void deleteSomeFavor(Long[] ids) {
-        favorModel.deleteSome(ids, new Observer<Boolean>() {
+        favorModel.delete(ids, new Observer<Boolean>() {
             @Override
             public void onSubscribe(Disposable d) {
 
@@ -75,7 +102,7 @@ public class FindPresenter extends BasePresenter<IF_3View> {
 
             @Override
             public void onError(Throwable e) {
-
+                mView.showToast("Error:" + e.getMessage());
             }
 
             @Override

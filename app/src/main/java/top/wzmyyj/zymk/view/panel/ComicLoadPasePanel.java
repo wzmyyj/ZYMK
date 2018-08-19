@@ -91,7 +91,7 @@ public class ComicLoadPasePanel extends BasePanel<ComicPresenter> {
         if (w == -1) {
             tv_loadpose.setText("加载失败，点击重试！");
             tv_loadpose.setTextColor(context.getResources().getColor(R.color.colorRed));
-            img_loadpose.setImageResource(R.mipmap.pic_fail);
+            img_loadpose.setImageResource(R.mipmap.pic_load_error);
             mHandler.sendEmptyMessage(0);
             return null;
         }

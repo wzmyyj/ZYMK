@@ -20,7 +20,7 @@ import top.wzmyyj.zymk.model.net.utils.ReOk;
 public class ComicModel {
 
     public void getComic(int comic_id, Observer<ComicBox> observer) {
-        Gson gson = new GsonBuilder().registerTypeAdapter(ComicBox.class, new ComicBox.Deserializer()).create();
+        Gson gson = new GsonBuilder().registerTypeAdapter(ComicBox.class, new ComicBox.Deserializer2()).create();
         Retrofit retrofit = ReOk.bind(Urls.ZYMK_BaseApi, gson);
         ComicService service = retrofit.create(ComicService.class);
         Observable<ComicBox> observable = service.getComic(comic_id);
