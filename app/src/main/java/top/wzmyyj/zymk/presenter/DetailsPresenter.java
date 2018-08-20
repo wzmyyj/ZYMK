@@ -8,6 +8,7 @@ import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 import top.wzmyyj.zymk.app.bean.BookBean;
 import top.wzmyyj.zymk.app.bean.FavorBean;
+import top.wzmyyj.zymk.app.bean.HistoryBean;
 import top.wzmyyj.zymk.app.data.Urls;
 import top.wzmyyj.zymk.app.event.FavorListChangeEvent;
 import top.wzmyyj.zymk.app.tools.I;
@@ -144,7 +145,27 @@ public class DetailsPresenter extends BasePresenter<IDetailsView> {
     }
 
     public void history(long id) {
+        historyModel.load(id, new Observer<HistoryBean>() {
+            @Override
+            public void onSubscribe(Disposable d) {
 
+            }
+
+            @Override
+            public void onNext(HistoryBean historyBean) {
+                mView.setHistory(historyBean.getChapter());
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                mView.showToast("Error:" + e.getMessage());
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
     }
 
 }

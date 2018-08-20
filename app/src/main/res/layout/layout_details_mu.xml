@@ -31,7 +31,8 @@
             android:id="@+id/img_mu_xu"
             android:layout_width="15dp"
             android:layout_height="15dp"
-            android:layout_gravity="bottom" />
+            android:layout_gravity="bottom"
+            android:src="@mipmap/svg_booklist_up" />
 
         <TextView
             android:id="@+id/tv_mu_xu"
@@ -39,6 +40,7 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="1dp"
             android:gravity="bottom"
+            android:text="升序"
             android:textColor="@color/colorGray_9"
             android:textSize="12sp" />
 

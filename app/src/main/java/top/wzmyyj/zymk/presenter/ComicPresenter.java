@@ -2,6 +2,8 @@ package top.wzmyyj.zymk.presenter;
 
 import android.app.Activity;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -11,8 +13,11 @@ import io.reactivex.disposables.Disposable;
 import top.wzmyyj.zymk.app.bean.BookBean;
 import top.wzmyyj.zymk.app.bean.ChapterBean;
 import top.wzmyyj.zymk.app.bean.ComicBean;
+import top.wzmyyj.zymk.app.bean.HistoryBean;
 import top.wzmyyj.zymk.app.data.Urls;
+import top.wzmyyj.zymk.app.event.HistoryListChangeEvent;
 import top.wzmyyj.zymk.app.tools.I;
+import top.wzmyyj.zymk.model.db.HistoryModel;
 import top.wzmyyj.zymk.model.net.ComicModel;
 import top.wzmyyj.zymk.model.net.box.ComicBox;
 import top.wzmyyj.zymk.presenter.base.BasePresenter;
@@ -26,10 +31,12 @@ import top.wzmyyj.zymk.view.iv.IComicView;
 public class ComicPresenter extends BasePresenter<IComicView> {
 
     private ComicModel mModel;
+    private HistoryModel historyModel;
 
     public ComicPresenter(Activity activity, IComicView iv) {
         super(activity, iv);
         mModel = new ComicModel();
+        historyModel = new HistoryModel(activity);
     }
 
     public long getChapter_id() {
@@ -109,8 +116,35 @@ public class ComicPresenter extends BasePresenter<IComicView> {
         }
     }
 
+    public void goSetting() {
+        I.toSettingActivity(mActivity);
+    }
 
-    public void saveHistory(BookBean book, long chapter_id) {
+    public void saveHistory(BookBean book, ChapterBean chapter) {
+        historyModel.insert(book, chapter, new Observer<HistoryBean>() {
+            @Override
+            public void onSubscribe(Disposable d) {
 
+            }
+
+            @Override
+            public void onNext(HistoryBean historyBean) {
+                if (historyBean == null) {
+                    mView.showToast("保存失败！");
+                    return;
+                }
+                EventBus.getDefault().post(new HistoryListChangeEvent(true));
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                mView.showToast("Error:" + e.getMessage());
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
     }
 }

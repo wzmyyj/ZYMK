@@ -53,6 +53,7 @@ public class HuaAdapter extends CommonAdapter<HuaBean> {
 
         if (huaBean.getId()==read) {
             img_reading.setVisibility(View.VISIBLE);
+            img_new.setVisibility(View.GONE);// 防止两个标记重叠。
         } else {
             img_reading.setVisibility(View.GONE);
         }

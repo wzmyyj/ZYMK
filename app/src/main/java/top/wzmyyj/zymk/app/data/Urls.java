@@ -53,7 +53,8 @@ public class Urls {
     // GitHub
     public static String YYJ_GitHub = "https://github.com/wzmyyj/ZYMK";
 
-
+    // 关于作者
+    public static String YYJ_About = "http://wzmyyj.top/about";
 
 
 }

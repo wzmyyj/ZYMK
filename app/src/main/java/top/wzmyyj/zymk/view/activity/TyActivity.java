@@ -1,11 +1,10 @@
 package top.wzmyyj.zymk.view.activity;
 
-import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import top.wzmyyj.zymk.R;
 import top.wzmyyj.zymk.presenter.TyPresenter;
 import top.wzmyyj.zymk.view.activity.base.BaseActivity;
@@ -32,8 +31,12 @@ public class TyActivity extends BaseActivity<TyPresenter> implements ITyView {
 
     @BindView(R.id.fl_panel)
     FrameLayout layout;
-    @BindView(R.id.img_back)
-    ImageView img_back;
+
+    @OnClick(R.id.img_back)
+    public void back() {
+        mPresenter.finish();
+    }
+
     @BindView(R.id.tv_title)
     TextView tv_title;
 
@@ -47,18 +50,6 @@ public class TyActivity extends BaseActivity<TyPresenter> implements ITyView {
     protected void initData() {
         super.initData();
         mPresenter.loadData();
-    }
-
-
-    @Override
-    protected void initListener() {
-        super.initListener();
-        img_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mPresenter.finish();
-            }
-        });
     }
 
     @Override

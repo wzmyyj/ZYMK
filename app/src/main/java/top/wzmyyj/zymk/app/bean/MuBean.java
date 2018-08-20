@@ -12,16 +12,6 @@ public class MuBean {
     private List<HuaBean> huaList;
     private int book_id;
 
-    private long reading_id;
-
-    public long getReading_id() {
-        return reading_id;
-    }
-
-    public void setReading_id(long reading_id) {
-        this.reading_id = reading_id;
-    }
-
     public MuBean(String time_desc, long time) {
         this.time_desc = time_desc;
         this.time = time;

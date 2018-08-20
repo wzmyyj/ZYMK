@@ -17,6 +17,9 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 import com.zhy.adapter.recyclerview.MultiItemTypeAdapter;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,9 +29,11 @@ import top.wzmyyj.wzm_sdk.adapter.ViewTitlePagerAdapter;
 import top.wzmyyj.wzm_sdk.panel.Panel;
 import top.wzmyyj.zymk.R;
 import top.wzmyyj.zymk.app.bean.BookBean;
+import top.wzmyyj.zymk.app.bean.ChapterBean;
 import top.wzmyyj.zymk.app.bean.MuBean;
 import top.wzmyyj.zymk.app.bean.XiBean;
 import top.wzmyyj.zymk.app.bean.ZiBean;
+import top.wzmyyj.zymk.app.event.HistoryListChangeEvent;
 import top.wzmyyj.zymk.app.tools.G;
 import top.wzmyyj.zymk.common.utils.StatusBarUtil;
 import top.wzmyyj.zymk.presenter.DetailsPresenter;
@@ -69,6 +74,9 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
     protected void initSome(Bundle savedInstanceState) {
         super.initSome(savedInstanceState);
         StatusBarUtil.initStatusBar(activity, true, true, true);
+        if (!EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().register(this);
+        }
     }
 
     // top
@@ -106,10 +114,20 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
     ImageView img_book;
     @BindView(R.id.tv_book_star)
     TextView tv_book_star;
-    @BindView(R.id.bt_save)
-    Button bt_save;
+
     @BindView(R.id.bt_read)
     Button bt_read;
+
+    @OnClick(R.id.bt_read)
+    public void read() {
+        mPresenter.goComic(mBook.getId(), history_chapter_id);
+    }
+
+    @OnClick(R.id.bt_save)
+    public void save() {
+        showToast("暂不支持离线缓存！");
+    }
+
 
     // tab
     @BindView(R.id.tabLayout)
@@ -222,7 +240,7 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
         G.img(context, book.getData_src(), img_book);
         G.imgBlur(context, book.getData_src(), img_book_bg, 15);
 
-        long id = book.getId();
+        long id = (long) book.getId();
         mPresenter.isFavor(id);
         mPresenter.history(id);
 
@@ -263,8 +281,31 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
         }
     }
 
+    private long history_chapter_id = 0;
+
     @Override
-    public void setHistory(long chapter_id) {
+    public void setHistory(ChapterBean chapter) {
+        if (chapter == null) {
+            bt_read.setText("开始阅读");
+        } else {
+            bt_read.setText("续看" + chapter.getChapter_name());
+            history_chapter_id = chapter.getChapter_id();
+            getPanel(1).f(1, chapter);
+        }
 
     }
+
+    @Subscribe
+    public void onEvent(HistoryListChangeEvent event) {
+        if (event.isChange()) {
+            mPresenter.history((long) mBook.getId());
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+
 }

@@ -23,18 +23,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
-            <!--<TextView-->
-                <!--android:id="@+id/tv_new"-->
-                <!--android:layout_width="35dp"-->
-                <!--android:layout_height="15dp"-->
-                <!--android:layout_gravity="right|top"-->
-                <!--android:background="@color/colorPrimary"-->
-                <!--android:gravity="center"-->
-                <!--android:paddingLeft="3dp"-->
-                <!--android:paddingRight="3dp"-->
-                <!--android:text="NEW"-->
-                <!--android:textColor="@color/colorWhite"-->
-                <!--android:textSize="10sp" />-->
+            <TextView
+                android:id="@+id/tv_new"
+                android:layout_width="35dp"
+                android:layout_height="15dp"
+                android:layout_gravity="right|top"
+                android:background="@color/colorPrimaryAhp"
+                android:gravity="center"
+                android:paddingLeft="3dp"
+                android:paddingRight="3dp"
+                android:text="NEW"
+                android:textColor="@color/colorWhite"
+                android:textSize="10sp" />
         </FrameLayout>
 
 
@@ -62,6 +62,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
                 android:layout_gravity="center_vertical"
+                android:layout_marginTop="20dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -69,7 +70,7 @@
                     android:layout_height="20dp"
                     android:gravity="center_vertical"
                     android:singleLine="true"
-                    android:text="已读："
+                    android:text="更新："
                     android:textColor="@color/colorGray_9"
                     android:textSize="12sp" />
 
@@ -80,43 +81,45 @@
                     android:gravity="center_vertical"
                     android:singleLine="true"
                     android:text="0话"
-                    android:textColor="@color/colorGray_7"
+                    android:textColor="@color/colorPrimary"
                     android:textSize="12dp" />
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:layout_gravity="bottom"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="5dp"
-                android:orientation="horizontal">
+            <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="20dp"-->
+            <!--android:layout_gravity="bottom"-->
+            <!--android:layout_marginBottom="10dp"-->
+            <!--android:layout_marginTop="5dp"-->
+            <!--android:orientation="horizontal">-->
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="20dp"
-                    android:gravity="center_vertical"
-                    android:singleLine="true"
-                    android:text="时间："
-                    android:textColor="@color/colorGray_9"
-                    android:textSize="12sp" />
+            <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="20dp"-->
+            <!--android:gravity="center_vertical"-->
+            <!--android:singleLine="true"-->
+            <!--android:text="时间："-->
+            <!--android:textColor="@color/colorGray_9"-->
+            <!--android:textSize="12sp" />-->
 
-                <TextView
-                    android:id="@+id/tv_update_time"
-                    android:layout_width="match_parent"
-                    android:layout_height="15dp"
-                    android:gravity="center_vertical"
-                    android:singleLine="true"
-                    android:text="刚刚"
-                    android:textColor="@color/colorGray_7"
-                    android:textSize="12dp" />
-            </LinearLayout>
+            <!--<TextView-->
+            <!--android:id="@+id/tv_update_time"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="15dp"-->
+            <!--android:gravity="center_vertical"-->
+            <!--android:singleLine="true"-->
+            <!--android:text="刚刚"-->
+            <!--android:textColor="@color/colorGray_7"-->
+            <!--android:textSize="12dp" />-->
+            <!--</LinearLayout>-->
 
         </FrameLayout>
 
         <RelativeLayout
+            android:id="@+id/rl_select"
             android:layout_width="30dp"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:visibility="gone">
 
             <ImageView
                 android:id="@+id/img_select"

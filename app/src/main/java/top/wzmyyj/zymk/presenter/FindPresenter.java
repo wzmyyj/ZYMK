@@ -7,10 +7,13 @@ import java.util.List;
 
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
+import top.wzmyyj.zymk.app.bean.DownloadBean;
 import top.wzmyyj.zymk.app.bean.FavorBean;
+import top.wzmyyj.zymk.app.bean.HistoryBean;
 import top.wzmyyj.zymk.app.data.Urls;
 import top.wzmyyj.zymk.app.tools.I;
 import top.wzmyyj.zymk.model.db.FavorModel;
+import top.wzmyyj.zymk.model.db.HistoryModel;
 import top.wzmyyj.zymk.presenter.base.BasePresenter;
 import top.wzmyyj.zymk.view.iv.IF_3View;
 
@@ -21,10 +24,12 @@ import top.wzmyyj.zymk.view.iv.IF_3View;
 public class FindPresenter extends BasePresenter<IF_3View> {
 
     private FavorModel favorModel;
+    private HistoryModel historyModel;
 
     public FindPresenter(Activity activity, IF_3View iv) {
         super(activity, iv);
         favorModel = new FavorModel(activity);
+        historyModel = new HistoryModel(activity);
     }
 
     public void loadData() {
@@ -38,9 +43,14 @@ public class FindPresenter extends BasePresenter<IF_3View> {
         }
     }
 
+    public void goComic(int comic_id, long chapter_id) {
+        I.toComicActivity(mActivity, comic_id, chapter_id);
+    }
 
-    List<FavorBean>  favorList=new ArrayList<>();
-    public void updateLoadFavor(){
+
+    List<FavorBean> favorList = new ArrayList<>();
+
+    public void updateLoadFavor() {
         favorModel.updateAll(new Observer<FavorBean>() {
             @Override
             public void onSubscribe(Disposable d) {
@@ -110,5 +120,63 @@ public class FindPresenter extends BasePresenter<IF_3View> {
 
             }
         });
+    }
+
+    public void loadHistory() {
+        historyModel.loadAll(new Observer<List<HistoryBean>>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(List<HistoryBean> historyBeans) {
+                mView.loadHistory(historyBeans);
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                mView.showToast("Error:" + e.getMessage());
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
+    }
+
+    public void deleteSomeHistory(Long[] ids) {
+        historyModel.delete(ids, new Observer<Boolean>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(Boolean is) {
+                mView.deleteHistory(is);
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                mView.showToast("Error:" + e.getMessage());
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
+    }
+
+
+    public void loadDownload() {
+        List<DownloadBean> downloadList = new ArrayList<>();
+        mView.loadDownload(downloadList);
+    }
+
+    public void deleteSomeDownload(Long[] ids) {
+        mView.deleteHistory(true);
     }
 }

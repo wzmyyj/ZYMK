@@ -11,6 +11,7 @@ import top.wzmyyj.zymk.app.bean.FavorBean;
 import top.wzmyyj.zymk.app.bean.ItemBean;
 import top.wzmyyj.zymk.app.data.Urls;
 import top.wzmyyj.zymk.app.tools.I;
+import top.wzmyyj.zymk.app.tools.P;
 import top.wzmyyj.zymk.model.db.FavorModel;
 import top.wzmyyj.zymk.model.net.MainModel;
 import top.wzmyyj.zymk.model.net.box.HomeBox;
@@ -96,7 +97,9 @@ public class HomePresenter extends BasePresenter<IF_1View> {
 
             @Override
             public void onNext(FavorBean favorBean) {
-                if (favorBean.isUnRead()) {
+                // 是否展示出来。
+                boolean is = P.create(mActivity).getBoolean("isCue", true);
+                if (favorBean.isUnRead()&&is) {
                     favorList.add(favorBean);
                 }
             }

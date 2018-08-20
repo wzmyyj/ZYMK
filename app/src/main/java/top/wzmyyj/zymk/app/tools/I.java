@@ -12,6 +12,7 @@ import top.wzmyyj.zymk.view.activity.MoreActivity;
 import top.wzmyyj.zymk.view.activity.NewActivity;
 import top.wzmyyj.zymk.view.activity.RankActivity;
 import top.wzmyyj.zymk.view.activity.SearchActivity;
+import top.wzmyyj.zymk.view.activity.SettingActivity;
 import top.wzmyyj.zymk.view.activity.TyActivity;
 
 /**
@@ -95,6 +96,11 @@ public class I {
         Intent intent = new Intent(context, ComicActivity.class);
         intent.putExtra("comic_id", comic_id);
         intent.putExtra("chapter_id", chapter_id);
+        context.startActivity(intent);
+    }
+
+    public static void toSettingActivity(Context context) {
+        Intent intent = new Intent(context, SettingActivity.class);
         context.startActivity(intent);
     }
 }

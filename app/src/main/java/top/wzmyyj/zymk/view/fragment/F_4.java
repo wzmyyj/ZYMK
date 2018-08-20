@@ -29,6 +29,11 @@ public class F_4 extends BaseFragment<MinePresenter> implements IF_4View {
     @BindView(R.id.v_top)
     View v;
 
+    @OnClick(R.id.img_me)
+    public void about() {
+        mPresenter.goAboutMe();
+    }
+
     @OnClick(R.id.ll_info)
     public void goGitHub() {
         mPresenter.goGitHubWeb();

@@ -425,10 +425,15 @@ public class ComicRecyclerPanel extends BaseRecyclerPanel<ComicBean, ComicPresen
     }
 
     @Override
-    public void onStop() {
-        super.onStop();
+    public void onPause() {
+        super.onPause();
         // 保存阅读记录。
-        mPresenter.saveHistory(mBook, mChapterId);
+        for (ChapterBean chapter : mChapterList) {
+            if (chapter.getChapter_id() == mChapterId) {
+                mPresenter.saveHistory(mBook, chapter);
+                return;
+            }
+        }
     }
 
     @Override
@@ -472,7 +477,7 @@ public class ComicRecyclerPanel extends BaseRecyclerPanel<ComicBean, ComicPresen
         ///////////////////////////////////////////////////// menu 1，跳转到设置页面。
         @OnClick(R.id.ll_menu_1)
         public void menu_1() {
-
+            mPresenter.goSetting();
         }
 
         ///////////////////////////////////////////////////// menu 2，设置自动滑动和停止。

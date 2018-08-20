@@ -62,7 +62,7 @@ public abstract class PanelActivity extends InitActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        mPanels.onStart();
+        mPanels.onStop();
     }
 
     @Override

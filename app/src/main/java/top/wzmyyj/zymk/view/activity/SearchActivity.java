@@ -22,6 +22,7 @@ import com.zhy.adapter.recyclerview.base.ViewHolder;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import butterknife.BindView;
@@ -30,7 +31,6 @@ import io.reactivex.annotations.NonNull;
 import top.wzmyyj.zymk.R;
 import top.wzmyyj.zymk.app.bean.BookBean;
 import top.wzmyyj.zymk.app.bean.SearchHistoryBean;
-import top.wzmyyj.zymk.app.utils.SearchHistoryComparator;
 import top.wzmyyj.zymk.presenter.SearchPresenter;
 import top.wzmyyj.zymk.view.activity.base.BaseActivity;
 import top.wzmyyj.zymk.view.iv.ISearchView;
@@ -271,7 +271,16 @@ public class SearchActivity extends BaseActivity<SearchPresenter> implements ISe
         } else {
             ll_history.setVisibility(View.VISIBLE);
         }
-        Collections.sort(mShList, new SearchHistoryComparator());
+        Collections.sort(mShList, new Comparator<SearchHistoryBean>() {
+            @Override
+            public int compare(SearchHistoryBean o1, SearchHistoryBean o2) {
+                if (o1.getTime() < o2.getTime()) {
+                    return 1;
+                } else {
+                    return -1;
+                }
+            }
+        });
         mShAdapter.notifyDataSetChanged();
     }
 

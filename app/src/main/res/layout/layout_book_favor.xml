@@ -116,8 +116,10 @@
         </FrameLayout>
 
         <RelativeLayout
+            android:id="@+id/rl_select"
             android:layout_width="30dp"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:visibility="gone">
 
             <ImageView
                 android:id="@+id/img_select"
@@ -125,8 +127,7 @@
                 android:layout_height="30dp"
                 android:layout_centerInParent="true"
                 android:padding="7dp"
-                android:src="@mipmap/icon_mine_not_select"
-                android:visibility="gone" />
+                android:src="@mipmap/icon_mine_not_select" />
         </RelativeLayout>
     </LinearLayout>
 

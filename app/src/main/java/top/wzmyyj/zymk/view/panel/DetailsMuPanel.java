@@ -12,15 +12,16 @@ import com.zhy.adapter.recyclerview.MultiItemTypeAdapter;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 import top.wzmyyj.wzm_sdk.tools.T;
 import top.wzmyyj.zymk.R;
+import top.wzmyyj.zymk.app.bean.ChapterBean;
 import top.wzmyyj.zymk.app.bean.HuaBean;
 import top.wzmyyj.zymk.app.bean.MuBean;
-import top.wzmyyj.zymk.app.utils.HuaComparator;
 import top.wzmyyj.zymk.presenter.DetailsPresenter;
 import top.wzmyyj.zymk.view.adapter.HuaAdapter;
 import top.wzmyyj.zymk.view.panel.base.BasePanel;
@@ -109,11 +110,18 @@ public class DetailsMuPanel extends BasePanel<DetailsPresenter> {
     @Override
     public Object f(int w, Object... objects) {
         if (w == -1) return null;
+        if (w == 1) {// 传入历史阅读章节。
+            ChapterBean chapter = (ChapterBean) objects[0];
+            read_chapter_id = chapter.getChapter_id();
+            updateView();
+            return null;
+        }
+
+        // 初始数据。
         MuBean mu = (MuBean) objects[0];
         tv_mu_last.setText(mu.getTime_desc());
 
         mBookID = mu.getBook_id();
-        read_chapter_id = mu.getReading_id();
 
         if (mu.getHuaList() != null) {
             mALLHuaList.clear();
@@ -126,7 +134,8 @@ public class DetailsMuPanel extends BasePanel<DetailsPresenter> {
                 tl_mu_pager.addTab(tl_mu_pager.newTab().setText(i + 1 + ""));
             }
 
-            xu();
+            sort(mALLHuaList, sort_xu);
+            updateView();
         } else {
             T.s("加载失败");
         }
@@ -139,7 +148,7 @@ public class DetailsMuPanel extends BasePanel<DetailsPresenter> {
 
     private long read_chapter_id;
     private int pager_size;
-    private int sort_xu = -1;
+    private int sort_xu = 1;
 
     @OnClick(R.id.tv_left)
     public void left() {
@@ -165,9 +174,14 @@ public class DetailsMuPanel extends BasePanel<DetailsPresenter> {
         }
 
         sort(mALLHuaList, sort_xu);
-        setData(read_chapter_id);
-
+        updateView();
     }
+
+
+    private void updateView() {
+        setData(read_chapter_id);
+    }
+
     private void setData(long chapter_id) {
 
         if (chapter_id == 0) {
@@ -175,14 +189,14 @@ public class DetailsMuPanel extends BasePanel<DetailsPresenter> {
             return;
         }
         int p = 1;
-        int i = mALLHuaList.size() - 1;
+        int i = 0;
         for (HuaBean hua : mALLHuaList) {
             if (hua.getId() == chapter_id) {
                 mAdapter.setRead(chapter_id);
                 p = i / 32 + 1;
                 break;
             }
-            i--;
+            i++;
         }
 
         setData(p);
@@ -213,6 +227,32 @@ public class DetailsMuPanel extends BasePanel<DetailsPresenter> {
         }
         mAdapter.notifyDataSetChanged();
 
+    }
+
+    public class HuaComparator implements Comparator<HuaBean> {
+
+        private int k;
+
+        public HuaComparator(int k) {
+            this.k = k;
+        }
+
+        public int getK() {
+            return k;
+        }
+
+        public void setK(int k) {
+            this.k = k;
+        }
+
+        @Override
+        public int compare(HuaBean o1, HuaBean o2) {
+            if (o1.getIndex() < o2.getIndex()) {
+                return k;
+            } else {
+                return -k;
+            }
+        }
     }
 
 }

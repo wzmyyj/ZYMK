@@ -32,6 +32,7 @@
         <activity android:name=".view.activity.TyActivity" />
         <activity android:name=".view.activity.SearchActivity" />
         <activity android:name=".view.activity.ComicActivity" />
+        <activity android:name=".view.activity.SettingActivity" />
     </application>
 
 </manifest>

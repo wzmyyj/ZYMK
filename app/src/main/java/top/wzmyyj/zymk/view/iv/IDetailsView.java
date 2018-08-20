@@ -3,6 +3,7 @@ package top.wzmyyj.zymk.view.iv;
 import java.util.List;
 
 import top.wzmyyj.zymk.app.bean.BookBean;
+import top.wzmyyj.zymk.app.bean.ChapterBean;
 import top.wzmyyj.zymk.app.bean.MuBean;
 import top.wzmyyj.zymk.app.bean.XiBean;
 import top.wzmyyj.zymk.app.bean.ZiBean;
@@ -26,6 +27,6 @@ public interface IDetailsView extends IBaseView, IUpdateView {
 
     void setIsFavor(boolean isFavor);
 
-    void setHistory(long chapter_id);
+    void setHistory(ChapterBean chapter);
 
 }

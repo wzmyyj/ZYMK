@@ -85,7 +85,7 @@ public class HistoryModel {
                 try {
                     // 查询原来是否已有。
                     HistoryDb dd = mDao.load((long) book.getId());
-                    // 有的话，直接返回。
+                    // 有的话，更新数据后返回。
                     if (dd != null) {
                         dd.setHistory_read_time(Vanessa.getTime());
                         dd.setHistory_chapter_id(chapter.getChapter_id());
@@ -125,6 +125,36 @@ public class HistoryModel {
                 try {
                     mDao.deleteByKeyInTx(ids);
                     observableEmitter.onNext(true);
+                } catch (Exception e) {
+                    observableEmitter.onError(e);
+                    e.printStackTrace();
+                } finally {
+                    observableEmitter.onComplete();
+                }
+            }
+
+        })
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(observer);
+    }
+
+
+    public void load(final long id, Observer<HistoryBean> observer) {
+        Observable.create(new ObservableOnSubscribe<HistoryBean>() {
+            @Override
+            public void subscribe(@NonNull ObservableEmitter<HistoryBean> observableEmitter) throws Exception {
+                try {
+                    // 查询原来是否已有。
+                    HistoryDb dd = mDao.load(id);
+                    // 有的话，更新数据后返回。
+                    if (dd != null) {
+                        HistoryBean bean = db2bean(dd);
+                        observableEmitter.onNext(bean);//更新后的对象。
+                    } else {
+                        observableEmitter.onNext(new HistoryBean());// 返回一个内容为空的对象。
+                    }
                 } catch (Exception e) {
                     observableEmitter.onError(e);
                     e.printStackTrace();

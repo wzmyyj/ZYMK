@@ -16,7 +16,7 @@
             android:layout_gravity="center"
             android:lines="1"
             android:maxWidth="150dp"
-            android:text=""
+            android:text="设置"
             android:textColor="@color/colorPrimary"
             android:textSize="18sp" />
 
@@ -39,9 +39,11 @@
         android:layout_height="0.1dp"
         android:background="@color/colorLine" />
 
-    <FrameLayout
-        android:id="@+id/fl_panel"
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent">
+
+        <include layout="@layout/layout_setting_content" />
+    </android.support.v4.widget.NestedScrollView>
 
 </LinearLayout>

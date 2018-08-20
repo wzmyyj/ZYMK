@@ -2,7 +2,6 @@ package top.wzmyyj.zymk.presenter;
 
 import android.app.Activity;
 
-import top.wzmyyj.wzm_sdk.tools.T;
 import top.wzmyyj.zymk.app.data.Urls;
 import top.wzmyyj.zymk.app.tools.I;
 import top.wzmyyj.zymk.presenter.base.BasePresenter;
@@ -16,6 +15,10 @@ public class MinePresenter extends BasePresenter<IF_4View> {
 
     public MinePresenter(Activity activity, IF_4View iv) {
         super(activity, iv);
+    }
+
+    public void goAboutMe() {
+        I.toBrowser(mActivity, Urls.YYJ_About);
     }
 
     public void goGitHubWeb() {
@@ -35,6 +38,6 @@ public class MinePresenter extends BasePresenter<IF_4View> {
     }
 
     public void goSetting() {
-        T.s("设置");
+        I.toSettingActivity(mActivity);
     }
 }
