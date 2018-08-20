@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorAhp_Black_8"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/fl_home_favor"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_gravity="bottom"
+            android:background="@color/colorWhite"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="95dp"
+                android:layout_weight="1"
+                android:text="大人，您订阅的漫画更新喽~"
+                android:textColor="@color/colorGray_7"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/tv_home_know"
+                android:layout_width="60dp"
+                android:layout_height="30dp"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/click_bg"
+                android:gravity="center"
+                android:text="我知道了"
+                android:textColor="@color/colorPrimary"
+                android:textSize="11sp" />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="90dp"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="10dp"
+            android:src="@mipmap/ic_awake_girl" />
+
+    </FrameLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:background="@color/colorLine" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_home_favor"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:background="@color/colorWhite"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="5dp" />
+
+</LinearLayout>

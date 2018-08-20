@@ -2,15 +2,18 @@ package top.wzmyyj.zymk.presenter;
 
 import android.app.Activity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
+import top.wzmyyj.zymk.app.bean.FavorBean;
 import top.wzmyyj.zymk.app.bean.ItemBean;
-import top.wzmyyj.zymk.app.tools.I;
-import top.wzmyyj.zymk.model.net.box.HomeBox;
-import top.wzmyyj.zymk.model.net.MainModel;
 import top.wzmyyj.zymk.app.data.Urls;
+import top.wzmyyj.zymk.app.tools.I;
+import top.wzmyyj.zymk.model.db.FavorModel;
+import top.wzmyyj.zymk.model.net.MainModel;
+import top.wzmyyj.zymk.model.net.box.HomeBox;
 import top.wzmyyj.zymk.presenter.base.BasePresenter;
 import top.wzmyyj.zymk.view.iv.IF_1View;
 
@@ -20,10 +23,12 @@ import top.wzmyyj.zymk.view.iv.IF_1View;
 
 public class HomePresenter extends BasePresenter<IF_1View> {
     private MainModel mModel;
+    private FavorModel favorModel;
 
     public HomePresenter(Activity activity, IF_1View iv) {
         super(activity, iv);
         mModel = new MainModel();
+        favorModel = new FavorModel(activity);
     }
 
 
@@ -79,6 +84,35 @@ public class HomePresenter extends BasePresenter<IF_1View> {
             I.toBrowser(mActivity, href);
         }
     }
+
+    List<FavorBean> favorList = new ArrayList<>();
+
+    public void updateLoadFavor() {
+        favorModel.updateAll(new Observer<FavorBean>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+                favorList.clear();
+            }
+
+            @Override
+            public void onNext(FavorBean favorBean) {
+                if (favorBean.isUnRead()) {
+                    favorList.add(favorBean);
+                }
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                mView.showToast("Error:" + e.getMessage());
+            }
+
+            @Override
+            public void onComplete() {
+                mView.loadFavor(favorList);
+            }
+        });
+    }
+
 
     public void goNew() {
         I.toNewActivity(mActivity);

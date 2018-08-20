@@ -71,15 +71,13 @@ public class F_3 extends BaseFragment<FindPresenter> implements IF_3View {
         for (Panel p : mPanels.getPanelList()) {
             viewList.add(p.getView());
         }
-        titles.add("收藏");
+        titles.add("订阅");
         titles.add("历史");
         titles.add("缓存");
         ViewTitlePagerAdapter pagerAdapter = new ViewTitlePagerAdapter(viewList, titles);
         mViewPager.setAdapter(pagerAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
-//        mPresenter.loadFavor();
-
-        mPresenter.updateLoadFavor();
+        mPresenter.loadFavor();// 只访问数据库。
     }
 
 
@@ -105,7 +103,7 @@ public class F_3 extends BaseFragment<FindPresenter> implements IF_3View {
     @Subscribe
     public void onEvent(FavorListChangeEvent event) {
         if (event.isChange()) {
-            mPresenter.loadFavor();
+            mPresenter.loadFavor();// 只访问数据库。
         }
     }
 

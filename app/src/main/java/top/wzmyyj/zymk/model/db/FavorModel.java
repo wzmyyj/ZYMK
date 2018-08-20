@@ -144,6 +144,7 @@ public class FavorModel {
                 .subscribe(observer);
     }
 
+    // 判断是否收藏，同时设为已读。
     public void isFavor(final Long id, Observer<Boolean> observer) {
         Observable.create(new ObservableOnSubscribe<Boolean>() {
             @Override
@@ -206,7 +207,7 @@ public class FavorModel {
                     public FavorBean apply(ComicBox comicBox) throws Exception {
                         BookBean book = comicBox.getBook();
                         FavorDb db = new FavorDb((long) book.getId(), book.getTitle(), Vanessa.getTime(),
-                                book.getChapter(), book.getChapter_id(), false);
+                                book.getChapter(), book.getChapter_id(), true);// 新添加的数据设为未读。
 
                         FavorDb dd = mDao.load((long) book.getId());
                         if (dd.getChapter_id() != db.getChapter_id()) {// 最新章节ID不一样则更新数据。

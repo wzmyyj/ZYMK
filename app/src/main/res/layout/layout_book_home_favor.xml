@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="106dp"
+    android:layout_height="180dp"
+    android:orientation="vertical"
+    android:padding="5dp">
+
+    <FrameLayout
+        android:layout_width="96dp"
+        android:layout_height="128dp">
+
+        <ImageView
+            android:id="@+id/img_book"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorGray_e" />
+
+        <TextView
+            android:id="@+id/tv_new"
+            android:layout_width="35dp"
+            android:layout_height="15dp"
+            android:layout_gravity="right|top"
+            android:background="@color/colorPrimaryAhp"
+            android:gravity="center"
+            android:paddingLeft="3dp"
+            android:paddingRight="3dp"
+            android:text="NEW"
+            android:textColor="@color/colorWhite"
+            android:textSize="10sp"
+            android:visibility="gone" />
+
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:gravity="center_vertical"
+        android:singleLine="true"
+        android:text="标题"
+        android:textColor="@color/colorGray_5"
+        android:textSize="13sp"  />
+
+    <TextView
+        android:id="@+id/tv_some"
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        android:gravity="center_vertical"
+        android:singleLine="true"
+        android:text="这个漫画很好看"
+        android:textColor="@color/colorGray_b"
+        android:textSize="11dp"/>
+
+</LinearLayout>

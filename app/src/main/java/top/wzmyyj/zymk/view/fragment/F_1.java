@@ -1,16 +1,21 @@
 package top.wzmyyj.zymk.view.fragment;
 
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 import top.wzmyyj.wzm_sdk.tools.T;
 import top.wzmyyj.zymk.R;
+import top.wzmyyj.zymk.app.bean.FavorBean;
 import top.wzmyyj.zymk.common.utils.StatusBarUtil;
 import top.wzmyyj.zymk.presenter.HomePresenter;
 import top.wzmyyj.zymk.view.fragment.base.BaseFragment;
 import top.wzmyyj.zymk.view.iv.IF_1View;
+import top.wzmyyj.zymk.view.panel.HomeFavorPanel;
 import top.wzmyyj.zymk.view.panel.HomeNestedScrollPanel;
 
 /**
@@ -35,10 +40,11 @@ public class F_1 extends BaseFragment<HomePresenter> implements IF_1View {
     protected void initPanels() {
         super.initPanels();
         addPanels(new HomeNestedScrollPanel(context, mPresenter));
+        addPanels(new HomeFavorPanel(context, mPresenter));
     }
 
-    @BindView(R.id.ll_panel)
-    LinearLayout layout;
+    @BindView(R.id.fl_panel)
+    FrameLayout fl_panel;
 
     @OnClick(R.id.img_a)
     public void fff() {
@@ -65,7 +71,9 @@ public class F_1 extends BaseFragment<HomePresenter> implements IF_1View {
         super.initView();
         StatusBarUtil.fitsStatusBarView(v0, v1, v2);
 
-        layout.addView(getPanelView(0));
+        fl_panel.addView(getPanelView(0));
+        fl_panel.addView(getPanelView(1));
+
         getPanel(0).bingViews(ll_top);
 
     }
@@ -74,11 +82,17 @@ public class F_1 extends BaseFragment<HomePresenter> implements IF_1View {
     protected void initData() {
         super.initData();
         mPresenter.loadData();
+        mPresenter.updateLoadFavor();
     }
 
     @Override
     public void update(int w, Object... objs) {
         getPanel(0).f(w, objs);
+    }
+
+    @Override
+    public void loadFavor(List<FavorBean> list) {
+        getPanel(1).f(0, list);
     }
 }
 
