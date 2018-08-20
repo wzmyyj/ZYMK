@@ -2,6 +2,8 @@
 
 一款采用MVP的仿知音漫客APP。
 
+mvp+rxjava+retrofit+okhttp+greendao+glide+gson+jsoup+eventbus+butterknife
+
 #### 效果图：
 
 ![u](https://upload-images.jianshu.io/upload_images/3262738-708b7293c33d5f43.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/340)
