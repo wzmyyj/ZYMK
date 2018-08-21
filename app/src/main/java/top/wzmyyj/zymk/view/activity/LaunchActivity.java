@@ -22,6 +22,11 @@ public class LaunchActivity extends BaseActivity<LaunchPresenter> implements ILa
         return R.layout.activity_launch;
     }
 
+    @Override
+    protected void initView() {
+        super.initView();
+        setSwipeBackEnable(false);
+    }
 
     @Override
     protected void initEvent() {

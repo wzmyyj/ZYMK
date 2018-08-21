@@ -47,6 +47,7 @@ public abstract class ViewPagerFragmentActivity extends InitActivity {
         setContentView(R.layout.activity_pager_fragment);
         mViewPager = (ViewPager) findViewById(R.id.viewPager);
         mTabMenu = (TabMenu) findViewById(R.id.tabMenu);
+        setSwipeBackEnable(false);
 
     }
 

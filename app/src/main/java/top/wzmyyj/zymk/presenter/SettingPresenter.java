@@ -15,6 +15,7 @@ import top.wzmyyj.zymk.app.data.Urls;
 import top.wzmyyj.zymk.app.tools.I;
 import top.wzmyyj.zymk.app.tools.P;
 import top.wzmyyj.zymk.app.utils.GlideCacheUtil;
+import top.wzmyyj.zymk.common.utils.PackageUtil;
 import top.wzmyyj.zymk.presenter.base.BasePresenter;
 import top.wzmyyj.zymk.view.iv.ISettingView;
 
@@ -54,7 +55,8 @@ public class SettingPresenter extends BasePresenter<ISettingView> {
     }
 
     public void getVersion() {
-        mView.setVersion("1.0");
+        String version = PackageUtil.getVersionName(mActivity);
+        mView.setVersion(version);
     }
 
     public void loadNewApp() {

@@ -31,4 +31,5 @@ dependencies {
     api 'com.zhy:base-adapter:3.0.3'
     api 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.5.1'
     api 'com.youth.banner:banner:1.4.10'
+    api 'me.imid.swipebacklayout.lib:library:1.1.0'
 }

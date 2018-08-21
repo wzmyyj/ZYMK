@@ -113,7 +113,7 @@ public class DetailsMuPanel extends BasePanel<DetailsPresenter> {
         if (w == 1) {// 传入历史阅读章节。
             ChapterBean chapter = (ChapterBean) objects[0];
             read_chapter_id = chapter.getChapter_id();
-            updateView();
+            setData(read_chapter_id);
             return null;
         }
 
@@ -135,7 +135,7 @@ public class DetailsMuPanel extends BasePanel<DetailsPresenter> {
             }
 
             sort(mALLHuaList, sort_xu);
-            updateView();
+            setData(1);
         } else {
             T.s("加载失败");
         }
@@ -174,13 +174,9 @@ public class DetailsMuPanel extends BasePanel<DetailsPresenter> {
         }
 
         sort(mALLHuaList, sort_xu);
-        updateView();
+        setData(1);
     }
 
-
-    private void updateView() {
-        setData(read_chapter_id);
-    }
 
     private void setData(long chapter_id) {
 
@@ -234,14 +230,6 @@ public class DetailsMuPanel extends BasePanel<DetailsPresenter> {
         private int k;
 
         public HuaComparator(int k) {
-            this.k = k;
-        }
-
-        public int getK() {
-            return k;
-        }
-
-        public void setK(int k) {
             this.k = k;
         }
 

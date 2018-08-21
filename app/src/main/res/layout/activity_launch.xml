@@ -4,15 +4,29 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <ImageView
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginBottom="10dp"
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
         android:layout_marginTop="20dp"
-        android:layout_weight="1"
-        android:src="@mipmap/ic_logo_girl" />
+        android:layout_weight="1">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@mipmap/ic_logo_girl" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="非"
+            android:textColor="@color/colorPrimary"
+            android:textSize="12sp" />
+    </FrameLayout>
+
 
     <TextView
         android:layout_width="match_parent"
