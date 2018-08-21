@@ -4,7 +4,7 @@
 
 mvp+rxjava+retrofit+okhttp+greendao+glide+gson+jsoup+eventbus+butterknife
 
-博客：[https://www.jianshu.com/p/80c8541387de](https://www.jianshu.com/p/80c8541387de)
+博客：[https://www.jianshu.com/u/1dc736dffcd3](https://www.jianshu.com/u/1dc736dffcd3)
 
 #### 效果图：
 
