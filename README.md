@@ -8,7 +8,7 @@ mvp+rxjava+retrofit+okhttp+greendao+glide+gson+jsoup+eventbus+butterknife
 
 
 
-![a](https://upload-images.jianshu.io/upload_images/3262738-075a4bc61d33622d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/340)
+![a](https://upload-images.jianshu.io/upload_images/3262738-ee02f84276bd3471.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/340)
 
 
 
