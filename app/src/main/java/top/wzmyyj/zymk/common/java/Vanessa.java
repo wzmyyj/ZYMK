@@ -89,6 +89,6 @@ public class Vanessa {
     public static boolean isInDay(long l, int i) {
         Date d = new Date();
         long t = Math.abs(d.getTime() - l);
-        return t < i * 24 * 60 * 60 * 1000;
+        return t < i * 24L * 60 * 60 * 1000;
     }
 }
