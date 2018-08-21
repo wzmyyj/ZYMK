@@ -6,7 +6,11 @@ mvp+rxjava+retrofit+okhttp+greendao+glide+gson+jsoup+eventbus+butterknife
 
 #### 效果图：
 
-![u](https://upload-images.jianshu.io/upload_images/3262738-708b7293c33d5f43.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/340)
+
+![a](https://upload-images.jianshu.io/upload_images/3262738-075a4bc61d33622d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/340)
+
+![b](https://upload-images.jianshu.io/upload_images/3262738-8e5cdbfd8b1002b9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/340)
+
 
 
 
@@ -18,7 +22,8 @@ mvp+rxjava+retrofit+okhttp+greendao+glide+gson+jsoup+eventbus+butterknife
 
 
 
-![d](https://upload-images.jianshu.io/upload_images/3262738-d6cd3d1306ef0860.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/340)
+![d](https://upload-images.jianshu.io/upload_images/3262738-46e77fe88ce2d05c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/340)
+
 
 
 
@@ -35,7 +40,6 @@ mvp+rxjava+retrofit+okhttp+greendao+glide+gson+jsoup+eventbus+butterknife
 
 
 ![s](https://upload-images.jianshu.io/upload_images/3262738-da02b8b7a7dc43ad.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/340)
-
 
 
 #### 项目地址：
