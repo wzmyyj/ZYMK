@@ -99,7 +99,8 @@ public class DocUtil {
     public static List<BoBean> transToBo(Element ele) {
         if (ele == null) return null;
         List<BoBean> data = new ArrayList<>();
-        Elements elements = ele.getElementsByClass("swiper-slide");
+        Element top=ele.getElementsByClass("swiper-banner").get(0);
+        Elements elements = top.getElementsByClass("swiper-slide");
         for (Element element : elements) {
             String href = element.absUrl("href");
             String data_src = element.absUrl("data-src");

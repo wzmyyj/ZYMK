@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import top.wzmyyj.wzm_sdk.tools.T;
 import top.wzmyyj.zymk.R;
 import top.wzmyyj.zymk.app.bean.BoBean;
 import top.wzmyyj.zymk.app.bean.ItemBean;
@@ -201,17 +202,18 @@ public class HomeNestedScrollPanel extends BaseNestedScrollPanel<HomePresenter> 
     }
 
     public void setBanner(final List<BoBean> bos) {
-        if (bos == null || bos.size() < 6) return;
+        if (bos == null || bos.size() == 0) return;
         List<String> imgs = new ArrayList<>();
         List<String> strs = new ArrayList<>();
 
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < bos.size(); i++) {
             BoBean bo = bos.get(i);
             imgs.add(bo.getData_src());
             strs.add(bo.getTitle());
         }
         mBanner.update(imgs, strs);
 
+//        T.s(""+bos.size());
         mBanner.setOnBannerListener(new OnBannerListener() {
             @Override
             public void OnBannerClick(int position) {
