@@ -6,6 +6,9 @@ mvp+rxjava+retrofit+okhttp+greendao+glide+gson+jsoup+eventbus+butterknife
 
 博客：[https://www.jianshu.com/u/1dc736dffcd3](https://www.jianshu.com/u/1dc736dffcd3)
 
+APk百度云下载：
+链接：[https://pan.baidu.com/s/1Xe153YKIAm_x992c0-sc-A](https://pan.baidu.com/s/1Xe153YKIAm_x992c0-sc-A) 密码：jq22
+
 #### 效果图：
 
 
