@@ -99,7 +99,7 @@ public class HomePresenter extends BasePresenter<IF_1View> {
             public void onNext(FavorBean favorBean) {
                 // 是否展示出来。
                 boolean is = P.create(mActivity).getBoolean("isCue", true);
-                if (favorBean.isUnRead()&&is) {
+                if (favorBean.isUnRead() && is) {
                     favorList.add(favorBean);
                 }
             }
@@ -116,6 +116,35 @@ public class HomePresenter extends BasePresenter<IF_1View> {
         });
     }
 
+    public void loadFavor() {
+        favorModel.loadAll(new Observer<List<FavorBean>>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(List<FavorBean> favorBeans) {
+                favorList.clear();
+                for (FavorBean favor : favorBeans) {
+                    if (favor.isUnRead()) {
+                        favorList.add(favor);
+                    }
+                }
+                mView.loadFavor(favorList);
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                mView.showToast("Error:" + e.getMessage());
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
+    }
 
     public void goNew() {
         I.toNewActivity(mActivity);

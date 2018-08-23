@@ -1,8 +1,12 @@
 package top.wzmyyj.zymk.view.fragment;
 
+import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.List;
 
@@ -11,6 +15,7 @@ import butterknife.OnClick;
 import top.wzmyyj.wzm_sdk.tools.T;
 import top.wzmyyj.zymk.R;
 import top.wzmyyj.zymk.app.bean.FavorBean;
+import top.wzmyyj.zymk.app.event.FavorListChangeEvent;
 import top.wzmyyj.zymk.common.utils.StatusBarUtil;
 import top.wzmyyj.zymk.presenter.HomePresenter;
 import top.wzmyyj.zymk.view.fragment.base.BaseFragment;
@@ -41,6 +46,27 @@ public class F_1 extends BaseFragment<HomePresenter> implements IF_1View {
         super.initPanels();
         addPanels(new HomeNestedScrollPanel(context, mPresenter));
         addPanels(new HomeFavorPanel(context, mPresenter));
+    }
+
+    @Override
+    protected void initSome(Bundle savedInstanceState) {
+        super.initSome(savedInstanceState);
+        if (!EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().register(this);
+        }
+    }
+
+    @Subscribe
+    public void onEvent(FavorListChangeEvent event) {
+        if (event.isChange()) {
+            mPresenter.loadFavor();// 只访问数据库。
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 
     @BindView(R.id.fl_panel)
@@ -94,6 +120,9 @@ public class F_1 extends BaseFragment<HomePresenter> implements IF_1View {
     public void loadFavor(List<FavorBean> list) {
         getPanel(1).f(0, list);
     }
+
+
+
 }
 
 
