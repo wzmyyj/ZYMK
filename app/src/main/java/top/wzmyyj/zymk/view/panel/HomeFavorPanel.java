@@ -48,7 +48,7 @@ public class HomeFavorPanel extends BasePanel<HomePresenter> {
     @BindView(R.id.rv_home_favor)
     RecyclerView mRecyclerView;
 
-    CommonAdapter mAdapter;
+    CommonAdapter<FavorBean> mAdapter;
 
     List<FavorBean> mData = new ArrayList<>();
 
@@ -111,6 +111,10 @@ public class HomeFavorPanel extends BasePanel<HomePresenter> {
             view.setVisibility(View.VISIBLE);
             mData.clear();
             mData.addAll(list);
+            mAdapter.notifyDataSetChanged();
+        }else{
+            view.setVisibility(View.GONE);
+            mData.clear();
             mAdapter.notifyDataSetChanged();
         }
         return super.f(w, objects);

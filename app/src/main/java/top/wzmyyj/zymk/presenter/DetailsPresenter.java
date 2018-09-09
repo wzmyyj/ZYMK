@@ -11,6 +11,7 @@ import top.wzmyyj.zymk.app.bean.FavorBean;
 import top.wzmyyj.zymk.app.bean.HistoryBean;
 import top.wzmyyj.zymk.app.data.Urls;
 import top.wzmyyj.zymk.app.event.FavorListChangeEvent;
+import top.wzmyyj.zymk.app.event.FavorUnReadChangeEvent;
 import top.wzmyyj.zymk.app.tools.I;
 import top.wzmyyj.zymk.model.db.FavorModel;
 import top.wzmyyj.zymk.model.db.HistoryModel;
@@ -99,6 +100,7 @@ public class DetailsPresenter extends BasePresenter<IDetailsView> {
             @Override
             public void onNext(Boolean is) {
                 mView.setIsFavor(is);
+                EventBus.getDefault().post(new FavorUnReadChangeEvent(true));
             }
 
             @Override

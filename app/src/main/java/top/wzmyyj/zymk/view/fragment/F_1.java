@@ -15,7 +15,7 @@ import butterknife.OnClick;
 import top.wzmyyj.wzm_sdk.tools.T;
 import top.wzmyyj.zymk.R;
 import top.wzmyyj.zymk.app.bean.FavorBean;
-import top.wzmyyj.zymk.app.event.FavorListChangeEvent;
+import top.wzmyyj.zymk.app.event.FavorUnReadChangeEvent;
 import top.wzmyyj.zymk.common.utils.StatusBarUtil;
 import top.wzmyyj.zymk.presenter.HomePresenter;
 import top.wzmyyj.zymk.view.fragment.base.BaseFragment;
@@ -57,7 +57,7 @@ public class F_1 extends BaseFragment<HomePresenter> implements IF_1View {
     }
 
     @Subscribe
-    public void onEvent(FavorListChangeEvent event) {
+    public void onEvent(FavorUnReadChangeEvent event) {
         if (event.isChange()) {
             mPresenter.loadFavor();// 只访问数据库。
         }

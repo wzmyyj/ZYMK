@@ -97,9 +97,7 @@ public class HomePresenter extends BasePresenter<IF_1View> {
 
             @Override
             public void onNext(FavorBean favorBean) {
-                // 是否展示出来。
-                boolean is = P.create(mActivity).getBoolean("isCue", true);
-                if (favorBean.isUnRead() && is) {
+                if (favorBean.isUnRead()) {
                     favorList.add(favorBean);
                 }
             }
@@ -111,7 +109,11 @@ public class HomePresenter extends BasePresenter<IF_1View> {
 
             @Override
             public void onComplete() {
-                mView.loadFavor(favorList);
+                // 是否展示出来。
+                boolean is = P.create(mActivity).getBoolean("isCue", true);
+                if (is) {
+                    mView.loadFavor(favorList);
+                }
             }
         });
     }
@@ -120,18 +122,16 @@ public class HomePresenter extends BasePresenter<IF_1View> {
         favorModel.loadAll(new Observer<List<FavorBean>>() {
             @Override
             public void onSubscribe(Disposable d) {
-
+                favorList.clear();
             }
 
             @Override
             public void onNext(List<FavorBean> favorBeans) {
-                favorList.clear();
                 for (FavorBean favor : favorBeans) {
                     if (favor.isUnRead()) {
                         favorList.add(favor);
                     }
                 }
-                mView.loadFavor(favorList);
             }
 
             @Override
@@ -141,7 +141,11 @@ public class HomePresenter extends BasePresenter<IF_1View> {
 
             @Override
             public void onComplete() {
-
+                // 是否展示出来。
+                boolean is = P.create(mActivity).getBoolean("isCue", true);
+                if (is) {
+                    mView.loadFavor(favorList);
+                }
             }
         });
     }
