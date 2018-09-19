@@ -48,54 +48,52 @@ public class ComicLoadPasePanel extends BasePanel<ComicPresenter> {
     @Override
     protected void initData() {
         super.initData();
+        count = 0;
+        status = -1;
         mHandler.sendEmptyMessage(1);
-        t = 0;
     }
 
 
     @SuppressLint("HandlerLeak")
     private Handler mHandler = new Handler() {
 
-        private int k = 1;
-
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            int w = msg.what;
-            if (w == 1) {
-                if (k == 1) {
-                    k = 2;
-                    img_loadpose.setImageResource(R.mipmap.pic_loadpose2);
-                } else {
-                    k = 1;
+            switch (msg.what) {
+                case 1:
                     img_loadpose.setImageResource(R.mipmap.pic_loadpose1);
-                }
-                mHandler.sendEmptyMessageDelayed(1, 200);
-            } else {
-                mHandler.removeMessages(1);
+                    mHandler.sendEmptyMessageDelayed(2, 200);
+                    break;
+                case 2:
+                    img_loadpose.setImageResource(R.mipmap.pic_loadpose2);
+                    mHandler.sendEmptyMessageDelayed(1, 200);
+                    break;
+                default:
+                    mHandler.removeMessages(1);
+                    mHandler.removeMessages(2);
+                    break;
             }
-            t++;
-            if (status == 0 && t > 10) {
+
+            count++;
+            if (status == 0 && count > 7) {
                 mHandler.sendEmptyMessage(0);
                 view.setVisibility(View.GONE);
             }
         }
     };
-
-    private int t = 0;
+    private int count = 0;
     private int status = -1;
 
-    @Override
-    public Object f(int w, Object... objects) {
-        status = w;
-        if (w == -1) {
-            tv_loadpose.setText("加载失败，点击重试！");
-            tv_loadpose.setTextColor(context.getResources().getColor(R.color.colorRed));
-            img_loadpose.setImageResource(R.mipmap.pic_load_error);
-            mHandler.sendEmptyMessage(0);
-            return null;
-        }
-        return super.f(w, objects);
+    public void loadSuccess() {
+        status = 0;
+    }
+
+    public void loadFail() {
+        mHandler.sendEmptyMessage(0);
+        tv_loadpose.setText("加载失败，点击重试！");
+        tv_loadpose.setTextColor(context.getResources().getColor(R.color.colorRed));
+        img_loadpose.setImageResource(R.mipmap.pic_load_error);
     }
 
     @Override

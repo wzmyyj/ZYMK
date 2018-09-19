@@ -11,6 +11,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import top.wzmyyj.zymk.R;
+import top.wzmyyj.zymk.app.bean.BoBean;
 import top.wzmyyj.zymk.app.bean.ItemBean;
 import top.wzmyyj.zymk.common.utils.DensityUtil;
 import top.wzmyyj.zymk.common.utils.StatusBarUtil;
@@ -87,19 +88,14 @@ public class HomeNestedScrollPanel extends BaseNestedScrollPanel<HomePresenter> 
         mPresenter.loadData();
     }
 
-    @Override
-    public Object f(int w, Object... objects) {
-        if (w == -1) return null;
-        // 轮播图。
-        getPanel(9).f(w,objects[0]);
-        // 各类漫画列表。
-        List<ItemBean> itemBeans = (List<ItemBean>) objects[1];
+
+    public void setHomeData(List<BoBean> boBeans, List<ItemBean> itemBeans) {
+        ((HomeBannerPanel) getPanel(9)).setBannerData(boBeans);
         if (itemBeans != null && itemBeans.size() == 9) {
             for (int i = 0; i < 9; i++) {
-                getPanel(i).f(w, itemBeans.get(i));
+                ((HomeItemPanel) getPanel(i)).setItemData(itemBeans.get(i));
             }
         }
-        return super.f(w, objects);
     }
 
     @BindView(R.id.fl_panel_0)

@@ -8,14 +8,14 @@ import top.wzmyyj.zymk.R;
 import top.wzmyyj.zymk.common.utils.StatusBarUtil;
 import top.wzmyyj.zymk.presenter.MinePresenter;
 import top.wzmyyj.zymk.view.fragment.base.BaseFragment;
-import top.wzmyyj.zymk.view.iv.IF_4View;
+import top.wzmyyj.zymk.view.iv.IMineView;
 
 /**
  * Created by yyj on 2018/06/29. email: 2209011667@qq.com
  * 第四页。
  */
 
-public class MineFragment extends BaseFragment<MinePresenter> implements IF_4View {
+public class MineFragment extends BaseFragment<MinePresenter> implements IMineView {
 
     @Override
     protected void initPresenter() {

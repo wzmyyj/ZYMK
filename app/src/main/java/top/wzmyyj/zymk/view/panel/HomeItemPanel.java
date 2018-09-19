@@ -83,25 +83,19 @@ public class HomeItemPanel extends BasePanel<HomePresenter> {
         });
     }
 
-    @Override
-    public Object f(int w, Object... objects) {
-        if (w == -1) return null;
-        ItemBean item = (ItemBean) objects[0];
-        if (item != null) {
-            itemBean = item;
-            setItem();
-        }
-        return super.f(w, objects);
-    }
 
-    private void setItem() {
+    public void setItemData(ItemBean item) {
+        if (item == null) return;
+        itemBean = item;
         img_icon.setImageResource(itemBean.getIcon());
-        tv_title.setText(itemBean.getTitle());
-        tv_summary.setText(itemBean.getSummary());
+        tv_title.setText(item.getTitle());
+        tv_summary.setText(item.getSummary());
         if (itemBean.getBooks() != null) {
             data.clear();
             data.addAll(itemBean.getBooks());
             bookAdapter.notifyDataSetChanged();
         }
+
     }
+
 }

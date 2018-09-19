@@ -3,9 +3,12 @@ package top.wzmyyj.zymk.view.activity;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 import top.wzmyyj.zymk.R;
+import top.wzmyyj.zymk.app.bean.BookBean;
 import top.wzmyyj.zymk.presenter.TyPresenter;
 import top.wzmyyj.zymk.view.activity.base.BaseActivity;
 import top.wzmyyj.zymk.view.iv.ITyView;
@@ -23,10 +26,14 @@ public class TyActivity extends BaseActivity<TyPresenter> implements ITyView {
         return R.layout.activity_ty;
     }
 
+    private TyRecyclerPanel tyRecyclerPanel;
+
     @Override
     protected void initPanels() {
         super.initPanels();
-        addPanels(new TyRecyclerPanel(activity, mPresenter));
+        addPanels(
+                tyRecyclerPanel = new TyRecyclerPanel(activity, mPresenter)
+        );
     }
 
     @BindView(R.id.fl_panel)
@@ -52,14 +59,20 @@ public class TyActivity extends BaseActivity<TyPresenter> implements ITyView {
         mPresenter.loadData();
     }
 
-    @Override
-    public void update(int w, Object... objs) {
-        getPanel(0).f(w, objs);
-    }
 
     @Override
     public void setTitle(String s) {
         if (tv_title != null)
             tv_title.setText(s);
+    }
+
+    @Override
+    public void update(boolean isFirst, List<BookBean> books, String base, String next) {
+        tyRecyclerPanel.setTyData(isFirst, books, base, next);
+    }
+
+    @Override
+    public void loadFail(String msg) {
+        tyRecyclerPanel.loadFail(msg);
     }
 }

@@ -46,8 +46,7 @@ public class NewPresenter extends BasePresenter<INewView> {
 
             @Override
             public void onNext(NewBox box) {
-                mView.update(0, box.getBookList1(), box.getBookList2());
-//                mView.showToast("加载成功");
+                mView.update(box.getBookList1(), box.getBookList2());
             }
 
             @Override

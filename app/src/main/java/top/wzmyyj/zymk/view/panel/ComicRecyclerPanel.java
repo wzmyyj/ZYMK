@@ -29,7 +29,6 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import top.wzmyyj.wzm_sdk.adapter.ivd.IVD;
 import top.wzmyyj.wzm_sdk.adapter.ivd.SingleIVD;
-import top.wzmyyj.wzm_sdk.tools.L;
 import top.wzmyyj.wzm_sdk.tools.T;
 import top.wzmyyj.zymk.R;
 import top.wzmyyj.zymk.app.bean.BookBean;
@@ -55,16 +54,18 @@ public class ComicRecyclerPanel extends BaseRecyclerPanel<ComicBean, ComicPresen
         super(context, comicPresenter);
     }
 
+    private ComicMeunPanel mMeunPanel;
+    private ComicLoadPasePanel mLoadPasePanel;
+
     @Override
     protected void initPanels() {
         super.initPanels();
         addPanels(
                 mMeunPanel = new ComicMeunPanel(context, mPresenter),
-                new ComicLoadPasePanel(context, mPresenter)
+                mLoadPasePanel = new ComicLoadPasePanel(context, mPresenter)
         );
     }
 
-    private ComicMeunPanel mMeunPanel;
 
     @Override
     protected void initView() {
@@ -217,33 +218,27 @@ public class ComicRecyclerPanel extends BaseRecyclerPanel<ComicBean, ComicPresen
     private long chapter_id_after;
 
 
-    @Override
-    public Object f(int w, Object... objects) {
-        L.d(w + "");
+    public void loadFail() {
+        mLoadPasePanel.loadFail();
+    }
 
-        getPanel(1).f(w, objects);
-        if (w == -1) {
-            return null;
-        }
-
-        BookBean book = (BookBean) objects[0];
+    public void setComicData(BookBean book, List<ChapterBean> chapterList, List<BookBean> bookList, List<ComicBean> comicList) {
+        mLoadPasePanel.loadSuccess();
         if (book != null) {
             mBook = book;
         }
 
-        List<ChapterBean> chapterList = (List<ChapterBean>) objects[1];
         if (chapterList != null && chapterList.size() > 0) {
             mChapterList.clear();
             mChapterList.addAll(chapterList);
         }
 
-        List<BookBean> bookList = (List<BookBean>) objects[2];
+
         if (bookList != null && bookList.size() > 0) {
             mBookList.clear();
             mBookList.addAll(bookList);
         }
 
-        List<ComicBean> comicList = (List<ComicBean>) objects[3];
         if (comicList != null && comicList.size() > 0) {
             mComicList.clear();
             mComicList.addAll(comicList);
@@ -252,10 +247,9 @@ public class ComicRecyclerPanel extends BaseRecyclerPanel<ComicBean, ComicPresen
         addEnd();
         addOnce();
         mHandler.sendEmptyMessageDelayed(1, 500);
-
         mMeunPanel.setCatalogChapterList(chapterList);
-        return super.f(w, objects);
     }
+
 
     // 增加最后结束语。
     private void addEnd() {

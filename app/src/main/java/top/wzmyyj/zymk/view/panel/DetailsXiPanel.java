@@ -89,14 +89,10 @@ public class DetailsXiPanel extends BasePanel<DetailsPresenter> {
         });
     }
 
-    @Override
-    public Object f(int w, Object... objects) {
-        if (w == -1) return null;
-        XiBean xi = (XiBean) objects[0];
+    public void setXiData(XiBean xi){
         AuthorBean author = xi.getAuthor();
         setAuthor(author);
         tv_juqing.setText(xi.getJuqing());
-        return super.f(w, objects);
     }
 
     private void setAuthor(AuthorBean author) {

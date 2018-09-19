@@ -59,9 +59,9 @@ public class ComicPresenter extends BasePresenter<IComicView> {
                     List<ChapterBean> chapterList = box.getChapterList();
                     Collections.reverse(chapterList);// 反序
                     List<ComicBean> comicList = getComicData(chapterList);
-                    mView.update(0, box.getBook(), chapterList, box.getBookList(), comicList);
+                    mView.update(box.getBook(), chapterList, box.getBookList(), comicList);
                 } else {
-                    mView.update(-1, box.getMsg());
+                    mView.loadFail(box.getMsg());
                     mView.showToast(box.getMsg());
                 }
 //                mView.showToast("加载成功");
@@ -69,7 +69,7 @@ public class ComicPresenter extends BasePresenter<IComicView> {
 
             @Override
             public void onError(Throwable e) {
-                mView.update(-1, e.getMessage());
+                mView.loadFail(e.getMessage());
                 mView.showToast("Error:" + e.getMessage());
             }
 
@@ -89,7 +89,7 @@ public class ComicPresenter extends BasePresenter<IComicView> {
 
             int start = chapter.getStart_var();
             int end = chapter.getEnd_var();
-            chapter.setPrice(0);
+//            chapter.setPrice(0);
 
             for (int i = start; i <= end; i++) {
                 ComicBean comic = new ComicBean();

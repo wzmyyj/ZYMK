@@ -17,7 +17,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import top.wzmyyj.wzm_sdk.tools.T;
 import top.wzmyyj.zymk.R;
 import top.wzmyyj.zymk.app.bean.ChapterBean;
 import top.wzmyyj.zymk.app.bean.HuaBean;
@@ -107,18 +106,13 @@ public class DetailsMuPanel extends BasePanel<DetailsPresenter> {
     private int mBookID;
     private List<HuaBean> mALLHuaList = new ArrayList<>();
 
-    @Override
-    public Object f(int w, Object... objects) {
-        if (w == -1) return null;
-        if (w == 1) {// 传入历史阅读章节。
-            ChapterBean chapter = (ChapterBean) objects[0];
-            read_chapter_id = chapter.getChapter_id();
-            setData(read_chapter_id);
-            return null;
-        }
+    public void setHistoryChapter(ChapterBean chapter) {// 传入历史阅读章节。
+        read_chapter_id = chapter.getChapter_id();
+        setData(read_chapter_id);
+    }
 
-        // 初始数据。
-        MuBean mu = (MuBean) objects[0];
+    public void setMuData(MuBean mu) {
+        if (mu == null) return;
         tv_mu_last.setText(mu.getTime_desc());
 
         mBookID = mu.getBook_id();
@@ -136,10 +130,7 @@ public class DetailsMuPanel extends BasePanel<DetailsPresenter> {
 
             sort(mALLHuaList, sort_xu);
             setData(1);
-        } else {
-            T.s("加载失败");
         }
-        return super.f(w, objects);
     }
 
     private void sort(List list, int k) {

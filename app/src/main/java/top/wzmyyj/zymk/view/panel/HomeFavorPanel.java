@@ -103,20 +103,17 @@ public class HomeFavorPanel extends BasePanel<HomePresenter> {
         });
     }
 
-    @Override
-    public Object f(int w, Object... objects) {
-        if (w == -1) return null;
-        List<FavorBean> list = (List<FavorBean>) objects[0];
+
+    public void setFavorData(List<FavorBean> list) {
         if (list != null && list.size() > 0) {
             view.setVisibility(View.VISIBLE);
             mData.clear();
             mData.addAll(list);
             mAdapter.notifyDataSetChanged();
-        }else{
+        } else {
             view.setVisibility(View.GONE);
             mData.clear();
             mAdapter.notifyDataSetChanged();
         }
-        return super.f(w, objects);
     }
 }

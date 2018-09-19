@@ -112,29 +112,24 @@ public class MoreRecyclerPanel extends BaseRecyclerPanel<BookBean, MorePresenter
         mPresenter.loadData();
     }
 
-    @Override
-    public Object f(int w, Object... objects) {
-        if (w == -1) return null;
-        String content = (String) objects[0];
+
+    public void setMoreData(String content, String figure, List<BookBean> books) {
         tv_1.setText(content);
-        String figure = (String) objects[1];
         G.img(context, figure, img_1);
 
         mData.clear();
-        List<BookBean> books = (List<BookBean>) objects[2];
-        for (BookBean item : books) {
-            mData.add(item);
+        if(books!=null){
+            mData.addAll(books);
         }
 
         tv_end.setText("-- 共推荐" + mData.size() + "个 --");
-
         notifyDataSetChanged();
-        return super.f(w, objects);
     }
 
 
-    ImageView img_1;
-    TextView tv_1;
+    private ImageView img_1;
+    private TextView tv_1;
+
 
     @Override
     protected void setHeader() {
@@ -150,14 +145,14 @@ public class MoreRecyclerPanel extends BaseRecyclerPanel<BookBean, MorePresenter
     }
 
 
-    TextView tv_end;
+    private TextView tv_end;
+
 
     @Override
     protected void setFooter() {
         super.setFooter();
         mFooter = mInflater.inflate(R.layout.layout_footer, null);
         tv_end = mFooter.findViewById(R.id.tv_end);
-
         tv_end.setText("-- 共推荐" + mData.size() + "个 --");
     }
 

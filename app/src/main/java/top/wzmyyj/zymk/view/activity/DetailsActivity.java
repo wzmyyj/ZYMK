@@ -57,13 +57,17 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
     }
 
 
+    private DetailsXiPanel xiPanel;
+    private DetailsMuPanel muPanel;
+    private DetailsZiPanel ziPanel;
+
     @Override
     protected void initPanels() {
         super.initPanels();
         addPanels(
-                new DetailsXiPanel(context, mPresenter).setTitle("详情"),
-                new DetailsMuPanel(context, mPresenter).setTitle("目录"),
-                new DetailsZiPanel(context, mPresenter).setTitle("支持")
+                (xiPanel = new DetailsXiPanel(context, mPresenter)).setTitle("详情"),
+                (muPanel = new DetailsMuPanel(context, mPresenter)).setTitle("目录"),
+                (ziPanel = new DetailsZiPanel(context, mPresenter)).setTitle("支持")
         );
     }
 
@@ -156,7 +160,7 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
 
         List<View> viewList = new ArrayList<>();
         List<String> titles = new ArrayList<>();
-        for (Panel p : mPanels.getPanelList()) {
+        for (Panel p : mPanelManager.getPanelList()) {
             viewList.add(p.getView());
             titles.add(p.getTitle());
         }
@@ -203,12 +207,6 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
 
     }
 
-    public void updateWithView() {
-        mRefreshLayout.autoRefresh();
-        update();
-        mRefreshLayout.finishRefresh(1500);
-    }
-
     private void update() {
         mPresenter.loadData();
     }
@@ -244,17 +242,17 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
 
     @Override
     public void setXi(XiBean xi) {
-        getPanel(0).f(0, xi);
+        xiPanel.setXiData(xi);
     }
 
     @Override
     public void setMu(MuBean mu) {
-        getPanel(1).f(0, mu);
+        muPanel.setMuData(mu);
     }
 
     @Override
     public void setZi(ZiBean zi) {
-        getPanel(2).f(0, zi);
+        ziPanel.setZiData(zi);
     }
 
 
@@ -286,7 +284,7 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
         } else {
             bt_read.setText("续看" + chapter.getChapter_name());
             history_chapter_id = chapter.getChapter_id();
-            getPanel(1).f(1, chapter);
+            muPanel.setHistoryChapter(chapter);
         }
 
     }

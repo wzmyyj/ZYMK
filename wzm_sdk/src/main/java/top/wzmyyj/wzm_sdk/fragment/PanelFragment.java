@@ -6,7 +6,7 @@ import android.support.annotation.Nullable;
 import android.view.View;
 
 import top.wzmyyj.wzm_sdk.panel.Panel;
-import top.wzmyyj.wzm_sdk.panel.Panels;
+import top.wzmyyj.wzm_sdk.panel.PanelManager;
 
 /**
  * Created by wzm on 2018/05/04. email: 2209011667@qq.com
@@ -15,18 +15,19 @@ import top.wzmyyj.wzm_sdk.panel.Panels;
 
 public abstract class PanelFragment extends InitFragment {
 
-    protected Panels mPanels = new Panels();
+
+    protected PanelManager mPanelManager = new PanelManager();
 
     public void addPanels(@NonNull Panel... panels) {
-        mPanels.addPanels(panels);
+        mPanelManager.addPanels(panels);
     }
 
     public View getPanelView(int i) {
-        return mPanels.getPanelView(i);
+        return mPanelManager.getPanelView(i);
     }
 
     public Panel getPanel(int i) {
-        return mPanels.get(i);
+        return mPanelManager.get(i);
     }
 
     protected void initPanels() {
@@ -37,52 +38,52 @@ public abstract class PanelFragment extends InitFragment {
     protected void initSome(Bundle savedInstanceState) {
         super.initSome(savedInstanceState);
         initPanels();
-        mPanels.onCreate(savedInstanceState);
+        mPanelManager.onCreate(savedInstanceState);
     }
 
 
     @Override
     public void onResume() {
         super.onResume();
-        mPanels.onResume();
+        mPanelManager.onResume();
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        mPanels.onStart();
+        mPanelManager.onStart();
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        mPanels.onPause();
+        mPanelManager.onPause();
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        mPanels.onStop();
+        mPanelManager.onStop();
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mPanels.onActivityCreated(savedInstanceState);
+        mPanelManager.onActivityCreated(savedInstanceState);
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        mPanels.onDestroyView();
+        mPanelManager.onDestroyView();
     }
 
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mPanels.onDestroy();
-        mPanels = null;
+        mPanelManager.onDestroy();
+        mPanelManager = null;
     }
 
 

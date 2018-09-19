@@ -72,16 +72,13 @@ public class NewRecyclerPanel extends BaseRecyclerPanel<BookBean, NewPresenter> 
         mPresenter.loadData();
     }
 
-    @Override
-    public Object f(int w, Object... objects) {
-        if (w == -1) return null;
+    public void setNewData(List<BookBean> books) {
+        if (books == null) return;
         mData.clear();
-        List<BookBean> books = (List<BookBean>) objects[0];
         for (BookBean item : books) {
             mData.add(item);
         }
         notifyDataSetChanged();
-        return super.f(w, objects);
     }
 
     @Override

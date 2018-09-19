@@ -12,6 +12,7 @@ import butterknife.BindView;
 import top.wzmyyj.wzm_sdk.adapter.ViewTitlePagerAdapter;
 import top.wzmyyj.wzm_sdk.panel.Panel;
 import top.wzmyyj.zymk.R;
+import top.wzmyyj.zymk.app.bean.BookBean;
 import top.wzmyyj.zymk.presenter.NewPresenter;
 import top.wzmyyj.zymk.view.activity.base.BaseActivity;
 import top.wzmyyj.zymk.view.iv.INewView;
@@ -55,7 +56,7 @@ public class NewActivity extends BaseActivity<NewPresenter> implements INewView 
         super.initData();
         List<View> viewList = new ArrayList<>();
         List<String> titles = new ArrayList<>();
-        for (Panel p : mPanels.getPanelList()) {
+        for (Panel p : mPanelManager.getPanelList()) {
             viewList.add(p.getView());
             titles.add(p.getTitle());
         }
@@ -76,10 +77,9 @@ public class NewActivity extends BaseActivity<NewPresenter> implements INewView 
         });
     }
 
-
     @Override
-    public void update(int w, Object... objs) {
-        getPanel(0).f(w, objs[0]);
-        getPanel(1).f(w, objs[1]);
+    public void update(List<BookBean>... bookList) {
+        ((NewRecyclerPanel) getPanel(0)).setNewData(bookList[0]);
+        ((NewRecyclerPanel) getPanel(1)).setNewData(bookList[1]);
     }
 }

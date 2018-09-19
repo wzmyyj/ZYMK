@@ -15,18 +15,18 @@ import top.wzmyyj.zymk.app.tools.I;
 import top.wzmyyj.zymk.model.db.FavorModel;
 import top.wzmyyj.zymk.model.db.HistoryModel;
 import top.wzmyyj.zymk.presenter.base.BasePresenter;
-import top.wzmyyj.zymk.view.iv.IF_3View;
+import top.wzmyyj.zymk.view.iv.IFindView;
 
 /**
  * Created by yyj on 2018/07/06. email: 2209011667@qq.com
  */
 
-public class FindPresenter extends BasePresenter<IF_3View> {
+public class FindPresenter extends BasePresenter<IFindView> {
 
     private FavorModel favorModel;
     private HistoryModel historyModel;
 
-    public FindPresenter(Activity activity, IF_3View iv) {
+    public FindPresenter(Activity activity, IFindView iv) {
         super(activity, iv);
         favorModel = new FavorModel(activity);
         historyModel = new HistoryModel(activity);

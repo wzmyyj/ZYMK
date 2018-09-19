@@ -1,5 +1,10 @@
 package top.wzmyyj.zymk.view.iv;
 
+import java.util.List;
+
+import top.wzmyyj.zymk.app.bean.BookBean;
+import top.wzmyyj.zymk.app.bean.ChapterBean;
+import top.wzmyyj.zymk.app.bean.ComicBean;
 import top.wzmyyj.zymk.view.iv.base.IBaseView;
 
 
@@ -8,5 +13,7 @@ import top.wzmyyj.zymk.view.iv.base.IBaseView;
  */
 
 public interface IComicView extends IBaseView{
-    void update(int w, Object... objs);
+    void update(BookBean book, List<ChapterBean> chapterList, List<BookBean> bookList, List<ComicBean> comicList);
+
+    void loadFail(String msg);
 }

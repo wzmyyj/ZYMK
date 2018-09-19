@@ -46,7 +46,8 @@ public class TypeRecyclerPanel extends BaseRecyclerPanel<TypeBean, TypePresenter
             public void convert(ViewHolder holder, TypeBean typeBean, int position) {
                 ImageView img_type = holder.getView(R.id.img_type);
                 TextView tv_type = holder.getView(R.id.tv_type);
-                tv_type.setText("- " + typeBean.getTitle() + " -");
+                String ss = "- " + typeBean.getTitle() + " -";
+                tv_type.setText(ss);
                 G.img(context, typeBean.getData_src(), img_type);
                 final String href = typeBean.getHref();
             }
@@ -70,25 +71,20 @@ public class TypeRecyclerPanel extends BaseRecyclerPanel<TypeBean, TypePresenter
     @Override
     public void update() {
         mPresenter.loadData();
-
     }
 
-    @Override
-    public Object f(int w, Object... objects) {
-        if (w == -1) {
+
+    public void setTypeData(List<TypeBean> typeList) {
+        if (typeList == null && typeList.size() == 0) {
             notifyDataSetChanged();
-            return null;
+            return;
         }
-        List<TypeBean> typeList = (List<TypeBean>) objects[0];
-        if (typeList != null && typeList.size() > 0) {
-            mData.clear();
-            for (TypeBean bean : typeList) {
-                mData.add(bean);
-            }
-        }
+        mData.clear();
+        mData.addAll(typeList);
         notifyDataSetChanged();
-        return super.f(w, objects);
+
     }
+
 
     protected TextView tv_empty;
 

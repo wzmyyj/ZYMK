@@ -5,15 +5,15 @@ import android.app.Activity;
 import top.wzmyyj.zymk.app.data.Urls;
 import top.wzmyyj.zymk.app.tools.I;
 import top.wzmyyj.zymk.presenter.base.BasePresenter;
-import top.wzmyyj.zymk.view.iv.IF_4View;
+import top.wzmyyj.zymk.view.iv.IMineView;
 
 /**
  * Created by yyj on 2018/07/06. email: 2209011667@qq.com
  */
 
-public class MinePresenter extends BasePresenter<IF_4View> {
+public class MinePresenter extends BasePresenter<IMineView> {
 
-    public MinePresenter(Activity activity, IF_4View iv) {
+    public MinePresenter(Activity activity, IMineView iv) {
         super(activity, iv);
     }
 

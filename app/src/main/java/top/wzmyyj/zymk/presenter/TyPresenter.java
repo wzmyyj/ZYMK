@@ -41,7 +41,7 @@ public class TyPresenter extends BasePresenter<ITyView> {
     }
 
 
-    public void loadData(String url, final int w) {
+    public void loadData(String url, final boolean isFirst) {
         if (!TextUtils.isEmpty(key)) {
             url = url + "?key=" + key;
         }
@@ -54,12 +54,12 @@ public class TyPresenter extends BasePresenter<ITyView> {
             @Override
             public void onNext(TyBox box) {
                 mView.setTitle(box.getTitle());
-                mView.update(w, box.getBooks(), box.getBase(), box.getNext());
+                mView.update(isFirst, box.getBooks(), box.getBase(), box.getNext());
             }
 
             @Override
             public void onError(Throwable e) {
-                mView.update(-1, e.getMessage());
+                mView.loadFail(e.getMessage());
                 mView.showToast("Error:" + e.getMessage());
             }
 
@@ -72,12 +72,12 @@ public class TyPresenter extends BasePresenter<ITyView> {
 
     // 下滑加载调用这个
     public void loadData(String url) {
-        loadData(url, 1);
+        loadData(url, false);
     }
 
     // 第一次加载调用这个
     public void loadData() {
-        loadData(href, 0);
+        loadData(href, true);
     }
 
 

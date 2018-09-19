@@ -24,17 +24,17 @@ import top.wzmyyj.zymk.app.event.HistoryListChangeEvent;
 import top.wzmyyj.zymk.common.utils.StatusBarUtil;
 import top.wzmyyj.zymk.presenter.FindPresenter;
 import top.wzmyyj.zymk.view.fragment.base.BaseFragment;
-import top.wzmyyj.zymk.view.iv.IF_3View;
+import top.wzmyyj.zymk.view.iv.IFindView;
+import top.wzmyyj.zymk.view.panel.DownloadRecyclerPanel;
 import top.wzmyyj.zymk.view.panel.FavorRecyclerPanel;
 import top.wzmyyj.zymk.view.panel.HistoryRecyclerPanel;
-import top.wzmyyj.zymk.view.panel.DownloadRecyclerPanel;
 
 /**
  * Created by yyj on 2018/07/06. email: 2209011667@qq.com
  * 第三页。
  */
 
-public class FindFragment extends BaseFragment<FindPresenter> implements IF_3View {
+public class FindFragment extends BaseFragment<FindPresenter> implements IFindView {
     @Override
     protected void initPresenter() {
         mPresenter = new FindPresenter(activity, this);
@@ -45,13 +45,17 @@ public class FindFragment extends BaseFragment<FindPresenter> implements IF_3Vie
         return R.layout.fragment_3;
     }
 
+    private FavorRecyclerPanel favorRecyclerPanel;
+    private HistoryRecyclerPanel historyRecyclerPanel;
+    private DownloadRecyclerPanel downloadRecyclerPanel;
+
     @Override
     protected void initPanels() {
         super.initPanels();
         addPanels(
-                new FavorRecyclerPanel(context, mPresenter),
-                new HistoryRecyclerPanel(context, mPresenter),
-                new DownloadRecyclerPanel(context, mPresenter)
+                (favorRecyclerPanel = new FavorRecyclerPanel(context, mPresenter)).setTitle("订阅"),
+                (historyRecyclerPanel = new HistoryRecyclerPanel(context, mPresenter)).setTitle("历史"),
+                (downloadRecyclerPanel = new DownloadRecyclerPanel(context, mPresenter)).setTitle("缓存")
         );
     }
 
@@ -75,12 +79,10 @@ public class FindFragment extends BaseFragment<FindPresenter> implements IF_3Vie
         super.initData();
         List<View> viewList = new ArrayList<>();
         List<String> titles = new ArrayList<>();
-        for (Panel p : mPanels.getPanelList()) {
+        for (Panel p : mPanelManager.getPanelList()) {
             viewList.add(p.getView());
+            titles.add(p.getTitle());
         }
-        titles.add("订阅");
-        titles.add("历史");
-        titles.add("缓存");
         ViewTitlePagerAdapter pagerAdapter = new ViewTitlePagerAdapter(viewList, titles);
         mViewPager.setAdapter(pagerAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
@@ -112,13 +114,14 @@ public class FindFragment extends BaseFragment<FindPresenter> implements IF_3Vie
     //////////////////////////////////////////////////////////////////////////// favor
     @Override
     public void loadFavor(List<FavorBean> list) {
-        getPanel(0).f(1, list);
+        if (list == null) return;
+        favorRecyclerPanel.setFindData(list);
     }
 
     @Override
     public void deleteFavor(boolean is) {
         if (!is) return;
-        getPanel(0).f(2);
+        favorRecyclerPanel.deleteSuccess();
     }
 
 
@@ -132,13 +135,14 @@ public class FindFragment extends BaseFragment<FindPresenter> implements IF_3Vie
 
     @Override
     public void loadHistory(List<HistoryBean> list) {
-        getPanel(1).f(1, list);
+        if (list == null) return;
+        historyRecyclerPanel.setFindData(list);
     }
 
     @Override
     public void deleteHistory(boolean is) {
         if (!is) return;
-        getPanel(1).f(2);
+        historyRecyclerPanel.deleteSuccess();
     }
 
     @Subscribe
@@ -151,15 +155,15 @@ public class FindFragment extends BaseFragment<FindPresenter> implements IF_3Vie
 
     @Override
     public void loadDownload(List<DownloadBean> list) {
-        getPanel(2).f(1, list);
+        if (list == null) return;
+        downloadRecyclerPanel.setFindData(list);
     }
 
     @Override
     public void deleteDownload(boolean is) {
         if (!is) return;
-        getPanel(2).f(2);
+        downloadRecyclerPanel.deleteSuccess();
     }
-
 
 
     @Subscribe

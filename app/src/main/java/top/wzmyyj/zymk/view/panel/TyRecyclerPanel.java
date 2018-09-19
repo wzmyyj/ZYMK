@@ -92,32 +92,25 @@ public class TyRecyclerPanel extends BaseRecyclerPanel<BookBean, TyPresenter> {
     private boolean isRuning = false;
 
 
-    @Override
-    public Object f(int w, Object... objects) {
-        isRuning = false;
-        if (w == -1) {
-            tv_end.setText("-- 加载失败,稍后再试 --");
-            notifyDataSetChanged();
-            return null;
-        }
-        List<BookBean> beanList = (List<BookBean>) objects[0];
-        if (beanList == null && beanList.size() == 0) {
-            notifyDataSetChanged();
-            return null;
-        }
-        String base = (String) objects[1];
-        String next = (String) objects[2];
+    public void loadFail(String msg) {
+        tv_end.setText("-- 加载失败,稍后再试 --");
+        notifyDataSetChanged();
+    }
 
-        if (w == 0) {
+    public void setTyData(boolean isFirst, List<BookBean> books, String base, String next) {
+        isRuning = false;
+        if (books == null && books.size() == 0) {
+            loadFail("No Books");
+            return;
+        }
+
+        if (isFirst) {
             mData.clear();
         }
 
-        for (BookBean book : beanList) {
-            mData.add(book);
-        }
+        mData.addAll(books);
         next_href = next;
         notifyDataSetChanged();
-        return super.f(w, objects);
     }
 
     TextView tv_end;

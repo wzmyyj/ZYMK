@@ -12,6 +12,7 @@ import butterknife.BindView;
 import top.wzmyyj.wzm_sdk.adapter.ViewTitlePagerAdapter;
 import top.wzmyyj.wzm_sdk.panel.Panel;
 import top.wzmyyj.zymk.R;
+import top.wzmyyj.zymk.app.bean.BookBean;
 import top.wzmyyj.zymk.presenter.RankPresenter;
 import top.wzmyyj.zymk.view.activity.base.BaseActivity;
 import top.wzmyyj.zymk.view.iv.IRankView;
@@ -56,7 +57,7 @@ public class RankActivity extends BaseActivity<RankPresenter> implements IRankVi
         super.initData();
         List<View> viewList = new ArrayList<>();
         List<String> titles = new ArrayList<>();
-        for (Panel p : mPanels.getPanelList()) {
+        for (Panel p : mPanelManager.getPanelList()) {
             viewList.add(p.getView());
             titles.add(p.getTitle());
         }
@@ -77,11 +78,12 @@ public class RankActivity extends BaseActivity<RankPresenter> implements IRankVi
         });
     }
 
-
     @Override
-    public void update(int w, Object... objs) {
-        getPanel(0).f(w, objs[0]);
-        getPanel(1).f(w, objs[1]);
-        getPanel(2).f(w, objs[2]);
+    public void update(List<BookBean>... bookList) {
+        ((RankRecyclerPanel)getPanel(0)).setRankData(bookList[0]);
+        ((RankRecyclerPanel)getPanel(1)).setRankData(bookList[1]);
+        ((RankRecyclerPanel)getPanel(2)).setRankData(bookList[2]);
     }
+
+
 }

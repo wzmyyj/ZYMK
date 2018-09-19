@@ -5,7 +5,7 @@ import android.support.annotation.NonNull;
 import android.view.View;
 
 import top.wzmyyj.wzm_sdk.panel.Panel;
-import top.wzmyyj.wzm_sdk.panel.Panels;
+import top.wzmyyj.wzm_sdk.panel.PanelManager;
 
 /**
  * Created by wzm on 2018/05/04. email: 2209011667@qq.com
@@ -14,17 +14,17 @@ import top.wzmyyj.wzm_sdk.panel.Panels;
 
 public abstract class PanelActivity extends InitActivity {
 
-    protected Panels mPanels = new Panels();
+    protected PanelManager mPanelManager = new PanelManager();
 
     public void addPanels(@NonNull Panel... panels) {
-        mPanels.addPanels(panels);
+        mPanelManager.addPanels(panels);
     }
 
     public View getPanelView(int i) {
-        return mPanels.getPanelView(i);
+        return mPanelManager.getPanelView(i);
     }
     public Panel getPanel(int i) {
-        return mPanels.get(i);
+        return mPanelManager.get(i);
     }
 
     protected void initPanels() {
@@ -35,46 +35,46 @@ public abstract class PanelActivity extends InitActivity {
     protected void initSome(Bundle savedInstanceState) {
         super.initSome(savedInstanceState);
         initPanels();
-        mPanels.onCreate(savedInstanceState);
+        mPanelManager.onCreate(savedInstanceState);
     }
 
 
     @Override
     protected void onResume() {
         super.onResume();
-        mPanels.onResume();
+        mPanelManager.onResume();
 
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        mPanels.onStart();
+        mPanelManager.onStart();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        mPanels.onPause();
+        mPanelManager.onPause();
     }
 
 
     @Override
     protected void onStop() {
         super.onStop();
-        mPanels.onStop();
+        mPanelManager.onStop();
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();
-        mPanels.onRestart();
+        mPanelManager.onRestart();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mPanels.onDestroy();
-        mPanels = null;
+        mPanelManager.onDestroy();
+        mPanelManager = null;
     }
 }

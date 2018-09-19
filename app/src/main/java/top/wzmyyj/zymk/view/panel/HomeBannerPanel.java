@@ -22,15 +22,8 @@ public class HomeBannerPanel extends BaseBannerPanel<HomePresenter> {
         super(context, homePresenter);
     }
 
-    @Override
-    public Object f(int w, Object... objects) {
-        if (w == -1) return null;
-        List<BoBean> bos = (List<BoBean>) objects[0];
-        setBanner(bos);
-        return super.f(w, objects);
-    }
 
-    public void setBanner(final List<BoBean> bos) {
+    public void setBannerData(final List<BoBean> bos) {
         if (bos == null || bos.size() == 0) return;
         List<String> imgs = new ArrayList<>();
         List<String> strs = new ArrayList<>();

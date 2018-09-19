@@ -209,28 +209,14 @@ public abstract class FindRecyclerPanel<T> extends BaseRecyclerPanel<T, FindPres
     protected boolean isCanSelect;
 
 
-    @Override
-    public Object f(int w, Object... objects) {
-        switch (w) {
-            case 1:
-                List<T> list = (List<T>) objects[0];
-                if (list == null) return null;
-                loadData(list);
-                break;
-            case 2:
-                deleteSuccess();
-                break;
-        }
-        return super.f(w, objects);
-    }
-
-    private void loadData(List<T> list) {
+    public void setFindData(List<T> list) {
+        if(list==null)return;
         mData.clear();
         mData.addAll(list);
         notifyDataSetChanged();
     }
 
-    private void deleteSuccess() {
+    public void deleteSuccess() {
         mData.removeAll(mSelectedList);
         mSelectedList.clear();
         notifyDataSetChanged();

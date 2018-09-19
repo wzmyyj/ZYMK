@@ -1,5 +1,8 @@
 package top.wzmyyj.zymk.view.iv;
 
+import java.util.List;
+
+import top.wzmyyj.zymk.app.bean.BookBean;
 import top.wzmyyj.zymk.view.iv.base.IBaseView;
 
 /**
@@ -8,5 +11,5 @@ import top.wzmyyj.zymk.view.iv.base.IBaseView;
 
 public interface IMoreView extends IBaseView {
     void setTitle(String s);
-    void update(int w, Object... objs);
+    void update(String content, String figure, List<BookBean> books);
 }

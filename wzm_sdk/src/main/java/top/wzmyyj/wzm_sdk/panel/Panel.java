@@ -60,19 +60,19 @@ public class Panel {
     // child panels
 
     // 内部panel的管理类。
-    protected Panels mPanels = new Panels();
+    protected PanelManager mPanelManager = new PanelManager();
 
     // 内部添加panel。
     public void addPanels(@NonNull Panel... panels) {
-        mPanels.addPanels(panels);
+        mPanelManager.addPanels(panels);
     }
 
     public View getPanelView(int i) {
-        return mPanels.getPanelView(i);
+        return mPanelManager.getPanelView(i);
     }
 
     public Panel getPanel(int i) {
-        return mPanels.get(i);
+        return mPanelManager.get(i);
     }
 
 
@@ -82,50 +82,51 @@ public class Panel {
 
     public void onCreate(Bundle savedInstanceState) {
         initPanels();
-        mPanels.onCreate(savedInstanceState);
+        mPanelManager.onCreate(savedInstanceState);
     }
 
     public void onResume() {
-        mPanels.onResume();
+        mPanelManager.onResume();
     }
 
 
     public void onStart() {
-        mPanels.onStart();
+        mPanelManager.onStart();
     }
 
     public void onRestart() {
-        mPanels.onRestart();
+        mPanelManager.onRestart();
     }
 
     public void onPause() {
-        mPanels.onPause();
+        mPanelManager.onPause();
     }
 
     public void onStop() {
-        mPanels.onStop();
+        mPanelManager.onStop();
     }
 
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        mPanels.onActivityCreated(savedInstanceState);
+        mPanelManager.onActivityCreated(savedInstanceState);
     }
 
     public void onDestroyView() {
-        mPanels.onDestroyView();
+        mPanelManager.onDestroyView();
     }
 
     public void onDestroy() {
-        mPanels.onDestroy();
-        mPanels = null;
+        mPanelManager.onDestroy();
+        viewList.clear();
+        mPanelManager = null;
         context = null;
         activity = null;
     }
 
 
-    // 给外部调用的统一万能函数。多个基本数据类型参数时可以选择分装成been。
-    public Object f(int w, Object... objects) {
-        return null;
-    }
+//    // 给外部调用的统一万能函数。多个基本数据类型参数时可以选择分装成been。
+//    public Object f(int w, Object... objects) {
+//        return null;
+//    }
 
     protected List<View> viewList = new ArrayList<>();
 

@@ -48,11 +48,7 @@ public class MorePresenter extends BasePresenter<IMoreView> {
             @Override
             public void onNext(MoreBox box) {
                 mView.setTitle(box.getTitle());
-                mView.update(0,
-                        box.getContent(),
-                        box.getFigure(),
-                        box.getBookList());
-//                mView.showToast("加载成功");
+                mView.update(box.getContent(), box.getFigure(), box.getBookList());
             }
 
             @Override

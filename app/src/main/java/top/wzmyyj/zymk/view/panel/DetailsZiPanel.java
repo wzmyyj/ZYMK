@@ -114,10 +114,8 @@ public class DetailsZiPanel extends BasePanel<DetailsPresenter> {
 
     }
 
-    @Override
-    public Object f(int w, Object... objects) {
-        if (w == -1) return null;
-        ZiBean zi = (ZiBean) objects[0];
+
+    public void setZiData(ZiBean zi){
         if (zi.getFansList() != null && zi.getFansList().size() > 3) {
             setFans(zi.getFansList());
         }
@@ -125,8 +123,6 @@ public class DetailsZiPanel extends BasePanel<DetailsPresenter> {
         if (zi.getSupport() != null && zi.getSupport().length == 6) {
             setAch(zi.getSupport());
         }
-
-        return super.f(w, objects);
     }
 
     private void setAch(String[] strs) {

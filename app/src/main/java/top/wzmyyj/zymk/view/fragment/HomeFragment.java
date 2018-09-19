@@ -14,12 +14,14 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import top.wzmyyj.wzm_sdk.tools.T;
 import top.wzmyyj.zymk.R;
+import top.wzmyyj.zymk.app.bean.BoBean;
 import top.wzmyyj.zymk.app.bean.FavorBean;
+import top.wzmyyj.zymk.app.bean.ItemBean;
 import top.wzmyyj.zymk.app.event.FavorUnReadChangeEvent;
 import top.wzmyyj.zymk.common.utils.StatusBarUtil;
 import top.wzmyyj.zymk.presenter.HomePresenter;
 import top.wzmyyj.zymk.view.fragment.base.BaseFragment;
-import top.wzmyyj.zymk.view.iv.IF_1View;
+import top.wzmyyj.zymk.view.iv.IHomeView;
 import top.wzmyyj.zymk.view.panel.HomeFavorPanel;
 import top.wzmyyj.zymk.view.panel.HomeNestedScrollPanel;
 
@@ -28,7 +30,7 @@ import top.wzmyyj.zymk.view.panel.HomeNestedScrollPanel;
  * 第一页。
  */
 
-public class HomeFragment extends BaseFragment<HomePresenter> implements IF_1View {
+public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeView {
 
 
     @Override
@@ -42,11 +44,14 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IF_1Vie
     }
 
 
+    private HomeNestedScrollPanel homeNestedScrollPanel;
+    private HomeFavorPanel homeFavorPanel;
+
     @Override
     protected void initPanels() {
         super.initPanels();
-        addPanels(new HomeNestedScrollPanel(context, mPresenter));
-        addPanels(new HomeFavorPanel(context, mPresenter));
+        addPanels(homeNestedScrollPanel = new HomeNestedScrollPanel(context, mPresenter));
+        addPanels(homeFavorPanel = new HomeFavorPanel(context, mPresenter));
     }
 
     @Override
@@ -98,10 +103,10 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IF_1Vie
         super.initView();
         StatusBarUtil.fitsStatusBarView(v0, v1, v2);
 
-        fl_panel.addView(getPanelView(0));
-        fl_panel.addView(getPanelView(1));
+        fl_panel.addView(homeNestedScrollPanel.getView());
+        fl_panel.addView(homeFavorPanel.getView());
 
-        getPanel(0).bingViews(ll_top);
+        homeNestedScrollPanel.bingViews(ll_top);
 
     }
 
@@ -113,15 +118,14 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IF_1Vie
     }
 
     @Override
-    public void update(int w, Object... objs) {
-        getPanel(0).f(w, objs);
+    public void update(List<BoBean> boBeans, List<ItemBean> itemBeans) {
+        homeNestedScrollPanel.setHomeData(boBeans, itemBeans);
     }
 
     @Override
     public void loadFavor(List<FavorBean> list) {
-        getPanel(1).f(0, list);
+        homeFavorPanel.setFavorData(list);
     }
-
 
 
 }

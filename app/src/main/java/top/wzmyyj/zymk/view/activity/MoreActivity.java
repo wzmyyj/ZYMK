@@ -6,8 +6,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.List;
+
 import butterknife.BindView;
 import top.wzmyyj.zymk.R;
+import top.wzmyyj.zymk.app.bean.BookBean;
 import top.wzmyyj.zymk.common.utils.StatusBarUtil;
 import top.wzmyyj.zymk.presenter.MorePresenter;
 import top.wzmyyj.zymk.view.activity.base.BaseActivity;
@@ -26,10 +29,13 @@ public class MoreActivity extends BaseActivity<MorePresenter> implements IMoreVi
         return R.layout.activity_more;
     }
 
+
+    private MoreRecyclerPanel moreRecyclerPanel;
+
     @Override
     protected void initPanels() {
         super.initPanels();
-        addPanels(new MoreRecyclerPanel(activity, mPresenter));
+        addPanels(moreRecyclerPanel = new MoreRecyclerPanel(activity, mPresenter));
     }
 
     @BindView(R.id.ll_panel)
@@ -49,7 +55,7 @@ public class MoreActivity extends BaseActivity<MorePresenter> implements IMoreVi
     @Override
     protected void initSome(Bundle savedInstanceState) {
         super.initSome(savedInstanceState);
-        StatusBarUtil.initStatusBar(activity,true,true,true);
+        StatusBarUtil.initStatusBar(activity, true, true, true);
     }
 
     @Override
@@ -79,8 +85,8 @@ public class MoreActivity extends BaseActivity<MorePresenter> implements IMoreVi
     }
 
     @Override
-    public void update(int w, Object... objs) {
-        getPanel(0).f(w, objs);
+    public void update(String content, String figure, List<BookBean> books) {
+        moreRecyclerPanel.setMoreData(content, figure, books);
     }
 
     @Override

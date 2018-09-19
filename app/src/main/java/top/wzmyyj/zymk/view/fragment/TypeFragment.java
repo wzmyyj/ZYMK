@@ -12,10 +12,11 @@ import butterknife.OnClick;
 import top.wzmyyj.wzm_sdk.adapter.ViewTitlePagerAdapter;
 import top.wzmyyj.wzm_sdk.panel.Panel;
 import top.wzmyyj.zymk.R;
+import top.wzmyyj.zymk.app.bean.TypeBean;
 import top.wzmyyj.zymk.common.utils.StatusBarUtil;
 import top.wzmyyj.zymk.presenter.TypePresenter;
 import top.wzmyyj.zymk.view.fragment.base.BaseFragment;
-import top.wzmyyj.zymk.view.iv.IF_2View;
+import top.wzmyyj.zymk.view.iv.ITypeView;
 import top.wzmyyj.zymk.view.panel.TypeRecyclerPanel;
 
 /**
@@ -23,7 +24,7 @@ import top.wzmyyj.zymk.view.panel.TypeRecyclerPanel;
  * 第二页。
  */
 
-public class TypeFragment extends BaseFragment<TypePresenter> implements IF_2View {
+public class TypeFragment extends BaseFragment<TypePresenter> implements ITypeView {
 
     @Override
     protected void initPresenter() {
@@ -40,10 +41,10 @@ public class TypeFragment extends BaseFragment<TypePresenter> implements IF_2Vie
     protected void initPanels() {
         super.initPanels();
         addPanels(
-                new TypeRecyclerPanel(context, mPresenter),
-                new TypeRecyclerPanel(context, mPresenter),
-                new TypeRecyclerPanel(context, mPresenter),
-                new TypeRecyclerPanel(context, mPresenter)
+                new TypeRecyclerPanel(context, mPresenter).setTitle("题材"),
+                new TypeRecyclerPanel(context, mPresenter).setTitle("进度"),
+                new TypeRecyclerPanel(context, mPresenter).setTitle("受众"),
+                new TypeRecyclerPanel(context, mPresenter).setTitle("媒体")
         );
     }
 
@@ -71,24 +72,22 @@ public class TypeFragment extends BaseFragment<TypePresenter> implements IF_2Vie
         super.initData();
         List<View> viewList = new ArrayList<>();
         List<String> titles = new ArrayList<>();
-        for (Panel p : mPanels.getPanelList()) {
+        for (Panel p : mPanelManager.getPanelList()) {
             viewList.add(p.getView());
+            titles.add(p.getTitle());
         }
-        titles.add("题材");
-        titles.add("进度");
-        titles.add("受众");
-        titles.add("媒体");
         ViewTitlePagerAdapter pagerAdapter = new ViewTitlePagerAdapter(viewList, titles);
         mViewPager.setAdapter(pagerAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
         mPresenter.loadData();
     }
 
+    @SafeVarargs
     @Override
-    public void update(int w, Object... objs) {
-        getPanel(0).f(w, objs[0]);
-        getPanel(1).f(w, objs[1]);
-        getPanel(2).f(w, objs[2]);
-        getPanel(3).f(w, objs[3]);
+    public final void update(List<TypeBean>... typeList) {
+        ((TypeRecyclerPanel) getPanel(0)).setTypeData(typeList[0]);
+        ((TypeRecyclerPanel) getPanel(1)).setTypeData(typeList[1]);
+        ((TypeRecyclerPanel) getPanel(2)).setTypeData(typeList[2]);
+        ((TypeRecyclerPanel) getPanel(3)).setTypeData(typeList[3]);
     }
 }

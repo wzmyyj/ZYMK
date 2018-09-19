@@ -10,12 +10,13 @@ import java.util.List;
 
 /**
  * Created by wzm on 2018/07/04. email: 2209011667@qq.com
+ * 多个Panel的管理类。
  */
 
-public class Panels {
+public class PanelManager {
     private List<Panel> mPanelList;
 
-    public Panels() {
+    public PanelManager() {
         mPanelList = new ArrayList<>();
     }
 

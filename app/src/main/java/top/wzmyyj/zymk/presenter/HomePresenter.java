@@ -16,17 +16,17 @@ import top.wzmyyj.zymk.model.db.FavorModel;
 import top.wzmyyj.zymk.model.net.MainModel;
 import top.wzmyyj.zymk.model.net.box.HomeBox;
 import top.wzmyyj.zymk.presenter.base.BasePresenter;
-import top.wzmyyj.zymk.view.iv.IF_1View;
+import top.wzmyyj.zymk.view.iv.IHomeView;
 
 /**
  * Created by yyj on 2018/06/29. email: 2209011667@qq.com
  */
 
-public class HomePresenter extends BasePresenter<IF_1View> {
+public class HomePresenter extends BasePresenter<IHomeView> {
     private MainModel mModel;
     private FavorModel favorModel;
 
-    public HomePresenter(Activity activity, IF_1View iv) {
+    public HomePresenter(Activity activity, IHomeView iv) {
         super(activity, iv);
         mModel = new MainModel();
         favorModel = new FavorModel(activity);
@@ -54,7 +54,7 @@ public class HomePresenter extends BasePresenter<IF_1View> {
 
             @Override
             public void onNext(HomeBox box) {
-                mView.update(0, box.getBoList(), box.getItemList());
+                mView.update(box.getBoList(), box.getItemList());
 //                mView.showToast("加载成功");
             }
 

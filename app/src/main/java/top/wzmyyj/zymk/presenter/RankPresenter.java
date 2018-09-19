@@ -46,8 +46,7 @@ public class RankPresenter extends BasePresenter<IRankView> {
 
             @Override
             public void onNext(RankBox box) {
-                mView.update(0, box.getBookList1(), box.getBookList2(),box.getBookList3());
-//                mView.showToast("加载成功");
+                mView.update(box.getBookList1(), box.getBookList2(),box.getBookList3());
             }
 
             @Override

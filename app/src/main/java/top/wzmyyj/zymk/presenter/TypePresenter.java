@@ -8,16 +8,16 @@ import top.wzmyyj.zymk.app.tools.I;
 import top.wzmyyj.zymk.model.net.box.TypeBox;
 import top.wzmyyj.zymk.model.net.MainModel;
 import top.wzmyyj.zymk.presenter.base.BasePresenter;
-import top.wzmyyj.zymk.view.iv.IF_2View;
+import top.wzmyyj.zymk.view.iv.ITypeView;
 
 /**
  * Created by yyj on 2018/06/29. email: 2209011667@qq.com
  */
 
-public class TypePresenter extends BasePresenter<IF_2View> {
+public class TypePresenter extends BasePresenter<ITypeView> {
     private MainModel mModel;
 
-    public TypePresenter(Activity activity, IF_2View iv) {
+    public TypePresenter(Activity activity, ITypeView iv) {
         super(activity, iv);
         mModel = new MainModel();
     }
@@ -31,21 +31,11 @@ public class TypePresenter extends BasePresenter<IF_2View> {
 
             @Override
             public void onNext(TypeBox box) {
-                mView.update(0,
-                        box.getTypeList1(),
-                        box.getTypeList2(),
-                        box.getTypeList3(),
-                        box.getTypeList4());
-//                mView.showToast("加载成功");
+                mView.update(box.getTypeList1(), box.getTypeList2(), box.getTypeList3(), box.getTypeList4());
             }
 
             @Override
             public void onError(Throwable e) {
-                mView.update(-1,
-                        e.getMessage(),
-                        e.getMessage(),
-                        e.getMessage(),
-                        e.getMessage());
                 mView.showToast("Error:" + e.getMessage());
             }
 

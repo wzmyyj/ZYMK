@@ -3,8 +3,13 @@ package top.wzmyyj.zymk.view.activity;
 import android.os.Bundle;
 import android.widget.FrameLayout;
 
+import java.util.List;
+
 import butterknife.BindView;
 import top.wzmyyj.zymk.R;
+import top.wzmyyj.zymk.app.bean.BookBean;
+import top.wzmyyj.zymk.app.bean.ChapterBean;
+import top.wzmyyj.zymk.app.bean.ComicBean;
 import top.wzmyyj.zymk.common.utils.StatusBarUtil;
 import top.wzmyyj.zymk.presenter.ComicPresenter;
 import top.wzmyyj.zymk.view.activity.base.BaseActivity;
@@ -27,10 +32,12 @@ public class ComicActivity extends BaseActivity<ComicPresenter> implements IComi
         return R.layout.activity_comic;
     }
 
+    private ComicRecyclerPanel comicRecyclerPanel;
+
     @Override
     protected void initPanels() {
         super.initPanels();
-        addPanels(new ComicRecyclerPanel(context, mPresenter));
+        addPanels(comicRecyclerPanel = new ComicRecyclerPanel(context, mPresenter));
     }
 
     @Override
@@ -45,7 +52,7 @@ public class ComicActivity extends BaseActivity<ComicPresenter> implements IComi
     @Override
     protected void initView() {
         super.initView();
-        fl_panel.addView(getPanelView(0));
+        fl_panel.addView(comicRecyclerPanel.getView());
     }
 
     @Override
@@ -54,8 +61,14 @@ public class ComicActivity extends BaseActivity<ComicPresenter> implements IComi
         mPresenter.loadData();
     }
 
+
     @Override
-    public void update(int w, Object... objs) {
-        getPanel(0).f(w, objs);
+    public void update(BookBean book, List<ChapterBean> chapterList, List<BookBean> bookList, List<ComicBean> comicList) {
+        comicRecyclerPanel.setComicData(book, chapterList, bookList, comicList);
+    }
+
+    @Override
+    public void loadFail(String msg) {
+        comicRecyclerPanel.loadFail();
     }
 }
