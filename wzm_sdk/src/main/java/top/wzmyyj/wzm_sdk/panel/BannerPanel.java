@@ -1,6 +1,7 @@
 package top.wzmyyj.wzm_sdk.panel;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
@@ -16,23 +17,22 @@ import top.wzmyyj.wzm_sdk.R;
  * Created by wzm on 2018/07/03. email: 2209011667@qq.com
  */
 
-public abstract class BoPanel extends InitPanel {
-
-    protected List images = new ArrayList<>();
-    protected List<String> titles = new ArrayList<>();
+public abstract class BannerPanel extends InitPanel {
 
     protected Banner mBanner;
 
-    public BoPanel(Context context) {
+    public BannerPanel(Context context) {
         super(context);
     }
 
     @Override
     protected void initView() {
-        view = mInflater.inflate(R.layout.panel_bo, null);
+        view = mInflater.inflate(R.layout.panel_banner, null);
         mBanner = view.findViewById(R.id.banner);
 
-        setData();
+        List images = new ArrayList<>();
+        List<String> titles = new ArrayList<>();
+        setData(images, titles);
         //设置图片加载器
         mBanner.setImageLoader(getImageLoader());
         //设置图片集合
@@ -44,7 +44,7 @@ public abstract class BoPanel extends InitPanel {
         //设置自动轮播，默认为true
         mBanner.isAutoPlay(true);
         //设置轮播时间
-        mBanner.setDelayTime(4000);
+        mBanner.setDelayTime(5000);
         //设置banner样式
         mBanner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR_TITLE_INSIDE);
         //设置指示器位置（当banner模式中有指示器时）
@@ -60,8 +60,11 @@ public abstract class BoPanel extends InitPanel {
 
     }
 
-    protected abstract void setData();
+    protected void setData(List images, List<String> titles) {
 
+    }
+
+    @NonNull
     protected abstract ImageLoader getImageLoader();
 
 
@@ -69,14 +72,14 @@ public abstract class BoPanel extends InitPanel {
     public void onStart() {
         super.onStart();
         //开始轮播
-//        mBanner.startAutoPlay();
+        mBanner.startAutoPlay();
     }
 
     @Override
     public void onStop() {
         super.onStop();
         //结束轮播
-//        mBanner.stopAutoPlay();
+        mBanner.stopAutoPlay();
     }
 
     @Override
@@ -88,4 +91,6 @@ public abstract class BoPanel extends InitPanel {
     protected void initListener() {
 
     }
+
+
 }

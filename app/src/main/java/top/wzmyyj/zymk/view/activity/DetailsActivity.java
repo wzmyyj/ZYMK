@@ -213,10 +213,6 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
         mPresenter.loadData();
     }
 
-    @Override
-    public void update(int w, Object... objs) {
-
-    }
 
     private BookBean mBook;
 

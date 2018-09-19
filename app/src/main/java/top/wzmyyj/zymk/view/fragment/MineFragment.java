@@ -12,9 +12,10 @@ import top.wzmyyj.zymk.view.iv.IF_4View;
 
 /**
  * Created by yyj on 2018/06/29. email: 2209011667@qq.com
+ * 第四页。
  */
 
-public class F_4 extends BaseFragment<MinePresenter> implements IF_4View {
+public class MineFragment extends BaseFragment<MinePresenter> implements IF_4View {
 
     @Override
     protected void initPresenter() {

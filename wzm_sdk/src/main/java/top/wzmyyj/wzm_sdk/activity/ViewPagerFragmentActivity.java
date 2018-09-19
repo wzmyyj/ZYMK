@@ -60,7 +60,6 @@ public abstract class ViewPagerFragmentActivity extends InitActivity {
     @Override
     protected void initData() {
         initFTs(mFTs);
-        int which = getWhich();
         if (mFTs == null || mFTs.size() == 0) {
             return;
         }
@@ -96,6 +95,10 @@ public abstract class ViewPagerFragmentActivity extends InitActivity {
         mTabMenu.setItemText(mStr)
                 .setItemIcon(mIcon1, mIcon2)
                 .setupWithViewPager(mViewPager);
+
+        int which = getWhich();
+        if (which < mStr.length)
+            mTabMenu.change(which);
 
     }
 

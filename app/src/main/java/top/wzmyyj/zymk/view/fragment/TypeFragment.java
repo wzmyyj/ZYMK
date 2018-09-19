@@ -20,9 +20,10 @@ import top.wzmyyj.zymk.view.panel.TypeRecyclerPanel;
 
 /**
  * Created by yyj on 2018/06/29. email: 2209011667@qq.com
+ * 第二页。
  */
 
-public class F_2 extends BaseFragment<TypePresenter> implements IF_2View {
+public class TypeFragment extends BaseFragment<TypePresenter> implements IF_2View {
 
     @Override
     protected void initPresenter() {

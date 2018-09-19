@@ -89,7 +89,7 @@ public class ComicPresenter extends BasePresenter<IComicView> {
 
             int start = chapter.getStart_var();
             int end = chapter.getEnd_var();
-//            chapter.setPrice(0);
+            chapter.setPrice(0);
 
             for (int i = start; i <= end; i++) {
                 ComicBean comic = new ComicBean();

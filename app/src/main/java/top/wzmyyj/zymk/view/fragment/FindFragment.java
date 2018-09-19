@@ -31,9 +31,10 @@ import top.wzmyyj.zymk.view.panel.DownloadRecyclerPanel;
 
 /**
  * Created by yyj on 2018/07/06. email: 2209011667@qq.com
+ * 第三页。
  */
 
-public class F_3 extends BaseFragment<FindPresenter> implements IF_3View {
+public class FindFragment extends BaseFragment<FindPresenter> implements IF_3View {
     @Override
     protected void initPresenter() {
         mPresenter = new FindPresenter(activity, this);

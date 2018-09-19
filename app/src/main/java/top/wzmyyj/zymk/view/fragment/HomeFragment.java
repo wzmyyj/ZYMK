@@ -25,9 +25,10 @@ import top.wzmyyj.zymk.view.panel.HomeNestedScrollPanel;
 
 /**
  * Created by yyj on 2018/06/28. email: 2209011667@qq.com
+ * 第一页。
  */
 
-public class F_1 extends BaseFragment<HomePresenter> implements IF_1View {
+public class HomeFragment extends BaseFragment<HomePresenter> implements IF_1View {
 
 
     @Override

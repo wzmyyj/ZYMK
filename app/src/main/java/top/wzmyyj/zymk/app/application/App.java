@@ -16,7 +16,8 @@ public class App extends BaseApplication {
     public void onCreate() {
         super.onCreate();
         StatusBarUtil.initStatusBarHeight(this);
-        L.setTAG("ZZZZZZ");
         DaoManager.getInstance(this.getApplicationContext());
+        L.setTAG("ZZZZZZZ");
+        L.setDebug(false);
     }
 }
