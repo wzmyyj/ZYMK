@@ -4,30 +4,33 @@ import android.app.Activity;
 import android.os.Handler;
 
 import top.wzmyyj.zymk.app.tools.I;
+import top.wzmyyj.zymk.contract.LaunchContract;
 import top.wzmyyj.zymk.presenter.base.BasePresenter;
-import top.wzmyyj.zymk.view.iv.ILaunchView;
 
 /**
  * Created by yyj on 2018/06/29. email: 2209011667@qq.com
  */
 
-public class LaunchPresenter extends BasePresenter<ILaunchView> {
+public class LaunchPresenter extends BasePresenter<LaunchContract.IView> implements LaunchContract.IPresenter {
 
     private Handler mHandler = new Handler();
 
-    public LaunchPresenter(Activity activity, ILaunchView iv) {
+    public LaunchPresenter(Activity activity, LaunchContract.IView iv) {
         super(activity, iv);
     }
 
+    @Override
     public void CheckPermission() {
 
     }
 
+    @Override
     public void init() {
 
     }
 
-    public void go() {
+    @Override
+    public void goMain() {
         mHandler.postDelayed(new Runnable() {
 
             @Override

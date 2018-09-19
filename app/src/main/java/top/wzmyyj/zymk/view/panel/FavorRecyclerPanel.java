@@ -19,7 +19,7 @@ import top.wzmyyj.zymk.app.bean.BookBean;
 import top.wzmyyj.zymk.app.bean.FavorBean;
 import top.wzmyyj.zymk.app.tools.G;
 import top.wzmyyj.zymk.common.java.Vanessa;
-import top.wzmyyj.zymk.presenter.FindPresenter;
+import top.wzmyyj.zymk.contract.FindContract;
 
 
 /**
@@ -27,12 +27,8 @@ import top.wzmyyj.zymk.presenter.FindPresenter;
  */
 
 public class FavorRecyclerPanel extends FindRecyclerPanel<FavorBean> {
-    public FavorRecyclerPanel(Context context, FindPresenter p) {
+    public FavorRecyclerPanel(Context context, FindContract.IPresenter p) {
         super(context, p);
-    }
-
-    @Override
-    protected void setData() {
     }
 
     @Override
@@ -153,7 +149,7 @@ public class FavorRecyclerPanel extends FindRecyclerPanel<FavorBean> {
 
     @Override
     public void update() {
-        mPresenter.updateLoadFavor();// 访问数据库,之后从网络加载最新数据并保存到数据库。
+        mPresenter.loadNetFavor();// 访问数据库,之后从网络加载最新数据并保存到数据库。
     }
 
     @Override

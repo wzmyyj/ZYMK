@@ -11,9 +11,9 @@ import top.wzmyyj.zymk.view.activity.MainActivity;
 import top.wzmyyj.zymk.view.activity.MoreActivity;
 import top.wzmyyj.zymk.view.activity.NewActivity;
 import top.wzmyyj.zymk.view.activity.RankActivity;
+import top.wzmyyj.zymk.view.activity.ResultActivity;
 import top.wzmyyj.zymk.view.activity.SearchActivity;
 import top.wzmyyj.zymk.view.activity.SettingActivity;
-import top.wzmyyj.zymk.view.activity.TyActivity;
 
 /**
  * Created by yyj on 2018/07/09. email: 2209011667@qq.com
@@ -68,14 +68,14 @@ public class I {
         context.startActivity(intent);
     }
 
-    public static void toTyActivity(Context context, String href) {
-        Intent intent = new Intent(context, TyActivity.class);
+    public static void toResultActivity(Context context, String href) {
+        Intent intent = new Intent(context, ResultActivity.class);
         intent.putExtra("href", href);
         context.startActivity(intent);
     }
 
     public static void toTyActivity(Context context, String href, String key) {
-        Intent intent = new Intent(context, TyActivity.class);
+        Intent intent = new Intent(context, ResultActivity.class);
         intent.putExtra("href", href);
         intent.putExtra("key", key);
         context.startActivity(intent);

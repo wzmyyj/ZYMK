@@ -31,16 +31,16 @@ import io.reactivex.annotations.NonNull;
 import top.wzmyyj.zymk.R;
 import top.wzmyyj.zymk.app.bean.BookBean;
 import top.wzmyyj.zymk.app.bean.SearchHistoryBean;
+import top.wzmyyj.zymk.contract.SearchContract;
 import top.wzmyyj.zymk.presenter.SearchPresenter;
 import top.wzmyyj.zymk.view.activity.base.BaseActivity;
-import top.wzmyyj.zymk.view.iv.ISearchView;
 
 
 /**
  * Created by yyj on 2018/07/30. email: 2209011667@qq.com
  */
 
-public class SearchActivity extends BaseActivity<SearchPresenter> implements ISearchView {
+public class SearchActivity extends BaseActivity<SearchContract.IPresenter> implements SearchContract.IView {
     @Override
     protected void initPresenter() {
         mPresenter = new SearchPresenter(activity, this);
@@ -300,7 +300,7 @@ public class SearchActivity extends BaseActivity<SearchPresenter> implements ISe
     }
 
     @Override
-    public void delHistory(long l) {
+    public void removeHistory(long l) {
         for (SearchHistoryBean bean : mShList) {
             if (bean.getId() == l) {
                 mShList.remove(bean);
@@ -312,7 +312,7 @@ public class SearchActivity extends BaseActivity<SearchPresenter> implements ISe
     }
 
     @Override
-    public void delAllHistory() {
+    public void removeAllHistory() {
         mShList.clear();
         notifyHistoryChanged();
     }

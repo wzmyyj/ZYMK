@@ -12,29 +12,27 @@ import top.wzmyyj.zymk.app.bean.FavorBean;
 import top.wzmyyj.zymk.app.bean.HistoryBean;
 import top.wzmyyj.zymk.app.data.Urls;
 import top.wzmyyj.zymk.app.tools.I;
+import top.wzmyyj.zymk.contract.FindContract;
 import top.wzmyyj.zymk.model.db.FavorModel;
 import top.wzmyyj.zymk.model.db.HistoryModel;
 import top.wzmyyj.zymk.presenter.base.BasePresenter;
-import top.wzmyyj.zymk.view.iv.IFindView;
 
 /**
  * Created by yyj on 2018/07/06. email: 2209011667@qq.com
  */
 
-public class FindPresenter extends BasePresenter<IFindView> {
+public class FindPresenter extends BasePresenter<FindContract.IView> implements FindContract.IPresenter {
 
     private FavorModel favorModel;
     private HistoryModel historyModel;
 
-    public FindPresenter(Activity activity, IFindView iv) {
+    public FindPresenter(Activity activity, FindContract.IView iv) {
         super(activity, iv);
         favorModel = new FavorModel(activity);
         historyModel = new HistoryModel(activity);
     }
 
-    public void loadData() {
-    }
-
+    @Override
     public void goDetails(String href) {
         if (href.contains(Urls.ZYMK_Base)) {
             I.toDetailsActivity(mActivity, href);
@@ -43,6 +41,7 @@ public class FindPresenter extends BasePresenter<IFindView> {
         }
     }
 
+    @Override
     public void goComic(int comic_id, long chapter_id) {
         I.toComicActivity(mActivity, comic_id, chapter_id);
     }
@@ -50,7 +49,9 @@ public class FindPresenter extends BasePresenter<IFindView> {
 
     List<FavorBean> favorList = new ArrayList<>();
 
-    public void updateLoadFavor() {
+
+    @Override
+    public void loadNetFavor() {
         favorModel.updateAll(new Observer<FavorBean>() {
             @Override
             public void onSubscribe(Disposable d) {
@@ -69,11 +70,13 @@ public class FindPresenter extends BasePresenter<IFindView> {
 
             @Override
             public void onComplete() {
-                mView.loadFavor(favorList);
+                mView.showFavor(favorList);
             }
         });
     }
 
+
+    @Override
     public void loadFavor() {
         favorModel.loadAll(new Observer<List<FavorBean>>() {
             @Override
@@ -83,7 +86,7 @@ public class FindPresenter extends BasePresenter<IFindView> {
 
             @Override
             public void onNext(List<FavorBean> favorBeans) {
-                mView.loadFavor(favorBeans);
+                mView.showFavor(favorBeans);
             }
 
             @Override
@@ -98,6 +101,7 @@ public class FindPresenter extends BasePresenter<IFindView> {
         });
     }
 
+    @Override
     public void deleteSomeFavor(Long[] ids) {
         favorModel.delete(ids, new Observer<Boolean>() {
             @Override
@@ -107,7 +111,7 @@ public class FindPresenter extends BasePresenter<IFindView> {
 
             @Override
             public void onNext(Boolean is) {
-                mView.deleteFavor(is);
+                mView.removeFavor(is);
             }
 
             @Override
@@ -122,6 +126,7 @@ public class FindPresenter extends BasePresenter<IFindView> {
         });
     }
 
+    @Override
     public void loadHistory() {
         historyModel.loadAll(new Observer<List<HistoryBean>>() {
             @Override
@@ -131,7 +136,7 @@ public class FindPresenter extends BasePresenter<IFindView> {
 
             @Override
             public void onNext(List<HistoryBean> historyBeans) {
-                mView.loadHistory(historyBeans);
+                mView.showHistory(historyBeans);
             }
 
             @Override
@@ -146,6 +151,8 @@ public class FindPresenter extends BasePresenter<IFindView> {
         });
     }
 
+
+    @Override
     public void deleteSomeHistory(Long[] ids) {
         historyModel.delete(ids, new Observer<Boolean>() {
             @Override
@@ -155,7 +162,7 @@ public class FindPresenter extends BasePresenter<IFindView> {
 
             @Override
             public void onNext(Boolean is) {
-                mView.deleteHistory(is);
+                mView.removeHistory(is);
             }
 
             @Override
@@ -171,12 +178,15 @@ public class FindPresenter extends BasePresenter<IFindView> {
     }
 
 
+    @Override
     public void loadDownload() {
         List<DownloadBean> downloadList = new ArrayList<>();
-        mView.loadDownload(downloadList);
+        mView.showDownload(downloadList);
     }
 
+
+    @Override
     public void deleteSomeDownload(Long[] ids) {
-        mView.deleteHistory(true);
+        mView.removeDownload(true);
     }
 }

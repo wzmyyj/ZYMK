@@ -12,12 +12,12 @@ import butterknife.BindView;
 import top.wzmyyj.zymk.R;
 import top.wzmyyj.zymk.app.bean.BookBean;
 import top.wzmyyj.zymk.common.utils.StatusBarUtil;
+import top.wzmyyj.zymk.contract.MoreContract;
 import top.wzmyyj.zymk.presenter.MorePresenter;
 import top.wzmyyj.zymk.view.activity.base.BaseActivity;
-import top.wzmyyj.zymk.view.iv.IMoreView;
 import top.wzmyyj.zymk.view.panel.MoreRecyclerPanel;
 
-public class MoreActivity extends BaseActivity<MorePresenter> implements IMoreView {
+public class MoreActivity extends BaseActivity<MoreContract.IPresenter> implements MoreContract.IView {
 
     @Override
     protected void initPresenter() {
@@ -85,7 +85,7 @@ public class MoreActivity extends BaseActivity<MorePresenter> implements IMoreVi
     }
 
     @Override
-    public void update(String content, String figure, List<BookBean> books) {
+    public void showData(String content, String figure, List<BookBean> books) {
         moreRecyclerPanel.setMoreData(content, figure, books);
     }
 

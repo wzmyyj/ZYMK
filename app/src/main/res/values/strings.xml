@@ -4,7 +4,7 @@
     <string name="launch_github">copy by wzmyyj 2018 /https://github.com/wzmyyj/ZYMK</string>
     <string name="mine_github">项目地址：\nhttps://github.com/wzmyyj/ZYMK</string>
     <string name="mine_github2">https://github.com/wzmyyj/ZYMK</string>
-    <string name="i_say">声明：本程序所有资源全部来源于网络爬虫,且规避了付费的漫画，所有的漫画在网络可以免费阅读的。本程序仅供学习参考使用，严禁任何商业用途。欢迎各位进行技术讨论和交流。如果侵犯到任何人的利益，可以联系作者QQ：2018987032。进行协商，进行漫画的下架。</string>
+    <string name="i_say">\n本程序所有资源全部来源于网络爬虫,且规避了付费的漫画，所有的漫画在网络可以免费阅读的。本程序仅供学习参考使用，严禁任何商业用途。欢迎各位进行技术讨论和交流。如果侵犯到任何人的利益，可以联系作者QQ：2018987032。进行协商，进行漫画的下架。</string>
     <string name="wzmyyj">wzmyyj</string>
     <string name="call_author">联系作者</string>
 </resources>

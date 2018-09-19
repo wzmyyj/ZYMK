@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import top.wzmyyj.zymk.app.bean.BoBean;
-import top.wzmyyj.zymk.presenter.HomePresenter;
+import top.wzmyyj.zymk.contract.HomeContract;
 import top.wzmyyj.zymk.view.panel.base.BaseBannerPanel;
 
 
@@ -16,9 +16,9 @@ import top.wzmyyj.zymk.view.panel.base.BaseBannerPanel;
  * Created by yyj on 2018/09/19. email: 2209011667@qq.com
  */
 
-public class HomeBannerPanel extends BaseBannerPanel<HomePresenter> {
+public class HomeBannerPanel extends BaseBannerPanel<HomeContract.IPresenter> {
 
-    public HomeBannerPanel(Context context, HomePresenter homePresenter) {
+    public HomeBannerPanel(Context context, HomeContract.IPresenter homePresenter) {
         super(context, homePresenter);
     }
 

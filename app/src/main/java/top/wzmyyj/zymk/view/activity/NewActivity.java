@@ -13,9 +13,9 @@ import top.wzmyyj.wzm_sdk.adapter.ViewTitlePagerAdapter;
 import top.wzmyyj.wzm_sdk.panel.Panel;
 import top.wzmyyj.zymk.R;
 import top.wzmyyj.zymk.app.bean.BookBean;
+import top.wzmyyj.zymk.contract.NewContract;
 import top.wzmyyj.zymk.presenter.NewPresenter;
 import top.wzmyyj.zymk.view.activity.base.BaseActivity;
-import top.wzmyyj.zymk.view.iv.INewView;
 import top.wzmyyj.zymk.view.panel.NewRecyclerPanel;
 
 
@@ -23,7 +23,7 @@ import top.wzmyyj.zymk.view.panel.NewRecyclerPanel;
  * Created by yyj on 2018/07/13. email: 2209011667@qq.com
  */
 
-public class NewActivity extends BaseActivity<NewPresenter> implements INewView {
+public class NewActivity extends BaseActivity<NewContract.IPresenter> implements NewContract.IView {
     @Override
     protected void initPresenter() {
         mPresenter = new NewPresenter(activity, this);
@@ -78,7 +78,7 @@ public class NewActivity extends BaseActivity<NewPresenter> implements INewView 
     }
 
     @Override
-    public void update(List<BookBean>... bookList) {
+    public void showData(List<BookBean>... bookList) {
         ((NewRecyclerPanel) getPanel(0)).setNewData(bookList[0]);
         ((NewRecyclerPanel) getPanel(1)).setNewData(bookList[1]);
     }

@@ -16,58 +16,66 @@ import top.wzmyyj.zymk.app.tools.I;
 import top.wzmyyj.zymk.app.tools.P;
 import top.wzmyyj.zymk.app.utils.GlideCacheUtil;
 import top.wzmyyj.zymk.common.utils.PackageUtil;
+import top.wzmyyj.zymk.contract.SettingContract;
 import top.wzmyyj.zymk.presenter.base.BasePresenter;
-import top.wzmyyj.zymk.view.iv.ISettingView;
 
 
 /**
  * Created by yyj on 2018/08/20. email: 2209011667@qq.com
  */
 
-public class SettingPresenter extends BasePresenter<ISettingView> {
-    public SettingPresenter(Activity activity, ISettingView iv) {
+public class SettingPresenter extends BasePresenter<SettingContract.IView> implements SettingContract.IPresenter {
+    public SettingPresenter(Activity activity, SettingContract.IView iv) {
         super(activity, iv);
     }
 
-
+    @Override
     public void goAboutMe() {
         I.toBrowser(mActivity, Urls.YYJ_About);
     }
 
+    @Override
     public void goGitHubWeb() {
         I.toBrowser(mActivity, Urls.YYJ_GitHub);
     }
 
+    @Override
     public void goFeedback() {
         I.toQQChat(mActivity, Keys.QQ_Number);
     }
 
+    @Override
     public void changeCue() {
         P p = P.create(mActivity);
         boolean is = p.getBoolean("isCue", true);
         p.putBoolean("isCue", !is).commit();
-        mView.isCue(!is);
+        mView.setCue(!is);
     }
 
+    @Override
     public void getCue() {
         boolean is = P.create(mActivity).getBoolean("isCue", true);
-        mView.isCue(is);
+        mView.setCue(is);
     }
 
+    @Override
     public void getVersion() {
         String version = PackageUtil.getVersionName(mActivity);
         mView.setVersion(version);
     }
 
+    @Override
     public void loadNewApp() {
         mView.showToast("已经是最新版本！");
     }
 
+    @Override
     public void getCacheSize() {
         String s = GlideCacheUtil.getInstance().getCacheSize(mActivity);
         mView.setCache(s);
     }
 
+    @Override
     public void clearCache() {
         GlideCacheUtil.getInstance().clearImageMemoryCache(mActivity);
         Observable.create(new ObservableOnSubscribe<String>() {

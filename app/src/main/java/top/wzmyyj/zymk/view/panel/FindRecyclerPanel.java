@@ -14,7 +14,7 @@ import java.util.List;
 
 import top.wzmyyj.zymk.R;
 import top.wzmyyj.zymk.common.utils.DensityUtil;
-import top.wzmyyj.zymk.presenter.FindPresenter;
+import top.wzmyyj.zymk.contract.FindContract;
 import top.wzmyyj.zymk.view.panel.base.BaseRecyclerPanel;
 
 
@@ -22,14 +22,9 @@ import top.wzmyyj.zymk.view.panel.base.BaseRecyclerPanel;
  * Created by yyj on 2018/08/01. email: 2209011667@qq.com
  */
 
-public abstract class FindRecyclerPanel<T> extends BaseRecyclerPanel<T, FindPresenter> {
-    public FindRecyclerPanel(Context context, FindPresenter p) {
+public abstract class FindRecyclerPanel<T> extends BaseRecyclerPanel<T, FindContract.IPresenter> {
+    public FindRecyclerPanel(Context context, FindContract.IPresenter p) {
         super(context, p);
-    }
-
-    @Override
-    protected void setData() {
-
     }
 
 

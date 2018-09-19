@@ -24,7 +24,7 @@ import top.wzmyyj.zymk.app.bean.AuthorBean;
 import top.wzmyyj.zymk.app.bean.BookBean;
 import top.wzmyyj.zymk.app.bean.XiBean;
 import top.wzmyyj.zymk.app.tools.G;
-import top.wzmyyj.zymk.presenter.DetailsPresenter;
+import top.wzmyyj.zymk.contract.DetailsContract;
 import top.wzmyyj.zymk.view.adapter.BookAdapter;
 import top.wzmyyj.zymk.view.panel.base.BasePanel;
 
@@ -32,9 +32,9 @@ import top.wzmyyj.zymk.view.panel.base.BasePanel;
  * Created by yyj on 2018/07/19. email: 2209011667@qq.com
  */
 
-public class DetailsXiPanel extends BasePanel<DetailsPresenter> {
-    public DetailsXiPanel(Context context, DetailsPresenter detailsPresenter) {
-        super(context, detailsPresenter);
+public class DetailsXiPanel extends BasePanel<DetailsContract.IPresenter> {
+    public DetailsXiPanel(Context context, DetailsContract.IPresenter p) {
+        super(context, p);
     }
 
 

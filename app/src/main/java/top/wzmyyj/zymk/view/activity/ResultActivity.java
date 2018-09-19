@@ -9,16 +9,16 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import top.wzmyyj.zymk.R;
 import top.wzmyyj.zymk.app.bean.BookBean;
-import top.wzmyyj.zymk.presenter.TyPresenter;
+import top.wzmyyj.zymk.contract.ResultContract;
+import top.wzmyyj.zymk.presenter.ResultPresenter;
 import top.wzmyyj.zymk.view.activity.base.BaseActivity;
-import top.wzmyyj.zymk.view.iv.ITyView;
-import top.wzmyyj.zymk.view.panel.TyRecyclerPanel;
+import top.wzmyyj.zymk.view.panel.ResultRecyclerPanel;
 
-public class TyActivity extends BaseActivity<TyPresenter> implements ITyView {
+public class ResultActivity extends BaseActivity<ResultContract.IPresenter> implements ResultContract.IView {
 
     @Override
     protected void initPresenter() {
-        mPresenter = new TyPresenter(activity, this);
+        mPresenter = new ResultPresenter(activity, this);
     }
 
     @Override
@@ -26,13 +26,13 @@ public class TyActivity extends BaseActivity<TyPresenter> implements ITyView {
         return R.layout.activity_ty;
     }
 
-    private TyRecyclerPanel tyRecyclerPanel;
+    private ResultRecyclerPanel tyRecyclerPanel;
 
     @Override
     protected void initPanels() {
         super.initPanels();
         addPanels(
-                tyRecyclerPanel = new TyRecyclerPanel(activity, mPresenter)
+                tyRecyclerPanel = new ResultRecyclerPanel(activity, mPresenter)
         );
     }
 
@@ -67,12 +67,12 @@ public class TyActivity extends BaseActivity<TyPresenter> implements ITyView {
     }
 
     @Override
-    public void update(boolean isFirst, List<BookBean> books, String base, String next) {
-        tyRecyclerPanel.setTyData(isFirst, books, base, next);
+    public void showData(boolean isFirst, List<BookBean> books, String base, String next) {
+        tyRecyclerPanel.setResultData(isFirst, books, base, next);
     }
 
     @Override
-    public void loadFail(String msg) {
+    public void showLoadFail(String msg) {
         tyRecyclerPanel.loadFail(msg);
     }
 }

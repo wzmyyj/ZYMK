@@ -19,9 +19,9 @@ import top.wzmyyj.zymk.app.bean.FavorBean;
 import top.wzmyyj.zymk.app.bean.ItemBean;
 import top.wzmyyj.zymk.app.event.FavorUnReadChangeEvent;
 import top.wzmyyj.zymk.common.utils.StatusBarUtil;
+import top.wzmyyj.zymk.contract.HomeContract;
 import top.wzmyyj.zymk.presenter.HomePresenter;
 import top.wzmyyj.zymk.view.fragment.base.BaseFragment;
-import top.wzmyyj.zymk.view.iv.IHomeView;
 import top.wzmyyj.zymk.view.panel.HomeFavorPanel;
 import top.wzmyyj.zymk.view.panel.HomeNestedScrollPanel;
 
@@ -30,7 +30,7 @@ import top.wzmyyj.zymk.view.panel.HomeNestedScrollPanel;
  * 第一页。
  */
 
-public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeView {
+public class HomeFragment extends BaseFragment<HomeContract.IPresenter> implements HomeContract.IView {
 
 
     @Override
@@ -114,16 +114,16 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     protected void initData() {
         super.initData();
         mPresenter.loadData();
-        mPresenter.updateLoadFavor();
+        mPresenter.loadNetFavor();
     }
 
     @Override
-    public void update(List<BoBean> boBeans, List<ItemBean> itemBeans) {
+    public void showData(List<BoBean> boBeans, List<ItemBean> itemBeans) {
         homeNestedScrollPanel.setHomeData(boBeans, itemBeans);
     }
 
     @Override
-    public void loadFavor(List<FavorBean> list) {
+    public void showFavor(List<FavorBean> list) {
         homeFavorPanel.setFavorData(list);
     }
 

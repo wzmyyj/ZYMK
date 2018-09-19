@@ -18,16 +18,16 @@ import top.wzmyyj.zymk.R;
 import top.wzmyyj.zymk.app.bean.FansBean;
 import top.wzmyyj.zymk.app.bean.ZiBean;
 import top.wzmyyj.zymk.app.tools.G;
-import top.wzmyyj.zymk.presenter.DetailsPresenter;
+import top.wzmyyj.zymk.contract.DetailsContract;
 import top.wzmyyj.zymk.view.panel.base.BasePanel;
 
 /**
  * Created by yyj on 2018/07/19. email: 2209011667@qq.com
  */
 
-public class DetailsZiPanel extends BasePanel<DetailsPresenter> {
-    public DetailsZiPanel(Context context, DetailsPresenter detailsPresenter) {
-        super(context, detailsPresenter);
+public class DetailsZiPanel extends BasePanel<DetailsContract.IPresenter> {
+    public DetailsZiPanel(Context context, DetailsContract.IPresenter p) {
+        super(context, p);
     }
 
     @Override
@@ -115,7 +115,7 @@ public class DetailsZiPanel extends BasePanel<DetailsPresenter> {
     }
 
 
-    public void setZiData(ZiBean zi){
+    public void setZiData(ZiBean zi) {
         if (zi.getFansList() != null && zi.getFansList().size() > 3) {
             setFans(zi.getFansList());
         }

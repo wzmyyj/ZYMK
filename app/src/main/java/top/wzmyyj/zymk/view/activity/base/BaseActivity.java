@@ -4,14 +4,14 @@ import android.os.Bundle;
 
 import top.wzmyyj.wzm_sdk.tools.T;
 import top.wzmyyj.zymk.common.utils.StatusBarUtil;
-import top.wzmyyj.zymk.presenter.base.IBasePresent;
-import top.wzmyyj.zymk.view.iv.base.IBaseView;
+import top.wzmyyj.zymk.contract.base.IBasePresenter;
+import top.wzmyyj.zymk.contract.base.IBaseView;
 
 /**
  * Created by yyj on 2018/06/28. email: 2209011667@qq.com
  */
 
-public abstract class BaseActivity<P extends IBasePresent> extends BasePanelActivity implements IBaseView {
+public abstract class BaseActivity<P extends IBasePresenter> extends BasePanelActivity implements IBaseView {
 
     protected P mPresenter;
 

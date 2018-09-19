@@ -16,7 +16,7 @@ import java.util.List;
 import top.wzmyyj.wzm_sdk.adapter.ivd.IVD;
 import top.wzmyyj.zymk.R;
 import top.wzmyyj.zymk.app.bean.DownloadBean;
-import top.wzmyyj.zymk.presenter.FindPresenter;
+import top.wzmyyj.zymk.contract.FindContract;
 
 
 /**
@@ -24,12 +24,8 @@ import top.wzmyyj.zymk.presenter.FindPresenter;
  */
 
 public class DownloadRecyclerPanel extends FindRecyclerPanel<DownloadBean> {
-    public DownloadRecyclerPanel(Context context, FindPresenter p) {
+    public DownloadRecyclerPanel(Context context, FindContract.IPresenter p) {
         super(context, p);
-    }
-
-    @Override
-    protected void setData() {
     }
 
     @Override

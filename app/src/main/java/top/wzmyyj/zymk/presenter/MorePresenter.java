@@ -7,27 +7,28 @@ import java.util.List;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 import top.wzmyyj.zymk.app.bean.BookBean;
-import top.wzmyyj.zymk.app.tools.I;
-import top.wzmyyj.zymk.model.net.box.MoreBox;
-import top.wzmyyj.zymk.model.net.MoreModel;
 import top.wzmyyj.zymk.app.data.Urls;
+import top.wzmyyj.zymk.app.tools.I;
+import top.wzmyyj.zymk.contract.MoreContract;
+import top.wzmyyj.zymk.model.net.MoreModel;
+import top.wzmyyj.zymk.model.net.box.MoreBox;
 import top.wzmyyj.zymk.presenter.base.BasePresenter;
-import top.wzmyyj.zymk.view.iv.IMoreView;
 
 
 /**
  * Created by yyj on 2018/07/11. email: 2209011667@qq.com
  */
 
-public class MorePresenter extends BasePresenter<IMoreView> {
+public class MorePresenter extends BasePresenter<MoreContract.IView> implements MoreContract.IPresenter{
     private MoreModel mModel;
 
-    public MorePresenter(Activity activity, IMoreView iv) {
+    public MorePresenter(Activity activity, MoreContract.IView iv) {
         super(activity, iv);
         mModel = new MoreModel();
     }
 
 
+    @Override
     public void addEmptyData(List<BookBean> data) {
         data.add(new BookBean());
         data.add(new BookBean());
@@ -37,6 +38,7 @@ public class MorePresenter extends BasePresenter<IMoreView> {
         data.add(new BookBean());
     }
 
+    @Override
     public void loadData() {
         String url = mActivity.getIntent().getStringExtra("href");
         mModel.getMoreData(url, new Observer<MoreBox>() {
@@ -48,7 +50,7 @@ public class MorePresenter extends BasePresenter<IMoreView> {
             @Override
             public void onNext(MoreBox box) {
                 mView.setTitle(box.getTitle());
-                mView.update(box.getContent(), box.getFigure(), box.getBookList());
+                mView.showData(box.getContent(), box.getFigure(), box.getBookList());
             }
 
             @Override
@@ -63,6 +65,7 @@ public class MorePresenter extends BasePresenter<IMoreView> {
         });
     }
 
+    @Override
     public void goDetails(String href) {
         if (href.contains(Urls.ZYMK_Base)) {
             I.toDetailsActivity(mActivity, href);

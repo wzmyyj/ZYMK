@@ -5,16 +5,16 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.OnClick;
 import top.wzmyyj.zymk.R;
+import top.wzmyyj.zymk.contract.SettingContract;
 import top.wzmyyj.zymk.presenter.SettingPresenter;
 import top.wzmyyj.zymk.view.activity.base.BaseActivity;
-import top.wzmyyj.zymk.view.iv.ISettingView;
 
 
 /**
  * Created by yyj on 2018/08/20. email: 2209011667@qq.com
  */
 
-public class SettingActivity extends BaseActivity<SettingPresenter> implements ISettingView {
+public class SettingActivity extends BaseActivity<SettingContract.IPresenter> implements SettingContract.IView {
     @Override
     protected void initPresenter() {
         mPresenter = new SettingPresenter(activity, this);
@@ -86,7 +86,7 @@ public class SettingActivity extends BaseActivity<SettingPresenter> implements I
     }
 
     @Override
-    public void isCue(boolean is) {
+    public void setCue(boolean is) {
         if (is) {
             tv_m_2.setText("是");
         } else {

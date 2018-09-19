@@ -18,7 +18,7 @@ import butterknife.OnClick;
 import top.wzmyyj.zymk.R;
 import top.wzmyyj.zymk.app.bean.BookBean;
 import top.wzmyyj.zymk.app.bean.ItemBean;
-import top.wzmyyj.zymk.presenter.HomePresenter;
+import top.wzmyyj.zymk.contract.HomeContract;
 import top.wzmyyj.zymk.view.adapter.BookAdapter;
 import top.wzmyyj.zymk.view.panel.base.BasePanel;
 
@@ -27,8 +27,8 @@ import top.wzmyyj.zymk.view.panel.base.BasePanel;
  * Created by yyj on 2018/08/16. email: 2209011667@qq.com
  */
 
-public class HomeItemPanel extends BasePanel<HomePresenter> {
-    public HomeItemPanel(Context context, HomePresenter p) {
+public class HomeItemPanel extends BasePanel<HomeContract.IPresenter> {
+    public HomeItemPanel(Context context, HomeContract.IPresenter p) {
         super(context, p);
     }
 

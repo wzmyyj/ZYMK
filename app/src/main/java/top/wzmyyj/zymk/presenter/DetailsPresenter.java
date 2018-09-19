@@ -13,24 +13,24 @@ import top.wzmyyj.zymk.app.data.Urls;
 import top.wzmyyj.zymk.app.event.FavorListChangeEvent;
 import top.wzmyyj.zymk.app.event.FavorUnReadChangeEvent;
 import top.wzmyyj.zymk.app.tools.I;
+import top.wzmyyj.zymk.contract.DetailsContract;
 import top.wzmyyj.zymk.model.db.FavorModel;
 import top.wzmyyj.zymk.model.db.HistoryModel;
 import top.wzmyyj.zymk.model.net.DetailsModel;
 import top.wzmyyj.zymk.model.net.box.DetailsBox;
 import top.wzmyyj.zymk.presenter.base.BasePresenter;
-import top.wzmyyj.zymk.view.iv.IDetailsView;
 
 
 /**
  * Created by yyj on 2018/07/14. email: 2209011667@qq.com
  */
 
-public class DetailsPresenter extends BasePresenter<IDetailsView> {
+public class DetailsPresenter extends BasePresenter<DetailsContract.IView> implements DetailsContract.IPresenter{
     private DetailsModel mModel;
     private FavorModel favorModel;
     private HistoryModel historyModel;
 
-    public DetailsPresenter(Activity activity, IDetailsView iv) {
+    public DetailsPresenter(Activity activity, DetailsContract.IView iv) {
         super(activity, iv);
         mModel = new DetailsModel();
         favorModel = new FavorModel(activity);
@@ -38,6 +38,7 @@ public class DetailsPresenter extends BasePresenter<IDetailsView> {
     }
 
 
+    @Override
     public void loadData() {
         String url = mActivity.getIntent().getStringExtra("href");
         mModel.getMoreData(url, new Observer<DetailsBox>() {
@@ -69,14 +70,17 @@ public class DetailsPresenter extends BasePresenter<IDetailsView> {
         });
     }
 
+    @Override
     public void goComic(int comic_id, long chapter_id) {
         I.toComicActivity(mActivity, comic_id, chapter_id);
     }
 
+    @Override
     public void goComic(int comic_id) {
         I.toComicActivity(mActivity, comic_id);
     }
 
+    @Override
     public void goDetails(String href) {
         if (href == null) {
             mView.showToast("空值");
@@ -89,6 +93,7 @@ public class DetailsPresenter extends BasePresenter<IDetailsView> {
         }
     }
 
+    @Override
     public void isFavor(long id) {
         favorModel.isFavor(id, new Observer<Boolean>() {
             @Override
@@ -114,6 +119,7 @@ public class DetailsPresenter extends BasePresenter<IDetailsView> {
         });
     }
 
+    @Override
     public void addFavor(BookBean book) {
         favorModel.insert(book, new Observer<FavorBean>() {
             @Override
@@ -145,7 +151,8 @@ public class DetailsPresenter extends BasePresenter<IDetailsView> {
         });
     }
 
-    public void history(long id) {
+    @Override
+    public void getHistoryRead(long id) {
         historyModel.load(id, new Observer<HistoryBean>() {
             @Override
             public void onSubscribe(Disposable d) {

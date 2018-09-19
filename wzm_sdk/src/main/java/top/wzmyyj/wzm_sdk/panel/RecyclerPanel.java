@@ -65,7 +65,7 @@ public abstract class RecyclerPanel<T> extends InitPanel
         mRefreshLayout.setPrimaryColorsId(R.color.colorRefresh, R.color.colorWhite);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
 
-        setData();
+        setFirstData();
         setIVD(mIVD);
         setHeader();
         setFooter();
@@ -76,7 +76,9 @@ public abstract class RecyclerPanel<T> extends InitPanel
     }
 
 
-    protected abstract void setData();
+    protected void setFirstData() {
+
+    }
 
 
     protected abstract void setIVD(List<IVD<T>> ivd);

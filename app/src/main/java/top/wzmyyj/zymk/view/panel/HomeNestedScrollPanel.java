@@ -15,7 +15,7 @@ import top.wzmyyj.zymk.app.bean.BoBean;
 import top.wzmyyj.zymk.app.bean.ItemBean;
 import top.wzmyyj.zymk.common.utils.DensityUtil;
 import top.wzmyyj.zymk.common.utils.StatusBarUtil;
-import top.wzmyyj.zymk.presenter.HomePresenter;
+import top.wzmyyj.zymk.contract.HomeContract;
 import top.wzmyyj.zymk.view.panel.base.BaseNestedScrollPanel;
 
 
@@ -24,9 +24,9 @@ import top.wzmyyj.zymk.view.panel.base.BaseNestedScrollPanel;
  * 主页。
  */
 
-public class HomeNestedScrollPanel extends BaseNestedScrollPanel<HomePresenter> {
+public class HomeNestedScrollPanel extends BaseNestedScrollPanel<HomeContract.IPresenter> {
 
-    public HomeNestedScrollPanel(Context context, HomePresenter p) {
+    public HomeNestedScrollPanel(Context context, HomeContract.IPresenter p) {
         super(context, p);
     }
 

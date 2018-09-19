@@ -15,23 +15,18 @@ import top.wzmyyj.wzm_sdk.adapter.ivd.SingleIVD;
 import top.wzmyyj.zymk.R;
 import top.wzmyyj.zymk.app.bean.TypeBean;
 import top.wzmyyj.zymk.app.tools.G;
-import top.wzmyyj.zymk.presenter.TypePresenter;
+import top.wzmyyj.zymk.contract.TypeContract;
 import top.wzmyyj.zymk.view.panel.base.BaseRecyclerPanel;
 
 /**
  * Created by yyj on 2018/07/06. email: 2209011667@qq.com
  */
 
-public class TypeRecyclerPanel extends BaseRecyclerPanel<TypeBean, TypePresenter> {
+public class TypeRecyclerPanel extends BaseRecyclerPanel<TypeBean, TypeContract.IPresenter> {
 
 
-    public TypeRecyclerPanel(Context context, TypePresenter p) {
+    public TypeRecyclerPanel(Context context, TypeContract.IPresenter p) {
         super(context, p);
-    }
-
-    @Override
-    protected void setData() {
-
     }
 
     @Override
@@ -58,7 +53,7 @@ public class TypeRecyclerPanel extends BaseRecyclerPanel<TypeBean, TypePresenter
     @Override
     public void onItemClick(View view, RecyclerView.ViewHolder holder, int position) {
         super.onItemClick(view, holder, position);
-        mPresenter.goTy(mData.get(position).getHref());
+        mPresenter.goResult(mData.get(position).getHref());
     }
 
     @Override

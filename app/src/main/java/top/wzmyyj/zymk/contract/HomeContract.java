@@ -2,8 +2,11 @@ package top.wzmyyj.zymk.contract;
 
 import java.util.List;
 
+import top.wzmyyj.zymk.app.bean.BoBean;
 import top.wzmyyj.zymk.app.bean.FavorBean;
-import top.wzmyyj.zymk.view.iv.base.IBaseView;
+import top.wzmyyj.zymk.app.bean.ItemBean;
+import top.wzmyyj.zymk.contract.base.IBasePresenter;
+import top.wzmyyj.zymk.contract.base.IBaseView;
 
 /**
  * Created by yyj on 2018/09/10. email: 2209011667@qq.com
@@ -11,10 +14,28 @@ import top.wzmyyj.zymk.view.iv.base.IBaseView;
 
 public interface HomeContract {
 
-    interface View extends IBaseView {
-        void loadFavor(List<FavorBean> list);
+    interface IView extends IBaseView {
+        void showFavor(List<FavorBean> list);
 
-        void update(int w, Object... objs);
+        void showData(List<BoBean> boBeans, List<ItemBean> itemBeans);
+    }
+
+    interface IPresenter extends IBasePresenter {
+        void loadData();
+
+        void loadFavor();
+
+        void loadNetFavor();
+
+        void goMore(String href);
+
+        void goDetails(String href);
+
+        void goNew();
+
+        void goRank();
+
+        void goSearch();
     }
 
 

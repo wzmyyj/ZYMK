@@ -17,33 +17,35 @@ import top.wzmyyj.zymk.app.bean.HistoryBean;
 import top.wzmyyj.zymk.app.data.Urls;
 import top.wzmyyj.zymk.app.event.HistoryListChangeEvent;
 import top.wzmyyj.zymk.app.tools.I;
+import top.wzmyyj.zymk.contract.ComicContract;
 import top.wzmyyj.zymk.model.db.HistoryModel;
 import top.wzmyyj.zymk.model.net.ComicModel;
 import top.wzmyyj.zymk.model.net.box.ComicBox;
 import top.wzmyyj.zymk.presenter.base.BasePresenter;
-import top.wzmyyj.zymk.view.iv.IComicView;
 
 
 /**
  * Created by yyj on 2018/08/01. email: 2209011667@qq.com
  */
 
-public class ComicPresenter extends BasePresenter<IComicView> {
+public class ComicPresenter extends BasePresenter<ComicContract.IView> implements ComicContract.IPresenter{
 
     private ComicModel mModel;
     private HistoryModel historyModel;
 
-    public ComicPresenter(Activity activity, IComicView iv) {
+    public ComicPresenter(Activity activity, ComicContract.IView iv) {
         super(activity, iv);
         mModel = new ComicModel();
         historyModel = new HistoryModel(activity);
     }
 
-    public long getChapter_id() {
+    @Override
+    public long getChapterId() {
         return mActivity.getIntent().getLongExtra("chapter_id", 0);
     }
 
 
+    @Override
     public void loadData() {
         int id = mActivity.getIntent().getIntExtra("comic_id", 0);
         mModel.getComicInfo(id, new Observer<ComicBox>() {
@@ -59,9 +61,9 @@ public class ComicPresenter extends BasePresenter<IComicView> {
                     List<ChapterBean> chapterList = box.getChapterList();
                     Collections.reverse(chapterList);// 反序
                     List<ComicBean> comicList = getComicData(chapterList);
-                    mView.update(box.getBook(), chapterList, box.getBookList(), comicList);
+                    mView.showData(box.getBook(), chapterList, box.getBookList(), comicList);
                 } else {
-                    mView.loadFail(box.getMsg());
+                    mView.showLoadFail(box.getMsg());
                     mView.showToast(box.getMsg());
                 }
 //                mView.showToast("加载成功");
@@ -69,7 +71,7 @@ public class ComicPresenter extends BasePresenter<IComicView> {
 
             @Override
             public void onError(Throwable e) {
-                mView.loadFail(e.getMessage());
+                mView.showLoadFail(e.getMessage());
                 mView.showToast("Error:" + e.getMessage());
             }
 
@@ -109,6 +111,7 @@ public class ComicPresenter extends BasePresenter<IComicView> {
         return comicList;
     }
 
+    @Override
     public void goDetails(String href) {
         if (href.contains(Urls.ZYMK_Base)) {
             I.toDetailsActivity2(mActivity, href);
@@ -117,10 +120,12 @@ public class ComicPresenter extends BasePresenter<IComicView> {
         }
     }
 
+    @Override
     public void goSetting() {
         I.toSettingActivity(mActivity);
     }
 
+    @Override
     public void saveHistory(BookBean book, ChapterBean chapter) {
         historyModel.insert(book, chapter, new Observer<HistoryBean>() {
             @Override

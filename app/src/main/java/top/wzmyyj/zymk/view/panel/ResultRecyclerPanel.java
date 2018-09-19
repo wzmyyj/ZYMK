@@ -17,7 +17,7 @@ import top.wzmyyj.wzm_sdk.adapter.ivd.SingleIVD;
 import top.wzmyyj.zymk.R;
 import top.wzmyyj.zymk.app.bean.BookBean;
 import top.wzmyyj.zymk.app.tools.G;
-import top.wzmyyj.zymk.presenter.TyPresenter;
+import top.wzmyyj.zymk.contract.ResultContract;
 import top.wzmyyj.zymk.view.panel.base.BaseRecyclerPanel;
 
 
@@ -25,15 +25,12 @@ import top.wzmyyj.zymk.view.panel.base.BaseRecyclerPanel;
  * Created by yyj on 2018/07/29. email: 2209011667@qq.com
  */
 
-public class TyRecyclerPanel extends BaseRecyclerPanel<BookBean, TyPresenter> {
-    public TyRecyclerPanel(Context context, TyPresenter tyPresenter) {
-        super(context, tyPresenter);
+public class ResultRecyclerPanel extends BaseRecyclerPanel<BookBean, ResultContract.IPresenter> {
+    public ResultRecyclerPanel(Context context, ResultContract.IPresenter p) {
+        super(context, p);
     }
 
-    @Override
-    protected void setData() {
-//        mPresenter.addEmptyData(mData);
-    }
+
 
     @Override
     protected void setIVD(List<IVD<BookBean>> ivd) {
@@ -97,7 +94,7 @@ public class TyRecyclerPanel extends BaseRecyclerPanel<BookBean, TyPresenter> {
         notifyDataSetChanged();
     }
 
-    public void setTyData(boolean isFirst, List<BookBean> books, String base, String next) {
+    public void setResultData(boolean isFirst, List<BookBean> books, String base, String next) {
         isRuning = false;
         if (books == null && books.size() == 0) {
             loadFail("No Books");

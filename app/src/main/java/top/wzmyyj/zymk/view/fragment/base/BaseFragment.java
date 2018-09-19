@@ -4,14 +4,14 @@ import android.content.Context;
 import android.os.Bundle;
 
 import top.wzmyyj.wzm_sdk.tools.T;
-import top.wzmyyj.zymk.presenter.base.BasePresenter;
-import top.wzmyyj.zymk.view.iv.base.IBaseView;
+import top.wzmyyj.zymk.contract.base.IBasePresenter;
+import top.wzmyyj.zymk.contract.base.IBaseView;
 
 /**
  * Created by yyj on 2018/06/28. email: 2209011667@qq.com
  */
 
-public abstract class BaseFragment<P extends BasePresenter> extends BasePanelFragment implements IBaseView {
+public abstract class BaseFragment<P extends IBasePresenter> extends BasePanelFragment implements IBaseView {
     protected P mPresenter;
 
     @Override

@@ -11,9 +11,9 @@ import top.wzmyyj.zymk.app.bean.BookBean;
 import top.wzmyyj.zymk.app.bean.ChapterBean;
 import top.wzmyyj.zymk.app.bean.ComicBean;
 import top.wzmyyj.zymk.common.utils.StatusBarUtil;
+import top.wzmyyj.zymk.contract.ComicContract;
 import top.wzmyyj.zymk.presenter.ComicPresenter;
 import top.wzmyyj.zymk.view.activity.base.BaseActivity;
-import top.wzmyyj.zymk.view.iv.IComicView;
 import top.wzmyyj.zymk.view.panel.ComicRecyclerPanel;
 
 
@@ -21,7 +21,7 @@ import top.wzmyyj.zymk.view.panel.ComicRecyclerPanel;
  * Created by yyj on 2018/08/01. email: 2209011667@qq.com
  */
 
-public class ComicActivity extends BaseActivity<ComicPresenter> implements IComicView {
+public class ComicActivity extends BaseActivity<ComicContract.IPresenter> implements ComicContract.IView {
     @Override
     protected void initPresenter() {
         mPresenter = new ComicPresenter(activity, this);
@@ -63,12 +63,12 @@ public class ComicActivity extends BaseActivity<ComicPresenter> implements IComi
 
 
     @Override
-    public void update(BookBean book, List<ChapterBean> chapterList, List<BookBean> bookList, List<ComicBean> comicList) {
+    public void showData(BookBean book, List<ChapterBean> chapterList, List<BookBean> bookList, List<ComicBean> comicList) {
         comicRecyclerPanel.setComicData(book, chapterList, bookList, comicList);
     }
 
     @Override
-    public void loadFail(String msg) {
+    public void showLoadFail(String msg) {
         comicRecyclerPanel.loadFail();
     }
 }

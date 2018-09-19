@@ -38,7 +38,7 @@ import top.wzmyyj.zymk.app.tools.A;
 import top.wzmyyj.zymk.app.tools.G;
 import top.wzmyyj.zymk.common.utils.DensityUtil;
 import top.wzmyyj.zymk.common.utils.MockUtil;
-import top.wzmyyj.zymk.presenter.ComicPresenter;
+import top.wzmyyj.zymk.contract.ComicContract;
 import top.wzmyyj.zymk.view.panel.base.BasePanel;
 import top.wzmyyj.zymk.view.panel.base.BaseRecyclerPanel;
 
@@ -48,9 +48,9 @@ import top.wzmyyj.zymk.view.panel.base.BaseRecyclerPanel;
  * 漫画阅读主页面。
  */
 
-public class ComicRecyclerPanel extends BaseRecyclerPanel<ComicBean, ComicPresenter> {
+public class ComicRecyclerPanel extends BaseRecyclerPanel<ComicBean, ComicContract.IPresenter> {
 
-    public ComicRecyclerPanel(Context context, ComicPresenter comicPresenter) {
+    public ComicRecyclerPanel(Context context, ComicContract.IPresenter comicPresenter) {
         super(context, comicPresenter);
     }
 
@@ -82,13 +82,9 @@ public class ComicRecyclerPanel extends BaseRecyclerPanel<ComicBean, ComicPresen
     @Override
     protected void initData() {
         super.initData();
-        mChapterId = mPresenter.getChapter_id();
+        mChapterId = mPresenter.getChapterId();
     }
 
-    @Override
-    protected void setData() {
-
-    }
 
     private final static int Definition_Low = 1;
     private final static int Definition_Middle = 2;
@@ -440,9 +436,9 @@ public class ComicRecyclerPanel extends BaseRecyclerPanel<ComicBean, ComicPresen
 
 
     // 内部类panel.菜单面板。
-    public class ComicMeunPanel extends BasePanel<ComicPresenter> {
+    public class ComicMeunPanel extends BasePanel<ComicContract.IPresenter> {
 
-        public ComicMeunPanel(Context context, ComicPresenter p) {
+        public ComicMeunPanel(Context context, ComicContract.IPresenter p) {
             super(context, p);
         }
 

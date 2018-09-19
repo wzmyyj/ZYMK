@@ -36,15 +36,15 @@ import top.wzmyyj.zymk.app.bean.ZiBean;
 import top.wzmyyj.zymk.app.event.HistoryListChangeEvent;
 import top.wzmyyj.zymk.app.tools.G;
 import top.wzmyyj.zymk.common.utils.StatusBarUtil;
+import top.wzmyyj.zymk.contract.DetailsContract;
 import top.wzmyyj.zymk.presenter.DetailsPresenter;
 import top.wzmyyj.zymk.view.activity.base.BaseActivity;
 import top.wzmyyj.zymk.view.adapter.BookAdapter;
-import top.wzmyyj.zymk.view.iv.IDetailsView;
 import top.wzmyyj.zymk.view.panel.DetailsMuPanel;
 import top.wzmyyj.zymk.view.panel.DetailsXiPanel;
 import top.wzmyyj.zymk.view.panel.DetailsZiPanel;
 
-public class DetailsActivity extends BaseActivity<DetailsPresenter> implements IDetailsView {
+public class DetailsActivity extends BaseActivity<DetailsContract.IPresenter> implements DetailsContract.IView {
 
     @Override
     protected void initPresenter() {
@@ -236,7 +236,7 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
 
         long id = (long) book.getId();
         mPresenter.isFavor(id);
-        mPresenter.history(id);
+        mPresenter.getHistoryRead(id);
 
     }
 
@@ -292,7 +292,7 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
     @Subscribe
     public void onEvent(HistoryListChangeEvent event) {
         if (event.isChange()) {
-            mPresenter.history((long) mBook.getId());
+            mPresenter.getHistoryRead((long) mBook.getId());
         }
     }
 

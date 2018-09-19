@@ -13,9 +13,9 @@ import top.wzmyyj.wzm_sdk.adapter.ViewTitlePagerAdapter;
 import top.wzmyyj.wzm_sdk.panel.Panel;
 import top.wzmyyj.zymk.R;
 import top.wzmyyj.zymk.app.bean.BookBean;
+import top.wzmyyj.zymk.contract.RankContract;
 import top.wzmyyj.zymk.presenter.RankPresenter;
 import top.wzmyyj.zymk.view.activity.base.BaseActivity;
-import top.wzmyyj.zymk.view.iv.IRankView;
 import top.wzmyyj.zymk.view.panel.RankRecyclerPanel;
 
 
@@ -23,7 +23,7 @@ import top.wzmyyj.zymk.view.panel.RankRecyclerPanel;
  * Created by yyj on 2018/07/13. email: 2209011667@qq.com
  */
 
-public class RankActivity extends BaseActivity<RankPresenter> implements IRankView {
+public class RankActivity extends BaseActivity<RankContract.IPresenter> implements RankContract.IView {
     @Override
     protected void initPresenter() {
         mPresenter = new RankPresenter(activity, this);
@@ -79,7 +79,7 @@ public class RankActivity extends BaseActivity<RankPresenter> implements IRankVi
     }
 
     @Override
-    public void update(List<BookBean>... bookList) {
+    public void showData(List<BookBean>... bookList) {
         ((RankRecyclerPanel)getPanel(0)).setRankData(bookList[0]);
         ((RankRecyclerPanel)getPanel(1)).setRankData(bookList[1]);
         ((RankRecyclerPanel)getPanel(2)).setRankData(bookList[2]);

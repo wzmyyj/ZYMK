@@ -14,9 +14,9 @@ import top.wzmyyj.wzm_sdk.panel.Panel;
 import top.wzmyyj.zymk.R;
 import top.wzmyyj.zymk.app.bean.TypeBean;
 import top.wzmyyj.zymk.common.utils.StatusBarUtil;
+import top.wzmyyj.zymk.contract.TypeContract;
 import top.wzmyyj.zymk.presenter.TypePresenter;
 import top.wzmyyj.zymk.view.fragment.base.BaseFragment;
-import top.wzmyyj.zymk.view.iv.ITypeView;
 import top.wzmyyj.zymk.view.panel.TypeRecyclerPanel;
 
 /**
@@ -24,7 +24,7 @@ import top.wzmyyj.zymk.view.panel.TypeRecyclerPanel;
  * 第二页。
  */
 
-public class TypeFragment extends BaseFragment<TypePresenter> implements ITypeView {
+public class TypeFragment extends BaseFragment<TypeContract.IPresenter> implements TypeContract.IView {
 
     @Override
     protected void initPresenter() {
@@ -84,7 +84,7 @@ public class TypeFragment extends BaseFragment<TypePresenter> implements ITypeVi
 
     @SafeVarargs
     @Override
-    public final void update(List<TypeBean>... typeList) {
+    public final void showData(List<TypeBean>... typeList) {
         ((TypeRecyclerPanel) getPanel(0)).setTypeData(typeList[0]);
         ((TypeRecyclerPanel) getPanel(1)).setTypeData(typeList[1]);
         ((TypeRecyclerPanel) getPanel(2)).setTypeData(typeList[2]);

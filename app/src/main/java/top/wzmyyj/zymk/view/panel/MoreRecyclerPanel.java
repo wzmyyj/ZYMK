@@ -18,7 +18,7 @@ import top.wzmyyj.zymk.app.bean.BookBean;
 import top.wzmyyj.zymk.app.tools.G;
 import top.wzmyyj.zymk.common.utils.DensityUtil;
 import top.wzmyyj.zymk.common.utils.StatusBarUtil;
-import top.wzmyyj.zymk.presenter.MorePresenter;
+import top.wzmyyj.zymk.contract.MoreContract;
 import top.wzmyyj.zymk.view.panel.base.BaseRecyclerPanel;
 
 
@@ -26,15 +26,17 @@ import top.wzmyyj.zymk.view.panel.base.BaseRecyclerPanel;
  * Created by yyj on 2018/07/04. email: 2209011667@qq.com
  */
 
-public class MoreRecyclerPanel extends BaseRecyclerPanel<BookBean, MorePresenter> {
+public class MoreRecyclerPanel extends BaseRecyclerPanel<BookBean, MoreContract.IPresenter> {
 
 
-    public MoreRecyclerPanel(Context context, MorePresenter p) {
+    public MoreRecyclerPanel(Context context, MoreContract.IPresenter p) {
         super(context, p);
     }
 
+
     @Override
-    protected void setData() {
+    protected void setFirstData() {
+        super.setFirstData();
         mPresenter.addEmptyData(mData);
     }
 
@@ -118,7 +120,7 @@ public class MoreRecyclerPanel extends BaseRecyclerPanel<BookBean, MorePresenter
         G.img(context, figure, img_1);
 
         mData.clear();
-        if(books!=null){
+        if (books != null) {
             mData.addAll(books);
         }
 

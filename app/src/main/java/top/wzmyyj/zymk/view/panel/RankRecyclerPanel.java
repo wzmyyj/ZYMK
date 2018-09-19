@@ -16,7 +16,7 @@ import top.wzmyyj.wzm_sdk.adapter.ivd.SingleIVD;
 import top.wzmyyj.zymk.R;
 import top.wzmyyj.zymk.app.bean.BookBean;
 import top.wzmyyj.zymk.app.tools.G;
-import top.wzmyyj.zymk.presenter.RankPresenter;
+import top.wzmyyj.zymk.contract.RankContract;
 import top.wzmyyj.zymk.view.panel.base.BaseRecyclerPanel;
 
 
@@ -24,15 +24,17 @@ import top.wzmyyj.zymk.view.panel.base.BaseRecyclerPanel;
  * Created by yyj on 2018/07/13. email: 2209011667@qq.com
  */
 
-public class RankRecyclerPanel extends BaseRecyclerPanel<BookBean, RankPresenter> {
-    public RankRecyclerPanel(Context context, RankPresenter rankPresenter) {
-        super(context, rankPresenter);
+public class RankRecyclerPanel extends BaseRecyclerPanel<BookBean, RankContract.IPresenter> {
+    public RankRecyclerPanel(Context context, RankContract.IPresenter p) {
+        super(context, p);
     }
 
     @Override
-    protected void setData() {
+    protected void setFirstData() {
+        super.setFirstData();
         mPresenter.addEmptyData(mData);
     }
+
 
     @Override
     protected void setIVD(List<IVD<BookBean>> ivd) {

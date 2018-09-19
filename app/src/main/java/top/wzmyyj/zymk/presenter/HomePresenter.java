@@ -8,43 +8,30 @@ import java.util.List;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 import top.wzmyyj.zymk.app.bean.FavorBean;
-import top.wzmyyj.zymk.app.bean.ItemBean;
 import top.wzmyyj.zymk.app.data.Urls;
 import top.wzmyyj.zymk.app.tools.I;
 import top.wzmyyj.zymk.app.tools.P;
+import top.wzmyyj.zymk.contract.HomeContract;
 import top.wzmyyj.zymk.model.db.FavorModel;
 import top.wzmyyj.zymk.model.net.MainModel;
 import top.wzmyyj.zymk.model.net.box.HomeBox;
 import top.wzmyyj.zymk.presenter.base.BasePresenter;
-import top.wzmyyj.zymk.view.iv.IHomeView;
 
 /**
  * Created by yyj on 2018/06/29. email: 2209011667@qq.com
  */
 
-public class HomePresenter extends BasePresenter<IHomeView> {
+public class HomePresenter extends BasePresenter<HomeContract.IView> implements HomeContract.IPresenter {
     private MainModel mModel;
     private FavorModel favorModel;
 
-    public HomePresenter(Activity activity, IHomeView iv) {
+    public HomePresenter(Activity activity, HomeContract.IView iv) {
         super(activity, iv);
         mModel = new MainModel();
         favorModel = new FavorModel(activity);
     }
 
-
-    public void addEmptyData(List<ItemBean> data) {
-        data.add(new ItemBean());
-        data.add(new ItemBean());
-        data.add(new ItemBean());
-        data.add(new ItemBean());
-        data.add(new ItemBean());
-        data.add(new ItemBean());
-        data.add(new ItemBean());
-        data.add(new ItemBean());
-        data.add(new ItemBean());
-    }
-
+    @Override
     public void loadData() {
         mModel.getHomeData(new Observer<HomeBox>() {
             @Override
@@ -54,7 +41,7 @@ public class HomePresenter extends BasePresenter<IHomeView> {
 
             @Override
             public void onNext(HomeBox box) {
-                mView.update(box.getBoList(), box.getItemList());
+                mView.showData(box.getBoList(), box.getItemList());
 //                mView.showToast("加载成功");
             }
 
@@ -70,25 +57,11 @@ public class HomePresenter extends BasePresenter<IHomeView> {
         });
     }
 
-    public void goMore(String href) {
-        I.toMoreActivity(mActivity, href);
-    }
-
-    public void goDetails(String href) {
-        if (href == null) {
-            mView.showToast("空值");
-            return;
-        }
-        if (href.contains(Urls.ZYMK_Base)) {
-            I.toDetailsActivity(mActivity, href);
-        } else {
-            I.toBrowser(mActivity, href);
-        }
-    }
 
     List<FavorBean> favorList = new ArrayList<>();
 
-    public void updateLoadFavor() {
+    @Override
+    public void loadNetFavor() {
         favorModel.updateAll(new Observer<FavorBean>() {
             @Override
             public void onSubscribe(Disposable d) {
@@ -112,12 +85,13 @@ public class HomePresenter extends BasePresenter<IHomeView> {
                 // 是否展示出来。
                 boolean is = P.create(mActivity).getBoolean("isCue", true);
                 if (is) {
-                    mView.loadFavor(favorList);
+                    mView.showFavor(favorList);
                 }
             }
         });
     }
 
+    @Override
     public void loadFavor() {
         favorModel.loadAll(new Observer<List<FavorBean>>() {
             @Override
@@ -144,20 +118,41 @@ public class HomePresenter extends BasePresenter<IHomeView> {
                 // 是否展示出来。
                 boolean is = P.create(mActivity).getBoolean("isCue", true);
                 if (is) {
-                    mView.loadFavor(favorList);
+                    mView.showFavor(favorList);
                 }
             }
         });
     }
 
+    @Override
+    public void goMore(String href) {
+        I.toMoreActivity(mActivity, href);
+    }
+
+    @Override
+    public void goDetails(String href) {
+        if (href == null) {
+            mView.showToast("空值");
+            return;
+        }
+        if (href.contains(Urls.ZYMK_Base)) {
+            I.toDetailsActivity(mActivity, href);
+        } else {
+            I.toBrowser(mActivity, href);
+        }
+    }
+
+    @Override
     public void goNew() {
         I.toNewActivity(mActivity);
     }
 
+    @Override
     public void goRank() {
         I.toRankActivity(mActivity);
     }
 
+    @Override
     public void goSearch() {
         I.toSearchActivity(mActivity);
     }

@@ -22,7 +22,7 @@ import top.wzmyyj.zymk.app.bean.BookBean;
 import top.wzmyyj.zymk.app.bean.FavorBean;
 import top.wzmyyj.zymk.app.tools.G;
 import top.wzmyyj.zymk.common.java.Vanessa;
-import top.wzmyyj.zymk.presenter.HomePresenter;
+import top.wzmyyj.zymk.contract.HomeContract;
 import top.wzmyyj.zymk.view.panel.base.BasePanel;
 
 
@@ -30,8 +30,8 @@ import top.wzmyyj.zymk.view.panel.base.BasePanel;
  * Created by yyj on 2018/08/20. email: 2209011667@qq.com
  */
 
-public class HomeFavorPanel extends BasePanel<HomePresenter> {
-    public HomeFavorPanel(Context context, HomePresenter p) {
+public class HomeFavorPanel extends BasePanel<HomeContract.IPresenter> {
+    public HomeFavorPanel(Context context, HomeContract.IPresenter p) {
         super(context, p);
     }
 

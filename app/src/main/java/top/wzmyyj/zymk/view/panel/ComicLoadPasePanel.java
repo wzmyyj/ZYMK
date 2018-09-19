@@ -11,7 +11,7 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.OnClick;
 import top.wzmyyj.zymk.R;
-import top.wzmyyj.zymk.presenter.ComicPresenter;
+import top.wzmyyj.zymk.contract.ComicContract;
 import top.wzmyyj.zymk.view.panel.base.BasePanel;
 
 
@@ -19,8 +19,8 @@ import top.wzmyyj.zymk.view.panel.base.BasePanel;
  * Created by yyj on 2018/08/06. email: 2209011667@qq.com
  */
 
-public class ComicLoadPasePanel extends BasePanel<ComicPresenter> {
-    public ComicLoadPasePanel(Context context, ComicPresenter p) {
+public class ComicLoadPasePanel extends BasePanel<ComicContract.IPresenter> {
+    public ComicLoadPasePanel(Context context, ComicContract.IPresenter p) {
         super(context, p);
     }
 

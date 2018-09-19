@@ -21,7 +21,7 @@ import top.wzmyyj.zymk.R;
 import top.wzmyyj.zymk.app.bean.ChapterBean;
 import top.wzmyyj.zymk.app.bean.HuaBean;
 import top.wzmyyj.zymk.app.bean.MuBean;
-import top.wzmyyj.zymk.presenter.DetailsPresenter;
+import top.wzmyyj.zymk.contract.DetailsContract;
 import top.wzmyyj.zymk.view.adapter.HuaAdapter;
 import top.wzmyyj.zymk.view.panel.base.BasePanel;
 
@@ -29,9 +29,9 @@ import top.wzmyyj.zymk.view.panel.base.BasePanel;
  * Created by yyj on 2018/07/19. email: 2209011667@qq.com
  */
 
-public class DetailsMuPanel extends BasePanel<DetailsPresenter> {
-    public DetailsMuPanel(Context context, DetailsPresenter detailsPresenter) {
-        super(context, detailsPresenter);
+public class DetailsMuPanel extends BasePanel<DetailsContract.IPresenter> {
+    public DetailsMuPanel(Context context, DetailsContract.IPresenter p) {
+        super(context, p);
     }
 
     @Override

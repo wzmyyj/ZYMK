@@ -10,31 +10,33 @@ import top.wzmyyj.wzm_sdk.tools.L;
 import top.wzmyyj.zymk.app.bean.SearchHistoryBean;
 import top.wzmyyj.zymk.app.data.Urls;
 import top.wzmyyj.zymk.app.tools.I;
+import top.wzmyyj.zymk.contract.SearchContract;
 import top.wzmyyj.zymk.model.db.SearchHistoryModel;
 import top.wzmyyj.zymk.model.net.SearchModel;
 import top.wzmyyj.zymk.model.net.box.SearchBox;
 import top.wzmyyj.zymk.presenter.base.BasePresenter;
-import top.wzmyyj.zymk.view.iv.ISearchView;
 
 /**
  * Created by yyj on 2018/07/30. email: 2209011667@qq.com
  */
 
-public class SearchPresenter extends BasePresenter<ISearchView> {
+public class SearchPresenter extends BasePresenter<SearchContract.IView> implements SearchContract.IPresenter {
     private SearchModel mModel;
     private SearchHistoryModel mModel2;
 
-    public SearchPresenter(Activity activity, ISearchView iv) {
+    public SearchPresenter(Activity activity, SearchContract.IView iv) {
         super(activity, iv);
         mModel = new SearchModel();
         mModel2 = new SearchHistoryModel(activity);
     }
 
+    @Override
     public void search(String s) {
         addHistory(s);
         I.toTyActivity(mActivity, Urls.ZYMK_All, s);
     }
 
+    @Override
     public void getHotTags() {
         mModel.getHotSearch(new Observer<SearchBox>() {
             @Override
@@ -64,6 +66,7 @@ public class SearchPresenter extends BasePresenter<ISearchView> {
         });
     }
 
+    @Override
     public void smart(String key) {
         mModel.getSmartSearch(key, new Observer<SearchBox>() {
             @Override
@@ -94,6 +97,7 @@ public class SearchPresenter extends BasePresenter<ISearchView> {
         });
     }
 
+    @Override
     public void getHistory() {
         mModel2.loadAll(new Observer<List<SearchHistoryBean>>() {
             @Override
@@ -142,6 +146,7 @@ public class SearchPresenter extends BasePresenter<ISearchView> {
         });
     }
 
+    @Override
     public void delHistory(long id) {
         mModel2.delete(id, new Observer<Long>() {
             @Override
@@ -151,7 +156,7 @@ public class SearchPresenter extends BasePresenter<ISearchView> {
 
             @Override
             public void onNext(Long l) {
-                mView.delHistory(l);
+                mView.removeHistory(l);
             }
 
             @Override
@@ -167,6 +172,7 @@ public class SearchPresenter extends BasePresenter<ISearchView> {
 
     }
 
+    @Override
     public void delAllHistory() {
         mModel2.deleteAll(new Observer<Long>() {
             @Override
@@ -176,7 +182,7 @@ public class SearchPresenter extends BasePresenter<ISearchView> {
 
             @Override
             public void onNext(Long l) {
-                mView.delAllHistory();
+                mView.removeAllHistory();
             }
 
             @Override
@@ -192,7 +198,7 @@ public class SearchPresenter extends BasePresenter<ISearchView> {
 
     }
 
-
+    @Override
     public void goDetails(String href, String title) {
         addHistory(title);
         if (href.contains(Urls.ZYMK_Base)) {

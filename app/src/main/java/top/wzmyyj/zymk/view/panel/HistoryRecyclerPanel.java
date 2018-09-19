@@ -21,7 +21,7 @@ import top.wzmyyj.zymk.app.bean.ChapterBean;
 import top.wzmyyj.zymk.app.bean.HistoryBean;
 import top.wzmyyj.zymk.app.tools.G;
 import top.wzmyyj.zymk.common.java.Vanessa;
-import top.wzmyyj.zymk.presenter.FindPresenter;
+import top.wzmyyj.zymk.contract.FindContract;
 
 
 /**
@@ -29,12 +29,8 @@ import top.wzmyyj.zymk.presenter.FindPresenter;
  */
 
 public class HistoryRecyclerPanel extends FindRecyclerPanel<HistoryBean> {
-    public HistoryRecyclerPanel(Context context, FindPresenter p) {
+    public HistoryRecyclerPanel(Context context, FindContract.IPresenter p) {
         super(context, p);
-    }
-
-    @Override
-    protected void setData() {
     }
 
     @Override

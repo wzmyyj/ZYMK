@@ -22,9 +22,9 @@ import top.wzmyyj.zymk.app.event.DownloadListChangeEvent;
 import top.wzmyyj.zymk.app.event.FavorListChangeEvent;
 import top.wzmyyj.zymk.app.event.HistoryListChangeEvent;
 import top.wzmyyj.zymk.common.utils.StatusBarUtil;
+import top.wzmyyj.zymk.contract.FindContract;
 import top.wzmyyj.zymk.presenter.FindPresenter;
 import top.wzmyyj.zymk.view.fragment.base.BaseFragment;
-import top.wzmyyj.zymk.view.iv.IFindView;
 import top.wzmyyj.zymk.view.panel.DownloadRecyclerPanel;
 import top.wzmyyj.zymk.view.panel.FavorRecyclerPanel;
 import top.wzmyyj.zymk.view.panel.HistoryRecyclerPanel;
@@ -34,7 +34,7 @@ import top.wzmyyj.zymk.view.panel.HistoryRecyclerPanel;
  * 第三页。
  */
 
-public class FindFragment extends BaseFragment<FindPresenter> implements IFindView {
+public class FindFragment extends BaseFragment<FindContract.IPresenter> implements FindContract.IView {
     @Override
     protected void initPresenter() {
         mPresenter = new FindPresenter(activity, this);
@@ -113,13 +113,13 @@ public class FindFragment extends BaseFragment<FindPresenter> implements IFindVi
 
     //////////////////////////////////////////////////////////////////////////// favor
     @Override
-    public void loadFavor(List<FavorBean> list) {
+    public void showFavor(List<FavorBean> list) {
         if (list == null) return;
         favorRecyclerPanel.setFindData(list);
     }
 
     @Override
-    public void deleteFavor(boolean is) {
+    public void removeFavor(boolean is) {
         if (!is) return;
         favorRecyclerPanel.deleteSuccess();
     }
@@ -134,13 +134,13 @@ public class FindFragment extends BaseFragment<FindPresenter> implements IFindVi
     //////////////////////////////////////////////////////////////////////////// history
 
     @Override
-    public void loadHistory(List<HistoryBean> list) {
+    public void showHistory(List<HistoryBean> list) {
         if (list == null) return;
         historyRecyclerPanel.setFindData(list);
     }
 
     @Override
-    public void deleteHistory(boolean is) {
+    public void removeHistory(boolean is) {
         if (!is) return;
         historyRecyclerPanel.deleteSuccess();
     }
@@ -154,13 +154,13 @@ public class FindFragment extends BaseFragment<FindPresenter> implements IFindVi
 
 
     @Override
-    public void loadDownload(List<DownloadBean> list) {
+    public void showDownload(List<DownloadBean> list) {
         if (list == null) return;
         downloadRecyclerPanel.setFindData(list);
     }
 
     @Override
-    public void deleteDownload(boolean is) {
+    public void removeDownload(boolean is) {
         if (!is) return;
         downloadRecyclerPanel.deleteSuccess();
     }

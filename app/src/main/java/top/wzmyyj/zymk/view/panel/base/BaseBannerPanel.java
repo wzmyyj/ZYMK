@@ -7,14 +7,14 @@ import com.youth.banner.loader.ImageLoader;
 
 import top.wzmyyj.wzm_sdk.panel.BannerPanel;
 import top.wzmyyj.zymk.app.utils.GlideImageLoader;
-import top.wzmyyj.zymk.presenter.base.IBasePresent;
+import top.wzmyyj.zymk.contract.base.IBasePresenter;
 
 
 /**
  * Created by yyj on 2018/09/19. email: 2209011667@qq.com
  */
 
-public abstract class BaseBannerPanel<P extends IBasePresent> extends BannerPanel {
+public abstract class BaseBannerPanel<P extends IBasePresenter> extends BannerPanel {
     protected P mPresenter;
 
     public BaseBannerPanel(Context context, P p) {
