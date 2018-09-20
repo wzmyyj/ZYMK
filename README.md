@@ -11,6 +11,17 @@ mvp+rxjava+retrofit+okhttp+greendao+glide+gson+jsoup+eventbus+butterknife
 APk百度云下载：
 链接：[https://pan.baidu.com/s/1Xe153YKIAm_x992c0-sc-A](https://pan.baidu.com/s/1Xe153YKIAm_x992c0-sc-A) 密码：jq22
 
+#### 最新更新（2018.06.19）
+1. 由常规MVP改为Google推荐的MVP-Contract模式。将原本的presenter层每个类抽象出接口，并将这些接口和对应的view的接口，放在同一个contract接口里（接口里放两个接口）。
+- 抽象出p层接口使v层依赖于p层接口（父类）。依赖倒转原则。
+- 使用contract好处是p层与v层相互调用关系在一个文件里一目了然。
+
+2. 修改了一些命名规范，类名，方法名等。
+
+3. 修改了一些类实现的方法，修复一个小bug。
+
+
+
 #### 效果图：
 
 
