@@ -9,7 +9,8 @@ mvp+rxjava+retrofit+okhttp+greendao+glide+gson+jsoup+eventbus+butterknife
 个人页：[http://wzmyyj.top/2018/08/22/android_3/](http://wzmyyj.top/2018/08/22/android_3/)
 
 APk百度云下载：
-链接：链接：[https://pan.baidu.com/s/1Gp5vcoUx7NEr8n17nM8wwg](https://pan.baidu.com/s/1Gp5vcoUx7NEr8n17nM8wwg) 密码：b6zq
+
+链接：[https://pan.baidu.com/s/1Gp5vcoUx7NEr8n17nM8wwg](https://pan.baidu.com/s/1Gp5vcoUx7NEr8n17nM8wwg) 密码：b6zq
 
 #### 最新更新（2018.06.19）
 1. 由常规MVP改为Google推荐的MVP-Contract模式。将原本的presenter层每个类抽象出接口，并将这些接口和对应的view的接口，放在同一个contract接口里（接口里放两个接口）。
