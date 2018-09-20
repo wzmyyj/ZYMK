@@ -1,6 +1,6 @@
 ## ZYMK
 
-一款采用MVP的仿《知音漫客》漫画APP。
+一款采用MVP-contract的仿《知音漫客》漫画APP。
 
 mvp+rxjava+retrofit+okhttp+greendao+glide+gson+jsoup+eventbus+butterknife
 
