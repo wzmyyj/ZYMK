@@ -10,7 +10,7 @@ import io.reactivex.disposables.Disposable;
 import top.wzmyyj.zymk.app.bean.FavorBean;
 import top.wzmyyj.zymk.app.data.Urls;
 import top.wzmyyj.zymk.app.tools.I;
-import top.wzmyyj.zymk.app.tools.P;
+import top.wzmyyj.wzm_sdk.tools.P;
 import top.wzmyyj.zymk.contract.HomeContract;
 import top.wzmyyj.zymk.model.db.FavorModel;
 import top.wzmyyj.zymk.model.net.MainModel;

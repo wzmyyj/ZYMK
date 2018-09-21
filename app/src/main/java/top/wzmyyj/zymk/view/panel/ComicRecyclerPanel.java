@@ -34,7 +34,7 @@ import top.wzmyyj.zymk.R;
 import top.wzmyyj.zymk.app.bean.BookBean;
 import top.wzmyyj.zymk.app.bean.ChapterBean;
 import top.wzmyyj.zymk.app.bean.ComicBean;
-import top.wzmyyj.zymk.app.tools.A;
+import top.wzmyyj.wzm_sdk.tools.A;
 import top.wzmyyj.zymk.app.tools.G;
 import top.wzmyyj.zymk.common.utils.DensityUtil;
 import top.wzmyyj.zymk.common.utils.MockUtil;

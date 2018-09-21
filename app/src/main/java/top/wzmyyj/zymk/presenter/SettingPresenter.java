@@ -13,7 +13,7 @@ import io.reactivex.schedulers.Schedulers;
 import top.wzmyyj.zymk.app.data.Keys;
 import top.wzmyyj.zymk.app.data.Urls;
 import top.wzmyyj.zymk.app.tools.I;
-import top.wzmyyj.zymk.app.tools.P;
+import top.wzmyyj.wzm_sdk.tools.P;
 import top.wzmyyj.zymk.app.utils.GlideCacheUtil;
 import top.wzmyyj.zymk.common.utils.PackageUtil;
 import top.wzmyyj.zymk.contract.SettingContract;
