@@ -3,6 +3,7 @@ package top.wzmyyj.zymk.view.panel;
 import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -113,6 +114,21 @@ public abstract class FindRecyclerPanel<T> extends BaseRecyclerPanel<T, FindCont
         });
     }
 
+    @Override
+    public boolean onItemLongClick(View view, RecyclerView.ViewHolder holder, int position) {
+        if (isCanSelect) {
+            isCanSelect = false;
+            mSelectedList.clear();
+            ll_bottom.setVisibility(View.GONE);
+            notifyDataSetChanged();
+        } else {
+            isCanSelect = true;
+            ll_bottom.setVisibility(View.VISIBLE);
+            notifyDataSetChanged();
+        }
+        return false;
+    }
+
     private void updateMenuView() {
         tv_num.setText("共" + mData.size() + "本");
         if (mData.size() == 0) {
@@ -136,6 +152,7 @@ public abstract class FindRecyclerPanel<T> extends BaseRecyclerPanel<T, FindCont
                 img_gongge.setImageResource(R.mipmap.ico_jiugongge);
             }
         }
+
 
 
         if (mSelectedList.size() != mData.size()) {
