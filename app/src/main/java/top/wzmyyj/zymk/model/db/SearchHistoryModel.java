@@ -132,7 +132,7 @@ public class SearchHistoryModel {
             public void subscribe(@NonNull ObservableEmitter<Long> observableEmitter) throws Exception {
                 try {
                     mDao.deleteAll();
-                    observableEmitter.onNext(null);
+                    observableEmitter.onNext(0L);
                 } catch (Exception e) {
                     observableEmitter.onError(e);
                     e.printStackTrace();
