@@ -1,4 +1,4 @@
-package top.wzmyyj.zymk.common.java;
+package top.wzmyyj.wzm_sdk.utils;
 
 import android.annotation.SuppressLint;
 
@@ -13,7 +13,7 @@ import java.util.Date;
  */
 
 
-public class Vanessa {
+public class TimeUtil {
 
 
     public static String long2str(long l, String format) {

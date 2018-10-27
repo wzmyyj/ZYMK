@@ -15,7 +15,7 @@ import top.wzmyyj.zymk.R;
 import top.wzmyyj.zymk.app.bean.BookBean;
 import top.wzmyyj.zymk.contract.NewContract;
 import top.wzmyyj.zymk.presenter.NewPresenter;
-import top.wzmyyj.zymk.view.activity.base.BaseActivity;
+import top.wzmyyj.zymk.base.activity.BaseActivity;
 import top.wzmyyj.zymk.view.panel.NewRecyclerPanel;
 
 

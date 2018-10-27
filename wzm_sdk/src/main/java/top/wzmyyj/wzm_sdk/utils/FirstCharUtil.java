@@ -1,11 +1,11 @@
-package top.wzmyyj.zymk.common.java;
+package top.wzmyyj.wzm_sdk.utils;
 
 /**
  * Created by yyj on 2017/06/12. email: 2209011667@qq.com
  */
 
 
-public class FirstChar {
+public class FirstCharUtil {
     // 简体中文的编码范围从B0A1（45217）一直到F7FE（63486）
     private static int BEGIN = 45217;
     private static int END = 63486;

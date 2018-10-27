@@ -13,10 +13,10 @@ import butterknife.BindView;
 import top.wzmyyj.zymk.R;
 import top.wzmyyj.zymk.app.bean.BoBean;
 import top.wzmyyj.zymk.app.bean.ItemBean;
-import top.wzmyyj.zymk.common.utils.DensityUtil;
-import top.wzmyyj.zymk.common.utils.StatusBarUtil;
+import top.wzmyyj.wzm_sdk.utils.DensityUtil;
+import top.wzmyyj.wzm_sdk.utils.StatusBarUtil;
 import top.wzmyyj.zymk.contract.HomeContract;
-import top.wzmyyj.zymk.view.panel.base.BaseNestedScrollPanel;
+import top.wzmyyj.zymk.base.panel.BaseNestedScrollPanel;
 
 
 /**

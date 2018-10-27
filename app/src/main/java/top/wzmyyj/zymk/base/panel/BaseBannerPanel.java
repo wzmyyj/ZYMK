@@ -1,4 +1,4 @@
-package top.wzmyyj.zymk.view.panel.base;
+package top.wzmyyj.zymk.base.panel;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -7,7 +7,7 @@ import com.youth.banner.loader.ImageLoader;
 
 import top.wzmyyj.wzm_sdk.panel.BannerPanel;
 import top.wzmyyj.zymk.app.utils.GlideImageLoader;
-import top.wzmyyj.zymk.contract.base.IBasePresenter;
+import top.wzmyyj.zymk.base.contract.IBasePresenter;
 
 
 /**

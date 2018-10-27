@@ -16,7 +16,7 @@ import top.wzmyyj.zymk.app.bean.MuBean;
 import top.wzmyyj.zymk.app.bean.TypeBean;
 import top.wzmyyj.zymk.app.bean.XiBean;
 import top.wzmyyj.zymk.app.bean.ZiBean;
-import top.wzmyyj.zymk.common.java.RandomSort;
+import top.wzmyyj.wzm_sdk.utils.RandomSortUtil;
 import top.wzmyyj.zymk.model.net.box.DetailsBox;
 import top.wzmyyj.zymk.model.net.box.HomeBox;
 import top.wzmyyj.zymk.model.net.box.MoreBox;
@@ -58,14 +58,14 @@ public class DocUtil {
                 books.add(book);
             }
 
-            RandomSort.sort(books);
+            RandomSortUtil.sort(books);
 
             item.setBooks(books);
             items.add(item);
 
         }
-        RandomSort.sort(items, 0, 3);
-        RandomSort.sort(items, 4, items.size() - 2);
+        RandomSortUtil.sort(items, 0, 3);
+        RandomSortUtil.sort(items, 4, items.size() - 2);
         return items;
     }
 
@@ -201,8 +201,8 @@ public class DocUtil {
             books2.add(book);
         }
 
-        RandomSort.sort(books1);
-        RandomSort.sort(books2);
+        RandomSortUtil.sort(books1);
+        RandomSortUtil.sort(books2);
 
         NewBox box = new NewBox(books1, books2);
 
@@ -320,7 +320,7 @@ public class DocUtil {
             book.setTags(ts);
             books.add(book);
         }
-        RandomSort.sort(books);
+        RandomSortUtil.sort(books);
         box.setBookList(books);
         return box;
 
@@ -384,7 +384,7 @@ public class DocUtil {
                 bookList.add(getBook(item));
             }
         }
-        RandomSort.sort(bookList);
+        RandomSortUtil.sort(bookList);
 
         DetailsBox box = new DetailsBox(mainBook, xi, mu, zi, bookList);
 

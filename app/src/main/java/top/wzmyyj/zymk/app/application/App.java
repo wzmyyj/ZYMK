@@ -1,7 +1,8 @@
 package top.wzmyyj.zymk.app.application;
 
 import top.wzmyyj.wzm_sdk.tools.L;
-import top.wzmyyj.zymk.common.utils.StatusBarUtil;
+import top.wzmyyj.zymk.base.application.BaseApplication;
+import top.wzmyyj.wzm_sdk.utils.StatusBarUtil;
 import top.wzmyyj.zymk.model.db.utils.DaoManager;
 
 /**

@@ -21,7 +21,7 @@ import com.bumptech.glide.request.transition.Transition;
 import jp.wasabeef.glide.transformations.BlurTransformation;
 import top.wzmyyj.zymk.R;
 import top.wzmyyj.zymk.app.utils.GlideApp;
-import top.wzmyyj.zymk.common.utils.MockUtil;
+import top.wzmyyj.wzm_sdk.utils.MockUtil;
 
 /**
  * Created by yyj on 2018/07/09. email: 2209011667@qq.com

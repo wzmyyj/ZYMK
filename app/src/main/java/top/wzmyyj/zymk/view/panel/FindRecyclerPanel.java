@@ -14,9 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import top.wzmyyj.zymk.R;
-import top.wzmyyj.zymk.common.utils.DensityUtil;
+import top.wzmyyj.wzm_sdk.utils.DensityUtil;
 import top.wzmyyj.zymk.contract.FindContract;
-import top.wzmyyj.zymk.view.panel.base.BaseRecyclerPanel;
+import top.wzmyyj.zymk.base.panel.BaseRecyclerPanel;
 
 
 /**

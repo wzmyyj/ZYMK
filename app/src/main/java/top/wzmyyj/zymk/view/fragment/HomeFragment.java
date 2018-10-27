@@ -18,10 +18,10 @@ import top.wzmyyj.zymk.app.bean.BoBean;
 import top.wzmyyj.zymk.app.bean.FavorBean;
 import top.wzmyyj.zymk.app.bean.ItemBean;
 import top.wzmyyj.zymk.app.event.FavorUnReadChangeEvent;
-import top.wzmyyj.zymk.common.utils.StatusBarUtil;
+import top.wzmyyj.wzm_sdk.utils.StatusBarUtil;
 import top.wzmyyj.zymk.contract.HomeContract;
 import top.wzmyyj.zymk.presenter.HomePresenter;
-import top.wzmyyj.zymk.view.fragment.base.BaseFragment;
+import top.wzmyyj.zymk.base.fragment.BaseFragment;
 import top.wzmyyj.zymk.view.panel.HomeFavorPanel;
 import top.wzmyyj.zymk.view.panel.HomeNestedScrollPanel;
 

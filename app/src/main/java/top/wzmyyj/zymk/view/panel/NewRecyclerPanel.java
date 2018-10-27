@@ -16,7 +16,7 @@ import top.wzmyyj.zymk.R;
 import top.wzmyyj.zymk.app.bean.BookBean;
 import top.wzmyyj.zymk.app.tools.G;
 import top.wzmyyj.zymk.contract.NewContract;
-import top.wzmyyj.zymk.view.panel.base.BaseRecyclerPanel;
+import top.wzmyyj.zymk.base.panel.BaseRecyclerPanel;
 
 
 /**

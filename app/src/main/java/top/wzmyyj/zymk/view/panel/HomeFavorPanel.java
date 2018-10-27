@@ -21,9 +21,9 @@ import top.wzmyyj.zymk.R;
 import top.wzmyyj.zymk.app.bean.BookBean;
 import top.wzmyyj.zymk.app.bean.FavorBean;
 import top.wzmyyj.zymk.app.tools.G;
-import top.wzmyyj.zymk.common.java.Vanessa;
+import top.wzmyyj.wzm_sdk.utils.TimeUtil;
 import top.wzmyyj.zymk.contract.HomeContract;
-import top.wzmyyj.zymk.view.panel.base.BasePanel;
+import top.wzmyyj.zymk.base.panel.BasePanel;
 
 
 /**
@@ -40,10 +40,17 @@ public class HomeFavorPanel extends BasePanel<HomeContract.IPresenter> {
         return R.layout.layout_home_favor;
     }
 
-    @OnClick({R.id.fl_home_favor, R.id.tv_home_know})
+    @OnClick(R.id.fl_home_favor)
     public void close() {
         view.setVisibility(View.GONE);
     }
+
+    @OnClick(R.id.tv_home_know)
+    public void know() {
+        view.setVisibility(View.GONE);
+        mPresenter.setAllFavorRead();
+    }
+
 
     @BindView(R.id.rv_home_favor)
     RecyclerView mRecyclerView;
@@ -73,7 +80,7 @@ public class HomeFavorPanel extends BasePanel<HomeContract.IPresenter> {
 
                 long update_time = bookBean.getUpdate_time();
                 // 最新更新是否三天内。
-                if (Vanessa.isInDay(update_time, 3)) {
+                if (TimeUtil.isInDay(update_time, 3)) {
                     tv_new.setVisibility(View.VISIBLE);
                 } else {
                     tv_new.setVisibility(View.GONE);

@@ -33,7 +33,7 @@ import top.wzmyyj.zymk.app.bean.BookBean;
 import top.wzmyyj.zymk.app.bean.SearchHistoryBean;
 import top.wzmyyj.zymk.contract.SearchContract;
 import top.wzmyyj.zymk.presenter.SearchPresenter;
-import top.wzmyyj.zymk.view.activity.base.BaseActivity;
+import top.wzmyyj.zymk.base.activity.BaseActivity;
 
 
 /**

@@ -1,17 +1,19 @@
-package top.wzmyyj.zymk.view.activity.base;
+package top.wzmyyj.zymk.base.activity;
 
 import android.os.Bundle;
 
+import butterknife.ButterKnife;
+import top.wzmyyj.wzm_sdk.activity.PanelActivity;
 import top.wzmyyj.wzm_sdk.tools.T;
-import top.wzmyyj.zymk.common.utils.StatusBarUtil;
-import top.wzmyyj.zymk.contract.base.IBasePresenter;
-import top.wzmyyj.zymk.contract.base.IBaseView;
+import top.wzmyyj.wzm_sdk.utils.StatusBarUtil;
+import top.wzmyyj.zymk.base.contract.IBasePresenter;
+import top.wzmyyj.zymk.base.contract.IBaseView;
 
 /**
  * Created by yyj on 2018/06/28. email: 2209011667@qq.com
  */
 
-public abstract class BaseActivity<P extends IBasePresenter> extends BasePanelActivity implements IBaseView {
+public abstract class BaseActivity<P extends IBasePresenter> extends PanelActivity implements IBaseView {
 
     protected P mPresenter;
 
@@ -30,6 +32,24 @@ public abstract class BaseActivity<P extends IBasePresenter> extends BasePanelAc
         if (mPresenter == null) {
             throw new IllegalStateException("please init mPresenter in initPresenter() method ");
         }
+    }
+
+    protected abstract int getLayoutId();
+
+    @Override
+    protected void initView() {
+        setContentView(getLayoutId());
+        ButterKnife.bind(this);
+    }
+
+    @Override
+    protected void initData() {
+
+    }
+
+    @Override
+    protected void initListener() {
+
     }
 
     @Override

@@ -12,7 +12,7 @@ import top.wzmyyj.zymk.app.tools.I;
 import top.wzmyyj.zymk.contract.MoreContract;
 import top.wzmyyj.zymk.model.net.MoreModel;
 import top.wzmyyj.zymk.model.net.box.MoreBox;
-import top.wzmyyj.zymk.presenter.base.BasePresenter;
+import top.wzmyyj.zymk.base.presenter.BasePresenter;
 
 
 /**

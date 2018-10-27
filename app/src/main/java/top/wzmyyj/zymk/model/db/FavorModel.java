@@ -21,7 +21,7 @@ import retrofit2.Retrofit;
 import top.wzmyyj.zymk.app.bean.BookBean;
 import top.wzmyyj.zymk.app.bean.FavorBean;
 import top.wzmyyj.zymk.app.data.Urls;
-import top.wzmyyj.zymk.common.java.Vanessa;
+import top.wzmyyj.wzm_sdk.utils.TimeUtil;
 import top.wzmyyj.zymk.greendao.gen.FavorDbDao;
 import top.wzmyyj.zymk.model.db.dao.FavorDb;
 import top.wzmyyj.zymk.model.db.utils.DaoManager;
@@ -177,6 +177,34 @@ public class FavorModel {
     }
 
 
+    // 全部设为已读。
+    public void setALLRead(Observer<Boolean> observer) {
+        Observable.create(new ObservableOnSubscribe<Boolean>() {
+            @Override
+            public void subscribe(@NonNull ObservableEmitter<Boolean> observableEmitter) throws Exception {
+                try {
+                    List<FavorDb> list = mDao.loadAll();
+                    for (FavorDb dd : list) {
+                        dd.setIsUnRead(false);
+                        mDao.update(dd);
+                    }
+                    observableEmitter.onNext(true);
+                } catch (Exception e) {
+                    observableEmitter.onError(e);
+                    e.printStackTrace();
+                } finally {
+                    observableEmitter.onComplete();
+                }
+            }
+
+        })
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(observer);
+    }
+
+
     //更新数据。
 
     @SuppressLint("CheckResult")
@@ -206,7 +234,7 @@ public class FavorModel {
                     @Override
                     public FavorBean apply(ComicBox comicBox) throws Exception {
                         BookBean book = comicBox.getBook();
-                        FavorDb db = new FavorDb((long) book.getId(), book.getTitle(), Vanessa.getTime(),
+                        FavorDb db = new FavorDb((long) book.getId(), book.getTitle(), TimeUtil.getTime(),
                                 book.getChapter(), book.getChapter_id(), true);// 新添加的数据设为未读。
 
                         FavorDb dd = mDao.load((long) book.getId());

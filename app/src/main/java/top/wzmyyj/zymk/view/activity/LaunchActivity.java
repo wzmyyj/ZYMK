@@ -5,7 +5,7 @@ import android.os.Bundle;
 import top.wzmyyj.zymk.R;
 import top.wzmyyj.zymk.contract.LaunchContract;
 import top.wzmyyj.zymk.presenter.LaunchPresenter;
-import top.wzmyyj.zymk.view.activity.base.BaseActivity;
+import top.wzmyyj.zymk.base.activity.BaseActivity;
 
 
 /**

@@ -15,7 +15,7 @@ import io.reactivex.schedulers.Schedulers;
 import top.wzmyyj.zymk.app.bean.BookBean;
 import top.wzmyyj.zymk.app.bean.ChapterBean;
 import top.wzmyyj.zymk.app.bean.HistoryBean;
-import top.wzmyyj.zymk.common.java.Vanessa;
+import top.wzmyyj.wzm_sdk.utils.TimeUtil;
 import top.wzmyyj.zymk.greendao.gen.HistoryDbDao;
 import top.wzmyyj.zymk.model.db.dao.HistoryDb;
 import top.wzmyyj.zymk.model.db.utils.DaoManager;
@@ -87,7 +87,7 @@ public class HistoryModel {
                     HistoryDb dd = mDao.load((long) book.getId());
                     // 有的话，更新数据后返回。
                     if (dd != null) {
-                        dd.setHistory_read_time(Vanessa.getTime());
+                        dd.setHistory_read_time(TimeUtil.getTime());
                         dd.setHistory_chapter_id(chapter.getChapter_id());
                         dd.setHistory_chapter_name(chapter.getChapter_name());
                         mDao.update(dd);
@@ -96,7 +96,7 @@ public class HistoryModel {
                     } else {
                         // 插入。
                         HistoryDb db = new HistoryDb((long) book.getId(), book.getTitle(), chapter.getChapter_id(),
-                                chapter.getChapter_name(), Vanessa.getTime());
+                                chapter.getChapter_name(), TimeUtil.getTime());
                         mDao.insert(db);
                         // 转化。
                         HistoryBean bean = db2bean(db);

@@ -18,7 +18,7 @@ import top.wzmyyj.zymk.model.db.FavorModel;
 import top.wzmyyj.zymk.model.db.HistoryModel;
 import top.wzmyyj.zymk.model.net.DetailsModel;
 import top.wzmyyj.zymk.model.net.box.DetailsBox;
-import top.wzmyyj.zymk.presenter.base.BasePresenter;
+import top.wzmyyj.zymk.base.presenter.BasePresenter;
 
 
 /**

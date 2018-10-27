@@ -3,7 +3,7 @@ package top.wzmyyj.zymk.view.activity;
 import java.util.List;
 
 import top.wzmyyj.zymk.R;
-import top.wzmyyj.zymk.view.activity.base.BaseMainActivity;
+import top.wzmyyj.zymk.base.activity.BaseMainActivity;
 import top.wzmyyj.zymk.view.fragment.HomeFragment;
 import top.wzmyyj.zymk.view.fragment.MineFragment;
 import top.wzmyyj.zymk.view.fragment.FindFragment;

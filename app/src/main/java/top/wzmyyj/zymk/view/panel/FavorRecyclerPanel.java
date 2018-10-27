@@ -18,7 +18,7 @@ import top.wzmyyj.zymk.R;
 import top.wzmyyj.zymk.app.bean.BookBean;
 import top.wzmyyj.zymk.app.bean.FavorBean;
 import top.wzmyyj.zymk.app.tools.G;
-import top.wzmyyj.zymk.common.java.Vanessa;
+import top.wzmyyj.wzm_sdk.utils.TimeUtil;
 import top.wzmyyj.zymk.contract.FindContract;
 
 
@@ -57,7 +57,7 @@ public class FavorRecyclerPanel extends FindRecyclerPanel<FavorBean> {
 
                 long update_time = bookBean.getUpdate_time();
                 // 最新更新是否一周内。
-                if (Vanessa.isInDay(update_time, 7)) {
+                if (TimeUtil.isInDay(update_time, 7)) {
                     tv_new.setVisibility(View.VISIBLE);
                 } else {
                     tv_new.setVisibility(View.GONE);
@@ -105,7 +105,7 @@ public class FavorRecyclerPanel extends FindRecyclerPanel<FavorBean> {
 
                 long update_time = bookBean.getUpdate_time();
                 // 最新更新是否三天内。
-                if (Vanessa.isInDay(update_time, 3)) {
+                if (TimeUtil.isInDay(update_time, 3)) {
                     tv_new.setVisibility(View.VISIBLE);
                 } else {
                     tv_new.setVisibility(View.GONE);

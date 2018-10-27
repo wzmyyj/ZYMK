@@ -20,7 +20,7 @@ import top.wzmyyj.zymk.app.bean.BookBean;
 import top.wzmyyj.zymk.app.bean.ChapterBean;
 import top.wzmyyj.zymk.app.bean.HistoryBean;
 import top.wzmyyj.zymk.app.tools.G;
-import top.wzmyyj.zymk.common.java.Vanessa;
+import top.wzmyyj.wzm_sdk.utils.TimeUtil;
 import top.wzmyyj.zymk.contract.FindContract;
 
 
@@ -62,7 +62,7 @@ public class HistoryRecyclerPanel extends FindRecyclerPanel<HistoryBean> {
 
                 // 上次阅读时间。
                 TextView tv_read_time = holder.getView(R.id.tv_read_time);
-                tv_read_time.setText(Vanessa.getEasyText(historyBean.getRead_time()));
+                tv_read_time.setText(TimeUtil.getEasyText(historyBean.getRead_time()));
 
 
                 LinearLayout ll_continue_read = holder.getView(R.id.ll_continue_read);
@@ -115,7 +115,7 @@ public class HistoryRecyclerPanel extends FindRecyclerPanel<HistoryBean> {
                 tv_title.setText(bookBean.getTitle());
 
 
-                tv_some.setText(Vanessa.getEasyText(historyBean.getRead_time()));
+                tv_some.setText(TimeUtil.getEasyText(historyBean.getRead_time()));
 
                 G.img(context, bookBean.getData_src(), img_book);
 

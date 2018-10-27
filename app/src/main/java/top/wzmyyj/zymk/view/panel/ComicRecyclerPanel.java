@@ -36,11 +36,11 @@ import top.wzmyyj.zymk.app.bean.ChapterBean;
 import top.wzmyyj.zymk.app.bean.ComicBean;
 import top.wzmyyj.wzm_sdk.tools.A;
 import top.wzmyyj.zymk.app.tools.G;
-import top.wzmyyj.zymk.common.utils.DensityUtil;
-import top.wzmyyj.zymk.common.utils.MockUtil;
+import top.wzmyyj.wzm_sdk.utils.DensityUtil;
+import top.wzmyyj.wzm_sdk.utils.MockUtil;
 import top.wzmyyj.zymk.contract.ComicContract;
-import top.wzmyyj.zymk.view.panel.base.BasePanel;
-import top.wzmyyj.zymk.view.panel.base.BaseRecyclerPanel;
+import top.wzmyyj.zymk.base.panel.BasePanel;
+import top.wzmyyj.zymk.base.panel.BaseRecyclerPanel;
 
 
 /**

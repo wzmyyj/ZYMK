@@ -14,7 +14,7 @@ import top.wzmyyj.zymk.contract.SearchContract;
 import top.wzmyyj.zymk.model.db.SearchHistoryModel;
 import top.wzmyyj.zymk.model.net.SearchModel;
 import top.wzmyyj.zymk.model.net.box.SearchBox;
-import top.wzmyyj.zymk.presenter.base.BasePresenter;
+import top.wzmyyj.zymk.base.presenter.BasePresenter;
 
 /**
  * Created by yyj on 2018/07/30. email: 2209011667@qq.com

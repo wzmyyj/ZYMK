@@ -13,7 +13,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.schedulers.Schedulers;
 import top.wzmyyj.zymk.app.bean.SearchHistoryBean;
-import top.wzmyyj.zymk.common.java.Vanessa;
+import top.wzmyyj.wzm_sdk.utils.TimeUtil;
 import top.wzmyyj.zymk.greendao.gen.SearchHistoryDbDao;
 import top.wzmyyj.zymk.model.db.dao.SearchHistoryDb;
 import top.wzmyyj.zymk.model.db.utils.DaoManager;
@@ -83,7 +83,7 @@ public class SearchHistoryModel {
                         mDao.delete(dd);
                     }
                     // 插入。
-                    SearchHistoryDb db = new SearchHistoryDb(null, word, Vanessa.getTime());
+                    SearchHistoryDb db = new SearchHistoryDb(null, word, TimeUtil.getTime());
                     long insert = mDao.insert(db);
                     db.setId(insert);
                     // 转化。

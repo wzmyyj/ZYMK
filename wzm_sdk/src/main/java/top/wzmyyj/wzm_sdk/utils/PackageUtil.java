@@ -1,4 +1,4 @@
-package top.wzmyyj.zymk.common.utils;
+package top.wzmyyj.wzm_sdk.utils;
 
 import android.content.Context;
 import android.content.pm.PackageInfo;

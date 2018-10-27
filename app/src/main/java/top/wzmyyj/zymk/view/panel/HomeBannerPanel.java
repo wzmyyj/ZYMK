@@ -9,7 +9,7 @@ import java.util.List;
 
 import top.wzmyyj.zymk.app.bean.BoBean;
 import top.wzmyyj.zymk.contract.HomeContract;
-import top.wzmyyj.zymk.view.panel.base.BaseBannerPanel;
+import top.wzmyyj.zymk.base.panel.BaseBannerPanel;
 
 
 /**

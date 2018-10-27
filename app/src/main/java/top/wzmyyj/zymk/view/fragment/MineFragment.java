@@ -5,10 +5,10 @@ import android.view.View;
 import butterknife.BindView;
 import butterknife.OnClick;
 import top.wzmyyj.zymk.R;
-import top.wzmyyj.zymk.common.utils.StatusBarUtil;
+import top.wzmyyj.wzm_sdk.utils.StatusBarUtil;
 import top.wzmyyj.zymk.contract.MineContract;
 import top.wzmyyj.zymk.presenter.MinePresenter;
-import top.wzmyyj.zymk.view.fragment.base.BaseFragment;
+import top.wzmyyj.zymk.base.fragment.BaseFragment;
 
 /**
  * Created by yyj on 2018/06/29. email: 2209011667@qq.com

@@ -11,10 +11,10 @@ import java.util.List;
 import butterknife.BindView;
 import top.wzmyyj.zymk.R;
 import top.wzmyyj.zymk.app.bean.BookBean;
-import top.wzmyyj.zymk.common.utils.StatusBarUtil;
+import top.wzmyyj.wzm_sdk.utils.StatusBarUtil;
 import top.wzmyyj.zymk.contract.MoreContract;
 import top.wzmyyj.zymk.presenter.MorePresenter;
-import top.wzmyyj.zymk.view.activity.base.BaseActivity;
+import top.wzmyyj.zymk.base.activity.BaseActivity;
 import top.wzmyyj.zymk.view.panel.MoreRecyclerPanel;
 
 public class MoreActivity extends BaseActivity<MoreContract.IPresenter> implements MoreContract.IView {

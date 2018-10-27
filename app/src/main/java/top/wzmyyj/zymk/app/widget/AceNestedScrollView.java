@@ -17,8 +17,8 @@ import java.lang.reflect.Field;
 
 import top.wzmyyj.wzm_sdk.widget.FixedSpeedScroller;
 import top.wzmyyj.zymk.R;
-import top.wzmyyj.zymk.common.utils.DensityUtil;
-import top.wzmyyj.zymk.common.utils.StatusBarUtil;
+import top.wzmyyj.wzm_sdk.utils.DensityUtil;
+import top.wzmyyj.wzm_sdk.utils.StatusBarUtil;
 
 
 /**

@@ -1,17 +1,19 @@
-package top.wzmyyj.zymk.view.fragment.base;
+package top.wzmyyj.zymk.base.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
 
+import butterknife.ButterKnife;
+import top.wzmyyj.wzm_sdk.fragment.PanelFragment;
 import top.wzmyyj.wzm_sdk.tools.T;
-import top.wzmyyj.zymk.contract.base.IBasePresenter;
-import top.wzmyyj.zymk.contract.base.IBaseView;
+import top.wzmyyj.zymk.base.contract.IBasePresenter;
+import top.wzmyyj.zymk.base.contract.IBaseView;
 
 /**
  * Created by yyj on 2018/06/28. email: 2209011667@qq.com
  */
 
-public abstract class BaseFragment<P extends IBasePresenter> extends BasePanelFragment implements IBaseView {
+public abstract class BaseFragment<P extends IBasePresenter> extends PanelFragment implements IBaseView {
     protected P mPresenter;
 
     @Override
@@ -28,6 +30,24 @@ public abstract class BaseFragment<P extends IBasePresenter> extends BasePanelFr
         if (mPresenter == null) {
             throw new IllegalStateException("please init mPresenter in initPresenter() method ");
         }
+    }
+
+    protected abstract int getLayoutId();
+
+    @Override
+    protected void initView() {
+        mVRoot = mInflater.inflate(getLayoutId(), null);
+        ButterKnife.bind(this, mVRoot);
+    }
+
+    @Override
+    protected void initData() {
+
+    }
+
+    @Override
+    protected void initListener() {
+
     }
 
     @Override

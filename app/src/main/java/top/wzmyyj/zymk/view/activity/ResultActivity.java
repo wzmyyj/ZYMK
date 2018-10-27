@@ -11,7 +11,7 @@ import top.wzmyyj.zymk.R;
 import top.wzmyyj.zymk.app.bean.BookBean;
 import top.wzmyyj.zymk.contract.ResultContract;
 import top.wzmyyj.zymk.presenter.ResultPresenter;
-import top.wzmyyj.zymk.view.activity.base.BaseActivity;
+import top.wzmyyj.zymk.base.activity.BaseActivity;
 import top.wzmyyj.zymk.view.panel.ResultRecyclerPanel;
 
 public class ResultActivity extends BaseActivity<ResultContract.IPresenter> implements ResultContract.IView {

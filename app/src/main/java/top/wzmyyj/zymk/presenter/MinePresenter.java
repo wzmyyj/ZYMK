@@ -5,7 +5,7 @@ import android.app.Activity;
 import top.wzmyyj.zymk.app.data.Urls;
 import top.wzmyyj.zymk.app.tools.I;
 import top.wzmyyj.zymk.contract.MineContract;
-import top.wzmyyj.zymk.presenter.base.BasePresenter;
+import top.wzmyyj.zymk.base.presenter.BasePresenter;
 
 /**
  * Created by yyj on 2018/07/06. email: 2209011667@qq.com

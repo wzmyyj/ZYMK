@@ -15,9 +15,9 @@ import top.wzmyyj.zymk.app.data.Urls;
 import top.wzmyyj.zymk.app.tools.I;
 import top.wzmyyj.wzm_sdk.tools.P;
 import top.wzmyyj.zymk.app.utils.GlideCacheUtil;
-import top.wzmyyj.zymk.common.utils.PackageUtil;
+import top.wzmyyj.wzm_sdk.utils.PackageUtil;
 import top.wzmyyj.zymk.contract.SettingContract;
-import top.wzmyyj.zymk.presenter.base.BasePresenter;
+import top.wzmyyj.zymk.base.presenter.BasePresenter;
 
 
 /**

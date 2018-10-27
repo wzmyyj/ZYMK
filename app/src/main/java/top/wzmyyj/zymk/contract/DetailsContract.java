@@ -7,8 +7,8 @@ import top.wzmyyj.zymk.app.bean.ChapterBean;
 import top.wzmyyj.zymk.app.bean.MuBean;
 import top.wzmyyj.zymk.app.bean.XiBean;
 import top.wzmyyj.zymk.app.bean.ZiBean;
-import top.wzmyyj.zymk.contract.base.IBasePresenter;
-import top.wzmyyj.zymk.contract.base.IBaseView;
+import top.wzmyyj.zymk.base.contract.IBasePresenter;
+import top.wzmyyj.zymk.base.contract.IBaseView;
 
 /**
  * Created by yyj on 2018/09/10. email: 2209011667@qq.com

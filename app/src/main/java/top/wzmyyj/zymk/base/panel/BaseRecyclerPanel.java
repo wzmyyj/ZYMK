@@ -1,9 +1,9 @@
-package top.wzmyyj.zymk.view.panel.base;
+package top.wzmyyj.zymk.base.panel;
 
 import android.content.Context;
 
 import top.wzmyyj.wzm_sdk.panel.RecyclerPanel;
-import top.wzmyyj.zymk.contract.base.IBasePresenter;
+import top.wzmyyj.zymk.base.contract.IBasePresenter;
 
 
 /**

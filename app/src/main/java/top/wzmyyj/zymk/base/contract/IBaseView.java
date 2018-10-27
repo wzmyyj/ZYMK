@@ -1,4 +1,4 @@
-package top.wzmyyj.zymk.contract.base;
+package top.wzmyyj.zymk.base.contract;
 
 /**
  * Created by yyj on 2018/06/28. email: 2209011667@qq.com

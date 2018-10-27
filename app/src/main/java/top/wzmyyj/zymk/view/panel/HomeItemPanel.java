@@ -20,7 +20,7 @@ import top.wzmyyj.zymk.app.bean.BookBean;
 import top.wzmyyj.zymk.app.bean.ItemBean;
 import top.wzmyyj.zymk.contract.HomeContract;
 import top.wzmyyj.zymk.view.adapter.BookAdapter;
-import top.wzmyyj.zymk.view.panel.base.BasePanel;
+import top.wzmyyj.zymk.base.panel.BasePanel;
 
 
 /**

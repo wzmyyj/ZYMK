@@ -15,7 +15,7 @@ import top.wzmyyj.zymk.R;
 import top.wzmyyj.zymk.app.bean.BookBean;
 import top.wzmyyj.zymk.contract.RankContract;
 import top.wzmyyj.zymk.presenter.RankPresenter;
-import top.wzmyyj.zymk.view.activity.base.BaseActivity;
+import top.wzmyyj.zymk.base.activity.BaseActivity;
 import top.wzmyyj.zymk.view.panel.RankRecyclerPanel;
 
 

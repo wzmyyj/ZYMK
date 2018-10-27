@@ -1,10 +1,10 @@
-package top.wzmyyj.zymk.view.panel.base;
+package top.wzmyyj.zymk.base.panel;
 
 import android.content.Context;
 
 import butterknife.ButterKnife;
 import top.wzmyyj.wzm_sdk.panel.NestedScrollPanel;
-import top.wzmyyj.zymk.contract.base.IBasePresenter;
+import top.wzmyyj.zymk.base.contract.IBasePresenter;
 
 
 /**

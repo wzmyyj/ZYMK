@@ -7,7 +7,7 @@ import butterknife.OnClick;
 import top.wzmyyj.zymk.R;
 import top.wzmyyj.zymk.contract.SettingContract;
 import top.wzmyyj.zymk.presenter.SettingPresenter;
-import top.wzmyyj.zymk.view.activity.base.BaseActivity;
+import top.wzmyyj.zymk.base.activity.BaseActivity;
 
 
 /**

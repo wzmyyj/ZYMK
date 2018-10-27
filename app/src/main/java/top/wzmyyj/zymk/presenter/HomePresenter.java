@@ -15,7 +15,7 @@ import top.wzmyyj.zymk.contract.HomeContract;
 import top.wzmyyj.zymk.model.db.FavorModel;
 import top.wzmyyj.zymk.model.net.MainModel;
 import top.wzmyyj.zymk.model.net.box.HomeBox;
-import top.wzmyyj.zymk.presenter.base.BasePresenter;
+import top.wzmyyj.zymk.base.presenter.BasePresenter;
 
 /**
  * Created by yyj on 2018/06/29. email: 2209011667@qq.com
@@ -91,6 +91,7 @@ public class HomePresenter extends BasePresenter<HomeContract.IView> implements 
         });
     }
 
+    // 只访问数据库。
     @Override
     public void loadFavor() {
         favorModel.loadAll(new Observer<List<FavorBean>>() {
@@ -120,6 +121,31 @@ public class HomePresenter extends BasePresenter<HomeContract.IView> implements 
                 if (is) {
                     mView.showFavor(favorList);
                 }
+            }
+        });
+    }
+
+    @Override
+    public void setAllFavorRead() {
+        favorModel.setALLRead(new Observer<Boolean>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+                favorList.clear();
+            }
+
+            @Override
+            public void onNext(Boolean b) {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                mView.showToast("Error:" + e.getMessage());
+            }
+
+            @Override
+            public void onComplete() {
+                favorList.clear();
             }
         });
     }

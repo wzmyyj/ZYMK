@@ -5,7 +5,7 @@ import android.os.Handler;
 
 import top.wzmyyj.zymk.app.tools.I;
 import top.wzmyyj.zymk.contract.LaunchContract;
-import top.wzmyyj.zymk.presenter.base.BasePresenter;
+import top.wzmyyj.zymk.base.presenter.BasePresenter;
 
 /**
  * Created by yyj on 2018/06/29. email: 2209011667@qq.com

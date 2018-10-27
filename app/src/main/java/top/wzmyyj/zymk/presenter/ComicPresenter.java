@@ -21,7 +21,7 @@ import top.wzmyyj.zymk.contract.ComicContract;
 import top.wzmyyj.zymk.model.db.HistoryModel;
 import top.wzmyyj.zymk.model.net.ComicModel;
 import top.wzmyyj.zymk.model.net.box.ComicBox;
-import top.wzmyyj.zymk.presenter.base.BasePresenter;
+import top.wzmyyj.zymk.base.presenter.BasePresenter;
 
 
 /**

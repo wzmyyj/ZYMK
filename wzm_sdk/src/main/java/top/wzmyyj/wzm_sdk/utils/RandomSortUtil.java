@@ -1,4 +1,4 @@
-package top.wzmyyj.zymk.common.java;
+package top.wzmyyj.wzm_sdk.utils;
 
 import java.util.List;
 import java.util.Random;
@@ -6,9 +6,10 @@ import java.util.Random;
 
 /**
  * Created by wzm on 2018/5/4 0004.
+ * 随机排序。
  */
 
-public class RandomSort {
+public class RandomSortUtil {
 
     public static void sort(int[] arr) {
         for (int i = 1; i < arr.length; i++) {

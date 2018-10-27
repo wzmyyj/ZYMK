@@ -12,7 +12,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import top.wzmyyj.zymk.R;
 import top.wzmyyj.zymk.contract.ComicContract;
-import top.wzmyyj.zymk.view.panel.base.BasePanel;
+import top.wzmyyj.zymk.base.panel.BasePanel;
 
 
 /**

@@ -26,7 +26,7 @@ import top.wzmyyj.zymk.app.bean.XiBean;
 import top.wzmyyj.zymk.app.tools.G;
 import top.wzmyyj.zymk.contract.DetailsContract;
 import top.wzmyyj.zymk.view.adapter.BookAdapter;
-import top.wzmyyj.zymk.view.panel.base.BasePanel;
+import top.wzmyyj.zymk.base.panel.BasePanel;
 
 /**
  * Created by yyj on 2018/07/19. email: 2209011667@qq.com

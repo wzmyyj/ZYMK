@@ -13,10 +13,10 @@ import top.wzmyyj.wzm_sdk.adapter.ViewTitlePagerAdapter;
 import top.wzmyyj.wzm_sdk.panel.Panel;
 import top.wzmyyj.zymk.R;
 import top.wzmyyj.zymk.app.bean.TypeBean;
-import top.wzmyyj.zymk.common.utils.StatusBarUtil;
+import top.wzmyyj.wzm_sdk.utils.StatusBarUtil;
 import top.wzmyyj.zymk.contract.TypeContract;
 import top.wzmyyj.zymk.presenter.TypePresenter;
-import top.wzmyyj.zymk.view.fragment.base.BaseFragment;
+import top.wzmyyj.zymk.base.fragment.BaseFragment;
 import top.wzmyyj.zymk.view.panel.TypeRecyclerPanel;
 
 /**

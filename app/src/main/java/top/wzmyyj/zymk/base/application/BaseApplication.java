@@ -1,4 +1,4 @@
-package top.wzmyyj.zymk.app.application;
+package top.wzmyyj.zymk.base.application;
 
 import top.wzmyyj.wzm_sdk.application.WZM_Application;
 

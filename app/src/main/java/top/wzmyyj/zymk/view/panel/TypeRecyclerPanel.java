@@ -16,7 +16,7 @@ import top.wzmyyj.zymk.R;
 import top.wzmyyj.zymk.app.bean.TypeBean;
 import top.wzmyyj.zymk.app.tools.G;
 import top.wzmyyj.zymk.contract.TypeContract;
-import top.wzmyyj.zymk.view.panel.base.BaseRecyclerPanel;
+import top.wzmyyj.zymk.base.panel.BaseRecyclerPanel;
 
 /**
  * Created by yyj on 2018/07/06. email: 2209011667@qq.com
