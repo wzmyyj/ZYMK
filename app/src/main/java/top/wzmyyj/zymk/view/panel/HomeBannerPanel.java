@@ -1,15 +1,18 @@
 package top.wzmyyj.zymk.view.panel;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 
 import com.youth.banner.listener.OnBannerListener;
+import com.youth.banner.loader.ImageLoader;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import top.wzmyyj.zymk.app.bean.BoBean;
-import top.wzmyyj.zymk.contract.HomeContract;
+import top.wzmyyj.zymk.app.utils.GlideImageLoader;
 import top.wzmyyj.zymk.base.panel.BaseBannerPanel;
+import top.wzmyyj.zymk.contract.HomeContract;
 
 
 /**
@@ -20,6 +23,12 @@ public class HomeBannerPanel extends BaseBannerPanel<HomeContract.IPresenter> {
 
     public HomeBannerPanel(Context context, HomeContract.IPresenter homePresenter) {
         super(context, homePresenter);
+    }
+
+    @NonNull
+    @Override
+    protected ImageLoader getImageLoader() {
+        return new GlideImageLoader();
     }
 
 
