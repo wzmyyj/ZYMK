@@ -1,14 +1,15 @@
 package top.wzmyyj.zymk.view.fragment;
 
 import android.view.View;
+import android.widget.FrameLayout;
 
 import butterknife.BindView;
-import butterknife.OnClick;
-import top.wzmyyj.zymk.R;
 import top.wzmyyj.wzm_sdk.utils.StatusBarUtil;
+import top.wzmyyj.zymk.R;
+import top.wzmyyj.zymk.base.fragment.BaseFragment;
 import top.wzmyyj.zymk.contract.MineContract;
 import top.wzmyyj.zymk.presenter.MinePresenter;
-import top.wzmyyj.zymk.base.fragment.BaseFragment;
+import top.wzmyyj.zymk.view.panel.MineNestedScrollPanel;
 
 /**
  * Created by yyj on 2018/06/29. email: 2209011667@qq.com
@@ -27,36 +28,14 @@ public class MineFragment extends BaseFragment<MineContract.IPresenter> implemen
         return R.layout.fragment_4;
     }
 
-    @OnClick(R.id.img_me)
-    public void about() {
-        mPresenter.goAboutMe();
+    @Override
+    protected void initPanels() {
+        super.initPanels();
+        addPanels(new MineNestedScrollPanel(context,mPresenter));
     }
 
-    @OnClick(R.id.ll_info)
-    public void goGitHub() {
-        mPresenter.goGitHubWeb();
-    }
-
-    @OnClick(R.id.ll_1)
-    public void goWeb1() {
-        mPresenter.goHomeWeb();
-    }
-
-    @OnClick(R.id.ll_2)
-    public void goWeb2() {
-        mPresenter.goHotWeb();
-    }
-
-    @OnClick(R.id.ll_3)
-    public void goWeb3() {
-        mPresenter.goTmallWeb();
-    }
-
-    @OnClick(R.id.ll_4)
-    public void goSetting() {
-        mPresenter.goSetting();
-    }
-
+    @BindView(R.id.fl_panel)
+    FrameLayout fl_panel;
 
     @BindView(R.id.v_top)
     View v;
@@ -65,5 +44,6 @@ public class MineFragment extends BaseFragment<MineContract.IPresenter> implemen
     protected void initView() {
         super.initView();
         StatusBarUtil.fitsStatusBarView(v);
+        fl_panel.addView(getPanelView(0));
     }
 }
