@@ -8,6 +8,7 @@ mvp+rxjava+retrofit+okhttp+greendao+glide+gson+jsoup+eventbus+butterknife
 
 个人页：[http://wzmyyj.top/2018/08/22/android_3/](http://wzmyyj.top/2018/08/22/android_3/)
 
+
 APk百度云下载：
 
 链接：[https://pan.baidu.com/s/1Gp5vcoUx7NEr8n17nM8wwg](https://pan.baidu.com/s/1Gp5vcoUx7NEr8n17nM8wwg) 密码：b6zq
@@ -70,5 +71,5 @@ APk百度云下载：
 
 #### 免责声明：
 
-本程序所有资源全部来源于网络爬虫,且规避了付费的漫画，所有的漫画在网络可以免费阅读的。本程序仅供学习参考使用，严禁任何商业用途。欢迎各位进行技术讨论和交流。如果侵犯到任何人的利益，可以联系作者QQ：2018987032。进行协商，进行漫画的下架。
+本程序所有资源全部来源于网络爬虫,且规避了付费的漫画，所有的漫画在网络可以免费阅读的。本程序仅供学习参考使用，严禁任何商业用途。欢迎各位进行技术讨论和交流。如果侵犯到任何人的利益，可以联系作者QQ：2018987032/2209011667。进行协商，进行漫画的下架。
 
