@@ -55,8 +55,8 @@ public class NewActivity extends BaseActivity<NewContract.IPresenter> implements
 
 
     @Override
-    protected void initData() {
-        super.initData();
+    protected void initView() {
+        super.initView();
         List<View> viewList = new ArrayList<>();
         List<String> titles = new ArrayList<>();
         for (Panel p : mPanelManager.getPanelList()) {
@@ -66,6 +66,11 @@ public class NewActivity extends BaseActivity<NewContract.IPresenter> implements
         ViewTitlePagerAdapter pagerAdapter = new ViewTitlePagerAdapter(viewList, titles);
         mViewPager.setAdapter(pagerAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
+    }
+
+    @Override
+    protected void initData() {
+        super.initData();
         mPresenter.loadData();
     }
 

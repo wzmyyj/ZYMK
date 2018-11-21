@@ -77,9 +77,7 @@ public class NewRecyclerPanel extends BaseRecyclerPanel<BookBean, NewContract.IP
     public void setNewData(List<BookBean> books) {
         if (books == null) return;
         mData.clear();
-        for (BookBean item : books) {
-            mData.add(item);
-        }
+        mData.addAll(books);
         notifyDataSetChanged();
     }
 

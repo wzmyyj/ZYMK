@@ -23,7 +23,7 @@ public class ResultActivity extends BaseActivity<ResultContract.IPresenter> impl
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_ty;
+        return R.layout.activity_result;
     }
 
     private ResultRecyclerPanel tyRecyclerPanel;

@@ -14,7 +14,7 @@ import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
 
 public abstract class InitActivity extends SwipeBackActivity {
 
-    private SwipeBackLayout mSwipeBackLayout;
+    protected SwipeBackLayout mSwipeBackLayout;
     protected Context context;
     protected Activity activity;
 
@@ -27,7 +27,7 @@ public abstract class InitActivity extends SwipeBackActivity {
         mSwipeBackLayout = getSwipeBackLayout();
         //设置滑动方向，可设置EDGE_LEFT, EDGE_RIGHT, EDGE_ALL, EDGE_BOTTOM
         mSwipeBackLayout.setEdgeTrackingEnabled(SwipeBackLayout.EDGE_LEFT);
-        mSwipeBackLayout.setEdgeSize(150);
+        mSwipeBackLayout.setEdgeSize(100);
         initSome(savedInstanceState);
         initView();
         initData();
