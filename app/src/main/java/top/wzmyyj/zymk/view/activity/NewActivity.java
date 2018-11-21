@@ -3,19 +3,19 @@ package top.wzmyyj.zymk.view.activity;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.view.View;
-import android.widget.ImageView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import top.wzmyyj.wzm_sdk.adapter.ViewTitlePagerAdapter;
 import top.wzmyyj.wzm_sdk.panel.Panel;
 import top.wzmyyj.zymk.R;
 import top.wzmyyj.zymk.app.bean.BookBean;
+import top.wzmyyj.zymk.base.activity.BaseActivity;
 import top.wzmyyj.zymk.contract.NewContract;
 import top.wzmyyj.zymk.presenter.NewPresenter;
-import top.wzmyyj.zymk.base.activity.BaseActivity;
 import top.wzmyyj.zymk.view.panel.NewRecyclerPanel;
 
 
@@ -47,8 +47,11 @@ public class NewActivity extends BaseActivity<NewContract.IPresenter> implements
     TabLayout mTabLayout;
     @BindView(R.id.viewPager)
     ViewPager mViewPager;
-    @BindView(R.id.img_back)
-    ImageView img_back;
+
+    @OnClick(R.id.img_back)
+    void back() {
+        mPresenter.finish();
+    }
 
 
     @Override
@@ -64,17 +67,6 @@ public class NewActivity extends BaseActivity<NewContract.IPresenter> implements
         mViewPager.setAdapter(pagerAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
         mPresenter.loadData();
-    }
-
-    @Override
-    protected void initListener() {
-        super.initListener();
-        img_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mPresenter.finish();
-            }
-        });
     }
 
     @Override

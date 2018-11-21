@@ -64,7 +64,7 @@ public class DetailsMuPanel extends BasePanel<DetailsContract.IPresenter> {
         super.initView();
         rv_mu.setLayoutManager(new GridLayoutManager(context, 4));
         rv_mu.setNestedScrollingEnabled(false);
-        mAdapter = new HuaAdapter(context, R.layout.layout_mu_item, mData);
+        mAdapter = new HuaAdapter(context, mData);
         rv_mu.setAdapter(mAdapter);
 
 

@@ -21,8 +21,8 @@ import top.wzmyyj.zymk.app.tools.G;
 
 public class BookAdapter extends CommonAdapter<BookBean> {
 
-    public BookAdapter(Context context, int layoutId, final List<BookBean> datas) {
-        super(context, layoutId, datas);
+    public BookAdapter(Context context, final List<BookBean> datas) {
+        super(context, R.layout.layout_book, datas);
     }
 
     @Override

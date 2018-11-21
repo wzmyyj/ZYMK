@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -38,7 +39,47 @@ public class TimeUtil {
 
     public static long getTime() {
         Date d = new Date();
-        return d.getTime();
+        return getTime(d);
+    }
+
+    public static long getTime(Date date) {
+        return date.getTime();
+    }
+
+    public static int getWeek() {
+        Date d = new Date();
+        return getWeek(d);
+    }
+
+    public static int getWeek(Date date) {
+        Calendar c = Calendar.getInstance();
+        c.setTime(date);
+        int week = c.get(Calendar.DAY_OF_WEEK);
+        return week;
+    }
+
+    public static int getMonth() {
+        Date d = new Date();
+        return getMonth(d);
+    }
+
+    public static int getMonth(Date date) {
+        Calendar c = Calendar.getInstance();
+        c.setTime(date);
+        int month = c.get(Calendar.DAY_OF_MONTH);
+        return month;
+    }
+
+    public static int getYear() {
+        Date d = new Date();
+        return getYear(d);
+    }
+
+    public static int getYear(Date date) {
+        Calendar c = Calendar.getInstance();
+        c.setTime(date);
+        int year = c.get(Calendar.DAY_OF_YEAR);
+        return year;
     }
 
     @SuppressLint("SimpleDateFormat")

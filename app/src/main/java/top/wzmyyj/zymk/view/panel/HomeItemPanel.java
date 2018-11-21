@@ -63,7 +63,7 @@ public class HomeItemPanel extends BasePanel<HomeContract.IPresenter> {
         super.initView();
         rv_item.setNestedScrollingEnabled(false);
         rv_item.setLayoutManager(new LinearLayoutManager(context, LinearLayout.HORIZONTAL, false));
-        bookAdapter = new BookAdapter(context, R.layout.layout_book, data);
+        bookAdapter = new BookAdapter(context, data);
         rv_item.setAdapter(bookAdapter);
     }
 

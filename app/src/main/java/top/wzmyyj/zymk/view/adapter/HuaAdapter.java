@@ -20,8 +20,8 @@ import top.wzmyyj.zymk.app.bean.HuaBean;
 
 public class HuaAdapter extends CommonAdapter<HuaBean> {
 
-    public HuaAdapter(Context context, int layoutId, List<HuaBean> datas) {
-        super(context, layoutId, datas);
+    public HuaAdapter(Context context,List<HuaBean> datas) {
+        super(context,  R.layout.layout_mu_item, datas);
     }
 
     private long read = 0;

@@ -1,6 +1,7 @@
 package top.wzmyyj.zymk.base.presenter;
 
 import android.app.Activity;
+import android.content.Context;
 
 import top.wzmyyj.wzm_sdk.tools.L;
 import top.wzmyyj.zymk.base.contract.IBasePresenter;
@@ -18,9 +19,22 @@ public class BasePresenter<V extends IBaseView> implements IBasePresenter {
         this.mActivity = activity;
         this.mView = iv;
     }
-
+    @Override
+    public Context getContext() {
+        return mActivity;
+    }
     @Override
     public void onCreate() {
+    }
+
+    @Override
+    public void onReStart() {
+
+    }
+
+    @Override
+    public void onStart() {
+
     }
 
     @Override
@@ -29,6 +43,11 @@ public class BasePresenter<V extends IBaseView> implements IBasePresenter {
 
     @Override
     public void onPause() {
+
+    }
+
+    @Override
+    public void onStop() {
 
     }
 
@@ -47,4 +66,6 @@ public class BasePresenter<V extends IBaseView> implements IBasePresenter {
     public void log(String s) {
         L.d(s);
     }
+
+
 }

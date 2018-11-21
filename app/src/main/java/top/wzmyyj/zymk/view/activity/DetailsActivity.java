@@ -154,7 +154,7 @@ public class DetailsActivity extends BaseActivity<DetailsContract.IPresenter> im
 
         rv_books.setLayoutManager(new LinearLayoutManager(context, LinearLayout.HORIZONTAL, false));
         rv_books.setNestedScrollingEnabled(false);
-        bookAdapter = new BookAdapter(context, R.layout.layout_book, xgBooks);
+        bookAdapter = new BookAdapter(context, xgBooks);
         rv_books.setAdapter(bookAdapter);
 
 

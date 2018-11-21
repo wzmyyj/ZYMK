@@ -66,7 +66,7 @@ public class DetailsXiPanel extends BasePanel<DetailsContract.IPresenter> {
     protected void initView() {
         super.initView();
         rv_author_books.setLayoutManager(new LinearLayoutManager(context, LinearLayout.HORIZONTAL, false));
-        bookAdapter = new BookAdapter(context, R.layout.layout_book, authorBooks);
+        bookAdapter = new BookAdapter(context, authorBooks);
         rv_author_books.setAdapter(bookAdapter);
     }
 
