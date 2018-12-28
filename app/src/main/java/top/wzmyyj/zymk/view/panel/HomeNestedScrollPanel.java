@@ -65,17 +65,13 @@ public class HomeNestedScrollPanel extends BaseNestedScrollPanel<HomeContract.IP
     protected void initListener() {
         super.initListener();
         mNestedScrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
-            int mDistance = 0;
-            //            //当距离在[0,maxDistance]变化时，透明度在[0,255之间变化]
-            int maxDistance = DensityUtil.dp2px(context, 155) - StatusBarUtil.StatusBarHeight;
-
             @Override
             public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
                 if (viewList.size() == 0) return;
                 View top = viewList.get(0);
-
-                mDistance = scrollY;
-                float percent = mDistance * 1f / maxDistance;//百分比
+                //当距离在[0,maxDistance]变化时，透明度在[0,255之间变化]
+                int maxDistance = DensityUtil.dp2px(context, 155) - StatusBarUtil.StatusBarHeight;
+                float percent = scrollY * 1f / maxDistance;//百分比
                 top.setAlpha(percent);
             }
         });
