@@ -468,7 +468,7 @@ public class DocUtil {
                 .get(0);
 
         Element top1 = influence.getElementsByClass("rank-1st").get(0);
-        Element top2 = influence.getElementsByClass("rank-2st").get(0);
+        Element top2 = influence.getElementsByClass("rank-2st").get(0);// 2018-12-31
         Element top3 = influence.getElementsByClass("rank-3st").get(0);
 
         fs.add(getFans(top1));
