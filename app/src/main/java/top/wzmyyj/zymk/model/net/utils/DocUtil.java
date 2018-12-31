@@ -468,15 +468,15 @@ public class DocUtil {
                 .get(0);
 
         Element top1 = influence.getElementsByClass("rank-1st").get(0);
-        Element top2 = influence.getElementsByClass("rank-2nd").get(0);
-        Element top3 = influence.getElementsByClass("rank-3rd").get(0);
+        Element top2 = influence.getElementsByClass("rank-2st").get(0);
+        Element top3 = influence.getElementsByClass("rank-3st").get(0);
 
         fs.add(getFans(top1));
         fs.add(getFans(top2));
         fs.add(getFans(top3));
 
         Elements items = influence.getElementsByClass("item");
-        if (items != null || items.size() > 0) {
+        if (items != null && items.size() > 0) {
             for (Element item : items) {
                 fs.add(getFans2(item));
             }
