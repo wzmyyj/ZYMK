@@ -65,11 +65,6 @@ public class TypeFragment extends BaseFragment<TypeContract.IPresenter> implemen
     protected void initView() {
         super.initView();
         StatusBarUtil.fitsStatusBarView(v);
-    }
-
-    @Override
-    protected void initData() {
-        super.initData();
         List<View> viewList = new ArrayList<>();
         List<String> titles = new ArrayList<>();
         for (Panel p : mPanelManager.getPanelList()) {
@@ -79,6 +74,12 @@ public class TypeFragment extends BaseFragment<TypeContract.IPresenter> implemen
         ViewTitlePagerAdapter pagerAdapter = new ViewTitlePagerAdapter(viewList, titles);
         mViewPager.setAdapter(pagerAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
+
+    }
+
+    @Override
+    protected void initData() {
+        super.initData();
         mPresenter.loadData();
     }
 

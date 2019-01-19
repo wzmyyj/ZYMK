@@ -68,6 +68,12 @@ public class MoreActivity extends BaseActivity<MoreContract.IPresenter> implemen
     }
 
     @Override
+    protected void initData() {
+        super.initData();
+        mPresenter.loadData();
+    }
+
+    @Override
     protected void initListener() {
         super.initListener();
         img_back.setOnClickListener(new View.OnClickListener() {
@@ -78,11 +84,6 @@ public class MoreActivity extends BaseActivity<MoreContract.IPresenter> implemen
         });
     }
 
-    @Override
-    protected void initData() {
-        super.initData();
-        mPresenter.loadData();
-    }
 
     @Override
     public void showData(String content, String figure, List<BookBean> books) {

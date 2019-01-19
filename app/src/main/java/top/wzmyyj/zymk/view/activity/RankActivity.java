@@ -53,8 +53,8 @@ public class RankActivity extends BaseActivity<RankContract.IPresenter> implemen
 
 
     @Override
-    protected void initData() {
-        super.initData();
+    protected void initView() {
+        super.initView();
         List<View> viewList = new ArrayList<>();
         List<String> titles = new ArrayList<>();
         for (Panel p : mPanelManager.getPanelList()) {
@@ -64,6 +64,11 @@ public class RankActivity extends BaseActivity<RankContract.IPresenter> implemen
         ViewTitlePagerAdapter pagerAdapter = new ViewTitlePagerAdapter(viewList, titles);
         mViewPager.setAdapter(pagerAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
+    }
+
+    @Override
+    protected void initData() {
+        super.initData();
         mPresenter.loadData();
     }
 
@@ -80,9 +85,9 @@ public class RankActivity extends BaseActivity<RankContract.IPresenter> implemen
 
     @Override
     public void showData(List<BookBean>... bookList) {
-        ((RankRecyclerPanel)getPanel(0)).setRankData(bookList[0]);
-        ((RankRecyclerPanel)getPanel(1)).setRankData(bookList[1]);
-        ((RankRecyclerPanel)getPanel(2)).setRankData(bookList[2]);
+        ((RankRecyclerPanel) getPanel(0)).setRankData(bookList[0]);
+        ((RankRecyclerPanel) getPanel(1)).setRankData(bookList[1]);
+        ((RankRecyclerPanel) getPanel(2)).setRankData(bookList[2]);
     }
 
 
