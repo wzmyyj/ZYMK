@@ -46,7 +46,7 @@ public class Urls {
     // 天猫商城
     public static String ZYMK_Tmall = "https://zymk.m.tmall.com/";
     // 图片
-    public static String ZYMK_Comic = "http://mhpic.zymkcdn.com/comic/";
+    public static String ZYMK_Comic = "http://mhpic.xiaomingtaiji.net/comic/";//"http://mhpic.zymkcdn.com/comic/";
     // 封面
     public static String ZYMK_Image = "https://image.zymkcdn.com/file/cover/?.jpg-300x400.webp";
 
