@@ -62,6 +62,7 @@ public abstract class RecyclerPanel<T> extends InitPanel
         mEmptyLayout = view.findViewById(R.id.fl_empty);
         mRefreshLayout.setHeaderHeight(100);
         mRefreshLayout.setFooterHeight(100);
+        mRefreshLayout.setEnableLoadMore(false);
         mRefreshLayout.setPrimaryColorsId(R.color.colorRefresh, R.color.colorWhite);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
 

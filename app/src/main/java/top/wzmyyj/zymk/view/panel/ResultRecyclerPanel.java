@@ -70,6 +70,7 @@ public class ResultRecyclerPanel extends BaseRecyclerPanel<BookBean, ResultContr
     @Override
     protected void initView() {
         super.initView();
+        mRefreshLayout.setEnableLoadMore(true);
         mRecyclerView.setLayoutManager(new GridLayoutManager(context, 3));
     }
 

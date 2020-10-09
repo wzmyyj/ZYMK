@@ -40,6 +40,7 @@ public abstract class NestedScrollPanel extends InitPanel {
         mRefreshLayout = view.findViewById(R.id.refreshLayout);
         mRefreshLayout.setHeaderHeight(100);
         mRefreshLayout.setFooterHeight(100);
+        mRefreshLayout.setEnableLoadMore(false);
         mRefreshLayout.setPrimaryColorsId(R.color.colorRefresh, R.color.colorWhite);
         contentView = mInflater.inflate(getContentViewId(), null);
         mNestedScrollView.addView(contentView);
