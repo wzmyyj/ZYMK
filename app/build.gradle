@@ -22,6 +22,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
 
     greendao {
         schemaVersion 1  //版本
@@ -49,6 +53,8 @@ dependencies {
     implementation 'jp.wasabeef:glide-transformations:3.0.1'
 
     implementation 'com.squareup.okhttp3:okhttp:3.10.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.8.0'
+
 
     implementation 'com.google.code.gson:gson:2.7'
 

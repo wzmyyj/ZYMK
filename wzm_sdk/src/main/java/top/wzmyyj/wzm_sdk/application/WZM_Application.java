@@ -13,7 +13,7 @@ public class WZM_Application extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        L.setTAG("WZM");
+        L.init("WZM", true);
         T.init(this);
     }
 }
