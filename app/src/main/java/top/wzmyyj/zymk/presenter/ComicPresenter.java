@@ -1,6 +1,7 @@
 package top.wzmyyj.zymk.presenter;
 
 import android.app.Activity;
+import android.support.annotation.NonNull;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -30,8 +31,8 @@ import top.wzmyyj.zymk.base.presenter.BasePresenter;
 
 public class ComicPresenter extends BasePresenter<ComicContract.IView> implements ComicContract.IPresenter{
 
-    private ComicModel mModel;
-    private HistoryModel historyModel;
+    private final ComicModel mModel;
+    private final HistoryModel historyModel;
 
     public ComicPresenter(Activity activity, ComicContract.IView iv) {
         super(activity, iv);
@@ -50,12 +51,12 @@ public class ComicPresenter extends BasePresenter<ComicContract.IView> implement
         int id = mActivity.getIntent().getIntExtra("comic_id", 0);
         mModel.getComicInfo(id, new Observer<ComicBox>() {
             @Override
-            public void onSubscribe(Disposable d) {
+            public void onSubscribe(@NonNull Disposable d) {
 
             }
 
             @Override
-            public void onNext(ComicBox box) {
+            public void onNext(@NonNull ComicBox box) {
                 int status = box.getStatus();
                 if (status == 0) {
                     List<ChapterBean> chapterList = box.getChapterList();
@@ -70,7 +71,7 @@ public class ComicPresenter extends BasePresenter<ComicContract.IView> implement
             }
 
             @Override
-            public void onError(Throwable e) {
+            public void onError(@NonNull Throwable e) {
                 mView.showLoadFail(e.getMessage());
                 mView.showToast("Error:" + e.getMessage());
             }
@@ -129,12 +130,12 @@ public class ComicPresenter extends BasePresenter<ComicContract.IView> implement
     public void saveHistory(BookBean book, ChapterBean chapter) {
         historyModel.insert(book, chapter, new Observer<HistoryBean>() {
             @Override
-            public void onSubscribe(Disposable d) {
+            public void onSubscribe(@NonNull Disposable d) {
 
             }
 
             @Override
-            public void onNext(HistoryBean historyBean) {
+            public void onNext(@NonNull HistoryBean historyBean) {
                 if (historyBean == null) {
                     mView.showToast("保存失败！");
                     return;
@@ -143,7 +144,7 @@ public class ComicPresenter extends BasePresenter<ComicContract.IView> implement
             }
 
             @Override
-            public void onError(Throwable e) {
+            public void onError(@NonNull Throwable e) {
                 mView.showToast("Error:" + e.getMessage());
             }
 

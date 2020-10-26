@@ -1,6 +1,7 @@
 package top.wzmyyj.zymk.presenter;
 
 import android.app.Activity;
+import android.support.annotation.NonNull;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -26,9 +27,9 @@ import top.wzmyyj.zymk.base.presenter.BasePresenter;
  */
 
 public class DetailsPresenter extends BasePresenter<DetailsContract.IView> implements DetailsContract.IPresenter{
-    private DetailsModel mModel;
-    private FavorModel favorModel;
-    private HistoryModel historyModel;
+    private final DetailsModel mModel;
+    private final FavorModel favorModel;
+    private final HistoryModel historyModel;
 
     public DetailsPresenter(Activity activity, DetailsContract.IView iv) {
         super(activity, iv);
@@ -43,12 +44,12 @@ public class DetailsPresenter extends BasePresenter<DetailsContract.IView> imple
         String url = mActivity.getIntent().getStringExtra("href");
         mModel.getMoreData(url, new Observer<DetailsBox>() {
             @Override
-            public void onSubscribe(Disposable d) {
+            public void onSubscribe(@NonNull Disposable d) {
 
             }
 
             @Override
-            public void onNext(DetailsBox box) {
+            public void onNext(@NonNull DetailsBox box) {
                 mView.setBook(box.getBook());
                 mView.setXi(box.getXi());
                 mView.setMu(box.getMu());
@@ -59,7 +60,7 @@ public class DetailsPresenter extends BasePresenter<DetailsContract.IView> imple
             }
 
             @Override
-            public void onError(Throwable e) {
+            public void onError(@NonNull Throwable e) {
                 mView.showToast("Error:" + e.getMessage());
             }
 
@@ -97,18 +98,18 @@ public class DetailsPresenter extends BasePresenter<DetailsContract.IView> imple
     public void isFavor(long id) {
         favorModel.isFavor(id, new Observer<Boolean>() {
             @Override
-            public void onSubscribe(Disposable d) {
+            public void onSubscribe(@NonNull Disposable d) {
 
             }
 
             @Override
-            public void onNext(Boolean is) {
+            public void onNext(@NonNull Boolean is) {
                 mView.setIsFavor(is);
                 EventBus.getDefault().post(new FavorUnReadChangeEvent(true));
             }
 
             @Override
-            public void onError(Throwable e) {
+            public void onError(@NonNull Throwable e) {
                 mView.showToast("Error:" + e.getMessage());
             }
 
@@ -123,12 +124,12 @@ public class DetailsPresenter extends BasePresenter<DetailsContract.IView> imple
     public void addFavor(BookBean book) {
         favorModel.insert(book, new Observer<FavorBean>() {
             @Override
-            public void onSubscribe(Disposable d) {
+            public void onSubscribe(@NonNull Disposable d) {
 
             }
 
             @Override
-            public void onNext(FavorBean favorBean) {
+            public void onNext(@NonNull FavorBean favorBean) {
                 if (favorBean.getBook() != null) {
                     mView.setIsFavor(true);
                     mView.showToast("收藏成功！");
@@ -140,7 +141,7 @@ public class DetailsPresenter extends BasePresenter<DetailsContract.IView> imple
             }
 
             @Override
-            public void onError(Throwable e) {
+            public void onError(@NonNull Throwable e) {
                 mView.showToast("Error:" + e.getMessage());
             }
 
@@ -155,17 +156,17 @@ public class DetailsPresenter extends BasePresenter<DetailsContract.IView> imple
     public void getHistoryRead(long id) {
         historyModel.load(id, new Observer<HistoryBean>() {
             @Override
-            public void onSubscribe(Disposable d) {
+            public void onSubscribe(@NonNull Disposable d) {
 
             }
 
             @Override
-            public void onNext(HistoryBean historyBean) {
+            public void onNext(@NonNull HistoryBean historyBean) {
                 mView.setHistory(historyBean.getChapter());
             }
 
             @Override
-            public void onError(Throwable e) {
+            public void onError(@NonNull Throwable e) {
                 mView.showToast("Error:" + e.getMessage());
             }
 

@@ -80,7 +80,7 @@ public class DocUtil {
         String desc = slide.getElementsByClass("desc").text();
 
         if (!star.contains(".")) {
-            StringBuffer sb = new StringBuffer(star);
+            StringBuilder sb = new StringBuilder(star);
             sb.insert(1, ".");
             star = sb.toString();
         }
@@ -99,7 +99,7 @@ public class DocUtil {
     public static List<BoBean> transToBo(Element ele) {
         if (ele == null) return null;
         List<BoBean> data = new ArrayList<>();
-        Element top=ele.getElementsByClass("swiper-banner").get(0);
+        Element top = ele.getElementsByClass("swiper-banner").get(0);
         Elements elements = top.getElementsByClass("swiper-slide");
         for (Element element : elements) {
             String href = element.absUrl("href");
@@ -114,8 +114,7 @@ public class DocUtil {
     public static HomeBox transToHome(Element body) {
         List<ItemBean> items = transToItem(body);
         List<BoBean> bos = transToBo(body);
-        HomeBox box = new HomeBox(bos, items);
-        return box;
+        return new HomeBox(bos, items);
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////// type
@@ -162,8 +161,7 @@ public class DocUtil {
             }
         }
 
-        TypeBox box = new TypeBox(typeList1, typeList2, typeList3, typeList4);
-        return box;
+        return new TypeBox(typeList1, typeList2, typeList3, typeList4);
     }
 
     private static TypeBean getTypeItem(Element item) {
@@ -173,8 +171,7 @@ public class DocUtil {
         String data_src = item.getElementsByTag("img").get(0)
                 .absUrl("data-src");
 
-        TypeBean bean = new TypeBean(title, href, data_src);
-        return bean;
+        return new TypeBean(title, href, data_src);
 
     }
 
@@ -204,9 +201,7 @@ public class DocUtil {
         RandomSortUtil.sort(books1);
         RandomSortUtil.sort(books2);
 
-        NewBox box = new NewBox(books1, books2);
-
-        return box;
+        return new NewBox(books1, books2);
     }
 
 
@@ -233,9 +228,7 @@ public class DocUtil {
             bookList3.add(book);
         }
 
-        RankBox box = new RankBox(bookList1, bookList2, bookList3);
-
-        return box;
+        return new RankBox(bookList1, bookList2, bookList3);
     }
 
     private static BookBean getRankBook(Element element, String iftClass) {
@@ -386,9 +379,7 @@ public class DocUtil {
         }
         RandomSortUtil.sort(bookList);
 
-        DetailsBox box = new DetailsBox(mainBook, xi, mu, zi, bookList);
-
-        return box;
+        return new DetailsBox(mainBook, xi, mu, zi, bookList);
     }
 
 
@@ -413,8 +404,7 @@ public class DocUtil {
             }
         }
         AuthorBean author = new AuthorBean(author_avatar, author_name, fans_num, author_say, books);
-        XiBean xi = new XiBean(author, juqing);
-        return xi;
+        return new XiBean(author, juqing);
     }
 
     private static MuBean getMu(Element element) {
@@ -445,8 +435,7 @@ public class DocUtil {
         }
 
 
-        MuBean mu = new MuBean(time_desc, time, huas);
-        return mu;
+        return new MuBean(time_desc, time, huas);
     }
 
     private static ZiBean getZi(Element element) {
@@ -467,30 +456,33 @@ public class DocUtil {
         Element influence = element.getElementsByClass("mk-influencerank-tabs")
                 .get(0);
 
-        Element top1 = influence.getElementsByClass("rank-1st").get(0);
-        Element top2 = influence.getElementsByClass("rank-2st").get(0);// 2018-12-31
-        Element top3 = influence.getElementsByClass("rank-3st").get(0);
+        try {
 
-        fs.add(getFans(top1));
-        fs.add(getFans(top2));
-        fs.add(getFans(top3));
+            Element top1 = influence.getElementsByClass("rank-1st").get(0);
+            Element top2 = influence.getElementsByClass("rank-2st").get(0);
+            Element top3 = influence.getElementsByClass("rank-3st").get(0);
 
-        Elements items = influence.getElementsByClass("item");
-        if (items != null && items.size() > 0) {
-            for (Element item : items) {
-                fs.add(getFans2(item));
+            fs.add(getFans(top1));
+            fs.add(getFans(top2));
+            fs.add(getFans(top3));
+
+            Elements items = influence.getElementsByClass("item");
+            if (items != null && items.size() > 0) {
+                for (Element item : items) {
+                    fs.add(getFans2(item));
+                }
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        ZiBean zi = new ZiBean(fs, su);
-        return zi;
+        return new ZiBean(fs, su);
     }
 
     private static FansBean getFans(Element ele) {
         String data_src = ele.getElementsByTag("img").get(0).absUrl("data-src");
         String name = ele.getElementsByClass("name").text();
         String num = ele.getElementsByTag("span").get(0).text();
-        FansBean fans = new FansBean(data_src, name, num);
-        return fans;
+        return new FansBean(data_src, name, num);
 
     }
 
@@ -498,8 +490,7 @@ public class DocUtil {
         String data_src = ele.getElementsByTag("img").get(0).absUrl("data-src");
         String name = ele.getElementsByClass("name").text();
         String num = ele.getElementsByClass("num").get(0).text();
-        FansBean fans = new FansBean(data_src, name, num);
-        return fans;
+        return new FansBean(data_src, name, num);
 
     }
 
@@ -524,9 +515,7 @@ public class DocUtil {
             }
         }
 
-        TyBox box = new TyBox(base, title, next, books);
-
-        return box;
+        return new TyBox(base, title, next, books);
     }
 
 }
