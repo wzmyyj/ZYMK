@@ -151,6 +151,7 @@ public class DetailsActivity extends BaseActivity<DetailsContract.IPresenter> im
         mRefreshLayout.setHeaderHeight(100);
         mRefreshLayout.setFooterHeight(100);
         mRefreshLayout.setPrimaryColorsId(R.color.colorRefresh, R.color.colorWhite);
+        mRefreshLayout.setEnableLoadMore(false);
 
         rv_books.setLayoutManager(new LinearLayoutManager(context, LinearLayout.HORIZONTAL, false));
         rv_books.setNestedScrollingEnabled(false);
