@@ -16,16 +16,12 @@ import top.wzmyyj.zymk.app.bean.BookBean;
 /**
  * Created by yyj on 2018/07/31. email: 2209011667@qq.com
  */
-
 public class SearchBox {
 
-    private int status;
+    private final int status;
     private String msg;
     private String key;
-    private List<BookBean> bookList;
-
-    public SearchBox() {
-    }
+    private final List<BookBean> bookList;
 
     public SearchBox(int status, String msg, List<BookBean> bookList) {
         this.status = status;
@@ -52,10 +48,6 @@ public class SearchBox {
         return status;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
     public String getMsg() {
         return msg;
     }
@@ -68,25 +60,17 @@ public class SearchBox {
         return bookList;
     }
 
-    public void setBookList(List<BookBean> bookList) {
-        this.bookList = bookList;
-    }
-
     // 定义静态内部类-->序列化器
     public static class Deserializer implements JsonDeserializer<SearchBox> {
-
         @Override
         public SearchBox deserialize(JsonElement json, Type arg1,
                                      JsonDeserializationContext arg2) throws JsonParseException {
-
             JsonObject jsonObject = json.getAsJsonObject();
             int status = jsonObject.get("status").getAsInt();
             String msg = jsonObject.get("msg").getAsString();
-            List<BookBean> list = new ArrayList<>();
-
             JsonObject data = jsonObject.getAsJsonObject("data");
             JsonArray array = data.getAsJsonArray("list");
-
+            List<BookBean> list = new ArrayList<>();
             for (int i = 0; i < array.size(); i++) {
                 JsonObject obj = array.get(i).getAsJsonObject();
                 String title = obj.get("comic_name").getAsString();
@@ -99,29 +83,21 @@ public class SearchBox {
                 bean.setChapter(chapter);
                 list.add(bean);
             }
-
-            SearchBox box = new SearchBox(status, msg, list);
-            return box;
+            return new SearchBox(status, msg, list);
         }
     }
 
     public static class Deserializer2 implements JsonDeserializer<SearchBox> {
-
         @Override
         public SearchBox deserialize(JsonElement json, Type arg1,
                                      JsonDeserializationContext arg2) throws JsonParseException {
-
             JsonObject jsonObject = json.getAsJsonObject();
             int status = jsonObject.get("status").getAsInt();
             String msg = jsonObject.get("msg").getAsString();
-            List<BookBean> list = new ArrayList<>();
-
             JsonObject data = jsonObject.getAsJsonObject("data");
-
             String key = data.get("key").getAsString();
-
             JsonArray array = data.get("page").getAsJsonObject().getAsJsonArray("comic_list");
-
+            List<BookBean> list = new ArrayList<>();
             for (int i = 0; i < array.size(); i++) {
                 JsonObject obj = array.get(i).getAsJsonObject();
                 String title = obj.get("comic_name").getAsString();
@@ -134,9 +110,7 @@ public class SearchBox {
                 bean.setChapter(chapter);
                 list.add(bean);
             }
-
-            SearchBox box = new SearchBox(status, msg, key, list);
-            return box;
+            return new SearchBox(status, msg, key, list);
         }
     }
 }

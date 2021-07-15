@@ -3,14 +3,13 @@ package top.wzmyyj.zymk.presenter;
 import android.app.Activity;
 
 import top.wzmyyj.zymk.app.data.Urls;
-import top.wzmyyj.zymk.app.tools.I;
+import top.wzmyyj.zymk.app.helper.IntentHelper;
 import top.wzmyyj.zymk.contract.MineContract;
 import top.wzmyyj.zymk.base.presenter.BasePresenter;
 
 /**
  * Created by yyj on 2018/07/06. email: 2209011667@qq.com
  */
-
 public class MinePresenter extends BasePresenter<MineContract.IView> implements MineContract.IPresenter {
 
     public MinePresenter(Activity activity, MineContract.IView iv) {
@@ -19,31 +18,31 @@ public class MinePresenter extends BasePresenter<MineContract.IView> implements 
 
     @Override
     public void goAboutMe() {
-        I.toBrowser(mActivity, Urls.YYJ_About);
+        IntentHelper.toBrowser(mActivity, Urls.YYJ_About);
     }
 
     @Override
     public void goGitHubWeb() {
-        I.toBrowser(mActivity, Urls.YYJ_GitHub);
+        IntentHelper.toBrowser(mActivity, Urls.YYJ_GitHub);
     }
 
     @Override
     public void goHomeWeb() {
-        I.toBrowser(mActivity, Urls.ZYMK_Base);
+        IntentHelper.toBrowser(mActivity, Urls.ZYMK_Base);
     }
 
     @Override
     public void goHotWeb() {
-        I.toBrowser(mActivity, Urls.ZYMK_Activity);
+        IntentHelper.toBrowser(mActivity, Urls.ZYMK_Activity);
     }
 
     @Override
-    public void goTmallWeb() {
-        I.toBrowser(mActivity, Urls.ZYMK_Tmall);
+    public void goTMallWeb() {
+        IntentHelper.toBrowser(mActivity, Urls.ZYMK_TMall);
     }
 
     @Override
     public void goSetting() {
-        I.toSettingActivity(mActivity);
+        IntentHelper.toSettingActivity(mActivity);
     }
 }

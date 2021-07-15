@@ -1,17 +1,18 @@
 package top.wzmyyj.zymk.view.activity;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
+
 import com.dl7.tag.TagLayout;
+import com.google.android.material.tabs.TabLayout;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
@@ -34,7 +35,7 @@ import top.wzmyyj.zymk.app.bean.MuBean;
 import top.wzmyyj.zymk.app.bean.XiBean;
 import top.wzmyyj.zymk.app.bean.ZiBean;
 import top.wzmyyj.zymk.app.event.HistoryListChangeEvent;
-import top.wzmyyj.zymk.app.tools.G;
+import top.wzmyyj.zymk.app.helper.GlideLoaderHelper;
 import top.wzmyyj.wzm_sdk.utils.StatusBarUtil;
 import top.wzmyyj.zymk.contract.DetailsContract;
 import top.wzmyyj.zymk.presenter.DetailsPresenter;
@@ -44,7 +45,51 @@ import top.wzmyyj.zymk.view.panel.DetailsMuPanel;
 import top.wzmyyj.zymk.view.panel.DetailsXiPanel;
 import top.wzmyyj.zymk.view.panel.DetailsZiPanel;
 
+/**
+ * Created by yyj on 2018/08/01. email: 2209011667@qq.com
+ */
+@SuppressLint("NonConstantResourceId")
 public class DetailsActivity extends BaseActivity<DetailsContract.IPresenter> implements DetailsContract.IView {
+
+    private DetailsXiPanel xiPanel;
+    private DetailsMuPanel muPanel;
+    private DetailsZiPanel ziPanel;
+
+    @BindView(R.id.img_book_bg)
+    ImageView imgBookBg;
+    @BindView(R.id.tv_book_title)
+    TextView tvBookTitle;
+    @BindView(R.id.tv_book_favor)
+    TextView tvBookFavor;
+    @BindView(R.id.tv_book_author)
+    TextView tvBookAuthor;
+    @BindView(R.id.tl_book_tag)
+    TagLayout tlBookTag;
+    @BindView(R.id.tv_book_ift)
+    TextView tvBookIft;
+    @BindView(R.id.img_book)
+    ImageView imgBook;
+    @BindView(R.id.tv_book_star)
+    TextView tvBookStar;
+    @BindView(R.id.bt_read)
+    Button btRead;
+    @BindView(R.id.tv_title)
+    TextView tvTitle;
+    @BindView(R.id.srl_details)
+    SmartRefreshLayout mRefreshLayout;
+    // tab
+    @BindView(R.id.tabLayout)
+    TabLayout mTabLayout;
+    // content
+    @BindView(R.id.vp_content)
+    ViewPager mViewPager;
+    @BindView(R.id.rv_books)
+    RecyclerView rvBooks;
+
+    private BookBean mBook;
+    private final List<BookBean> xgBooks = new ArrayList<>();
+    private BookAdapter bookAdapter;
+    private long historyChapterId = 0;
 
     @Override
     protected void initPresenter() {
@@ -56,11 +101,6 @@ public class DetailsActivity extends BaseActivity<DetailsContract.IPresenter> im
         return R.layout.activity_details;
     }
 
-
-    private DetailsXiPanel xiPanel;
-    private DetailsMuPanel muPanel;
-    private DetailsZiPanel ziPanel;
-
     @Override
     protected void initPanels() {
         super.initPanels();
@@ -71,9 +111,6 @@ public class DetailsActivity extends BaseActivity<DetailsContract.IPresenter> im
         );
     }
 
-    private List<BookBean> xgBooks = new ArrayList<>();
-    private BookAdapter bookAdapter;
-
     @Override
     protected void initSome(Bundle savedInstanceState) {
         super.initSome(savedInstanceState);
@@ -82,13 +119,6 @@ public class DetailsActivity extends BaseActivity<DetailsContract.IPresenter> im
             EventBus.getDefault().register(this);
         }
     }
-
-    // top
-    @BindView(R.id.tv_title)
-    TextView tv_title;
-
-    @BindView(R.id.srl_details)
-    SmartRefreshLayout mRefreshLayout;
 
     @OnClick(R.id.img_back)
     void back() {
@@ -101,30 +131,9 @@ public class DetailsActivity extends BaseActivity<DetailsContract.IPresenter> im
         mPresenter.addFavor(mBook);
     }
 
-    // bg
-    @BindView(R.id.img_book_bg)
-    ImageView img_book_bg;
-    @BindView(R.id.tv_book_title)
-    TextView tv_book_title;
-    @BindView(R.id.tv_book_favor)
-    TextView tv_book_favor;
-    @BindView(R.id.tv_book_author)
-    TextView tv_book_author;
-    @BindView(R.id.tl_book_tag)
-    TagLayout tl_book_tag;
-    @BindView(R.id.tv_book_ift)
-    TextView tv_book_ift;
-    @BindView(R.id.img_book)
-    ImageView img_book;
-    @BindView(R.id.tv_book_star)
-    TextView tv_book_star;
-
-    @BindView(R.id.bt_read)
-    Button bt_read;
-
     @OnClick(R.id.bt_read)
     public void read() {
-        mPresenter.goComic(mBook.getId(), history_chapter_id);
+        mPresenter.goComic(mBook.getId(), historyChapterId);
     }
 
     @OnClick(R.id.bt_save)
@@ -132,33 +141,17 @@ public class DetailsActivity extends BaseActivity<DetailsContract.IPresenter> im
         showToast("暂不支持离线缓存！");
     }
 
-
-    // tab
-    @BindView(R.id.tabLayout)
-    TabLayout mTabLayout;
-
-    // content
-    @BindView(R.id.vp_content)
-    ViewPager mViewPager;
-    @BindView(R.id.rv_books)
-    RecyclerView rv_books;
-
-
     @Override
     protected void initView() {
         super.initView();
-
         mRefreshLayout.setHeaderHeight(100);
         mRefreshLayout.setFooterHeight(100);
         mRefreshLayout.setPrimaryColorsId(R.color.colorRefresh, R.color.colorWhite);
         mRefreshLayout.setEnableLoadMore(false);
-
-        rv_books.setLayoutManager(new LinearLayoutManager(context, LinearLayout.HORIZONTAL, false));
-        rv_books.setNestedScrollingEnabled(false);
+        rvBooks.setLayoutManager(new LinearLayoutManager(context, RecyclerView.HORIZONTAL, false));
+        rvBooks.setNestedScrollingEnabled(false);
         bookAdapter = new BookAdapter(context, xgBooks);
-        rv_books.setAdapter(bookAdapter);
-
-
+        rvBooks.setAdapter(bookAdapter);
         List<View> viewList = new ArrayList<>();
         List<String> titles = new ArrayList<>();
         for (Panel p : mPanelManager.getPanelList()) {
@@ -169,8 +162,6 @@ public class DetailsActivity extends BaseActivity<DetailsContract.IPresenter> im
         mViewPager.setAdapter(pagerAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
         mViewPager.setCurrentItem(1);
-
-
     }
 
     @Override
@@ -205,40 +196,32 @@ public class DetailsActivity extends BaseActivity<DetailsContract.IPresenter> im
                 return false;
             }
         });
-
     }
 
     private void update() {
         mPresenter.loadData();
     }
 
-
-    private BookBean mBook;
-
     @Override
     public void setBook(BookBean book) {
         if (book == null) return;
         mBook = book;
-        tv_title.setText(book.getTitle());
-        tv_book_title.setText(book.getTitle());
-        tv_book_author.setText(book.getAuthor());
-        tv_book_ift.setText(book.getIft());
-        tv_book_star.setText(book.getStar() + "分");
-
-        tl_book_tag.cleanTags();
-
+        tvTitle.setText(book.getTitle());
+        tvBookTitle.setText(book.getTitle());
+        tvBookAuthor.setText(book.getAuthor());
+        tvBookIft.setText(book.getIft());
+        tvBookStar.setText((book.getStar() + "分"));
+        tlBookTag.cleanTags();
         if (book.getTags() != null) {
             for (String tag : book.getTags()) {
-                tl_book_tag.addTag(tag);
+                tlBookTag.addTag(tag);
             }
         }
-        G.img(context, book.getData_src(), img_book);
-        G.imgBlur(context, book.getData_src(), img_book_bg, 15);
-
-        long id = (long) book.getId();
+        GlideLoaderHelper.img(imgBook, book.getDataSrc());
+        GlideLoaderHelper.imgBlur(imgBookBg, book.getDataSrc(), 15);
+        long id = book.getId();
         mPresenter.isFavor(id);
         mPresenter.getHistoryRead(id);
-
     }
 
     @Override
@@ -256,44 +239,38 @@ public class DetailsActivity extends BaseActivity<DetailsContract.IPresenter> im
         ziPanel.setZiData(zi);
     }
 
-
     @Override
     public void setBookList(List<BookBean> list) {
         if (list == null) return;
         xgBooks.clear();
-        for (BookBean book : list) {
-            xgBooks.add(book);
-        }
+        xgBooks.addAll(list);
         bookAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void setIsFavor(boolean isFavor) {
         if (isFavor) {
-            tv_book_favor.setVisibility(View.VISIBLE);
+            tvBookFavor.setVisibility(View.VISIBLE);
         } else {
-            tv_book_favor.setVisibility(View.GONE);
+            tvBookFavor.setVisibility(View.GONE);
         }
     }
-
-    private long history_chapter_id = 0;
 
     @Override
     public void setHistory(ChapterBean chapter) {
         if (chapter == null) {
-            bt_read.setText("开始阅读");
+            btRead.setText("开始阅读");
         } else {
-            bt_read.setText("续看" + chapter.getChapter_name());
-            history_chapter_id = chapter.getChapter_id();
+            btRead.setText(("续看" + chapter.getChapterName()));
+            historyChapterId = chapter.getChapterId();
             muPanel.setHistoryChapter(chapter);
         }
-
     }
 
     @Subscribe
     public void onEvent(HistoryListChangeEvent event) {
         if (event.isChange()) {
-            mPresenter.getHistoryRead((long) mBook.getId());
+            mPresenter.getHistoryRead(mBook.getId());
         }
     }
 
@@ -302,5 +279,4 @@ public class DetailsActivity extends BaseActivity<DetailsContract.IPresenter> im
         super.onDestroy();
         EventBus.getDefault().unregister(this);
     }
-
 }

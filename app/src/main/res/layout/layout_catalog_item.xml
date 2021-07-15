@@ -1,29 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/ll_catalog_bg"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:ignore="HardcodedText,ContentDescription">
 
     <ImageView
         android:id="@+id/img_catalog_pic"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_margin="5dp" />
+        android:layout_height="80pt"
+        android:layout_margin="5pt" />
 
     <TextView
         android:id="@+id/tv_catalog_name"
         android:layout_width="match_parent"
-        android:layout_height="20dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
+        android:layout_height="20pt"
+        android:layout_marginLeft="5pt"
+        android:layout_marginRight="5pt"
         android:gravity="center_vertical"
         android:textColor="@color/colorWhite"
-        android:textSize="12sp" />
+        android:textSize="12pt" />
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="0.1dp"
+        android:layout_height="0.1pt"
         android:background="@color/colorLine" />
 
 </LinearLayout>

@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="220dp"
-    android:background="@color/colorGray_b">
+    android:layout_height="220pt"
+    android:background="@color/colorGray_b"
+    tools:ignore="HardcodedText,ContentDescription">
 
     <ImageView
         android:id="@+id/img_book_bg"
@@ -13,73 +15,77 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="95dp"
+        android:layout_height="95pt"
         android:layout_gravity="bottom"
-        android:layout_marginBottom="60dp"
-        android:layout_marginLeft="130dp"
+        android:layout_marginStart="130pt"
+        android:layout_marginLeft="130pt"
+        android:layout_marginBottom="60pt"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="25dp"
+            android:layout_height="25pt"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/tv_book_title"
-                android:layout_width="0dp"
-                android:layout_height="25dp"
+                android:layout_width="0pt"
+                android:layout_height="25pt"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
                 android:textColor="@color/colorWhite"
-                android:textSize="18sp" />
+                android:textSize="18pt" />
 
             <TextView
                 android:id="@+id/tv_book_favor"
-                android:layout_width="36dp"
-                android:layout_height="15dp"
-                android:layout_marginRight="15dp"
+                android:layout_width="36pt"
+                android:layout_height="15pt"
+                android:layout_marginEnd="15pt"
+                android:layout_marginRight="15pt"
                 android:background="@drawable/bg_favor"
                 android:gravity="center"
                 android:text="已收藏"
                 android:textColor="@color/colorWhite"
-                android:textSize="10sp"
+                android:textSize="10pt"
                 android:visibility="gone" />
+
         </LinearLayout>
 
         <TextView
             android:id="@+id/tv_book_author"
             android:layout_width="match_parent"
-            android:layout_height="15dp"
+            android:layout_height="15pt"
             android:gravity="center_vertical"
             android:textColor="@color/colorWhite_1"
-            android:textSize="12sp" />
+            android:textSize="12pt" />
 
         <com.dl7.tag.TagLayout
             android:id="@+id/tl_book_tag"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="30pt"
             android:layout_gravity="center_vertical"
             app:tag_layout_bg_color="@color/colorClarity"
             app:tag_layout_border_color="@color/colorClarity"
-            app:tag_layout_border_width="0dp"
+            app:tag_layout_border_width="0pt"
             app:tag_layout_random_color="true"
             app:tag_layout_shape="arc"
             app:tag_view_border_color="@color/colorClarity"
             app:tag_view_text_color="@color/colorWhite"
-            app:tag_view_text_size="8sp"></com.dl7.tag.TagLayout>
+            app:tag_view_text_size="8pt" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="4dp"
+            android:layout_marginBottom="4pt"
             android:gravity="bottom"
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:layout_marginRight="3dp"
+                android:layout_width="15pt"
+                android:layout_height="15pt"
+                android:layout_marginEnd="3pt"
+                android:layout_marginRight="3pt"
                 android:background="@mipmap/icon_comic_human" />
 
             <TextView
@@ -87,14 +93,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorWhite_1"
-                android:textSize="12sp" />
+                android:textSize="12pt" />
+
         </LinearLayout>
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="60pt"
         android:layout_gravity="bottom"
         android:background="@color/colorWhite"
         android:gravity="center_vertical"
@@ -103,37 +110,39 @@
         <Button
             android:id="@+id/bt_save"
             style="?android:attr/borderlessButtonStyle"
-            android:layout_width="0dp"
-            android:layout_height="30dp"
-            android:layout_marginLeft="130dp"
+            android:layout_width="0pt"
+            android:layout_height="30pt"
+            android:layout_marginStart="130pt"
+            android:layout_marginLeft="130pt"
             android:layout_weight="1"
             android:background="@drawable/bt_save_selector"
             android:text="离线缓存"
             android:textColor="@color/colorOrange"
-            android:textSize="14sp" />
+            android:textSize="14pt" />
 
         <Button
             android:id="@+id/bt_read"
             style="?android:attr/borderlessButtonStyle"
-            android:layout_width="0dp"
-            android:layout_height="30dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_width="0pt"
+            android:layout_height="30pt"
+            android:layout_marginLeft="10pt"
+            android:layout_marginRight="10pt"
             android:layout_weight="1"
             android:background="@drawable/bt_read_selector"
             android:text="开始阅读"
             android:textColor="@color/colorWhite"
-            android:textSize="14sp" />
+            android:textSize="14pt" />
     </LinearLayout>
 
     <FrameLayout
-        android:layout_width="108dp"
-        android:layout_height="144dp"
+        android:layout_width="108pt"
+        android:layout_height="144pt"
         android:layout_gravity="bottom"
-        android:layout_marginBottom="11dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10pt"
+        android:layout_marginLeft="10pt"
+        android:layout_marginBottom="11pt"
         android:background="@drawable/img_stroke_bg2"
-        android:padding="2dp">
+        android:padding="2pt">
 
         <ImageView
             android:id="@+id/img_book"
@@ -143,17 +152,17 @@
 
         <TextView
             android:id="@+id/tv_book_star"
-            android:layout_width="35dp"
-            android:layout_height="15dp"
-            android:layout_gravity="right|top"
+            android:layout_width="35pt"
+            android:layout_height="15pt"
+            android:layout_gravity="end|top"
             android:background="@color/black_overlay"
             android:gravity="center"
-            android:paddingLeft="3dp"
-            android:paddingRight="3dp"
+            android:paddingLeft="3pt"
+            android:paddingRight="3pt"
             android:textColor="@color/colorWhite"
-            android:textSize="10sp" />
-    </FrameLayout>
+            android:textSize="10pt" />
 
+    </FrameLayout>
 
 </FrameLayout>
 

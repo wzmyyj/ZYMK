@@ -11,16 +11,17 @@ import top.wzmyyj.zymk.base.contract.IBaseView;
 /**
  * Created by yyj on 2018/09/10. email: 2209011667@qq.com
  */
-
 public interface ComicContract {
 
     interface IView extends IBaseView {
-        void showData(BookBean book, List<ChapterBean> chapterList, List<BookBean> bookList, List<ComicBean> comicList);
+
+        void showData(BookBean book, List<ChapterBean> chapterList, List<BookBean> bookList);
 
         void showLoadFail(String msg);
     }
 
     interface IPresenter extends IBasePresenter {
+
         long getChapterId();
 
         void loadData();
@@ -31,8 +32,8 @@ public interface ComicContract {
 
         void saveHistory(BookBean book, ChapterBean chapter);
 
+        List<ComicBean> getComicList(ChapterBean chapter);
 
+        ChapterBean chapterEnd();
     }
-
-
 }

@@ -1,0 +1,14 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16pt</dimen>
+    <dimen name="activity_vertical_margin">16pt</dimen>
+    <dimen name="tab_icon_size">20pt</dimen>
+    <dimen name="tab_text_size">12pt</dimen>
+    <dimen name="tab_height">55pt</dimen>
+    <dimen name="banner_indicator_height">9pt</dimen>
+    <dimen name="banner_indicator_margin">3pt</dimen>
+    <dimen name="banner_indicator_width">9pt</dimen>
+    <dimen name="banner_title_height">25pt</dimen>
+    <dimen name="banner_title_text_size">12pt</dimen>
+    <dimen name="line_height">0.1pt</dimen>
+</resources>

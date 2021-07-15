@@ -1,5 +1,6 @@
 package top.wzmyyj.zymk.view.activity;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.widget.FrameLayout;
 
@@ -16,12 +17,17 @@ import top.wzmyyj.zymk.presenter.ComicPresenter;
 import top.wzmyyj.zymk.base.activity.BaseActivity;
 import top.wzmyyj.zymk.view.panel.ComicRecyclerPanel;
 
-
 /**
  * Created by yyj on 2018/08/01. email: 2209011667@qq.com
  */
-
+@SuppressLint("NonConstantResourceId")
 public class ComicActivity extends BaseActivity<ComicContract.IPresenter> implements ComicContract.IView {
+
+    private ComicRecyclerPanel comicRecyclerPanel;
+
+    @BindView(R.id.fl_panel)
+    FrameLayout flPanel;
+
     @Override
     protected void initPresenter() {
         mPresenter = new ComicPresenter(activity, this);
@@ -31,8 +37,6 @@ public class ComicActivity extends BaseActivity<ComicContract.IPresenter> implem
     protected int getLayoutId() {
         return R.layout.activity_comic;
     }
-
-    private ComicRecyclerPanel comicRecyclerPanel;
 
     @Override
     protected void initPanels() {
@@ -46,13 +50,10 @@ public class ComicActivity extends BaseActivity<ComicContract.IPresenter> implem
         StatusBarUtil.fullScreen(this);
     }
 
-    @BindView(R.id.fl_panel)
-    FrameLayout fl_panel;
-
     @Override
     protected void initView() {
         super.initView();
-        fl_panel.addView(comicRecyclerPanel.getView());
+        flPanel.addView(comicRecyclerPanel.getView());
     }
 
     @Override
@@ -61,10 +62,9 @@ public class ComicActivity extends BaseActivity<ComicContract.IPresenter> implem
         mPresenter.loadData();
     }
 
-
     @Override
-    public void showData(BookBean book, List<ChapterBean> chapterList, List<BookBean> bookList, List<ComicBean> comicList) {
-        comicRecyclerPanel.setComicData(book, chapterList, bookList, comicList);
+    public void showData(BookBean book, List<ChapterBean> chapterList, List<BookBean> bookList) {
+        comicRecyclerPanel.setComicData(book, chapterList, bookList);
     }
 
     @Override

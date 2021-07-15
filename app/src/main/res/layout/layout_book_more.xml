@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="140dp"
-    android:orientation="vertical">
-
+    android:layout_height="140pt"
+    android:orientation="vertical"
+    tools:ignore="HardcodedText,ContentDescription">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="139dp"
+        android:layout_height="139pt"
         android:background="@color/colorWhite"
         android:orientation="horizontal"
-        android:padding="15dp">
+        android:padding="15pt">
 
         <FrameLayout
-            android:layout_width="81dp"
-            android:layout_height="108dp"
+            android:layout_width="81pt"
+            android:layout_height="108pt"
             android:background="@color/colorGray_e">
 
             <ImageView
@@ -26,96 +27,97 @@
             <!--<TextView-->
             <!--android:id="@+id/tv_chapter"-->
             <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="16dp"-->
+            <!--android:layout_height="16pt"-->
             <!--android:layout_gravity="bottom"-->
             <!--android:background="@color/black_overlay"-->
             <!--android:gravity="right|center_vertical"-->
-            <!--android:paddingRight="5dp"-->
+            <!--android:paddingRight="5pt"-->
             <!--android:text="0话"-->
             <!--android:textColor="@color/colorWhite"-->
-            <!--android:textSize="12sp" />-->
+            <!--android:textSize="12pt" />-->
 
             <TextView
                 android:id="@+id/tv_star"
-                android:layout_width="35dp"
-                android:layout_height="15dp"
-                android:layout_gravity="right|top"
+                android:layout_width="35pt"
+                android:layout_height="15pt"
+                android:layout_gravity="end|top"
                 android:background="@color/black_overlay"
                 android:gravity="center"
-                android:paddingLeft="3dp"
-                android:paddingRight="3dp"
+                android:paddingLeft="3pt"
+                android:paddingRight="3pt"
                 android:textColor="@color/colorWhite"
-                android:textSize="10sp" />
-        </FrameLayout>
+                android:textSize="10pt" />
 
+        </FrameLayout>
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_marginLeft="10dp"
             android:layout_height="match_parent"
-            android:padding="5dp">
+            android:layout_marginStart="10pt"
+            android:layout_marginLeft="10pt"
+            android:padding="5pt">
 
             <TextView
                 android:id="@+id/tv_title"
                 android:layout_width="match_parent"
-                android:layout_height="20dp"
+                android:layout_height="20pt"
                 android:layout_gravity="top"
                 android:gravity="center_vertical"
                 android:singleLine="true"
                 android:text="标题"
                 android:textColor="@color/colorGray_5"
-                android:textSize="15sp" />
-
+                android:textSize="15pt" />
 
             <com.dl7.tag.TagLayout
                 android:id="@+id/tl_tag"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="40pt"
                 android:layout_gravity="center_vertical"
-                app:tag_layout_border_width="0dp"
+                app:tag_layout_border_width="0pt"
                 app:tag_layout_random_color="true"
                 app:tag_layout_shape="arc"
                 app:tag_view_border_color="@color/colorClarity"
                 app:tag_view_text_color="@color/colorWhite"
-                app:tag_view_text_size="8sp"></com.dl7.tag.TagLayout>
-
+                app:tag_view_text_size="8pt" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="20dp"
+                android:layout_height="20pt"
                 android:layout_gravity="bottom"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="5pt"
+                android:layout_marginBottom="10pt"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="20dp"
+                    android:layout_height="20pt"
                     android:gravity="center_vertical"
                     android:singleLine="true"
                     android:text="推荐理由："
                     android:textColor="@color/colorGray_5"
-                    android:textSize="13sp" />
+                    android:textSize="13pt" />
 
                 <TextView
                     android:id="@+id/tv_desc"
                     android:layout_width="match_parent"
-                    android:layout_height="20dp"
+                    android:layout_height="20pt"
                     android:gravity="center_vertical"
                     android:singleLine="true"
                     android:text="这个漫画很好看"
                     android:textColor="@color/colorGray_b"
-                    android:textSize="12dp" />
+                    android:textSize="12pt" />
+
             </LinearLayout>
 
         </FrameLayout>
+
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="0.1dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
+        android:layout_height="0.1pt"
+        android:layout_marginLeft="15pt"
+        android:layout_marginRight="15pt"
         android:background="@color/colorLine" />
 
 </LinearLayout>

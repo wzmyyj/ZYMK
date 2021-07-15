@@ -1,46 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="55dp"
+    android:layout_height="55pt"
     android:layout_gravity="center"
-    android:padding="7dp">
-
+    android:padding="7pt"
+    tools:ignore="HardcodedText,ContentDescription">
 
     <TextView
         android:id="@+id/tv_hua_text"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="3dp"
+        android:layout_margin="3pt"
         android:background="@color/colorGray_g"
         android:gravity="center"
         android:text="1话"
         android:textColor="@color/colorGray_6"
-        android:textSize="12sp" />
+        android:textSize="12pt" />
 
     <ImageView
         android:id="@+id/img_hua_lock"
-        android:layout_width="10dp"
-        android:layout_height="13dp"
+        android:layout_width="10pt"
+        android:layout_height="13pt"
         android:src="@mipmap/icon_chapter_lock"
         android:visibility="gone" />
 
     <ImageView
         android:id="@+id/img_hua_new"
-        android:layout_width="15dp"
-        android:layout_height="6dp"
-        android:layout_gravity="right"
-        android:paddingLeft="4.5dp"
-        android:paddingRight="4.5dp"
+        android:layout_width="15pt"
+        android:layout_height="6pt"
+        android:layout_gravity="end"
+        android:paddingLeft="4.5pt"
+        android:paddingRight="4.5pt"
         android:src="@drawable/new_oval_bg"
         android:visibility="gone" />
 
     <ImageView
         android:id="@+id/img_hua_reading"
-        android:layout_width="15dp"
-        android:layout_height="9dp"
-        android:layout_gravity="right"
+        android:layout_width="15pt"
+        android:layout_height="9pt"
+        android:layout_gravity="end"
         android:src="@mipmap/icon_chapter_picture_reading"
         android:visibility="gone" />
-
 
 </FrameLayout>

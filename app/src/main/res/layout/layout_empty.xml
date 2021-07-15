@@ -1,29 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:ignore="HardcodedText,ContentDescription">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:gravity="center_horizontal"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:ignore="UseCompoundDrawables,UselessParent">
 
         <ImageView
             android:id="@+id/img_empty_pic"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="100pt"
+            android:layout_height="100pt"
             android:src="@mipmap/pic_empty" />
 
         <TextView
             android:id="@+id/tv_empty_text"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="30pt"
             android:gravity="center"
             android:text="这里什么都没有哦~"
             android:textColor="@color/colorGray_9"
-            android:textSize="14sp" />
+            android:textSize="14pt" />
+
     </LinearLayout>
 
 </RelativeLayout>

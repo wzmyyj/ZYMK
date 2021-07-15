@@ -11,14 +11,13 @@
         app:banner_default_image="@color/colorGray_e"
         app:indicator_drawable_selected="@mipmap/point_0"
         app:indicator_drawable_unselected="@mipmap/point_1"
-        app:indicator_height="9dp"
-        app:indicator_margin="3dp"
-        app:indicator_width="9dp"
+        app:indicator_height="@dimen/banner_indicator_height"
+        app:indicator_margin="@dimen/banner_indicator_margin"
+        app:indicator_width="@dimen/banner_indicator_width"
         app:scroll_time="1000"
         app:title_background="@color/black_overlay"
-        app:title_height="25dp"
+        app:title_height="@dimen/banner_title_height"
         app:title_textcolor="@color/colorWhite"
-        app:title_textsize="12dp">
+        app:title_textsize="@dimen/banner_title_text_size" />
 
-    </com.youth.banner.Banner>
 </FrameLayout>

@@ -5,14 +5,15 @@ import android.os.Bundle;
 import butterknife.ButterKnife;
 import top.wzmyyj.wzm_sdk.activity.PanelActivity;
 import top.wzmyyj.wzm_sdk.tools.T;
+import top.wzmyyj.wzm_sdk.utils.AdaptScreenUtil;
 import top.wzmyyj.wzm_sdk.utils.StatusBarUtil;
+import top.wzmyyj.zymk.app.data.Config;
 import top.wzmyyj.zymk.base.contract.IBasePresenter;
 import top.wzmyyj.zymk.base.contract.IBaseView;
 
 /**
  * Created by yyj on 2018/06/28. email: 2209011667@qq.com
  */
-
 public abstract class BaseActivity<P extends IBasePresenter> extends PanelActivity implements IBaseView {
 
     protected P mPresenter;
@@ -22,11 +23,11 @@ public abstract class BaseActivity<P extends IBasePresenter> extends PanelActivi
         initPresenter();
         checkPresenterIsNull();
         super.initSome(savedInstanceState);
-        StatusBarUtil.initStatusBar(activity,false,true,true);
+        StatusBarUtil.initStatusBar(activity, false, true, true);
+        AdaptScreenUtil.adaptWidth(getResources(), Config.BASE_WIDTH);
     }
 
     protected abstract void initPresenter();
-
 
     private void checkPresenterIsNull() {
         if (mPresenter == null) {
@@ -44,18 +45,28 @@ public abstract class BaseActivity<P extends IBasePresenter> extends PanelActivi
 
     @Override
     protected void initData() {
-
     }
 
     @Override
     protected void initListener() {
-
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mPresenter.onCreate();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        mPresenter.onReStart();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mPresenter.onStart();
     }
 
     @Override
@@ -68,6 +79,12 @@ public abstract class BaseActivity<P extends IBasePresenter> extends PanelActivi
     protected void onPause() {
         super.onPause();
         mPresenter.onPause();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mPresenter.onStop();
     }
 
     @Override

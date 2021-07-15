@@ -1,36 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/ll_definition"
-    android:layout_width="250dp"
-    android:layout_height="60dp"
+    android:layout_width="250pt"
+    android:layout_height="60pt"
     android:layout_gravity="center_horizontal|bottom"
-    android:layout_marginBottom="150dp"
+    android:layout_marginBottom="150pt"
     android:background="@drawable/bg_menu"
     android:orientation="horizontal"
-    android:padding="5dp">
+    android:padding="5pt"
+    tools:ignore="HardcodedText,ContentDescription">
 
     <ImageView
         android:id="@+id/img_definition_low"
-        android:layout_width="0dp"
+        android:layout_width="0pt"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:padding="15dp"
+        android:padding="15pt"
         android:src="@mipmap/ic_read_definition_low" />
 
     <ImageView
         android:id="@+id/img_definition_middle"
-        android:layout_width="0dp"
+        android:layout_width="0pt"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:padding="15dp"
+        android:padding="15pt"
         android:src="@mipmap/ic_read_definition_middle" />
 
     <ImageView
         android:id="@+id/img_definition_high"
-        android:layout_width="0dp"
+        android:layout_width="0pt"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:padding="15dp"
+        android:padding="15pt"
         android:src="@mipmap/ic_read_definition_high" />
+
 </LinearLayout>

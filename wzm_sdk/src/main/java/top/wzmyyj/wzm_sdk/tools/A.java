@@ -12,11 +12,10 @@ import android.view.animation.TranslateAnimation;
  * Created by yyj on 2018/08/10. email: 2209011667@qq.com
  * 动画封装类。
  */
-
+@SuppressWarnings("unused")
 public class A {
 
-    private AnimationSet animSet;
-
+    private final AnimationSet animSet;
 
     public A() {
         animSet = new AnimationSet(true);
@@ -96,8 +95,19 @@ public class A {
         return animSet;
     }
 
-
     public void into(View view) {
         view.setAnimation(animSet);
+    }
+
+    public interface AListener extends Animation.AnimationListener {
+
+        default void onAnimationStart(Animation var1) {
+        }
+
+        default void onAnimationEnd(Animation var1) {
+        }
+
+        default void onAnimationRepeat(Animation var1) {
+        }
     }
 }

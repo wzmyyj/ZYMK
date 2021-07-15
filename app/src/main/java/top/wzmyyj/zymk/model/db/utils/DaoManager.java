@@ -2,20 +2,17 @@ package top.wzmyyj.zymk.model.db.utils;
 
 import android.content.Context;
 
-import org.greenrobot.greendao.query.QueryBuilder;
-
 import top.wzmyyj.zymk.greendao.gen.DaoMaster;
 import top.wzmyyj.zymk.greendao.gen.DaoSession;
 
 /**
  * Created by yyj on 2018/08/13. email: 2209011667@qq.com
  */
-
 public class DaoManager {
+
     private static volatile DaoManager manager;
-    private static DaoMaster.DevOpenHelper helper;
-    private static DaoSession daoSession;
-    private Context mContext;
+    private DaoSession daoSession;
+    private final Context mContext;
 
     private DaoManager(Context context) {
         this.mContext = context.getApplicationContext();
@@ -37,7 +34,7 @@ public class DaoManager {
     //判断是否存在数据库，没有就创建
     public DaoMaster getDaoMaster() {
         if (daoMaster == null) {
-            helper = new DaoMaster.DevOpenHelper(mContext, "test.db", null);
+            DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(mContext, "test.db", null);
             daoMaster = new DaoMaster(helper.getWritableDb());
         }
         return daoMaster;
@@ -54,30 +51,30 @@ public class DaoManager {
         return daoSession;
     }
 
-    //输出日志
-    public void setDebug() {
-        QueryBuilder.LOG_SQL = true;
-        QueryBuilder.LOG_VALUES = true;
-    }
-
-    public void close() {
-        closeHelper();
-        closeSession();
-    }
-
-    public void closeHelper() {
-        if (helper != null) {
-            helper.close();
-            helper = null;
-        }
-    }
-
-    //关闭session
-    public void closeSession() {
-        if (daoSession != null) {
-            daoSession.clear();
-            daoSession = null;
-        }
-    }
+//    //输出日志
+//    public void setDebug() {
+//        QueryBuilder.LOG_SQL = true;
+//        QueryBuilder.LOG_VALUES = true;
+//    }
+//
+//    public void close() {
+//        closeHelper();
+//        closeSession();
+//    }
+//
+//    public void closeHelper() {
+//        if (helper != null) {
+//            helper.close();
+//            helper = null;
+//        }
+//    }
+//
+//    //关闭session
+//    public void closeSession() {
+//        if (daoSession != null) {
+//            daoSession.clear();
+//            daoSession = null;
+//        }
+//    }
 }
 

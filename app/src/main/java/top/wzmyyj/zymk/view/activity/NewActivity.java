@@ -1,8 +1,11 @@
 package top.wzmyyj.zymk.view.activity;
 
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
+import android.annotation.SuppressLint;
 import android.view.View;
+
+import androidx.viewpager.widget.ViewPager;
+
+import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,12 +21,17 @@ import top.wzmyyj.zymk.contract.NewContract;
 import top.wzmyyj.zymk.presenter.NewPresenter;
 import top.wzmyyj.zymk.view.panel.NewRecyclerPanel;
 
-
 /**
  * Created by yyj on 2018/07/13. email: 2209011667@qq.com
  */
-
+@SuppressLint("NonConstantResourceId")
 public class NewActivity extends BaseActivity<NewContract.IPresenter> implements NewContract.IView {
+
+    @BindView(R.id.tabLayout)
+    TabLayout mTabLayout;
+    @BindView(R.id.viewPager)
+    ViewPager mViewPager;
+
     @Override
     protected void initPresenter() {
         mPresenter = new NewPresenter(activity, this);
@@ -43,16 +51,10 @@ public class NewActivity extends BaseActivity<NewContract.IPresenter> implements
         );
     }
 
-    @BindView(R.id.tabLayout)
-    TabLayout mTabLayout;
-    @BindView(R.id.viewPager)
-    ViewPager mViewPager;
-
     @OnClick(R.id.img_back)
     void back() {
         mPresenter.finish();
     }
-
 
     @Override
     protected void initView() {
@@ -75,8 +77,8 @@ public class NewActivity extends BaseActivity<NewContract.IPresenter> implements
     }
 
     @Override
-    public void showData(List<BookBean>... bookList) {
-        ((NewRecyclerPanel) getPanel(0)).setNewData(bookList[0]);
-        ((NewRecyclerPanel) getPanel(1)).setNewData(bookList[1]);
+    public void showData(List<BookBean> bookList1, List<BookBean> bookList2) {
+        ((NewRecyclerPanel) getPanel(0)).setNewData(bookList1);
+        ((NewRecyclerPanel) getPanel(1)).setNewData(bookList2);
     }
 }

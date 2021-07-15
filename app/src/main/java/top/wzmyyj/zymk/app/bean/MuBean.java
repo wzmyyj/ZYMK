@@ -5,24 +5,14 @@ import java.util.List;
 /**
  * Created by yyj on 2018/07/15. email: 2209011667@qq.com
  */
-
 public class MuBean {
-    private String time_desc;
-    private long time;
-    private List<HuaBean> huaList;
+
     private int book_id;
+    private final String timeDesc;
+    private final List<HuaBean> huaList;
 
-    public MuBean(String time_desc, long time) {
-        this.time_desc = time_desc;
-        this.time = time;
-    }
-
-    public MuBean() {
-    }
-
-    public MuBean(String time_desc, long time, List<HuaBean> huaList) {
-        this.time_desc = time_desc;
-        this.time = time;
+    public MuBean(String time_desc, List<HuaBean> huaList) {
+        this.timeDesc = time_desc;
         this.huaList = huaList;
     }
 
@@ -34,27 +24,11 @@ public class MuBean {
         this.book_id = book_id;
     }
 
-    public String getTime_desc() {
-        return time_desc;
-    }
-
-    public void setTime_desc(String time_desc) {
-        this.time_desc = time_desc;
-    }
-
-    public long getTime() {
-        return time;
-    }
-
-    public void setTime(long time) {
-        this.time = time;
+    public String getTimeDesc() {
+        return timeDesc;
     }
 
     public List<HuaBean> getHuaList() {
         return huaList;
-    }
-
-    public void setHuaList(List<HuaBean> huaList) {
-        this.huaList = huaList;
     }
 }

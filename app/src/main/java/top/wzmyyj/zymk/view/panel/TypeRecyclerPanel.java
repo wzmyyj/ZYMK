@@ -1,36 +1,38 @@
 package top.wzmyyj.zymk.view.panel;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.zhy.adapter.recyclerview.base.ViewHolder;
 
 import java.util.List;
 
+import top.wzmyyj.wzm_sdk.adapter.ivd.IVD;
 import top.wzmyyj.wzm_sdk.adapter.ivd.SingleIVD;
 import top.wzmyyj.zymk.R;
 import top.wzmyyj.zymk.app.bean.TypeBean;
-import top.wzmyyj.zymk.app.tools.G;
+import top.wzmyyj.zymk.app.helper.GlideLoaderHelper;
 import top.wzmyyj.zymk.contract.TypeContract;
 import top.wzmyyj.zymk.base.panel.BaseRecyclerPanel;
 
 /**
  * Created by yyj on 2018/07/06. email: 2209011667@qq.com
  */
-
+@SuppressLint("NonConstantResourceId")
 public class TypeRecyclerPanel extends BaseRecyclerPanel<TypeBean, TypeContract.IPresenter> {
-
 
     public TypeRecyclerPanel(Context context, TypeContract.IPresenter p) {
         super(context, p);
     }
 
     @Override
-    protected void setIVD(List ivd) {
+    protected void setIVD(List<IVD<TypeBean>> ivd) {
         ivd.add(new SingleIVD<TypeBean>() {
             @Override
             public int getItemViewLayoutId() {
@@ -43,12 +45,10 @@ public class TypeRecyclerPanel extends BaseRecyclerPanel<TypeBean, TypeContract.
                 TextView tv_type = holder.getView(R.id.tv_type);
                 String ss = "- " + typeBean.getTitle() + " -";
                 tv_type.setText(ss);
-                G.img(context, typeBean.getData_src(), img_type);
-                final String href = typeBean.getHref();
+                GlideLoaderHelper.img(img_type, typeBean.getDataSrc());
             }
         });
     }
-
 
     @Override
     public void onItemClick(View view, RecyclerView.ViewHolder holder, int position) {
@@ -62,33 +62,25 @@ public class TypeRecyclerPanel extends BaseRecyclerPanel<TypeBean, TypeContract.
         mRecyclerView.setLayoutManager(new GridLayoutManager(context, 3));
     }
 
-
     @Override
     public void update() {
         mPresenter.loadData();
     }
 
-
     public void setTypeData(List<TypeBean> typeList) {
-        if (typeList == null && typeList.size() == 0) {
-            notifyDataSetChanged();
-            return;
-        }
         mData.clear();
-        mData.addAll(typeList);
+        if (typeList != null && typeList.size() > 0) {
+            mData.addAll(typeList);
+        }
         notifyDataSetChanged();
-
     }
 
-
-    protected TextView tv_empty;
-
+    @SuppressLint("InflateParams")
     @Override
     protected void setEmpty() {
         mEmpty = mInflater.inflate(R.layout.layout_empty, null);
-        tv_empty = mEmpty.findViewById(R.id.tv_empty_text);
+        TextView tv_empty = mEmpty.findViewById(R.id.tv_empty_text);
         mEmpty.setVisibility(View.GONE);
         tv_empty.setText("下滑刷新，重新加载。");
     }
-
 }

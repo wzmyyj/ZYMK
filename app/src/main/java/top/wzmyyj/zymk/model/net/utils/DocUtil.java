@@ -28,11 +28,9 @@ import top.wzmyyj.zymk.model.net.box.TypeBox;
 /**
  * Created by yyj on 2018/07/09. email: 2209011667@qq.com
  */
-
 public class DocUtil {
 
-
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////// home
+    //------------------------------ home ----------------------------------------//
 
     public static List<ItemBean> transToItem(Element ele) {
         if (ele == null) return null;
@@ -47,28 +45,21 @@ public class DocUtil {
             String summary = hd.getElementsByClass("summary").text();
             Element a = hd.getElementsByTag("a").get(0);
             String href = a.absUrl("href");
-
-
             ItemBean item = new ItemBean(title, summary, href);
-
             Elements slides = element.getElementsByClass("swiper-slide");
             List<BookBean> books = new ArrayList<>();
             for (Element slide : slides) {
                 BookBean book = getBook(slide);
                 books.add(book);
             }
-
             RandomSortUtil.sort(books);
-
             item.setBooks(books);
             items.add(item);
-
         }
         RandomSortUtil.sort(items, 0, 3);
         RandomSortUtil.sort(items, 4, items.size() - 2);
         return items;
     }
-
 
     private static BookBean getBook(Element slide) {
         Element a = slide.getElementsByTag("a").get(0);
@@ -78,23 +69,20 @@ public class DocUtil {
         String star = slide.getElementsByTag("span").get(1).text();
         String chapter = slide.getElementsByTag("span").get(0).text();
         String desc = slide.getElementsByClass("desc").text();
-
         if (!star.contains(".")) {
             StringBuilder sb = new StringBuilder(star);
             sb.insert(1, ".");
             star = sb.toString();
         }
-
         BookBean book = new BookBean();
         book.setId(id);
-        book.setData_src(data_src);
+        book.setDataSrc(data_src);
         book.setTitle(title);
         book.setChapter(chapter);
         book.setDesc(desc);
         book.setStar(star);
         return book;
     }
-
 
     public static List<BoBean> transToBo(Element ele) {
         if (ele == null) return null;
@@ -110,57 +98,44 @@ public class DocUtil {
         return data;
     }
 
-
     public static HomeBox transToHome(Element body) {
         List<ItemBean> items = transToItem(body);
         List<BoBean> bos = transToBo(body);
         return new HomeBox(bos, items);
     }
 
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////// type
+    //------------------------------ type ----------------------------------------//
 
     public static TypeBox transToType(Element body) {
-
-//        Elements tab = body.getElementsByClass("tab-toggle").get(0)
-//                .getElementsByClass("item");
-//        String[] strs = new String[4];
-//        for (int i = 0; i < strs.length; i++) {
-//            strs[i] = tab.get(i).text();
-//        }
         Elements sw = body.getElementsByClass("mk-class-list");
-
         List<TypeBean> typeList1 = new ArrayList<>();
         Elements items1 = sw.get(0).getElementsByClass("item");
-        if (items1 != null || items1.size() > 0) {
+        if (items1 != null && items1.size() > 0) {
             for (Element item : items1) {
                 typeList1.add(getTypeItem(item));
             }
         }
-
         List<TypeBean> typeList2 = new ArrayList<>();
         Elements items2 = sw.get(1).getElementsByClass("item");
-        if (items2 != null || items2.size() > 0) {
+        if (items2 != null && items2.size() > 0) {
             for (Element item : items2) {
                 typeList2.add(getTypeItem(item));
             }
         }
-
         List<TypeBean> typeList3 = new ArrayList<>();
         Elements items3 = sw.get(2).getElementsByClass("item");
-        if (items3 != null || items3.size() > 0) {
+        if (items3 != null && items3.size() > 0) {
             for (Element item : items3) {
                 typeList3.add(getTypeItem(item));
             }
         }
-
         List<TypeBean> typeList4 = new ArrayList<>();
         Elements items4 = sw.get(3).getElementsByClass("item");
-        if (items4 != null || items4.size() > 0) {
+        if (items4 != null && items4.size() > 0) {
             for (Element item : items4) {
                 typeList4.add(getTypeItem(item));
             }
         }
-
         return new TypeBox(typeList1, typeList2, typeList3, typeList4);
     }
 
@@ -170,13 +145,10 @@ public class DocUtil {
         String href = a.absUrl("href");
         String data_src = item.getElementsByTag("img").get(0)
                 .absUrl("data-src");
-
         return new TypeBean(title, href, data_src);
-
     }
 
-
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////// new
+    //------------------------------ new ----------------------------------------//
 
     public static NewBox transToNew(Element body) {
         Elements elements = body.getElementsByClass("mk-floor");
@@ -197,37 +169,31 @@ public class DocUtil {
             BookBean book = getBook(slide);
             books2.add(book);
         }
-
         RandomSortUtil.sort(books1);
         RandomSortUtil.sort(books2);
-
         return new NewBox(books1, books2);
     }
 
+    //------------------------------ rank ----------------------------------------//
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////  rank
     public static RankBox transToRank(Element body) {
         String[] ifts = new String[]{"ift-fire", "ift-love_money", "ift-ticket"};
         Elements lists = body.getElementsByClass("mk-rank-list");
-
         List<BookBean> bookList1 = new ArrayList<>();
         for (Element element : lists.get(0).getElementsByClass("item")) {
             BookBean book = getRankBook(element, ifts[0]);
             bookList1.add(book);
         }
-
         List<BookBean> bookList2 = new ArrayList<>();
         for (Element element : lists.get(1).getElementsByClass("item")) {
             BookBean book = getRankBook(element, ifts[1]);
             bookList2.add(book);
         }
-
         List<BookBean> bookList3 = new ArrayList<>();
         for (Element element : lists.get(2).getElementsByClass("item")) {
             BookBean book = getRankBook(element, ifts[2]);
             bookList3.add(book);
         }
-
         return new RankBox(bookList1, bookList2, bookList3);
     }
 
@@ -235,10 +201,8 @@ public class DocUtil {
         Element a = element.getElementsByTag("a").get(0);
         int id = Integer.parseInt(a.getElementsByTag("img").get(0)
                 .attr("data-id"));
-
         String data_src = a.getElementsByTag("img").get(0)
                 .absUrl("data-src");
-
         String title = element.getElementsByClass("title").text();
         String ift = element.getElementsByClass(iftClass).text()
                 .replace("人气值: ", "")
@@ -246,17 +210,15 @@ public class DocUtil {
                 .replace("个元宝", "")
                 .replace("月票数: ", "");
         String num = element.getElementsByClass("num").text();
-
         List<String> ts = new ArrayList<>();
         Elements tags = element.getElementsByClass("tags");
         for (Element tag : tags) {
             String t = tag.text();
             ts.add(t);
         }
-
         BookBean book = new BookBean();
         book.setId(id);
-        book.setData_src(data_src);
+        book.setDataSrc(data_src);
         book.setTitle(title);
         book.setNum(num);
         book.setIft(ift);
@@ -264,25 +226,16 @@ public class DocUtil {
         return book;
     }
 
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////// more
+    //------------------------------ more ----------------------------------------//
 
     public static MoreBox transToMore(Element body) {
-
-        MoreBox box = new MoreBox();
-        box.setHref(body.baseUri());
-
+        String href = body.baseUri();
         String top = body.getElementsByClass("mk-crumb").get(0)
                 .getElementsByTag("strong").text();
         String figure = body.getElementsByClass("figure").attr("data-src");
         String content = body.getElementsByClass("book-desc").get(0)
                 .getElementsByClass("content").text();
-
-        box.setTitle(top);
-        box.setFigure(figure);
-        box.setContent(content);
-
         List<BookBean> books = new ArrayList<>();
-
         Elements elements = body.getElementsByClass("item");
         for (Element element : elements) {
             Element a = element.getElementsByTag("a").get(0);
@@ -290,49 +243,38 @@ public class DocUtil {
                     .attr("data-id"));
             String data_src = a.getElementsByTag("img").get(0)
                     .absUrl("data-src");
-
             String star = a.getElementsByTag("span").get(0).text();
             String title = element.getElementsByClass("title").text();
             String desc = element.getElementsByClass("content").text();
-
             BookBean book = new BookBean();
             book.setId(id);
             book.setTitle(title);
-            book.setData_src(data_src);
+            book.setDataSrc(data_src);
             book.setStar(star);
             book.setDesc(desc);
-
             List<String> ts = new ArrayList<>();
-
             Elements tags = element.getElementsByClass("tags-txt");
             for (Element tag : tags) {
                 String t = tag.text();
                 ts.add(t);
             }
-
             book.setTags(ts);
             books.add(book);
         }
         RandomSortUtil.sort(books);
-        box.setBookList(books);
-        return box;
-
+        return new MoreBox(href, top, content, figure, books);
     }
 
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////// details
+    //------------------------------ details ----------------------------------------//
 
     public static DetailsBox transToDetails(Element body) {
-
         Element mk = body.getElementsByClass("mk-detail").get(0);
-        // .getElementsByTag("strong").text();
         String title = mk.getElementsByClass("name").text();
         String author = mk.getElementsByClass("author").text();
-
         Element ci = mk.getElementsByClass("comic-item").get(0);
         int id = Integer.parseInt(ci.getElementsByTag("img").get(0)
                 .attr("data-id"));
         String data_src = ci.getElementsByTag("img").get(0).attr("data-src");
-
         String star = mk.getElementsByClass("ift-xing").text();
         String ift = mk.getElementsByClass("hasread").text();
         Elements tags = mk.getElementsByClass("tags");
@@ -341,87 +283,72 @@ public class DocUtil {
             String t = tag.text();
             ts.add(t);
         }
-
         BookBean mainBook = new BookBean();
         mainBook.setId(id);
         mainBook.setTitle(title);
         mainBook.setAuthor(author);
         mainBook.setStar(star);
         mainBook.setIft(ift);
-        mainBook.setData_src(data_src);
+        mainBook.setDataSrc(data_src);
         mainBook.setTags(ts);
-
-
-        Elements swipers = body.getElementsByClass("tab-item");
-        XiBean xi = getXi(swipers.get(0));
-        MuBean mu = getMu(swipers.get(1));
-        ZiBean zi = getZi(swipers.get(2));
-
+        Elements tabs = body.getElementsByClass("tab-item");
+        XiBean xi = getXi(tabs.get(0));
+        MuBean mu = getMu(tabs.get(1));
+        ZiBean zi = getZi(tabs.get(2));
         HuaBean laseHua = mu.getHuaList().get(mu.getHuaList().size() - 1);
         long chapter_id = laseHua.getId();
         String chapter_name = laseHua.getName();
         long update_time = laseHua.getUptime();
-        mainBook.setChapter_id(chapter_id);
+        mainBook.setChapterId(chapter_id);
         mainBook.setChapter(chapter_name);
-        mainBook.setDesc(xi.getJuqing());
-        mainBook.setUpdate_time(update_time);
+        mainBook.setDesc(xi.getPlot());
+        mainBook.setUpdateTime(update_time);
         xi.getAuthor().getBookList().add(mainBook);
-
         mu.setBook_id(mainBook.getId());
-        // //////////////
         List<BookBean> bookList = new ArrayList<>();
         Element mk2 = body.getElementsByClass("mk-recommend").get(0);
         Elements items = mk2.getElementsByClass("comic-item");
-        if (items != null || items.size() > 0) {
+        if (items != null && items.size() > 0) {
             for (Element item : items) {
                 bookList.add(getBook(item));
             }
         }
         RandomSortUtil.sort(bookList);
-
         return new DetailsBox(mainBook, xi, mu, zi, bookList);
     }
 
-
     private static XiBean getXi(Element element) {
-
-        String juqing = element.getElementsByClass("comic-detail").get(0)
+        String plot = element.getElementsByClass("comic-detail").get(0)
                 .getElementsByClass("content").get(0).text();
         Element info = element.getElementsByClass("author-info").get(0);
-        String author_avatar =
-                info.getElementsByClass("author-avatar").get(0)
-                        .absUrl("data-src");
+        String author_avatar = info.getElementsByClass("author-avatar").get(0)
+                .absUrl("data-src");
         String author_name = info.getElementsByClass("author-name").text();
         String fans_num = info.getElementsByClass("fans-num").text();
-
         String author_say = element.getElementsByClass("content").get(2).text();
         List<BookBean> books = new ArrayList<>();
         Elements items = element.getElementsByClass("comic-item");
-        if (items != null || items.size() > 0) {
+        if (items != null && items.size() > 0) {
             for (Element item : items) {
                 BookBean book = getBook(item);
                 books.add(book);
             }
         }
         AuthorBean author = new AuthorBean(author_avatar, author_name, fans_num, author_say, books);
-        return new XiBean(author, juqing);
+        return new XiBean(author, plot);
     }
 
     private static MuBean getMu(Element element) {
         Element update = element.getElementById("updateTime");
-        long time = Long.parseLong(update.attr("datetime"));
         String time_desc = update.text();
-
-        List<HuaBean> huas = new ArrayList<>();
+        List<HuaBean> huaList = new ArrayList<>();
         Elements items = element.getElementsByClass("item");
-        if (items != null || items.size() > 0) {
+        if (items != null && items.size() > 0) {
             int size = items.size();
             for (int i = size - 1; i >= 0; i--) {
                 Element item = items.get(i);
                 long id = Long.parseLong(item.attr("data-id"));
                 long uptime = Long.parseLong(item.attr("data-uptime"));
-//                String href = item.getElementsByClass("chapterBtn").get(0)
-//                        .absUrl("href");
                 String name = item.getElementsByClass("chapterBtn").get(0)
                         .attr("title");
                 Elements lock = item.getElementsByClass("lockIcon");
@@ -430,42 +357,32 @@ public class DocUtil {
                 boolean isDot = updot != null && updot.size() > 0;
                 HuaBean hua = new HuaBean(id, name, uptime, isLock, isDot);
                 hua.setIndex(i);
-                huas.add(hua);
+                huaList.add(hua);
             }
         }
-
-
-        return new MuBean(time_desc, time, huas);
+        return new MuBean(time_desc, huaList);
     }
 
     private static ZiBean getZi(Element element) {
         Element support = element.getElementsByClass("support").get(0);
-        Elements nums = support.getElementsByClass("num");
-
+        Elements numList = support.getElementsByClass("num");
         String[] su = new String[]{
-                nums.get(0).text(),
-                nums.get(1).text(),
-                nums.get(2).text(),
-                nums.get(3).text(),
-                nums.get(4).text(),
-                nums.get(5).text(),
+                numList.get(0).text(),
+                numList.get(1).text(),
+                numList.get(2).text(),
+                numList.get(3).text(),
+                numList.get(4).text(),
+                numList.get(5).text(),
         };
-
-
         List<FansBean> fs = new ArrayList<>();
-        Element influence = element.getElementsByClass("mk-influencerank-tabs")
-                .get(0);
-
+        Element influence = element.getElementsByClass("mk-influencerank-tabs").get(0);
         try {
-
             Element top1 = influence.getElementsByClass("rank-1st").get(0);
             Element top2 = influence.getElementsByClass("rank-2st").get(0);
             Element top3 = influence.getElementsByClass("rank-3st").get(0);
-
             fs.add(getFans(top1));
             fs.add(getFans(top2));
             fs.add(getFans(top3));
-
             Elements items = influence.getElementsByClass("item");
             if (items != null && items.size() > 0) {
                 for (Element item : items) {
@@ -483,7 +400,6 @@ public class DocUtil {
         String name = ele.getElementsByClass("name").text();
         String num = ele.getElementsByTag("span").get(0).text();
         return new FansBean(data_src, name, num);
-
     }
 
     private static FansBean getFans2(Element ele) {
@@ -491,31 +407,24 @@ public class DocUtil {
         String name = ele.getElementsByClass("name").text();
         String num = ele.getElementsByClass("num").get(0).text();
         return new FansBean(data_src, name, num);
-
     }
 
-
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////// ty
+    //------------------------------ ty ----------------------------------------//
 
     public static TyBox transToTy(Element body) {
         String base = body.baseUri();
         String title = body.getElementsByClass("mk-header").get(0)
                 .getElementsByClass("title").get(0).text();
-
         String next = body.getElementsByClass("mk-pages").get(0)
                 .getElementsByClass("next").get(0).absUrl("href");
-
         Element comic_sort = body.getElementsByClass("comic-sort").get(0);
-
         List<BookBean> books = new ArrayList<>();
         Elements items = comic_sort.getElementsByClass("comic-item");
-        if (items != null || items.size() > 0) {
+        if (items != null && items.size() > 0) {
             for (Element item : items) {
                 books.add(getBook(item));
             }
         }
-
         return new TyBox(base, title, next, books);
     }
-
 }

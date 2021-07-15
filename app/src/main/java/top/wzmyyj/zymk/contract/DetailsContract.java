@@ -13,10 +13,10 @@ import top.wzmyyj.zymk.base.contract.IBaseView;
 /**
  * Created by yyj on 2018/09/10. email: 2209011667@qq.com
  */
-
 public interface DetailsContract {
 
     interface IView extends IBaseView {
+
         void setBook(BookBean book);
 
         void setXi(XiBean xi);
@@ -33,11 +33,10 @@ public interface DetailsContract {
     }
 
     interface IPresenter extends IBasePresenter {
+
         void loadData();
 
         void goComic(int comic_id, long chapter_id);
-
-        void goComic(int comic_id);
 
         void goDetails(String href);
 
@@ -47,6 +46,5 @@ public interface DetailsContract {
 
         void getHistoryRead(long id);
     }
-
 
 }

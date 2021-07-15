@@ -5,4 +5,10 @@
     <dimen name="tab_icon_size">20dp</dimen>
     <dimen name="tab_text_size">12sp</dimen>
     <dimen name="tab_height">55dp</dimen>
+    <dimen name="banner_indicator_height">9dp</dimen>
+    <dimen name="banner_indicator_margin">3dp</dimen>
+    <dimen name="banner_indicator_width">9dp</dimen>
+    <dimen name="banner_title_height">25dp</dimen>
+    <dimen name="banner_title_text_size">12sp</dimen>
+    <dimen name="line_height">0.1dp</dimen>
 </resources>

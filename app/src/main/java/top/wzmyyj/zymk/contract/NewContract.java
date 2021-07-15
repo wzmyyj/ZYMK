@@ -9,11 +9,11 @@ import top.wzmyyj.zymk.base.contract.IBaseView;
 /**
  * Created by yyj on 2018/09/10. email: 2209011667@qq.com
  */
-
 public interface NewContract {
 
     interface IView extends IBaseView {
-        void showData(List<BookBean>... bookList);
+
+        void showData(List<BookBean> bookList1, List<BookBean> bookList2);
     }
 
     interface IPresenter extends IBasePresenter {
@@ -22,10 +22,6 @@ public interface NewContract {
 
         void loadData();
 
-
         void goDetails(String href);
-
     }
-
-
 }

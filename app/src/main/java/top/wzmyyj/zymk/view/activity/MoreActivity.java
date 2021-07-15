@@ -1,5 +1,6 @@
 package top.wzmyyj.zymk.view.activity;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -17,7 +18,26 @@ import top.wzmyyj.zymk.presenter.MorePresenter;
 import top.wzmyyj.zymk.base.activity.BaseActivity;
 import top.wzmyyj.zymk.view.panel.MoreRecyclerPanel;
 
+/**
+ * Created by yyj on 2018/08/01. email: 2209011667@qq.com
+ */
+@SuppressLint("NonConstantResourceId")
 public class MoreActivity extends BaseActivity<MoreContract.IPresenter> implements MoreContract.IView {
+
+    private MoreRecyclerPanel moreRecyclerPanel;
+
+    @BindView(R.id.ll_panel)
+    LinearLayout llPanel;
+    @BindView(R.id.img_back)
+    ImageView imgBack;
+    @BindView(R.id.tv_title)
+    TextView tvTitle;
+    @BindView(R.id.ll_top)
+    LinearLayout llTop;
+    @BindView(R.id.v_top_0)
+    View v0;
+    @BindView(R.id.v_top_1)
+    View v1;
 
     @Override
     protected void initPresenter() {
@@ -29,28 +49,11 @@ public class MoreActivity extends BaseActivity<MoreContract.IPresenter> implemen
         return R.layout.activity_more;
     }
 
-
-    private MoreRecyclerPanel moreRecyclerPanel;
-
     @Override
     protected void initPanels() {
         super.initPanels();
         addPanels(moreRecyclerPanel = new MoreRecyclerPanel(activity, mPresenter));
     }
-
-    @BindView(R.id.ll_panel)
-    LinearLayout layout;
-    @BindView(R.id.img_back)
-    ImageView img_back;
-    @BindView(R.id.tv_title)
-    TextView tv_title;
-    @BindView(R.id.ll_top)
-    LinearLayout ll_top;
-
-    @BindView(R.id.v_top_0)
-    View v0;
-    @BindView(R.id.v_top_1)
-    View v1;
 
     @Override
     protected void initSome(Bundle savedInstanceState) {
@@ -63,8 +66,8 @@ public class MoreActivity extends BaseActivity<MoreContract.IPresenter> implemen
         super.initView();
         StatusBarUtil.fitsStatusBarView(v0, v1);
 
-        layout.addView(getPanelView(0));
-        getPanel(0).bingViews(ll_top);
+        llPanel.addView(getPanelView(0));
+        getPanel(0).bingViews(llTop);
     }
 
     @Override
@@ -76,14 +79,8 @@ public class MoreActivity extends BaseActivity<MoreContract.IPresenter> implemen
     @Override
     protected void initListener() {
         super.initListener();
-        img_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mPresenter.finish();
-            }
-        });
+        imgBack.setOnClickListener(v -> mPresenter.finish());
     }
-
 
     @Override
     public void showData(String content, String figure, List<BookBean> books) {
@@ -92,7 +89,6 @@ public class MoreActivity extends BaseActivity<MoreContract.IPresenter> implemen
 
     @Override
     public void setTitle(String s) {
-        if (tv_title != null)
-            tv_title.setText(s);
+        if (tvTitle != null) tvTitle.setText(s);
     }
 }

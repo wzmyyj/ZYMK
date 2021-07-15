@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:ignore="HardcodedText,ContentDescription">
 
     <FrameLayout
         android:id="@+id/fl_panel"
@@ -16,38 +18,41 @@
         <View
             android:id="@+id/v_top_0"
             android:layout_width="match_parent"
-            android:layout_height="0dp" />
+            android:layout_height="0pt" />
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="45dp">
+            android:layout_height="45pt">
 
             <ImageView
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                android:layout_gravity="left"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:padding="7dp"
+                android:layout_width="45pt"
+                android:layout_height="45pt"
+                android:layout_gravity="start"
+                android:layout_marginLeft="10pt"
+                android:layout_marginRight="10pt"
+                android:padding="7pt"
                 android:src="@drawable/black_oval_bg" />
 
             <ImageView
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                android:layout_gravity="right|center_vertical"
-                android:layout_marginRight="10dp"
-                android:padding="7dp"
+                android:layout_width="45pt"
+                android:layout_height="45pt"
+                android:layout_gravity="end|center_vertical"
+                android:layout_marginEnd="10pt"
+                android:layout_marginRight="10pt"
+                android:padding="7pt"
                 android:src="@drawable/black_oval_bg" />
 
             <ImageView
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                android:layout_gravity="right|center_vertical"
-                android:layout_marginRight="10dp"
-                android:padding="13dp"
+                android:layout_width="45pt"
+                android:layout_height="45pt"
+                android:layout_gravity="end|center_vertical"
+                android:layout_marginEnd="10pt"
+                android:layout_marginRight="10pt"
+                android:padding="13pt"
                 android:src="@mipmap/svg_white_nav_bar_search" />
 
         </FrameLayout>
+
     </LinearLayout>
 
     <LinearLayout
@@ -61,7 +66,7 @@
         <View
             android:id="@+id/v_top_1"
             android:layout_width="match_parent"
-            android:layout_height="0dp" />
+            android:layout_height="0pt" />
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -69,28 +74,31 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="45pt"
                 android:gravity="center"
                 android:text="推荐"
                 android:textColor="@color/colorPrimary"
-                android:textSize="18sp" />
+                android:textSize="18pt" />
 
             <ImageView
                 android:id="@+id/img_search"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                android:layout_gravity="right|center_vertical"
-                android:layout_marginRight="10dp"
+                android:layout_width="45pt"
+                android:layout_height="45pt"
+                android:layout_gravity="end|center_vertical"
+                android:layout_marginEnd="10pt"
+                android:layout_marginRight="10pt"
                 android:background="@drawable/click_bg"
-                android:padding="13dp"
+                android:padding="13pt"
                 android:src="@mipmap/svg_red_nav_bar_search" />
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="0.1dp"
+                android:layout_height="0.1pt"
                 android:layout_gravity="bottom"
                 android:background="@color/colorLine" />
+
         </FrameLayout>
+
     </LinearLayout>
 
     <LinearLayout
@@ -101,19 +109,19 @@
         <View
             android:id="@+id/v_top_2"
             android:layout_width="match_parent"
-            android:layout_height="0dp" />
+            android:layout_height="0pt" />
 
         <ImageView
             android:id="@+id/img_a"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:layout_gravity="left"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_width="45pt"
+            android:layout_height="45pt"
+            android:layout_gravity="start"
+            android:layout_marginLeft="10pt"
+            android:layout_marginRight="10pt"
             android:background="@drawable/click_bg"
-            android:padding="7.5dp"
+            android:padding="7.5pt"
             android:src="@mipmap/pic_main_boy" />
-    </LinearLayout>
 
+    </LinearLayout>
 
 </FrameLayout>

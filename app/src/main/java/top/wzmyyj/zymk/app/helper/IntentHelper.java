@@ -1,4 +1,4 @@
-package top.wzmyyj.zymk.app.tools;
+package top.wzmyyj.zymk.app.helper;
 
 import android.app.Activity;
 import android.content.Context;
@@ -19,8 +19,8 @@ import top.wzmyyj.zymk.view.activity.SettingActivity;
  * Created by yyj on 2018/07/09. email: 2209011667@qq.com
  * Intent 页面跳转的统一封装类。
  */
+public class IntentHelper {
 
-public class I {
     public static void toMainActivity(Context context) {
         Intent intent = new Intent(context, MainActivity.class);
         context.startActivity(intent);
@@ -83,12 +83,6 @@ public class I {
 
     public static void toSearchActivity(Context context) {
         Intent intent = new Intent(context, SearchActivity.class);
-        context.startActivity(intent);
-    }
-
-    public static void toComicActivity(Context context, int comic_id) {
-        Intent intent = new Intent(context, ComicActivity.class);
-        intent.putExtra("comic_id", comic_id);
         context.startActivity(intent);
     }
 

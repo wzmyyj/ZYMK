@@ -16,19 +16,18 @@ import top.wzmyyj.zymk.model.net.utils.ReOk;
 /**
  * Created by yyj on 2018/08/02. email: 2209011667@qq.com
  */
-
 public class ComicModel {
 
-    public void getComic(int comic_id, Observer<ComicBox> observer) {
-        Gson gson = new GsonBuilder().registerTypeAdapter(ComicBox.class, new ComicBox.Deserializer2()).create();
-        Retrofit retrofit = ReOk.bind(Urls.ZYMK_BaseApi, gson);
-        ComicService service = retrofit.create(ComicService.class);
-        Observable<ComicBox> observable = service.getComic(comic_id);
-        observable.subscribeOn(Schedulers.io())
-                .unsubscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(observer);
-    }
+//    public void getComic(int comic_id, Observer<ComicBox> observer) {
+//        Gson gson = new GsonBuilder().registerTypeAdapter(ComicBox.class, new ComicBox.Deserializer2()).create();
+//        Retrofit retrofit = ReOk.bind(Urls.ZYMK_BaseApi, gson);
+//        ComicService service = retrofit.create(ComicService.class);
+//        Observable<ComicBox> observable = service.getComic(comic_id);
+//        observable.subscribeOn(Schedulers.io())
+//                .unsubscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(observer);
+//    }
 
     public void getComicInfo(int comic_id, Observer<ComicBox> observer) {
         Gson gson = new GsonBuilder().registerTypeAdapter(ComicBox.class, new ComicBox.Deserializer()).create();

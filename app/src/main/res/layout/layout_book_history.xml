@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
-
+    android:orientation="vertical"
+    tools:ignore="HardcodedText,ContentDescription">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="138dp"
+        android:layout_height="138pt"
         android:background="@color/colorWhite"
+        android:baselineAligned="false"
         android:orientation="horizontal"
-        android:padding="15dp">
+        android:padding="15pt">
 
         <FrameLayout
-            android:layout_width="81dp"
-            android:layout_height="108dp"
+            android:layout_width="81pt"
+            android:layout_height="108pt"
             android:background="@color/colorGray_e">
 
             <ImageView
@@ -25,140 +26,146 @@
 
             <!--<TextView-->
             <!--android:id="@+id/tv_new"-->
-            <!--android:layout_width="35dp"-->
-            <!--android:layout_height="15dp"-->
+            <!--android:layout_width="35pt"-->
+            <!--android:layout_height="15pt"-->
             <!--android:layout_gravity="right|top"-->
             <!--android:background="@color/colorPrimary"-->
             <!--android:gravity="center"-->
-            <!--android:paddingLeft="3dp"-->
-            <!--android:paddingRight="3dp"-->
+            <!--android:paddingLeft="3pt"-->
+            <!--android:paddingRight="3pt"-->
             <!--android:text="NEW"-->
             <!--android:textColor="@color/colorWhite"-->
-            <!--android:textSize="10sp" />-->
+            <!--android:textSize="10pt" />-->
+
         </FrameLayout>
 
 
         <FrameLayout
-            android:layout_width="0dp"
+            android:layout_width="0pt"
             android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10pt"
+            android:layout_marginLeft="10pt"
             android:layout_weight="1"
-            android:padding="5dp">
+            android:padding="5pt">
 
             <TextView
                 android:id="@+id/tv_title"
                 android:layout_width="match_parent"
-                android:layout_height="20dp"
+                android:layout_height="20pt"
                 android:layout_gravity="top"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="5pt"
                 android:gravity="center_vertical"
                 android:singleLine="true"
                 android:text="标题"
                 android:textColor="@color/colorGray_5"
-                android:textSize="15sp" />
-
+                android:textSize="15pt" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="20dp"
+                android:layout_height="20pt"
                 android:layout_gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="20dp"
+                    android:layout_height="20pt"
                     android:gravity="center_vertical"
                     android:singleLine="true"
                     android:text="已读："
                     android:textColor="@color/colorGray_9"
-                    android:textSize="12sp" />
+                    android:textSize="12pt" />
 
                 <TextView
                     android:id="@+id/tv_chapter"
                     android:layout_width="match_parent"
-                    android:layout_height="15dp"
+                    android:layout_height="15pt"
                     android:gravity="center_vertical"
                     android:singleLine="true"
                     android:text="0话"
                     android:textColor="@color/colorGray_7"
-                    android:textSize="12dp" />
+                    android:textSize="12pt" />
+
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="20dp"
+                android:layout_height="20pt"
                 android:layout_gravity="bottom"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="5pt"
+                android:layout_marginBottom="10pt"
                 android:orientation="horizontal">
 
                 <!--<TextView-->
                 <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="20dp"-->
+                <!--android:layout_height="20pt"-->
                 <!--android:gravity="center_vertical"-->
                 <!--android:singleLine="true"-->
                 <!--android:text="时间："-->
                 <!--android:textColor="@color/colorGray_9"-->
-                <!--android:textSize="12sp" />-->
+                <!--android:textSize="12pt" />-->
 
                 <TextView
                     android:id="@+id/tv_read_time"
                     android:layout_width="match_parent"
-                    android:layout_height="15dp"
+                    android:layout_height="15pt"
                     android:gravity="center_vertical"
                     android:singleLine="true"
                     android:text="刚刚"
                     android:textColor="@color/colorGray_b"
-                    android:textSize="12dp" />
+                    android:textSize="12pt" />
+
             </LinearLayout>
 
         </FrameLayout>
 
-
         <LinearLayout
             android:id="@+id/ll_continue_read"
-            android:layout_width="50dp"
+            android:layout_width="50pt"
             android:layout_height="match_parent"
             android:gravity="center_horizontal"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            tools:ignore="UseCompoundDrawables">
 
             <ImageView
                 android:id="@+id/img_continue_read"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_marginTop="30dp"
+                android:layout_width="35pt"
+                android:layout_height="35pt"
+                android:layout_marginTop="30pt"
                 android:src="@mipmap/icon_continue_read" />
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="30pt"
                 android:gravity="center"
                 android:text="续看"
                 android:textColor="@color/colorGray_9"
-                android:textSize="12dp" />
+                android:textSize="12pt" />
+
         </LinearLayout>
 
         <RelativeLayout
             android:id="@+id/rl_select"
-            android:layout_width="30dp"
+            android:layout_width="30pt"
             android:layout_height="match_parent"
             android:visibility="gone">
 
             <ImageView
                 android:id="@+id/img_select"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="30pt"
+                android:layout_height="30pt"
                 android:layout_centerInParent="true"
-                android:padding="7dp"
+                android:padding="7pt"
                 android:src="@mipmap/icon_mine_not_select" />
+
         </RelativeLayout>
+
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="0.1dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
+        android:layout_height="0.1pt"
+        android:layout_marginLeft="15pt"
+        android:layout_marginRight="15pt"
         android:background="@color/colorLine" />
 
 </LinearLayout>

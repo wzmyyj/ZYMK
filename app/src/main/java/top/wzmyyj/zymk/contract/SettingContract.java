@@ -6,10 +6,10 @@ import top.wzmyyj.zymk.base.contract.IBaseView;
 /**
  * Created by yyj on 2018/09/10. email: 2209011667@qq.com
  */
-
 public interface SettingContract {
 
     interface IView extends IBaseView {
+
         void setCache(String s);
 
         void setVersion(String s);
@@ -18,6 +18,7 @@ public interface SettingContract {
     }
 
     interface IPresenter extends IBasePresenter {
+
         void goAboutMe();
 
         void goGitHubWeb();
@@ -30,13 +31,12 @@ public interface SettingContract {
 
         void getVersion();
 
-
         void loadNewApp();
 
         void getCacheSize();
 
         void clearCache();
+
+        void setting();
     }
-
-
 }

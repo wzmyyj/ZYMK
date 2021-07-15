@@ -1,86 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorWhite"
     android:orientation="vertical"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:ignore="HardcodedText,ContentDescription">
 
-    <android.support.v4.view.ViewPager
+    <androidx.viewpager.widget.ViewPager
         android:id="@+id/vp_content"
         android:layout_width="match_parent"
-        android:layout_height="540dp">
-
-    </android.support.v4.view.ViewPager>
+        android:layout_height="540pt" />
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="0.1dp"
+        android:layout_height="0.1pt"
         android:background="@color/colorLine" />
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="15dp"
+        android:layout_height="15pt"
         android:background="@color/colorGray_g" />
-
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="0.1dp"
+        android:layout_height="0.1pt"
         android:background="@color/colorLine" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="10pt"
+        android:layout_marginBottom="10pt"
         android:orientation="vertical">
-
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="25dp"
+            android:layout_height="25pt"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp">
+            android:paddingLeft="10pt"
+            android:paddingRight="10pt"
+            tools:ignore="UseCompoundDrawables">
 
             <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:padding="2dp"
+                android:layout_width="20pt"
+                android:layout_height="20pt"
+                android:padding="2pt"
                 android:src="@mipmap/svg_red_work" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5pt"
+                android:layout_marginLeft="5pt"
                 android:text="相关推荐"
                 android:textColor="@color/colorGray_6"
-                android:textSize="15sp" />
+                android:textSize="15pt" />
+
         </LinearLayout>
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_books"
             android:layout_width="match_parent"
-            android:layout_height="180dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp">
-
-        </android.support.v7.widget.RecyclerView>
+            android:layout_height="180pt"
+            android:paddingLeft="10pt"
+            android:paddingRight="10pt" />
 
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="0.1dp"
+        android:layout_height="0.1pt"
         android:background="@color/colorLine" />
-
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="15dp"
+        android:layout_height="15pt"
         android:background="@color/colorGray_g" />
+
 </LinearLayout>
 

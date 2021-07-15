@@ -1,7 +1,10 @@
 package top.wzmyyj.wzm_sdk.panel;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
-import android.support.annotation.NonNull;
+import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
@@ -16,7 +19,6 @@ import top.wzmyyj.wzm_sdk.R;
 /**
  * Created by wzm on 2018/07/03. email: 2209011667@qq.com
  */
-
 public abstract class BannerPanel extends InitPanel {
 
     protected Banner mBanner;
@@ -25,12 +27,12 @@ public abstract class BannerPanel extends InitPanel {
         super(context);
     }
 
+    @SuppressLint("InflateParams")
     @Override
     protected void initView() {
         view = mInflater.inflate(R.layout.panel_banner, null);
         mBanner = view.findViewById(R.id.banner);
-
-        List images = new ArrayList<>();
+        List<Object> images = new ArrayList<>();
         List<String> titles = new ArrayList<>();
         setData(images, titles);
         //设置图片加载器
@@ -49,7 +51,6 @@ public abstract class BannerPanel extends InitPanel {
         mBanner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR_TITLE_INSIDE);
         //设置指示器位置（当banner模式中有指示器时）
         mBanner.setIndicatorGravity(BannerConfig.RIGHT);
-
         // 自定义样式
         setBanner(mBanner);
         //banner设置方法全部调用完毕时最后调用
@@ -57,16 +58,13 @@ public abstract class BannerPanel extends InitPanel {
     }
 
     protected void setBanner(Banner banner) {
-
     }
 
-    protected void setData(List images, List<String> titles) {
-
+    protected void setData(List<Object> images, List<String> titles) {
     }
 
     @NonNull
     protected abstract ImageLoader getImageLoader();
-
 
     @Override
     public void onStart() {
@@ -83,14 +81,15 @@ public abstract class BannerPanel extends InitPanel {
     }
 
     @Override
-    protected void initData() {
+    protected void initSome(Bundle savedInstanceState) {
+        super.initSome(savedInstanceState);
+    }
 
+    @Override
+    protected void initData() {
     }
 
     @Override
     protected void initListener() {
-
     }
-
-
 }

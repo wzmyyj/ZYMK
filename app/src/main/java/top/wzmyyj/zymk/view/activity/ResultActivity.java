@@ -1,5 +1,6 @@
 package top.wzmyyj.zymk.view.activity;
 
+import android.annotation.SuppressLint;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
@@ -14,7 +15,16 @@ import top.wzmyyj.zymk.presenter.ResultPresenter;
 import top.wzmyyj.zymk.base.activity.BaseActivity;
 import top.wzmyyj.zymk.view.panel.ResultRecyclerPanel;
 
+/**
+ * Created by yyj on 2018/07/13. email: 2209011667@qq.com
+ */
+@SuppressLint("NonConstantResourceId")
 public class ResultActivity extends BaseActivity<ResultContract.IPresenter> implements ResultContract.IView {
+
+    @BindView(R.id.fl_panel)
+    FrameLayout flPanel;
+    @BindView(R.id.tv_title)
+    TextView tvTitle;
 
     @Override
     protected void initPresenter() {
@@ -31,26 +41,18 @@ public class ResultActivity extends BaseActivity<ResultContract.IPresenter> impl
     @Override
     protected void initPanels() {
         super.initPanels();
-        addPanels(
-                tyRecyclerPanel = new ResultRecyclerPanel(activity, mPresenter)
-        );
+        addPanels(tyRecyclerPanel = new ResultRecyclerPanel(activity, mPresenter));
     }
-
-    @BindView(R.id.fl_panel)
-    FrameLayout layout;
 
     @OnClick(R.id.img_back)
     public void back() {
         mPresenter.finish();
     }
 
-    @BindView(R.id.tv_title)
-    TextView tv_title;
-
     @Override
     protected void initView() {
         super.initView();
-        layout.addView(getPanelView(0));
+        flPanel.addView(getPanelView(0));
     }
 
     @Override
@@ -59,11 +61,10 @@ public class ResultActivity extends BaseActivity<ResultContract.IPresenter> impl
         mPresenter.loadData();
     }
 
-
     @Override
     public void setTitle(String s) {
-        if (tv_title != null)
-            tv_title.setText(s);
+        if (tvTitle != null)
+            tvTitle.setText(s);
     }
 
     @Override

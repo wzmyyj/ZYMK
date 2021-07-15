@@ -5,10 +5,10 @@ import java.util.List;
 /**
  * Created by yyj on 2018/07/15. email: 2209011667@qq.com
  */
-
 public class ZiBean {
-    private List<FansBean> fansList;
-    private String[] support = new String[6];
+
+    private final List<FansBean> fansList;
+    private String[] support;
 
     public ZiBean(List<FansBean> fansList, String[] support) {
         this.fansList = fansList;
@@ -17,10 +17,6 @@ public class ZiBean {
 
     public List<FansBean> getFansList() {
         return fansList;
-    }
-
-    public void setFansList(List<FansBean> fansList) {
-        this.fansList = fansList;
     }
 
     public String[] getSupport() {

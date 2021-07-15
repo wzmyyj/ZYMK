@@ -3,6 +3,8 @@ package top.wzmyyj.zymk.base.fragment;
 import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+
 import butterknife.ButterKnife;
 import top.wzmyyj.wzm_sdk.fragment.PanelFragment;
 import top.wzmyyj.wzm_sdk.tools.T;
@@ -12,17 +14,16 @@ import top.wzmyyj.zymk.base.contract.IBaseView;
 /**
  * Created by yyj on 2018/06/28. email: 2209011667@qq.com
  */
-
 public abstract class BaseFragment<P extends IBasePresenter> extends PanelFragment implements IBaseView {
+
     protected P mPresenter;
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         initPresenter();
         checkPresenterIsNull();
     }
-
 
     protected abstract void initPresenter();
 
@@ -42,18 +43,22 @@ public abstract class BaseFragment<P extends IBasePresenter> extends PanelFragme
 
     @Override
     protected void initData() {
-
     }
 
     @Override
     protected void initListener() {
-
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mPresenter.onCreate();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        mPresenter.onStart();
     }
 
     @Override
@@ -66,6 +71,12 @@ public abstract class BaseFragment<P extends IBasePresenter> extends PanelFragme
     public void onPause() {
         super.onPause();
         mPresenter.onPause();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        mPresenter.onStop();
     }
 
     @Override

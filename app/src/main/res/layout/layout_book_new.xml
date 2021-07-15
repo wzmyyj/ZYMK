@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="140dp"
-    android:orientation="vertical">
-
+    android:layout_height="140pt"
+    android:orientation="vertical"
+    tools:ignore="HardcodedText,ContentDescription">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="139dp"
+        android:layout_height="139pt"
         android:background="@color/colorWhite"
         android:orientation="horizontal"
-        android:padding="15dp">
+        android:padding="15pt">
 
         <FrameLayout
-            android:layout_width="108dp"
-            android:layout_height="108dp"
+            android:layout_width="108pt"
+            android:layout_height="108pt"
             android:background="@color/colorGray_e">
 
             <ImageView
@@ -25,185 +25,103 @@
 
             <TextView
                 android:id="@+id/tv_star"
-                android:layout_width="35dp"
-                android:layout_height="15dp"
-                android:layout_gravity="right|top"
+                android:layout_width="35pt"
+                android:layout_height="15pt"
+                android:layout_gravity="end|top"
                 android:background="@color/black_overlay"
                 android:gravity="center"
-                android:paddingLeft="3dp"
-                android:paddingRight="3dp"
+                android:paddingLeft="3pt"
+                android:paddingRight="3pt"
                 android:textColor="@color/colorWhite"
-                android:textSize="10sp" />
+                android:textSize="10pt" />
         </FrameLayout>
-
 
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
-            android:padding="5dp">
+            android:layout_marginStart="10pt"
+            android:layout_marginLeft="10pt"
+            android:padding="5pt">
 
             <TextView
                 android:id="@+id/tv_title"
                 android:layout_width="match_parent"
-                android:layout_height="20dp"
+                android:layout_height="20pt"
                 android:layout_gravity="top"
                 android:gravity="center_vertical"
                 android:singleLine="true"
                 android:text="标题"
                 android:textColor="@color/colorGray_5"
-                android:textSize="15sp" />
+                android:textSize="15pt" />
 
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="20dp"
+                android:layout_height="20pt"
                 android:layout_gravity="center_vertical"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="5pt"
+                android:layout_marginBottom="10pt"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="20dp"
+                    android:layout_height="20pt"
                     android:gravity="center_vertical"
                     android:singleLine="true"
                     android:text="最新更新："
                     android:textColor="@color/colorGray_9"
-                    android:textSize="13sp" />
+                    android:textSize="13pt" />
 
                 <TextView
                     android:id="@+id/tv_chapter"
                     android:layout_width="match_parent"
-                    android:layout_height="15dp"
+                    android:layout_height="15pt"
                     android:gravity="center_vertical"
                     android:singleLine="true"
                     android:text="0话"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="13dp" />
+                    android:textSize="13pt" />
+
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="20dp"
+                android:layout_height="20pt"
                 android:layout_gravity="bottom"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="5pt"
+                android:layout_marginBottom="10pt"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="20dp"
+                    android:layout_height="20pt"
                     android:gravity="center_vertical"
                     android:singleLine="true"
                     android:text="推荐理由："
                     android:textColor="@color/colorGray_9"
-                    android:textSize="13sp" />
+                    android:textSize="13pt" />
 
                 <TextView
                     android:id="@+id/tv_desc"
                     android:layout_width="match_parent"
-                    android:layout_height="15dp"
+                    android:layout_height="15pt"
                     android:gravity="center_vertical"
                     android:singleLine="true"
                     android:text="这个漫画很好看"
                     android:textColor="@color/colorGray_7"
-                    android:textSize="13dp" />
+                    android:textSize="13pt" />
+
             </LinearLayout>
 
         </FrameLayout>
+
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="0.1dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
+        android:layout_height="0.1pt"
+        android:layout_marginLeft="15pt"
+        android:layout_marginRight="15pt"
         android:background="@color/colorLine" />
 
 </LinearLayout>
-
-<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--android:layout_width="match_parent"-->
-<!--android:layout_height="260dp"-->
-<!--android:orientation="vertical">-->
-
-<!--<FrameLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="200dp">-->
-
-    <!--<ImageView-->
-        <!--android:id="@+id/img_book"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:background="@color/colorGray_e" />-->
-
-    <!--<TextView-->
-        <!--android:id="@+id/tv_star"-->
-        <!--android:layout_width="35dp"-->
-        <!--android:layout_height="15dp"-->
-        <!--android:layout_gravity="right|top"-->
-        <!--android:background="@color/black_overlay"-->
-        <!--android:gravity="center"-->
-        <!--android:paddingLeft="3dp"-->
-        <!--android:paddingRight="3dp"-->
-        <!--android:textColor="@color/colorWhite"-->
-        <!--android:textSize="10sp" />-->
-<!--</FrameLayout>-->
-
-<!--<LinearLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="25dp"-->
-    <!--android:gravity="center_vertical"-->
-    <!--android:orientation="horizontal"-->
-    <!--android:paddingLeft="15dp">-->
-
-    <!--<TextView-->
-        <!--android:id="@+id/tv_title"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="20dp"-->
-        <!--android:gravity="center_vertical"-->
-        <!--android:singleLine="true"-->
-        <!--android:text="标题"-->
-        <!--android:textColor="@color/colorGray_5"-->
-        <!--android:textSize="14sp" />-->
-
-<!--</LinearLayout>-->
-
-<!--<LinearLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="25dp"-->
-    <!--android:gravity="center_vertical"-->
-    <!--android:orientation="horizontal"-->
-    <!--android:paddingLeft="15dp"-->
-    <!--android:paddingRight="15dp">-->
-
-    <!--<TextView-->
-        <!--android:id="@+id/tv_desc"-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_height="15dp"-->
-        <!--android:layout_weight="1"-->
-        <!--android:gravity="center_vertical"-->
-        <!--android:singleLine="true"-->
-        <!--android:text="这个漫画很好看"-->
-        <!--android:textColor="@color/colorGray_9"-->
-        <!--android:textSize="13dp" />-->
-
-    <!--<TextView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="16dp"-->
-        <!--android:text="更新至："-->
-        <!--android:textColor="@color/colorGray_9"-->
-        <!--android:textSize="13sp" />-->
-
-    <!--<TextView-->
-        <!--android:id="@+id/tv_chapter"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="16dp"-->
-        <!--android:text="0话"-->
-        <!--android:textColor="@color/colorPrimary"-->
-        <!--android:textSize="13sp" />-->
-<!--</LinearLayout>-->
-
-
-<!--</LinearLayout>-->

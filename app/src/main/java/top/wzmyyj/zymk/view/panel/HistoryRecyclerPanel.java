@@ -1,17 +1,18 @@
 package top.wzmyyj.zymk.view.panel;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.zhy.adapter.recyclerview.base.ViewHolder;
 
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import top.wzmyyj.wzm_sdk.adapter.ivd.IVD;
@@ -19,16 +20,16 @@ import top.wzmyyj.zymk.R;
 import top.wzmyyj.zymk.app.bean.BookBean;
 import top.wzmyyj.zymk.app.bean.ChapterBean;
 import top.wzmyyj.zymk.app.bean.HistoryBean;
-import top.wzmyyj.zymk.app.tools.G;
+import top.wzmyyj.zymk.app.helper.GlideLoaderHelper;
 import top.wzmyyj.wzm_sdk.utils.TimeUtil;
 import top.wzmyyj.zymk.contract.FindContract;
-
 
 /**
  * Created by yyj on 2018/08/01. email: 2209011667@qq.com
  */
-
+@SuppressLint("NonConstantResourceId")
 public class HistoryRecyclerPanel extends FindRecyclerPanel<HistoryBean> {
+
     public HistoryRecyclerPanel(Context context, FindContract.IPresenter p) {
         super(context, p);
     }
@@ -43,7 +44,7 @@ public class HistoryRecyclerPanel extends FindRecyclerPanel<HistoryBean> {
 
             @Override
             public boolean isForViewType(HistoryBean item, int position) {
-                return !isGongge;// 列表形式。
+                return !isGrid;// 列表形式。
             }
 
             @Override
@@ -52,19 +53,14 @@ public class HistoryRecyclerPanel extends FindRecyclerPanel<HistoryBean> {
                 ImageView img_book = holder.getView(R.id.img_book);
                 TextView tv_title = holder.getView(R.id.tv_title);
                 tv_title.setText(bookBean.getTitle());
-                G.img(context, bookBean.getData_src(), img_book);
-
-
+                GlideLoaderHelper.img(img_book, bookBean.getDataSrc());
                 // 已读章节。
                 ChapterBean chapterBean = historyBean.getChapter();
                 TextView tv_chapter = holder.getView(R.id.tv_chapter);
-                tv_chapter.setText(chapterBean.getChapter_name());
-
+                tv_chapter.setText(chapterBean.getChapterName());
                 // 上次阅读时间。
                 TextView tv_read_time = holder.getView(R.id.tv_read_time);
-                tv_read_time.setText(TimeUtil.getEasyText(historyBean.getRead_time()));
-
-
+                tv_read_time.setText(TimeUtil.getEasyText(historyBean.getReadTime()));
                 LinearLayout ll_continue_read = holder.getView(R.id.ll_continue_read);
                 ImageView img_continue_read = holder.getView(R.id.img_continue_read);
                 ImageView img_select = holder.getView(R.id.img_select);
@@ -81,19 +77,11 @@ public class HistoryRecyclerPanel extends FindRecyclerPanel<HistoryBean> {
                 } else {
                     img_select.setImageResource(R.mipmap.icon_mine_not_select);
                 }
-
-                final long chapter_id = chapterBean.getChapter_id();
+                final long chapter_id = chapterBean.getChapterId();
                 final int comic_id = bookBean.getId();
-                img_continue_read.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        mPresenter.goComic(comic_id, chapter_id);
-                    }
-                });
-
+                img_continue_read.setOnClickListener(v -> mPresenter.goComic(comic_id, chapter_id));
             }
         });
-
         ivd.add(new IVD<HistoryBean>() {
             @Override
             public int getItemViewLayoutId() {
@@ -102,7 +90,7 @@ public class HistoryRecyclerPanel extends FindRecyclerPanel<HistoryBean> {
 
             @Override
             public boolean isForViewType(HistoryBean item, int position) {
-                return isGongge;// 表格形式。
+                return isGrid;// 表格形式。
             }
 
             @Override
@@ -111,14 +99,9 @@ public class HistoryRecyclerPanel extends FindRecyclerPanel<HistoryBean> {
                 ImageView img_book = holder.getView(R.id.img_book);
                 TextView tv_title = holder.getView(R.id.tv_title);
                 TextView tv_some = holder.getView(R.id.tv_some);
-
                 tv_title.setText(bookBean.getTitle());
-
-
-                tv_some.setText(TimeUtil.getEasyText(historyBean.getRead_time()));
-
-                G.img(context, bookBean.getData_src(), img_book);
-
+                tv_some.setText(TimeUtil.getEasyText(historyBean.getReadTime()));
+                GlideLoaderHelper.img(img_book, bookBean.getDataSrc());
                 ImageView img_select = holder.getView(R.id.img_select);
                 RelativeLayout rl_select = holder.getView(R.id.rl_select);
                 if (isCanSelect) {
@@ -131,10 +114,8 @@ public class HistoryRecyclerPanel extends FindRecyclerPanel<HistoryBean> {
                 } else {
                     img_select.setImageResource(R.mipmap.icon_mine_not_select);
                 }
-
             }
         });
-
     }
 
     @Override
@@ -159,17 +140,7 @@ public class HistoryRecyclerPanel extends FindRecyclerPanel<HistoryBean> {
     @Override
     protected void sort() {
         super.sort();
-        Collections.sort(mData, new Comparator<HistoryBean>() {
-
-            @Override
-            public int compare(HistoryBean o1, HistoryBean o2) {
-                if (o1.getRead_time() < o2.getRead_time()) {
-                    return 1;
-                } else {
-                    return -1;
-                }
-            }
-        });
+        Collections.sort(mData, (o1, o2) -> Long.compare(o2.getReadTime(), o1.getReadTime()));
     }
 
     @Override
@@ -185,6 +156,6 @@ public class HistoryRecyclerPanel extends FindRecyclerPanel<HistoryBean> {
     @Override
     protected void initView() {
         super.initView();
-        tv_empty.setText("奴家在等大人的宠幸~");
+        tvEmpty.setText("奴家在等大人的宠幸~");
     }
 }

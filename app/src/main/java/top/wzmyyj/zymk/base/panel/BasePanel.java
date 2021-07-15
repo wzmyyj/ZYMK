@@ -9,8 +9,8 @@ import top.wzmyyj.zymk.base.contract.IBasePresenter;
 /**
  * Created by yyj on 2018/06/28. email: 2209011667@qq.com
  */
-
 public abstract class BasePanel<P extends IBasePresenter> extends InitPanel {
+
     protected P mPresenter;
 
     public BasePanel(Context context, P p) {
@@ -35,11 +35,9 @@ public abstract class BasePanel<P extends IBasePresenter> extends InitPanel {
 
     @Override
     protected void initData() {
-
     }
 
     @Override
     protected void initListener() {
-
     }
 }

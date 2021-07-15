@@ -16,11 +16,9 @@ import top.wzmyyj.zymk.model.net.utils.ReOk;
 /**
  * Created by yyj on 2018/07/30. email: 2209011667@qq.com
  */
-
 public class SearchModel {
 
     public void getHotSearch(Observer<SearchBox> observer) {
-
         Gson gson = new GsonBuilder().registerTypeAdapter(SearchBox.class, new SearchBox.Deserializer()).create();
         Retrofit retrofit = ReOk.bind(Urls.ZYMK_BaseApi, gson);
         SearchService service = retrofit.create(SearchService.class);
@@ -29,18 +27,16 @@ public class SearchModel {
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer);
-
     }
 
     public void getSmartSearch(final String key, Observer<SearchBox> observer) {
         Gson gson = new GsonBuilder().registerTypeAdapter(SearchBox.class, new SearchBox.Deserializer2()).create();
-        Retrofit retrofit = ReOk.bind(Urls.ZYMK_BaseApi, gson);
+        Retrofit retrofit = ReOk.bind(Urls.ZYMK_Base, gson);
         SearchService service = retrofit.create(SearchService.class);
         Observable<SearchBox> observable = service.getSmartSearch(key);
         observable.subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer);
-
     }
 }

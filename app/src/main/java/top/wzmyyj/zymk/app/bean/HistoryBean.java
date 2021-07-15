@@ -3,11 +3,11 @@ package top.wzmyyj.zymk.app.bean;
 /**
  * Created by yyj on 2018/08/14. email: 2209011667@qq.com
  */
-
 public class HistoryBean {
+
     private BookBean book;
     private ChapterBean chapter;
-    private long read_time;
+    private long readTime;
 
     public BookBean getBook() {
         return book;
@@ -25,11 +25,11 @@ public class HistoryBean {
         this.chapter = chapter;
     }
 
-    public long getRead_time() {
-        return read_time;
+    public long getReadTime() {
+        return readTime;
     }
 
-    public void setRead_time(long read_time) {
-        this.read_time = read_time;
+    public void setReadTime(long readTime) {
+        this.readTime = readTime;
     }
 }

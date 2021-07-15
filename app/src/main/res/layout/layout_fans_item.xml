@@ -1,33 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="100dp"
+    android:layout_height="100pt"
     android:gravity="center_horizontal"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:ignore="HardcodedText,ContentDescription">
 
     <top.wzmyyj.wzm_sdk.widget.CircleImageView
         android:id="@+id/img_fins"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="10dp"
+        android:layout_width="50pt"
+        android:layout_height="50pt"
+        android:layout_marginTop="10pt"
         app:border_color="@color/colorLine"
-        app:border_width="0.1dp" />
+        app:border_width="0.1pt" />
 
     <TextView
         android:id="@+id/tv_fans_name"
         android:layout_width="wrap_content"
-        android:layout_height="15dp"
-        android:layout_marginTop="4dp"
+        android:layout_height="15pt"
+        android:layout_marginTop="4pt"
         android:gravity="center"
         android:lines="1"
         android:text="Fans2"
         android:textColor="@color/colorGray_5"
-        android:textSize="10sp" />
+        android:textSize="10pt" />
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="16dp"
+        android:layout_height="16pt"
         android:orientation="horizontal">
 
         <TextView
@@ -37,7 +39,7 @@
             android:singleLine="true"
             android:text="影响力 "
             android:textColor="@color/colorGray_9"
-            android:textSize="10sp" />
+            android:textSize="10pt" />
 
         <TextView
             android:id="@+id/tv_fans_num"
@@ -47,6 +49,8 @@
             android:singleLine="true"
             android:text="123"
             android:textColor="@color/colorPrimary"
-            android:textSize="10dp" />
+            android:textSize="10pt" />
+
     </LinearLayout>
+
 </LinearLayout>

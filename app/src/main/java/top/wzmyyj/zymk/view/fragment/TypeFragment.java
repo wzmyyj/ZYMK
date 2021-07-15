@@ -1,8 +1,11 @@
 package top.wzmyyj.zymk.view.fragment;
 
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
+import android.annotation.SuppressLint;
 import android.view.View;
+
+import androidx.viewpager.widget.ViewPager;
+
+import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,8 +26,15 @@ import top.wzmyyj.zymk.view.panel.TypeRecyclerPanel;
  * Created by yyj on 2018/06/29. email: 2209011667@qq.com
  * 第二页。
  */
-
+@SuppressLint("NonConstantResourceId")
 public class TypeFragment extends BaseFragment<TypeContract.IPresenter> implements TypeContract.IView {
+
+    @BindView(R.id.tabLayout)
+    TabLayout mTabLayout;
+    @BindView(R.id.viewPager)
+    ViewPager mViewPager;
+    @BindView(R.id.v_top)
+    View vTop;
 
     @Override
     protected void initPresenter() {
@@ -35,7 +45,6 @@ public class TypeFragment extends BaseFragment<TypeContract.IPresenter> implemen
     protected int getLayoutId() {
         return R.layout.fragment_2;
     }
-
 
     @Override
     protected void initPanels() {
@@ -48,23 +57,15 @@ public class TypeFragment extends BaseFragment<TypeContract.IPresenter> implemen
         );
     }
 
-    @BindView(R.id.tabLayout)
-    TabLayout mTabLayout;
-    @BindView(R.id.viewPager)
-    ViewPager mViewPager;
-
     @OnClick(R.id.img_search)
     public void search() {
         mPresenter.goSearch();
     }
 
-    @BindView(R.id.v_top)
-    View v;
-
     @Override
     protected void initView() {
         super.initView();
-        StatusBarUtil.fitsStatusBarView(v);
+        StatusBarUtil.fitsStatusBarView(vTop);
         List<View> viewList = new ArrayList<>();
         List<String> titles = new ArrayList<>();
         for (Panel p : mPanelManager.getPanelList()) {
@@ -74,7 +75,6 @@ public class TypeFragment extends BaseFragment<TypeContract.IPresenter> implemen
         ViewTitlePagerAdapter pagerAdapter = new ViewTitlePagerAdapter(viewList, titles);
         mViewPager.setAdapter(pagerAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
-
     }
 
     @Override
@@ -83,12 +83,12 @@ public class TypeFragment extends BaseFragment<TypeContract.IPresenter> implemen
         mPresenter.loadData();
     }
 
-    @SafeVarargs
     @Override
-    public final void showData(List<TypeBean>... typeList) {
-        ((TypeRecyclerPanel) getPanel(0)).setTypeData(typeList[0]);
-        ((TypeRecyclerPanel) getPanel(1)).setTypeData(typeList[1]);
-        ((TypeRecyclerPanel) getPanel(2)).setTypeData(typeList[2]);
-        ((TypeRecyclerPanel) getPanel(3)).setTypeData(typeList[3]);
+    public void showData(List<TypeBean> typeList1, List<TypeBean> typeList2,
+                         List<TypeBean> typeList3, List<TypeBean> typeList4) {
+        ((TypeRecyclerPanel) getPanel(0)).setTypeData(typeList1);
+        ((TypeRecyclerPanel) getPanel(1)).setTypeData(typeList2);
+        ((TypeRecyclerPanel) getPanel(2)).setTypeData(typeList3);
+        ((TypeRecyclerPanel) getPanel(3)).setTypeData(typeList4);
     }
 }

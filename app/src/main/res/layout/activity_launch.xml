@@ -1,52 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:ignore="HardcodedText">
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        android:layout_marginTop="20dp"
+        android:layout_height="0pt"
+        android:layout_marginLeft="40pt"
+        android:layout_marginTop="20pt"
+        android:layout_marginRight="40pt"
+        android:layout_marginBottom="10pt"
         android:layout_weight="1">
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@mipmap/ic_logo_girl" />
+            android:src="@mipmap/ic_logo_girl"
+            tools:ignore="ContentDescription" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="40pt"
             android:text="非"
             android:textColor="@color/colorPrimary"
-            android:textSize="12sp" />
+            android:textSize="12pt" />
     </FrameLayout>
-
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
+        android:layout_height="30pt"
+        android:layout_marginLeft="30pt"
+        android:layout_marginRight="30pt"
         android:gravity="center"
         android:text="@string/launch_tip"
         android:textColor="@color/colorGray_9"
-        android:textSize="13sp" />
+        android:textSize="13pt" />
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="20dp"
-        android:layout_marginBottom="20dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
+        android:layout_height="20pt"
+        android:layout_marginLeft="30pt"
+        android:layout_marginRight="30pt"
+        android:layout_marginBottom="20pt"
         android:gravity="center"
         android:text="@string/launch_github"
         android:textColor="@color/colorGray_b"
-        android:textSize="10sp" />
+        android:textSize="10pt"
+        tools:ignore="Smallpt" />
 
 </LinearLayout>

@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:ignore="HardcodedText,ContentDescription">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="40pt"
         android:orientation="horizontal"
-        android:padding="10dp">
+        android:padding="10pt">
 
         <TextView
             android:layout_width="wrap_content"
@@ -20,7 +22,7 @@
 
         <TextView
             android:id="@+id/tv_mu_last"
-            android:layout_width="0dp"
+            android:layout_width="0pt"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:textColor="@color/colorGray_6"
@@ -29,16 +31,17 @@
 
         <ImageView
             android:id="@+id/img_mu_xu"
-            android:layout_width="15dp"
-            android:layout_height="15dp"
+            android:layout_width="15pt"
+            android:layout_height="15pt"
             android:layout_gravity="bottom"
-            android:src="@mipmap/svg_booklist_up" />
+            android:src="@mipmap/svg_book_list_up" />
 
         <TextView
             android:id="@+id/tv_mu_xu"
-            android:layout_width="35dp"
+            android:layout_width="35pt"
             android:layout_height="match_parent"
-            android:layout_marginLeft="1dp"
+            android:layout_marginStart="1pt"
+            android:layout_marginLeft="1pt"
             android:gravity="bottom"
             android:text="升序"
             android:textColor="@color/colorGray_9"
@@ -46,90 +49,94 @@
 
     </LinearLayout>
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_mu"
+        android:layout_marginEnd="3pt"
+        android:layout_marginStart="3pt"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="0pt"
         android:layout_weight="1"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-    </android.support.v7.widget.RecyclerView>
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="60pt"
+        android:baselineAligned="false"
         android:orientation="horizontal"
-        android:paddingBottom="18dp">
+        android:paddingBottom="18pt">
 
         <LinearLayout
-            android:layout_width="60dp"
+            android:layout_width="60pt"
             android:layout_height="match_parent"
-            android:layout_margin="10dp"
-            android:orientation="horizontal">
+            android:layout_margin="10pt"
+            android:orientation="horizontal"
+            tools:ignore="UseCompoundDrawables">
 
             <ImageView
-                android:layout_width="15dp"
-                android:layout_height="15dp"
+                android:layout_width="15pt"
+                android:layout_height="15pt"
                 android:layout_gravity="center"
-                android:src="@mipmap/svg_booklist_left" />
+                android:src="@mipmap/svg_book_list_left" />
 
             <TextView
                 android:id="@+id/tv_left"
-                android:layout_width="0dp"
+                android:layout_width="0pt"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5pt"
+                android:layout_marginLeft="5pt"
                 android:layout_weight="1"
                 android:background="@drawable/click_bg"
                 android:gravity="center"
                 android:text="上一页"
                 android:textColor="@color/colorGray_7"
                 android:textSize="12sp" />
+
         </LinearLayout>
 
-        <android.support.design.widget.TabLayout
+        <com.google.android.material.tabs.TabLayout
             android:id="@+id/tl_mu_pager"
-            android:layout_width="0dp"
-            android:layout_height="30dp"
+            android:layout_width="0pt"
+            android:layout_height="30pt"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10pt"
+            android:layout_marginRight="10pt"
             android:layout_weight="1"
             app:tabIndicatorColor="@color/colorPrimary"
-            app:tabIndicatorHeight="0dp"
-            app:tabMaxWidth="45dp"
+            app:tabIndicatorHeight="0pt"
+            app:tabMaxWidth="45pt"
             app:tabMode="scrollable"
             app:tabSelectedTextColor="@color/colorPrimary"
             app:tabTextAppearance="@style/MyTabLayoutTextAppearance2"
-            app:tabTextColor="@color/colorGray_9">
-
-        </android.support.design.widget.TabLayout>
+            app:tabTextColor="@color/colorGray_9" />
 
         <LinearLayout
-            android:layout_width="60dp"
+            android:layout_width="60pt"
             android:layout_height="match_parent"
-            android:layout_margin="10dp"
-            android:orientation="horizontal">
+            android:layout_margin="10pt"
+            android:orientation="horizontal"
+            tools:ignore="UseCompoundDrawables">
 
             <TextView
                 android:id="@+id/tv_right"
-                android:layout_width="0dp"
+                android:layout_width="0pt"
                 android:layout_height="match_parent"
-                android:layout_marginRight="5dp"
+                android:layout_marginEnd="5pt"
+                android:layout_marginRight="5pt"
                 android:layout_weight="1"
                 android:background="@drawable/click_bg"
                 android:gravity="center"
-                android:text="上一页"
+                android:text="下一页"
                 android:textColor="@color/colorGray_7"
                 android:textSize="12sp" />
 
             <ImageView
-                android:layout_width="15dp"
-                android:layout_height="15dp"
+                android:layout_width="15pt"
+                android:layout_height="15pt"
                 android:layout_gravity="center"
-                android:src="@mipmap/svg_booklist_right" />
-
+                android:src="@mipmap/svg_book_list_right" />
 
         </LinearLayout>
 
     </LinearLayout>
+
 </LinearLayout>

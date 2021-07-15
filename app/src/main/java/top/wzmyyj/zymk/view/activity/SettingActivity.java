@@ -1,5 +1,6 @@
 package top.wzmyyj.zymk.view.activity;
 
+import android.annotation.SuppressLint;
 import android.widget.TextView;
 
 import butterknife.BindView;
@@ -9,12 +10,21 @@ import top.wzmyyj.zymk.contract.SettingContract;
 import top.wzmyyj.zymk.presenter.SettingPresenter;
 import top.wzmyyj.zymk.base.activity.BaseActivity;
 
-
 /**
  * Created by yyj on 2018/08/20. email: 2209011667@qq.com
  */
-
+@SuppressLint("NonConstantResourceId")
 public class SettingActivity extends BaseActivity<SettingContract.IPresenter> implements SettingContract.IView {
+
+    @BindView(R.id.tv_m_1)
+    TextView tvM1;
+    @BindView(R.id.tv_m_2)
+    TextView tvM2;
+    @BindView(R.id.tv_m_3)
+    TextView tvM3;
+    @BindView(R.id.tv_i_say)
+    TextView tvISay;
+
     @Override
     protected void initPresenter() {
         mPresenter = new SettingPresenter(activity, this);
@@ -24,7 +34,6 @@ public class SettingActivity extends BaseActivity<SettingContract.IPresenter> im
     protected int getLayoutId() {
         return R.layout.activity_setting;
     }
-
 
     @OnClick(R.id.img_back)
     public void back() {
@@ -61,15 +70,10 @@ public class SettingActivity extends BaseActivity<SettingContract.IPresenter> im
         mPresenter.goFeedback();
     }
 
-    @BindView(R.id.tv_m_1)
-    TextView tv_m_1;
-    @BindView(R.id.tv_m_2)
-    TextView tv_m_2;
-    @BindView(R.id.tv_m_3)
-    TextView tv_m_3;
-
-    @BindView(R.id.tv_i_say)
-    TextView tv_i_say;
+    @OnClick(R.id.tv_title)
+    public void setting() {
+        mPresenter.setting();
+    }
 
     @Override
     protected void initData() {
@@ -77,27 +81,25 @@ public class SettingActivity extends BaseActivity<SettingContract.IPresenter> im
         mPresenter.getCacheSize();
         mPresenter.getCue();
         mPresenter.getVersion();
-        tv_i_say.setText(R.string.i_say);
+        tvISay.setText(R.string.i_say);
     }
 
     @Override
     public void setCache(String s) {
-        tv_m_1.setText(s);
+        tvM1.setText(s);
     }
 
     @Override
     public void setCue(boolean is) {
         if (is) {
-            tv_m_2.setText("是");
+            tvM2.setText("是");
         } else {
-            tv_m_2.setText("否");
+            tvM2.setText("否");
         }
     }
 
     @Override
     public void setVersion(String s) {
-        tv_m_3.setText(s);
+        tvM3.setText(s);
     }
-
-
 }

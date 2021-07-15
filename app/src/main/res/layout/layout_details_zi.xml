@@ -1,41 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:ignore="HardcodedText,ContentDescription">
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_zi_1"
         android:layout_width="match_parent"
-        android:layout_height="110dp"
-        android:layout_margin="10dp">
-
-    </android.support.v7.widget.RecyclerView>
+        android:layout_height="110pt"
+        android:layout_margin="10pt" />
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="0.1dp"
+        android:layout_height="0.1pt"
         android:background="@color/colorLine" />
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="35dp"
+        android:layout_height="35pt"
         android:gravity="center_vertical"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingTop="10dp"
+        android:paddingLeft="10pt"
+        android:paddingTop="10pt"
+        android:paddingRight="10pt"
         android:text="粉丝影响力"
         android:textColor="@color/colorGray_9"
-        android:textSize="14sp" />
+        android:textSize="14pt" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="160dp"
+        android:layout_height="160pt"
+        android:baselineAligned="false"
         android:orientation="horizontal">
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="0pt"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center_horizontal"
@@ -43,26 +44,27 @@
 
             <top.wzmyyj.wzm_sdk.widget.CircleImageView
                 android:id="@+id/img_fins_2"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_marginTop="25dp"
+                android:layout_width="80pt"
+                android:layout_height="80pt"
+                android:layout_marginTop="25pt"
+                android:src="@mipmap/ic_error"
                 app:border_color="@color/colorLine"
-                app:border_width="0.1dp" />
+                app:border_width="0.1pt" />
 
             <TextView
                 android:id="@+id/tv_fans_name_2"
                 android:layout_width="wrap_content"
-                android:layout_height="20dp"
-                android:layout_marginTop="5dp"
+                android:layout_height="20pt"
+                android:layout_marginTop="5pt"
                 android:gravity="center"
                 android:lines="1"
-                android:text="Fans2"
+                android:text="*****"
                 android:textColor="@color/colorGray_5"
-                android:textSize="12sp" />
+                android:textSize="12pt" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="20dp"
+                android:layout_height="20pt"
                 android:orientation="horizontal">
 
                 <TextView
@@ -72,7 +74,7 @@
                     android:singleLine="true"
                     android:text="影响力 "
                     android:textColor="@color/colorGray_9"
-                    android:textSize="12sp" />
+                    android:textSize="12pt" />
 
                 <TextView
                     android:id="@+id/tv_fans_num_2"
@@ -80,16 +82,16 @@
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
                     android:singleLine="true"
-                    android:text="123"
+                    android:text="---"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="12dp" />
-            </LinearLayout>
+                    android:textSize="12pt" />
 
+            </LinearLayout>
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="0pt"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center_horizontal"
@@ -97,26 +99,27 @@
 
             <top.wzmyyj.wzm_sdk.widget.CircleImageView
                 android:id="@+id/img_fins_1"
-                android:layout_width="90dp"
-                android:layout_height="90dp"
-                android:layout_marginTop="5dp"
+                android:layout_width="90pt"
+                android:layout_height="90pt"
+                android:layout_marginTop="5pt"
+                android:src="@mipmap/ic_error"
                 app:border_color="@color/colorLine"
-                app:border_width="0.1dp" />
+                app:border_width="0.1pt" />
 
             <TextView
                 android:id="@+id/tv_fans_name_1"
                 android:layout_width="wrap_content"
-                android:layout_height="20dp"
-                android:layout_marginTop="5dp"
+                android:layout_height="20pt"
+                android:layout_marginTop="5pt"
                 android:gravity="center"
                 android:lines="1"
-                android:text="Fans2"
+                android:text="*****"
                 android:textColor="@color/colorGray_5"
-                android:textSize="12sp" />
+                android:textSize="12pt" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="20dp"
+                android:layout_height="20pt"
                 android:orientation="horizontal">
 
                 <TextView
@@ -126,7 +129,7 @@
                     android:singleLine="true"
                     android:text="影响力 "
                     android:textColor="@color/colorGray_9"
-                    android:textSize="12sp" />
+                    android:textSize="12pt" />
 
                 <TextView
                     android:id="@+id/tv_fans_num_1"
@@ -134,42 +137,44 @@
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
                     android:singleLine="true"
-                    android:text="123"
+                    android:text="---"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="12dp" />
+                    android:textSize="12pt" />
+
             </LinearLayout>
+
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="0pt"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
-
             <top.wzmyyj.wzm_sdk.widget.CircleImageView
                 android:id="@+id/img_fins_3"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_marginTop="25dp"
+                android:layout_width="80pt"
+                android:layout_height="80pt"
+                android:layout_marginTop="25pt"
+                android:src="@mipmap/ic_error"
                 app:border_color="@color/colorLine"
-                app:border_width="0.1dp" />
+                app:border_width="0.1pt" />
 
             <TextView
                 android:id="@+id/tv_fans_name_3"
                 android:layout_width="wrap_content"
-                android:layout_height="20dp"
-                android:layout_marginTop="5dp"
+                android:layout_height="20pt"
+                android:layout_marginTop="5pt"
                 android:gravity="center"
                 android:lines="1"
-                android:text="Fans2"
+                android:text="*****"
                 android:textColor="@color/colorGray_5"
-                android:textSize="12sp" />
+                android:textSize="12pt" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="20dp"
+                android:layout_height="20pt"
                 android:orientation="horizontal">
 
                 <TextView
@@ -179,7 +184,7 @@
                     android:singleLine="true"
                     android:text="影响力 "
                     android:textColor="@color/colorGray_9"
-                    android:textSize="12sp" />
+                    android:textSize="12pt" />
 
                 <TextView
                     android:id="@+id/tv_fans_num_3"
@@ -187,9 +192,10 @@
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
                     android:singleLine="true"
-                    android:text="123"
+                    android:text="---"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="12dp" />
+                    android:textSize="12pt" />
+
             </LinearLayout>
 
         </LinearLayout>
@@ -198,15 +204,29 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="0.1dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_height="0.1pt"
+        android:layout_marginLeft="10pt"
+        android:layout_marginRight="10pt"
         android:background="@color/colorLine" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_zi_fans"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    </android.support.v7.widget.RecyclerView>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_zi_fans"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:id="@+id/tv_fans_empty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="------ 该内容已被隐藏！------"
+            android:textColor="@color/colorGray_9"
+            android:textSize="12pt" />
+
+    </FrameLayout>
+
 </LinearLayout>

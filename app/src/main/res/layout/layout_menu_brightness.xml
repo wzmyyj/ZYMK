@@ -1,36 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/ll_brightness"
-    android:layout_width="180dp"
-    android:layout_height="100dp"
+    android:layout_width="180pt"
+    android:layout_height="100pt"
     android:layout_gravity="center"
     android:background="@drawable/bg_menu"
     android:orientation="vertical"
-    android:padding="10dp">
+    android:padding="10pt"
+    tools:ignore="HardcodedText,ContentDescription">
 
     <com.xw.repo.BubbleSeekBar
         android:id="@+id/bsb_brightness"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_height="0pt"
+        android:layout_marginTop="20pt"
         android:layout_weight="1"
         app:bsb_bubble_color="@color/colorPrimary"
         app:bsb_max="1"
         app:bsb_min="0"
         app:bsb_progress="1"
-        app:bsb_second_track_size="1dp"
+        app:bsb_second_track_size="1pt"
         app:bsb_thumb_color="@color/colorPrimary"
         app:bsb_track_color="@color/colorGray_b"
-        app:bsb_track_size="1.5dp" />
+        app:bsb_track_size="1.5pt" />
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="35dp"
+        android:layout_height="35pt"
         android:gravity="center"
         android:text="调整亮度"
         android:textColor="@color/colorWhite"
-        android:textSize="15sp" />
-
+        android:textSize="15pt" />
 
 </LinearLayout>

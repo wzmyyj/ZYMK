@@ -6,8 +6,6 @@ import android.os.Bundle;
 /**
  * Created by wzm on 2018/04/23. email: 2209011667@qq.com
  */
-
-
 public abstract class InitPanel extends Panel {
 
     public InitPanel(Context context) {

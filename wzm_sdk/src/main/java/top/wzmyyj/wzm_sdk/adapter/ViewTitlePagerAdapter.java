@@ -1,29 +1,20 @@
 package top.wzmyyj.wzm_sdk.adapter;
 
-import android.support.v4.view.PagerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.viewpager.widget.PagerAdapter;
 
 import java.util.List;
 
 /**
  * Created by wzm on 2018/04/17. email: 2209011667@qq.com
  */
-
-
 public class ViewTitlePagerAdapter extends PagerAdapter {
-    private String[] titles;
-    private List<View> viewList;
 
-
-    public ViewTitlePagerAdapter(List<View> viewList) {
-        this.viewList = viewList;
-    }
-
-    public ViewTitlePagerAdapter(List<View> viewList, String[] titles) {
-        this.viewList = viewList;
-        this.titles = titles;
-    }
+    private final String[] titles;
+    private final List<View> viewList;
 
     public ViewTitlePagerAdapter(List<View> viewList, List<String> titles) {
         this.viewList = viewList;
@@ -34,17 +25,17 @@ public class ViewTitlePagerAdapter extends PagerAdapter {
         this.titles = strings;
     }
 
-
     @Override
     public int getCount() {
         return viewList.size();
     }
 
     @Override
-    public void destroyItem(ViewGroup container, int position, Object object) {
+    public void destroyItem(ViewGroup container, int position, @NonNull Object object) {
         container.removeView(viewList.get(position));
     }
 
+    @NonNull
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         container.addView(viewList.get(position));
@@ -54,14 +45,12 @@ public class ViewTitlePagerAdapter extends PagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-        if (titles == null) {
-            return null;
-        }
+        if (titles == null) return null;
         return titles[position];
     }
 
     @Override
-    public boolean isViewFromObject(View view, Object object) {
+    public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
         return view == object;
     }
 }

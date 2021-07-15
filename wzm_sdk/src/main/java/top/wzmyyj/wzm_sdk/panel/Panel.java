@@ -3,12 +3,13 @@ package top.wzmyyj.wzm_sdk.panel;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -18,8 +19,6 @@ import java.util.List;
  * Panel拥有Fragment类似的生命周期，子层比父层先执行，同层按顺序先执行。
  * Panel与父层通讯紧密时，可以用内部类。
  */
-
-
 public class Panel {
 
     protected LayoutInflater mInflater;
@@ -36,7 +35,6 @@ public class Panel {
         return activity;
     }
 
-
     public String getTitle() {
         return title;
     }
@@ -52,12 +50,9 @@ public class Panel {
         this.mInflater = LayoutInflater.from(context);
     }
 
-
     public View getView() {
         return view;
     }
-
-    // child panels
 
     // 内部panel的管理类。
     protected PanelManager mPanelManager = new PanelManager();
@@ -75,9 +70,7 @@ public class Panel {
         return mPanelManager.get(i);
     }
 
-
     protected void initPanels() {
-
     }
 
     public void onCreate(Bundle savedInstanceState) {
@@ -88,7 +81,6 @@ public class Panel {
     public void onResume() {
         mPanelManager.onResume();
     }
-
 
     public void onStart() {
         mPanelManager.onStart();
@@ -106,10 +98,6 @@ public class Panel {
         mPanelManager.onStop();
     }
 
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        mPanelManager.onActivityCreated(savedInstanceState);
-    }
-
     public void onDestroyView() {
         mPanelManager.onDestroyView();
     }
@@ -122,19 +110,10 @@ public class Panel {
         activity = null;
     }
 
-
-//    // 给外部调用的统一万能函数。多个基本数据类型参数时可以选择分装成been。
-//    public Object f(int w, Object... objects) {
-//        return null;
-//    }
-
     protected List<View> viewList = new ArrayList<>();
 
     // 外部调用，用于绑定外界的View。可以控制外界的view。
     public void bingViews(View... views) {
-        for (int i = 0; i < views.length; i++) {
-            viewList.add(views[i]);
-        }
+        Collections.addAll(viewList, views);
     }
-
 }

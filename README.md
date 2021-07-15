@@ -1,6 +1,6 @@
 ## ZYMK
 
-一款采用MVP-contract的仿《知音漫客》漫画APP。(修改bug 2018-12-31)
+一款采用MVP-contract的仿《知音漫客》漫画APP。
 
 mvp+rxjava+retrofit+okhttp+greendao+glide+gson+jsoup+eventbus+butterknife
 
@@ -8,12 +8,25 @@ mvp+rxjava+retrofit+okhttp+greendao+glide+gson+jsoup+eventbus+butterknife
 
 个人页：[http://wzmyyj.top/2018/08/22/android_3/](http://wzmyyj.top/2018/08/22/android_3/)
 
+#### 1.1.1
+1. 漫画图片预加载逻辑优化和加载动画结束判断监听第一张图片是否展示。
 
-APk百度云下载：
+2. 按屏幕宽度适配，全部用pt做单位（基准420pt为屏幕宽）。
 
-链接：[https://pan.baidu.com/s/1aAzeL_KGw9GyagroW2MyWg](https://pan.baidu.com/s/1aAzeL_KGw9GyagroW2MyWg) 密码：0zgm
+3. 升级AndroidX，升级各第三方库。
 
-#### 最新更新（2018.06.19）
+4. 其他性能或UI优化。
+
+#### 1.1.0
+1. 漫画图片预加载。
+
+2. GlideLoaderHelper修改。
+
+3. 漫画滑动监听。
+
+4. 优化代码，消除警告。
+
+#### 1.0.3
 1. 由常规MVP改为Google推荐的MVP-Contract模式。将原本的presenter层每个类抽象出接口，并将这些接口和对应的view的接口，放在同一个contract接口里（接口里放两个接口）。
 - 抽象出p层接口使v层依赖于p层接口（父类）。依赖倒转原则。
 - 使用contract好处是p层与v层相互调用关系在一个文件里一目了然。

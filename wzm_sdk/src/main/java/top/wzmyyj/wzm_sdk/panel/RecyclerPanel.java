@@ -1,11 +1,13 @@
 package top.wzmyyj.wzm_sdk.panel;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.FrameLayout;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -24,35 +26,25 @@ import top.wzmyyj.wzm_sdk.adapter.ivd.IVD;
 /**
  * Created by wzm on 2018/04/23. email: 2209011667@qq.com
  */
-
-
-public abstract class RecyclerPanel<T> extends InitPanel
-        implements MultiItemTypeAdapter.OnItemClickListener {
+public abstract class RecyclerPanel<T> extends InitPanel implements MultiItemTypeAdapter.OnItemClickListener {
 
     protected RecyclerView mRecyclerView;
     protected SmartRefreshLayout mRefreshLayout;
-
-
     protected FrameLayout mFrameLayout;
     protected List<T> mData = new ArrayList<>();
     protected List<IVD<T>> mIVD = new ArrayList<>();
-    protected HeaderAndFooterWrapper mHeaderAndFooterWrapper;
-
+    protected HeaderAndFooterWrapper<T> mWrapperAdapter;
     protected View mHeader;
     protected View mFooter;
-
     protected View mEmpty;
-
     protected FrameLayout mEmptyLayout;
-
     protected int delayed_r = 1500, delayed_l = 1000;
-
 
     public RecyclerPanel(Context context) {
         super(context);
     }
 
-
+    @SuppressLint("InflateParams")
     @Override
     protected void initView() {
         view = mInflater.inflate(R.layout.panel_sr, null);
@@ -65,63 +57,50 @@ public abstract class RecyclerPanel<T> extends InitPanel
         mRefreshLayout.setEnableLoadMore(false);
         mRefreshLayout.setPrimaryColorsId(R.color.colorRefresh, R.color.colorWhite);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
-
         setFirstData();
         setIVD(mIVD);
         setHeader();
         setFooter();
         setEmpty();
-        if (mEmpty != null) {
-            mEmptyLayout.addView(mEmpty);
-        }
+        if (mEmpty != null) mEmptyLayout.addView(mEmpty);
     }
-
 
     protected void setFirstData() {
-
     }
-
 
     protected abstract void setIVD(List<IVD<T>> ivd);
 
-
     protected void setHeader() {
     }
-
 
     protected void setFooter() {
     }
 
     protected void setEmpty() {
-
     }
 
     @Override
     protected void initData() {
-
-        MultiItemTypeAdapter mAdapter = new MultiItemTypeAdapter(context, mData) {
+        MultiItemTypeAdapter<T> mAdapter = new MultiItemTypeAdapter<T>(context, mData) {
             @Override
-            public void onViewRecycled(@NonNull RecyclerView.ViewHolder holder) {
+            public void onViewRecycled(@NonNull ViewHolder holder) {
                 super.onViewRecycled(holder);
-                viewRecycled((ViewHolder) holder);
+                viewRecycled(holder);
             }
         };
-
         for (ItemViewDelegate<T> ivd : mIVD) {
             mAdapter.addItemViewDelegate(ivd);
         }
-
         mAdapter.setOnItemClickListener(this);
-        mHeaderAndFooterWrapper = new HeaderAndFooterWrapper(mAdapter);
+        mWrapperAdapter = new HeaderAndFooterWrapper<>(mAdapter);
         if (mHeader != null)
-            mHeaderAndFooterWrapper.addHeaderView(mHeader);
+            mWrapperAdapter.addHeaderView(mHeader);
         if (mFooter != null)
-            mHeaderAndFooterWrapper.addFootView(mFooter);
-        mRecyclerView.setAdapter(mHeaderAndFooterWrapper);
+            mWrapperAdapter.addFootView(mFooter);
+        mRecyclerView.setAdapter(mWrapperAdapter);
     }
 
     public void viewRecycled(@NonNull ViewHolder holder) {
-
     }
 
     @Override
@@ -146,12 +125,9 @@ public abstract class RecyclerPanel<T> extends InitPanel
     }
 
     protected void loadMore() {
-
     }
 
-
     public void onItemClick(View view, RecyclerView.ViewHolder holder, int position) {
-
     }
 
     public boolean onItemLongClick(View view, RecyclerView.ViewHolder holder, int position) {
@@ -166,15 +142,13 @@ public abstract class RecyclerPanel<T> extends InitPanel
 
     public abstract void update();
 
-
     // 排序
     protected void sort() {
-
     }
 
     protected void notifyDataSetChanged() {
         sort();
-        mHeaderAndFooterWrapper.notifyDataSetChanged();
+        mWrapperAdapter.notifyDataSetChanged();
         upHeaderAndFooter();
         upEmpty();
     }
@@ -196,6 +170,4 @@ public abstract class RecyclerPanel<T> extends InitPanel
             mEmpty.setVisibility(View.GONE);
         }
     }
-
-
 }

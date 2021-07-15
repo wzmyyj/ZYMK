@@ -6,14 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Observable;
-import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.annotations.NonNull;
 import io.reactivex.schedulers.Schedulers;
-import top.wzmyyj.zymk.app.bean.SearchHistoryBean;
 import top.wzmyyj.wzm_sdk.utils.TimeUtil;
+import top.wzmyyj.zymk.app.bean.SearchHistoryBean;
 import top.wzmyyj.zymk.greendao.gen.SearchHistoryDbDao;
 import top.wzmyyj.zymk.model.db.dao.SearchHistoryDb;
 import top.wzmyyj.zymk.model.db.utils.DaoManager;
@@ -21,9 +19,9 @@ import top.wzmyyj.zymk.model.db.utils.DaoManager;
 /**
  * Created by yyj on 2018/07/30. email: 2209011667@qq.com
  */
-
 public class SearchHistoryModel {
-    private SearchHistoryDbDao mDao;
+
+    private final SearchHistoryDbDao mDao;
 
     public SearchHistoryModel(Context context) {
         mDao = DaoManager.getInstance(context).getDaoSession().getSearchHistoryDbDao();
@@ -48,21 +46,17 @@ public class SearchHistoryModel {
     }
 
     public void loadAll(Observer<List<SearchHistoryBean>> observer) {
-        Observable.create(new ObservableOnSubscribe<List<SearchHistoryBean>>() {
-            @Override
-            public void subscribe(@NonNull ObservableEmitter<List<SearchHistoryBean>> observableEmitter) throws Exception {
-                try {
-                    List<SearchHistoryDb> list = mDao.loadAll();
-                    List<SearchHistoryBean> data = db2beanList(list);
-                    observableEmitter.onNext(data);
-                } catch (Exception e) {
-                    observableEmitter.onError(e);
-                    e.printStackTrace();
-                } finally {
-                    observableEmitter.onComplete();
-                }
+        Observable.create((ObservableOnSubscribe<List<SearchHistoryBean>>) observableEmitter -> {
+            try {
+                List<SearchHistoryDb> list = mDao.loadAll();
+                List<SearchHistoryBean> data = db2beanList(list);
+                observableEmitter.onNext(data);
+            } catch (Exception e) {
+                observableEmitter.onError(e);
+                e.printStackTrace();
+            } finally {
+                observableEmitter.onComplete();
             }
-
         })
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
@@ -70,33 +64,28 @@ public class SearchHistoryModel {
                 .subscribe(observer);
     }
 
-
     public void insert(final String word, Observer<SearchHistoryBean> observer) {
-        Observable.create(new ObservableOnSubscribe<SearchHistoryBean>() {
-            @Override
-            public void subscribe(@NonNull ObservableEmitter<SearchHistoryBean> observableEmitter) throws Exception {
-                try {
-                    // 查询原来是否已有。
-                    SearchHistoryDb dd = mDao.queryBuilder().where(SearchHistoryDbDao.Properties.Search_word.eq(word)).unique();
-                    // 有的话，将其删除。
-                    if (dd != null) {
-                        mDao.delete(dd);
-                    }
-                    // 插入。
-                    SearchHistoryDb db = new SearchHistoryDb(null, word, TimeUtil.getTime());
-                    long insert = mDao.insert(db);
-                    db.setId(insert);
-                    // 转化。
-                    SearchHistoryBean bean = db2bean(db);
-                    observableEmitter.onNext(bean);
-                } catch (Exception e) {
-                    observableEmitter.onError(e);
-                    e.printStackTrace();
-                } finally {
-                    observableEmitter.onComplete();
+        Observable.create((ObservableOnSubscribe<SearchHistoryBean>) observableEmitter -> {
+            try {
+                // 查询原来是否已有。
+                SearchHistoryDb dd = mDao.queryBuilder().where(SearchHistoryDbDao.Properties.Search_word.eq(word)).unique();
+                // 有的话，将其删除。
+                if (dd != null) {
+                    mDao.delete(dd);
                 }
+                // 插入。
+                SearchHistoryDb db = new SearchHistoryDb(null, word, TimeUtil.getTime());
+                long insert = mDao.insert(db);
+                db.setId(insert);
+                // 转化。
+                SearchHistoryBean bean = db2bean(db);
+                observableEmitter.onNext(bean);
+            } catch (Exception e) {
+                observableEmitter.onError(e);
+                e.printStackTrace();
+            } finally {
+                observableEmitter.onComplete();
             }
-
         })
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
@@ -105,20 +94,16 @@ public class SearchHistoryModel {
     }
 
     public void delete(final Long id, Observer<Long> observer) {
-        Observable.create(new ObservableOnSubscribe<Long>() {
-            @Override
-            public void subscribe(@NonNull ObservableEmitter<Long> observableEmitter) throws Exception {
-                try {
-                    mDao.deleteByKey(id);
-                    observableEmitter.onNext(id);
-                } catch (Exception e) {
-                    observableEmitter.onError(e);
-                    e.printStackTrace();
-                } finally {
-                    observableEmitter.onComplete();
-                }
+        Observable.create((ObservableOnSubscribe<Long>) observableEmitter -> {
+            try {
+                mDao.deleteByKey(id);
+                observableEmitter.onNext(id);
+            } catch (Exception e) {
+                observableEmitter.onError(e);
+                e.printStackTrace();
+            } finally {
+                observableEmitter.onComplete();
             }
-
         })
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
@@ -127,26 +112,20 @@ public class SearchHistoryModel {
     }
 
     public void deleteAll(Observer<Long> observer) {
-        Observable.create(new ObservableOnSubscribe<Long>() {
-            @Override
-            public void subscribe(@NonNull ObservableEmitter<Long> observableEmitter) throws Exception {
-                try {
-                    mDao.deleteAll();
-                    observableEmitter.onNext(0L);
-                } catch (Exception e) {
-                    observableEmitter.onError(e);
-                    e.printStackTrace();
-                } finally {
-                    observableEmitter.onComplete();
-                }
+        Observable.create((ObservableOnSubscribe<Long>) observableEmitter -> {
+            try {
+                mDao.deleteAll();
+                observableEmitter.onNext(0L);
+            } catch (Exception e) {
+                observableEmitter.onError(e);
+                e.printStackTrace();
+            } finally {
+                observableEmitter.onComplete();
             }
-
         })
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer);
     }
-
-
 }

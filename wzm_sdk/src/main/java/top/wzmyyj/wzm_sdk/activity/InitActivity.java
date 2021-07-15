@@ -10,8 +10,6 @@ import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
 /**
  * Created by wzm on 2018/04/22. email: 2209011667@qq.com
  */
-
-
 public abstract class InitActivity extends SwipeBackActivity {
 
     protected SwipeBackLayout mSwipeBackLayout;
@@ -38,7 +36,6 @@ public abstract class InitActivity extends SwipeBackActivity {
     protected void initSome(Bundle savedInstanceState) {
     }
 
-
     protected abstract void initView();
 
     protected abstract void initData();
@@ -48,15 +45,10 @@ public abstract class InitActivity extends SwipeBackActivity {
     protected void initEvent() {
     }
 
-
-//    /**
-//     * 当按下返回键时
-//     */
 //    @Override
 //    public void onBackPressed() {
 //        scrollToFinishActivity();//左滑退出activity
 //    }
-
 
     @Override
     protected void onDestroy() {

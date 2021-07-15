@@ -1,10 +1,12 @@
 package top.wzmyyj.zymk.view.panel;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.dl7.tag.TagLayout;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
@@ -15,16 +17,16 @@ import top.wzmyyj.wzm_sdk.adapter.ivd.IVD;
 import top.wzmyyj.wzm_sdk.adapter.ivd.SingleIVD;
 import top.wzmyyj.zymk.R;
 import top.wzmyyj.zymk.app.bean.BookBean;
-import top.wzmyyj.zymk.app.tools.G;
+import top.wzmyyj.zymk.app.helper.GlideLoaderHelper;
 import top.wzmyyj.zymk.contract.RankContract;
 import top.wzmyyj.zymk.base.panel.BaseRecyclerPanel;
-
 
 /**
  * Created by yyj on 2018/07/13. email: 2209011667@qq.com
  */
-
+@SuppressLint("NonConstantResourceId")
 public class RankRecyclerPanel extends BaseRecyclerPanel<BookBean, RankContract.IPresenter> {
+
     public RankRecyclerPanel(Context context, RankContract.IPresenter p) {
         super(context, p);
     }
@@ -34,7 +36,6 @@ public class RankRecyclerPanel extends BaseRecyclerPanel<BookBean, RankContract.
         super.setFirstData();
         mPresenter.addEmptyData(mData);
     }
-
 
     @Override
     protected void setIVD(List<IVD<BookBean>> ivd) {
@@ -46,17 +47,14 @@ public class RankRecyclerPanel extends BaseRecyclerPanel<BookBean, RankContract.
 
             @Override
             public void convert(ViewHolder holder, BookBean bookBean, int position) {
-
                 ImageView img_book = holder.getView(R.id.img_book);
                 TextView tv_num = holder.getView(R.id.tv_num);
                 TextView tv_title = holder.getView(R.id.tv_title);
                 TextView tv_what = holder.getView(R.id.tv_what);
                 TextView tv_ift = holder.getView(R.id.tv_ift);
-
                 tv_title.setText(bookBean.getTitle());
-                tv_what.setText(title.replace("榜", "") + "：");
+                tv_what.setText((title.replace("榜", "") + "："));
                 tv_ift.setText(bookBean.getIft());
-
                 String num = bookBean.getNum() == null ? "0" : bookBean.getNum();
                 int n = Integer.parseInt(num);
                 switch (n) {
@@ -73,22 +71,18 @@ public class RankRecyclerPanel extends BaseRecyclerPanel<BookBean, RankContract.
                         tv_num.setBackgroundResource(R.mipmap.ic_rank_3);
                         break;
                     default:
-                        tv_num.setText("" + n);
+                        tv_num.setText(("" + n));
                         tv_num.setBackgroundResource(R.color.colorClarity);
                         break;
                 }
-
                 TagLayout tl_tag = holder.getView(R.id.tl_tag);
                 tl_tag.cleanTags();
-
                 if (bookBean.getTags() != null) {
                     for (String tag : bookBean.getTags()) {
                         tl_tag.addTag(tag);
                     }
                 }
-
-                G.img(context, bookBean.getData_src(), img_book);
-
+                GlideLoaderHelper.img(img_book, bookBean.getDataSrc());
             }
         });
     }
@@ -104,16 +98,14 @@ public class RankRecyclerPanel extends BaseRecyclerPanel<BookBean, RankContract.
         mPresenter.loadData();
     }
 
-
     public void setRankData(List<BookBean> books) {
         if (books == null) return;
         mData.clear();
-        for (BookBean item : books) {
-            mData.add(item);
-        }
+        mData.addAll(books);
         notifyDataSetChanged();
     }
 
+    @SuppressLint("InflateParams")
     @Override
     protected void setFooter() {
         super.setFooter();

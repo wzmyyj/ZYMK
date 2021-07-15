@@ -1,22 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:ignore="HardcodedText,ContentDescription">
 
     <FrameLayout
         android:id="@+id/fl_top"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:layout_height="45pt"
         android:background="@color/colorAhp_Black">
 
         <ImageView
             android:id="@+id/img_back"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:layout_gravity="left|center_vertical"
-            android:layout_marginLeft="10dp"
-            android:padding="13dp"
+            android:layout_width="45pt"
+            android:layout_height="45pt"
+            android:layout_gravity="start|center_vertical"
+            android:layout_marginStart="10pt"
+            android:layout_marginLeft="10pt"
+            android:padding="13pt"
             android:src="@mipmap/svg_white_nav_bar_back" />
 
         <TextView
@@ -26,25 +29,25 @@
             android:layout_gravity="center"
             android:text="12话"
             android:textColor="@color/colorWhite"
-            android:textSize="16sp" />
+            android:textSize="16pt" />
 
         <TextView
             android:id="@+id/tv_chapter_var"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="right|center_vertical"
-            android:layout_marginRight="60dp"
+            android:layout_gravity="end|center_vertical"
+            android:layout_marginEnd="60pt"
+            android:layout_marginRight="60pt"
             android:text="1/9"
             android:textColor="@color/colorGray_e"
-            android:textSize="14sp" />
+            android:textSize="14pt" />
 
     </FrameLayout>
-
 
     <LinearLayout
         android:id="@+id/ll_bottom"
         android:layout_width="match_parent"
-        android:layout_height="125dp"
+        android:layout_height="125pt"
         android:layout_gravity="bottom"
         android:background="@color/colorAhp_Black"
         android:orientation="vertical">
@@ -52,237 +55,248 @@
         <LinearLayout
             android:id="@+id/ll_auto"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="40pt"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
+            android:paddingLeft="20pt"
+            android:paddingRight="20pt"
             android:visibility="gone">
 
             <TextView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="20pt"
+                android:layout_height="20pt"
                 android:gravity="center"
                 android:text="慢"
                 android:textColor="@color/colorGray_e"
-                android:textSize="14sp" />
+                android:textSize="14pt" />
 
             <com.xw.repo.BubbleSeekBar
                 android:id="@+id/bsb_auto"
-                android:layout_width="0dp"
+                android:layout_width="0pt"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="2dp"
+                android:layout_marginLeft="10pt"
+                android:layout_marginTop="2pt"
+                android:layout_marginRight="10pt"
                 android:layout_weight="1"
                 app:bsb_bubble_color="@color/colorBlue"
                 app:bsb_max="1.5"
                 app:bsb_min="0.5"
                 app:bsb_progress="1"
                 app:bsb_second_track_color="@color/colorBlue"
-                app:bsb_second_track_size="1dp"
+                app:bsb_second_track_size="1pt"
                 app:bsb_thumb_color="@color/colorBlue"
                 app:bsb_track_color="@color/colorGray_b"
-                app:bsb_track_size="1.5dp" />
+                app:bsb_track_size="1.5pt" />
 
             <TextView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="20pt"
+                android:layout_height="20pt"
                 android:gravity="center"
                 android:text="快"
                 android:textColor="@color/colorGray_e"
-                android:textSize="14sp" />
+                android:textSize="14pt" />
         </LinearLayout>
 
 
         <LinearLayout
             android:id="@+id/ll_progress"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="40pt"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp">
+            android:paddingLeft="20pt"
+            android:paddingRight="20pt">
 
             <ImageView
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:src="@mipmap/svg_booklist_left" />
+                android:layout_width="15pt"
+                android:layout_height="15pt"
+                android:src="@mipmap/svg_book_list_left" />
 
             <com.xw.repo.BubbleSeekBar
                 android:id="@+id/bsb_1"
-                android:layout_width="0dp"
+                android:layout_width="0pt"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="2dp"
+                android:layout_marginStart="10pt"
+                android:layout_marginLeft="10pt"
+                android:layout_marginTop="2pt"
                 android:layout_weight="1"
                 app:bsb_bubble_color="@color/colorPrimary"
                 app:bsb_second_track_color="@color/colorPrimary"
-                app:bsb_second_track_size="1dp"
+                app:bsb_second_track_size="1pt"
                 app:bsb_section_count="1"
                 app:bsb_thumb_color="@color/colorPrimary"
                 app:bsb_track_color="@color/colorGray_b"
-                app:bsb_track_size="1.5dp" />
+                app:bsb_track_size="1.5pt" />
 
             <TextView
                 android:id="@+id/tv_chapter_var2"
-                android:layout_width="40dp"
+                android:layout_width="40pt"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="1/9"
                 android:textColor="@color/colorGray_e"
-                android:textSize="12sp" />
+                android:textSize="12pt" />
 
             <ImageView
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:src="@mipmap/svg_booklist_right" />
+                android:layout_width="15pt"
+                android:layout_height="15pt"
+                android:src="@mipmap/svg_book_list_right" />
+
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:baselineAligned="false"
             android:orientation="horizontal"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp">
+            android:paddingLeft="10pt"
+            android:paddingRight="10pt">
 
             <LinearLayout
                 android:id="@+id/ll_menu_1"
-                android:layout_width="0dp"
+                android:layout_width="0pt"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:clickable="true"
+                android:focusable="true"
                 android:gravity="center_horizontal"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                tools:ignore="UseCompoundDrawables">
 
                 <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginTop="10dp"
-                    android:padding="1dp"
+                    android:layout_width="30pt"
+                    android:layout_height="30pt"
+                    android:layout_marginTop="10pt"
+                    android:padding="1pt"
                     android:src="@mipmap/ic_read_set" />
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="20dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_height="20pt"
+                    android:layout_marginTop="10pt"
                     android:text="设置"
                     android:textColor="@color/colorWhite"
-                    android:textSize="14sp" />
+                    android:textSize="14pt" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/ll_menu_2"
-                android:layout_width="0dp"
+                android:layout_width="0pt"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:clickable="true"
+                android:focusable="true"
                 android:gravity="center_horizontal"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                tools:ignore="UseCompoundDrawables">
 
                 <ImageView
                     android:id="@+id/img_auto"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginTop="10dp"
-                    android:padding="1dp"
+                    android:layout_width="30pt"
+                    android:layout_height="30pt"
+                    android:layout_marginTop="10pt"
+                    android:padding="1pt"
                     android:src="@mipmap/ic_read_start" />
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="20dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_height="20pt"
+                    android:layout_marginTop="10pt"
                     android:text="自动"
                     android:textColor="@color/colorWhite"
-                    android:textSize="14sp" />
+                    android:textSize="14pt" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/ll_menu_3"
-                android:layout_width="0dp"
+                android:layout_width="0pt"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:clickable="true"
+                android:focusable="true"
                 android:gravity="center_horizontal"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                tools:ignore="UseCompoundDrawables">
 
                 <ImageView
                     android:id="@+id/img_definition"
-                    android:layout_width="35dp"
-                    android:layout_height="30dp"
-                    android:layout_marginTop="10dp"
-                    android:padding="1dp"
+                    android:layout_width="35pt"
+                    android:layout_height="30pt"
+                    android:layout_marginTop="10pt"
+                    android:padding="1pt"
                     android:src="@mipmap/ic_read_definition_middle" />
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="20dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_height="20pt"
+                    android:layout_marginTop="10pt"
                     android:text="画质"
                     android:textColor="@color/colorWhite"
-                    android:textSize="14sp" />
+                    android:textSize="14pt" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/ll_menu_4"
-                android:layout_width="0dp"
+                android:layout_width="0pt"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:clickable="true"
+                android:focusable="true"
                 android:gravity="center_horizontal"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                tools:ignore="UseCompoundDrawables">
 
                 <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginTop="10dp"
-                    android:padding="1dp"
+                    android:layout_width="30pt"
+                    android:layout_height="30pt"
+                    android:layout_marginTop="10pt"
+                    android:padding="1pt"
                     android:src="@mipmap/ic_read_brightness_b" />
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="20dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_height="20pt"
+                    android:layout_marginTop="10pt"
                     android:text="亮度"
                     android:textColor="@color/colorWhite"
-                    android:textSize="14sp" />
+                    android:textSize="14pt" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/ll_menu_5"
-                android:layout_width="0dp"
+                android:layout_width="0pt"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:clickable="true"
+                android:focusable="true"
                 android:gravity="center_horizontal"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                tools:ignore="UseCompoundDrawables">
 
                 <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginTop="10dp"
-                    android:padding="1dp"
+                    android:layout_width="30pt"
+                    android:layout_height="30pt"
+                    android:layout_marginTop="10pt"
+                    android:padding="1pt"
                     android:src="@mipmap/ic_read_catalog_ic" />
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="20dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_height="20pt"
+                    android:layout_marginTop="10pt"
                     android:text="目录"
                     android:textColor="@color/colorWhite"
-                    android:textSize="14sp" />
+                    android:textSize="14pt" />
 
             </LinearLayout>
-
 
         </LinearLayout>
 
     </LinearLayout>
-
 
     <include layout="@layout/layout_menu_definition" />
 
@@ -296,6 +310,5 @@
         android:layout_height="match_parent"
         android:alpha="0"
         android:background="@color/colorAhp_Black_d" />
-
 
 </FrameLayout>

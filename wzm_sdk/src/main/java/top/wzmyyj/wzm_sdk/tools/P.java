@@ -1,5 +1,6 @@
 package top.wzmyyj.wzm_sdk.tools;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -10,11 +11,12 @@ import java.util.Set;
 /**
  * Created by yyj on 2018/08/20. email: 2209011667@qq.com
  */
-
+@SuppressWarnings("unused")
+@SuppressLint("CommitPrefEdits")
 public class P {
     //save
-    private SharedPreferences sha;
-    private SharedPreferences.Editor ed;
+    private final SharedPreferences sha;
+    private final SharedPreferences.Editor ed;
 
     public P(Context context, String name) {
         sha = context.getSharedPreferences(name, Activity.MODE_PRIVATE);
@@ -94,6 +96,4 @@ public class P {
     public void commit() {
         ed.commit();
     }
-
-
 }

@@ -9,8 +9,8 @@ import top.wzmyyj.zymk.model.net.box.SearchBox;
 /**
  * Created by yyj on 2018/07/31. email: 2209011667@qq.com
  */
-
 public interface SearchService {
+
     @GET(Urls.API_HotSearch)
     Observable<SearchBox> getHotSearch();
 

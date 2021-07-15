@@ -3,20 +3,16 @@ package top.wzmyyj.zymk.app.bean;
 /**
  * Created by yyj on 2018/07/06. email: 2209011667@qq.com
  */
-
 public class TypeBean {
 
     private String title;
     private String href;
-    private String data_src;
-
-    public TypeBean() {
-    }
+    private final String dataSrc;
 
     public TypeBean(String title, String href, String data_src) {
         this.title = title;
         this.href = href;
-        this.data_src = data_src;
+        this.dataSrc = data_src;
     }
 
     public String getTitle() {
@@ -35,12 +31,7 @@ public class TypeBean {
         this.href = href;
     }
 
-
-    public String getData_src() {
-        return data_src;
-    }
-
-    public void setData_src(String data_src) {
-        this.data_src = data_src;
+    public String getDataSrc() {
+        return dataSrc;
     }
 }

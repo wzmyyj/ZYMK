@@ -1,62 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/ll_catalog"
-    android:layout_width="150dp"
+    android:layout_width="150pt"
     android:layout_height="match_parent"
-    android:layout_gravity="right"
+    android:layout_gravity="end"
     android:background="@color/colorAhp_Black"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:ignore="HardcodedText,ContentDescription">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="50pt"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="5dp">
+        android:padding="5pt">
 
         <ImageView
             android:id="@+id/img_catalog_all"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
+            android:layout_width="20pt"
+            android:layout_height="20pt"
+            android:layout_marginLeft="5pt"
+            android:layout_marginRight="5pt"
             android:src="@mipmap/ic_read_catalog_collected_works" />
 
         <TextView
             android:id="@+id/tv_catalog_all"
-            android:layout_width="0dp"
+            android:layout_width="0pt"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
             android:text="全集"
             android:textColor="@color/colorGray_e"
-            android:textSize="14sp" />
+            android:textSize="14pt" />
 
         <ImageView
             android:id="@+id/img_catalog_xu"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
+            android:layout_width="20pt"
+            android:layout_height="20pt"
+            android:layout_marginLeft="5pt"
+            android:layout_marginRight="5pt"
             android:src="@mipmap/ic_read_catalog_order" />
 
         <TextView
             android:id="@+id/tv_catalog_xu"
-            android:layout_width="0dp"
+            android:layout_width="0pt"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
             android:text="正序"
             android:textColor="@color/colorGray_e"
-            android:textSize="14sp" />
+            android:textSize="14pt" />
+
     </LinearLayout>
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_catalog"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    </android.support.v7.widget.RecyclerView>
+        android:layout_height="match_parent" />
 
 </LinearLayout>

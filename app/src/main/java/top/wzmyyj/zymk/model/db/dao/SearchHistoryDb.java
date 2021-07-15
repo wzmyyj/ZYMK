@@ -11,6 +11,7 @@ import org.greenrobot.greendao.annotation.Unique;
  */
 @Entity
 public class SearchHistoryDb {
+
     @Id(autoincrement = true)
     private Long id;
     @Unique
@@ -53,5 +54,4 @@ public class SearchHistoryDb {
     public void setSearch_time(long search_time) {
         this.search_time = search_time;
     }
-
 }

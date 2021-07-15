@@ -1,32 +1,33 @@
 package top.wzmyyj.zymk.view.panel;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.zhy.adapter.recyclerview.base.ViewHolder;
 
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import top.wzmyyj.wzm_sdk.adapter.ivd.IVD;
 import top.wzmyyj.zymk.R;
 import top.wzmyyj.zymk.app.bean.BookBean;
 import top.wzmyyj.zymk.app.bean.FavorBean;
-import top.wzmyyj.zymk.app.tools.G;
+import top.wzmyyj.zymk.app.helper.GlideLoaderHelper;
 import top.wzmyyj.wzm_sdk.utils.TimeUtil;
 import top.wzmyyj.zymk.contract.FindContract;
-
 
 /**
  * Created by yyj on 2018/08/01. email: 2209011667@qq.com
  */
-
+@SuppressLint("NonConstantResourceId")
 public class FavorRecyclerPanel extends FindRecyclerPanel<FavorBean> {
+
     public FavorRecyclerPanel(Context context, FindContract.IPresenter p) {
         super(context, p);
     }
@@ -41,7 +42,7 @@ public class FavorRecyclerPanel extends FindRecyclerPanel<FavorBean> {
 
             @Override
             public boolean isForViewType(FavorBean item, int position) {
-                return !isGongge;// 列表形式。
+                return !isGrid;// 列表形式。
             }
 
             @Override
@@ -51,20 +52,16 @@ public class FavorRecyclerPanel extends FindRecyclerPanel<FavorBean> {
                 TextView tv_new = holder.getView(R.id.tv_new);
                 TextView tv_chapter = holder.getView(R.id.tv_chapter);
                 TextView tv_title = holder.getView(R.id.tv_title);
-
                 tv_title.setText(bookBean.getTitle());
                 tv_chapter.setText(bookBean.getChapter());
-
-                long update_time = bookBean.getUpdate_time();
+                long update_time = bookBean.getUpdateTime();
                 // 最新更新是否一周内。
                 if (TimeUtil.isInDay(update_time, 7)) {
                     tv_new.setVisibility(View.VISIBLE);
                 } else {
                     tv_new.setVisibility(View.GONE);
                 }
-
-                G.img(context, bookBean.getData_src(), img_book);
-
+                GlideLoaderHelper.img(img_book, bookBean.getDataSrc());
                 ImageView img_select = holder.getView(R.id.img_select);
                 RelativeLayout rl_select = holder.getView(R.id.rl_select);
                 if (isCanSelect) {
@@ -77,10 +74,8 @@ public class FavorRecyclerPanel extends FindRecyclerPanel<FavorBean> {
                 } else {
                     img_select.setImageResource(R.mipmap.icon_mine_not_select);
                 }
-
             }
         });
-
         ivd.add(new IVD<FavorBean>() {
             @Override
             public int getItemViewLayoutId() {
@@ -89,7 +84,7 @@ public class FavorRecyclerPanel extends FindRecyclerPanel<FavorBean> {
 
             @Override
             public boolean isForViewType(FavorBean item, int position) {
-                return isGongge;// 表格形式。
+                return isGrid;// 表格形式。
             }
 
             @Override
@@ -99,22 +94,16 @@ public class FavorRecyclerPanel extends FindRecyclerPanel<FavorBean> {
                 TextView tv_new = holder.getView(R.id.tv_new);
                 TextView tv_title = holder.getView(R.id.tv_title);
                 TextView tv_some = holder.getView(R.id.tv_some);
-
                 tv_title.setText(bookBean.getTitle());
-
-
-                long update_time = bookBean.getUpdate_time();
+                long update_time = bookBean.getUpdateTime();
                 // 最新更新是否三天内。
                 if (TimeUtil.isInDay(update_time, 3)) {
                     tv_new.setVisibility(View.VISIBLE);
                 } else {
                     tv_new.setVisibility(View.GONE);
                 }
-
                 tv_some.setText(bookBean.getChapter());
-
-                G.img(context, bookBean.getData_src(), img_book);
-
+                GlideLoaderHelper.img(img_book, bookBean.getDataSrc());
                 ImageView img_select = holder.getView(R.id.img_select);
                 RelativeLayout rl_select = holder.getView(R.id.rl_select);
                 if (isCanSelect) {
@@ -127,10 +116,8 @@ public class FavorRecyclerPanel extends FindRecyclerPanel<FavorBean> {
                 } else {
                     img_select.setImageResource(R.mipmap.icon_mine_not_select);
                 }
-
             }
         });
-
     }
 
     @Override
@@ -155,16 +142,7 @@ public class FavorRecyclerPanel extends FindRecyclerPanel<FavorBean> {
     @Override
     protected void sort() {
         super.sort();
-        Collections.sort(mData, new Comparator<FavorBean>() {
-            @Override
-            public int compare(FavorBean o1, FavorBean o2) {
-                if (o1.getBook().getUpdate_time() < o2.getBook().getUpdate_time()) {
-                    return 1;
-                } else {
-                    return -1;
-                }
-            }
-        });
+        Collections.sort(mData, (o1, o2) -> Long.compare(o2.getBook().getUpdateTime(), o1.getBook().getUpdateTime()));
     }
 
     @Override
@@ -180,6 +158,6 @@ public class FavorRecyclerPanel extends FindRecyclerPanel<FavorBean> {
     @Override
     protected void initView() {
         super.initView();
-        tv_empty.setText("大人，您的后宫空空如也...");
+        tvEmpty.setText("大人，您的后宫空空如也...");
     }
 }

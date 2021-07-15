@@ -1,10 +1,7 @@
 package top.wzmyyj.wzm_sdk.widget;
 
-
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -13,37 +10,34 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import top.wzmyyj.wzm_sdk.R;
 
-
 /**
  * Created by wzm on 2018/04/21. email: 2209011667@qq.com
  */
-
 public class TabMenu extends LinearLayout {
-
-    private int which = 0;
-    private int item_count = 2;
 
     final static private int ITEM_COUNT_MIN = 2;
     final static private int ITEM_COUNT_MAX = 6;
-
-    private int icon_size;
-    private int text_size;
-    private int item_bg;
-    private int text_color1;
-    private int text_color2;
-
-    private List<LinearLayout> layouts;
-    private List<ImageView> images;
-    private List<TextView> texts;
-
-    private String[] str = new String[]{"Item1", "Item2", "Item3", "Item4", "Item5", "Item6"};
-    private int[] icon1 = new int[6];
-    private int[] icon2 = new int[6];
+    private final int icon_size;
+    private final int text_size;
+    private final int item_bg;
+    private final int text_color1;
+    private final int text_color2;
+    private int which;
+    private int item_count;
+    private final List<LinearLayout> layouts;
+    private final List<ImageView> images;
+    private final List<TextView> texts;
+    private final String[] str = new String[]{"Item1", "Item2", "Item3", "Item4", "Item5", "Item6"};
+    private final int[] icon1 = new int[6];
+    private final int[] icon2 = new int[6];
 
     private ViewPager mViewPager;
 
@@ -70,11 +64,9 @@ public class TabMenu extends LinearLayout {
     public TabMenu(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         this.setOrientation(LinearLayout.HORIZONTAL);
-
         layouts = new ArrayList<>();
         images = new ArrayList<>();
         texts = new ArrayList<>();
-
         TypedArray a = context.getTheme().obtainStyledAttributes(attrs,
                 R.styleable.TabMenu, defStyle, 0);
         which = a.getInt(R.styleable.TabMenu_which, 0);
@@ -89,8 +81,6 @@ public class TabMenu extends LinearLayout {
         a.recycle();
         initView();
         initData();
-
-
     }
 
     private void initView() {
@@ -122,18 +112,13 @@ public class TabMenu extends LinearLayout {
             param3.gravity = Gravity.CENTER_HORIZONTAL;
             tv.setLayoutParams(param3);
             tv.setGravity(Gravity.CENTER);
-
             final int w = i;
-            layout.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (mMenuItemClickListener != null) {
-                        mMenuItemClickListener.onClick(layout, w);
-                        change(w);
-                    }
+            layout.setOnClickListener(v -> {
+                if (mMenuItemClickListener != null) {
+                    mMenuItemClickListener.onClick(layout, w);
+                    change(w);
                 }
             });
-
             layouts.add(layout);
             images.add(img);
             texts.add(tv);
@@ -142,7 +127,7 @@ public class TabMenu extends LinearLayout {
 
     private TabMenu limitCount(int item_count) {
         this.item_count = (item_count > ITEM_COUNT_MAX) ? ITEM_COUNT_MAX :
-                (item_count < ITEM_COUNT_MIN) ? ITEM_COUNT_MIN : item_count;
+                Math.max(item_count, ITEM_COUNT_MIN);
         return this;
     }
 
@@ -154,9 +139,7 @@ public class TabMenu extends LinearLayout {
     public TabMenu setItemText(String[] str) {
         if (str != null) {
             for (int i = 0; i < str.length; i++) {
-                if (i > this.str.length - 1) {
-                    break;
-                }
+                if (i > this.str.length - 1) break;
                 this.str[i] = str[i];
             }
         }
@@ -166,11 +149,11 @@ public class TabMenu extends LinearLayout {
         return this;
     }
 
-    public TabMenu setItemTextColor(int text_color1, int text_color2) {
-        this.text_color1 = text_color1;
-        this.text_color2 = text_color2;
-        return this.setItemTextColor();
-    }
+//    public TabMenu setItemTextColor(int text_color1, int text_color2) {
+//        this.text_color1 = text_color1;
+//        this.text_color2 = text_color2;
+//        return this.setItemTextColor();
+//    }
 
     private TabMenu setItemTextColor() {
         for (int i = 0; i < ITEM_COUNT_MAX; i++) {
@@ -215,7 +198,6 @@ public class TabMenu extends LinearLayout {
         return this;
     }
 
-
     private TabMenu setItemVisibility() {
         for (int i = 0; i < ITEM_COUNT_MAX; i++) {
             if (i < item_count) {
@@ -240,17 +222,14 @@ public class TabMenu extends LinearLayout {
                 .setItemIcon(icon1, icon2);
     }
 
-
     public void change(int which) {
         if (which != this.which) {
             this.limitWhich(which).setItemTextColor().setItemIcon();
         }
     }
 
-    public TabMenu setupWithViewPager(ViewPager viewPager) {
-        if (viewPager == null) {
-            return this;
-        }
+    public void setupWithViewPager(ViewPager viewPager) {
+        if (viewPager == null) return;
         mViewPager = viewPager;
         PagerAdapter adapter = mViewPager.getAdapter();
         if (adapter != null) {
@@ -260,18 +239,10 @@ public class TabMenu extends LinearLayout {
                     .setItemTextColor()
                     .setItemIcon();
         }
-
-        this.setOnMenuItemClickListener(new OnMenuItemClickListener() {
-            @Override
-            public void onClick(View view, int pos) {
-                mViewPager.setCurrentItem(pos, false);
-            }
-        });
-
-        mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        this.setOnMenuItemClickListener((view, pos) -> mViewPager.setCurrentItem(pos, false));
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
             }
 
             @Override
@@ -284,9 +255,5 @@ public class TabMenu extends LinearLayout {
 
             }
         });
-        return this;
-
     }
-
-
 }

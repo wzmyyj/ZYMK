@@ -1,9 +1,12 @@
 package top.wzmyyj.zymk.view.activity;
 
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
+import android.annotation.SuppressLint;
 import android.view.View;
 import android.widget.ImageView;
+
+import androidx.viewpager.widget.ViewPager;
+
+import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,12 +21,19 @@ import top.wzmyyj.zymk.presenter.RankPresenter;
 import top.wzmyyj.zymk.base.activity.BaseActivity;
 import top.wzmyyj.zymk.view.panel.RankRecyclerPanel;
 
-
 /**
  * Created by yyj on 2018/07/13. email: 2209011667@qq.com
  */
-
+@SuppressLint("NonConstantResourceId")
 public class RankActivity extends BaseActivity<RankContract.IPresenter> implements RankContract.IView {
+
+    @BindView(R.id.tabLayout)
+    TabLayout mTabLayout;
+    @BindView(R.id.viewPager)
+    ViewPager mViewPager;
+    @BindView(R.id.img_back)
+    ImageView imgBack;
+
     @Override
     protected void initPresenter() {
         mPresenter = new RankPresenter(activity, this);
@@ -43,14 +53,6 @@ public class RankActivity extends BaseActivity<RankContract.IPresenter> implemen
                 new RankRecyclerPanel(activity, mPresenter).setTitle("月票榜")
         );
     }
-
-    @BindView(R.id.tabLayout)
-    TabLayout mTabLayout;
-    @BindView(R.id.viewPager)
-    ViewPager mViewPager;
-    @BindView(R.id.img_back)
-    ImageView img_back;
-
 
     @Override
     protected void initView() {
@@ -75,20 +77,13 @@ public class RankActivity extends BaseActivity<RankContract.IPresenter> implemen
     @Override
     protected void initListener() {
         super.initListener();
-        img_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mPresenter.finish();
-            }
-        });
+        imgBack.setOnClickListener(v -> mPresenter.finish());
     }
 
     @Override
-    public void showData(List<BookBean>... bookList) {
-        ((RankRecyclerPanel) getPanel(0)).setRankData(bookList[0]);
-        ((RankRecyclerPanel) getPanel(1)).setRankData(bookList[1]);
-        ((RankRecyclerPanel) getPanel(2)).setRankData(bookList[2]);
+    public void showData(List<BookBean> bookList1, List<BookBean> bookList2, List<BookBean> bookList3) {
+        ((RankRecyclerPanel) getPanel(0)).setRankData(bookList1);
+        ((RankRecyclerPanel) getPanel(1)).setRankData(bookList2);
+        ((RankRecyclerPanel) getPanel(2)).setRankData(bookList3);
     }
-
-
 }

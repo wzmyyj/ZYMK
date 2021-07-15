@@ -12,18 +12,16 @@ import java.util.Date;
  * Vanessa 凡妮莎，第八个七骑士，拥有控制时间的沙漏和魔法。
  * 时间转换工具类。
  */
-
-
+@SuppressWarnings("unused")
+@SuppressLint("SimpleDateFormat")
 public class TimeUtil {
-
 
     public static String long2str(long l, String format) {
         if (l == 0) {
             return "";
         }
         SimpleDateFormat sdf = new SimpleDateFormat(format);
-        String s = sdf.format(new Date(l));
-        return s;
+        return sdf.format(new Date(l));
     }
 
     public static long str2long(String time, String format) {
@@ -32,7 +30,7 @@ public class TimeUtil {
         try {
             l = sdf.parse(time).getTime();
         } catch (ParseException e) {
-//            e.printStackTrace();
+            e.printStackTrace();
         }
         return l;
     }
@@ -54,8 +52,7 @@ public class TimeUtil {
     public static int getWeek(Date date) {
         Calendar c = Calendar.getInstance();
         c.setTime(date);
-        int week = c.get(Calendar.DAY_OF_WEEK);
-        return week;
+        return c.get(Calendar.DAY_OF_WEEK);
     }
 
     public static int getMonth() {
@@ -66,8 +63,7 @@ public class TimeUtil {
     public static int getMonth(Date date) {
         Calendar c = Calendar.getInstance();
         c.setTime(date);
-        int month = c.get(Calendar.DAY_OF_MONTH);
-        return month;
+        return c.get(Calendar.DAY_OF_MONTH);
     }
 
     public static int getYear() {
@@ -78,11 +74,9 @@ public class TimeUtil {
     public static int getYear(Date date) {
         Calendar c = Calendar.getInstance();
         c.setTime(date);
-        int year = c.get(Calendar.DAY_OF_YEAR);
-        return year;
+        return c.get(Calendar.DAY_OF_YEAR);
     }
 
-    @SuppressLint("SimpleDateFormat")
     public static String getEasyTime(long l) {
         Date d = new Date();
         String s;
@@ -122,7 +116,6 @@ public class TimeUtil {
         } else {
             s = getEasyTime(l);
         }
-
         return s;
     }
 

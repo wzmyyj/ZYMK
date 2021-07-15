@@ -1,5 +1,6 @@
 package top.wzmyyj.zymk.view.activity;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import top.wzmyyj.zymk.R;
@@ -7,11 +8,10 @@ import top.wzmyyj.zymk.contract.LaunchContract;
 import top.wzmyyj.zymk.presenter.LaunchPresenter;
 import top.wzmyyj.zymk.base.activity.BaseActivity;
 
-
 /**
  * Created by yyj on 2018/06/24. email: 2209011667@qq.com
  */
-
+@SuppressLint("NonConstantResourceId")
 public class LaunchActivity extends BaseActivity<LaunchContract.IPresenter> implements LaunchContract.IView {
 
     @Override

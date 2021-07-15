@@ -1,9 +1,9 @@
 package top.wzmyyj.wzm_sdk.panel;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.view.View;
+
+import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,26 +12,16 @@ import java.util.List;
  * Created by wzm on 2018/07/04. email: 2209011667@qq.com
  * 多个Panel的管理类。
  */
-
 public class PanelManager {
-    private List<Panel> mPanelList;
+
+    private final List<Panel> mPanelList;
 
     public PanelManager() {
         mPanelList = new ArrayList<>();
     }
 
     public void addPanels(@NonNull Panel... panels) {
-        for (int i = 0; i < panels.length; i++)
-            if (panels[i] != null)
-                this.mPanelList.add(panels[i]);
-    }
-
-    public void movePanel(@NonNull Panel panel) {
-        mPanelList.remove(panel);
-    }
-
-    public void movePanel(int i) {
-        mPanelList.remove(i);
+        for (Panel panel : panels) if (panel != null) this.mPanelList.add(panel);
     }
 
     public List<Panel> getPanelList() {
@@ -46,10 +36,6 @@ public class PanelManager {
         mPanelList.clear();
     }
 
-    public void setPanelList(List<Panel> mPanelList) {
-        this.mPanelList = mPanelList;
-    }
-
     public View getPanelView(int i) {
         return this.mPanelList.get(i).getView();
     }
@@ -59,77 +45,43 @@ public class PanelManager {
     }
 
     public void onCreate(Bundle savedInstanceState) {
-        if (mPanelList == null || mPanelList.size() == 0)
-            return;
-        for (Panel p : mPanelList) {
-            p.onCreate(savedInstanceState);
-        }
+        if (mPanelList.size() == 0) return;
+        for (Panel p : mPanelList) p.onCreate(savedInstanceState);
     }
 
     public void onResume() {
-        if (mPanelList == null || mPanelList.size() == 0)
-            return;
-        for (Panel p : mPanelList) {
-            p.onResume();
-        }
+        if (mPanelList.size() == 0) return;
+        for (Panel p : mPanelList) p.onResume();
     }
 
-
     public void onStart() {
-        if (mPanelList == null || mPanelList.size() == 0)
-            return;
-        for (Panel p : mPanelList) {
-            p.onStart();
-        }
+        if (mPanelList.size() == 0) return;
+        for (Panel p : mPanelList) p.onStart();
     }
 
     public void onRestart() {
-        if (mPanelList == null || mPanelList.size() == 0)
-            return;
-        for (Panel p : mPanelList) {
-            p.onRestart();
-        }
+        if (mPanelList.size() == 0) return;
+        for (Panel p : mPanelList) p.onRestart();
     }
 
     public void onPause() {
-        if (mPanelList == null || mPanelList.size() == 0)
-            return;
-        for (Panel p : mPanelList) {
-            p.onPause();
-        }
+        if (mPanelList.size() == 0) return;
+        for (Panel p : mPanelList) p.onPause();
     }
 
     public void onStop() {
-        if (mPanelList == null || mPanelList.size() == 0)
-            return;
-        for (Panel p : mPanelList) {
-            p.onStop();
-        }
-    }
-
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        if (mPanelList == null || mPanelList.size() == 0)
-            return;
-        for (Panel p : mPanelList) {
-            p.onActivityCreated(savedInstanceState);
-        }
+        if (mPanelList.size() == 0) return;
+        for (Panel p : mPanelList) p.onStop();
     }
 
     public void onDestroyView() {
-        if (mPanelList == null || mPanelList.size() == 0)
-            return;
-        for (Panel p : mPanelList) {
-            p.onDestroyView();
-        }
+        if (mPanelList.size() == 0) return;
+        for (Panel p : mPanelList) p.onDestroyView();
     }
 
     public void onDestroy() {
-        if (mPanelList == null || mPanelList.size() == 0)
-            return;
-        for (Panel p : mPanelList) {
-            p.onDestroy();
-        }
+        if (mPanelList.size() == 0) return;
+        for (Panel p : mPanelList) p.onDestroy();
         mPanelList.clear();
     }
-
 }

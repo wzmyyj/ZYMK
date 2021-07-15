@@ -11,7 +11,6 @@ import top.wzmyyj.zymk.base.contract.IBaseView;
 /**
  * Created by yyj on 2018/09/10. email: 2209011667@qq.com
  */
-
 public interface FindContract {
 
     interface IView extends IBaseView {
@@ -24,11 +23,9 @@ public interface FindContract {
 
         void removeHistory(boolean is);
 
-
         void showDownload(List<DownloadBean> list);
 
         void removeDownload(boolean is);
-
     }
 
     interface IPresenter extends IBasePresenter {
@@ -43,7 +40,6 @@ public interface FindContract {
 
         void deleteSomeFavor(Long[] ids);
 
-
         void loadHistory();
 
         void deleteSomeHistory(Long[] ids);
@@ -52,6 +48,5 @@ public interface FindContract {
 
         void deleteSomeDownload(Long[] ids);
     }
-
 
 }

@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="106dp"
-    android:layout_height="180dp"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="106pt"
+    android:layout_height="180pt"
     android:orientation="vertical"
-    android:padding="5dp">
+    android:padding="5pt"
+    tools:ignore="HardcodedText,ContentDescription">
 
     <FrameLayout
-        android:layout_width="96dp"
-        android:layout_height="128dp">
+        android:layout_width="96pt"
+        android:layout_height="128pt">
 
         <ImageView
             android:id="@+id/img_book"
@@ -18,45 +20,49 @@
         <TextView
             android:id="@+id/tv_chapter"
             android:layout_width="match_parent"
-            android:layout_height="16dp"
+            android:layout_height="16pt"
             android:layout_gravity="bottom"
             android:background="@color/black_overlay"
-            android:gravity="right|center_vertical"
-            android:paddingRight="5dp"
+            android:gravity="end|center_vertical"
+            android:paddingStart="5pt"
+            android:paddingEnd="5pt"
+            android:paddingRight="5pt"
             android:text="0话"
             android:textColor="@color/colorWhite"
-            android:textSize="12sp" />
+            android:textSize="12pt" />
 
         <TextView
             android:id="@+id/tv_star"
-            android:layout_width="35dp"
-            android:layout_height="15dp"
-            android:layout_gravity="right|top"
+            android:layout_width="35pt"
+            android:layout_height="15pt"
+            android:layout_gravity="end|top"
             android:background="@color/black_overlay"
             android:gravity="center"
-            android:paddingLeft="3dp"
-            android:paddingRight="3dp"
+            android:paddingLeft="3pt"
+            android:paddingRight="3pt"
             android:textColor="@color/colorWhite"
-            android:textSize="10sp" />
+            android:textSize="10pt" />
+
     </FrameLayout>
 
     <TextView
         android:id="@+id/tv_title"
         android:layout_width="match_parent"
-        android:layout_height="20dp"
+        android:layout_height="20pt"
         android:gravity="center_vertical"
         android:singleLine="true"
         android:text="标题"
         android:textColor="@color/colorGray_5"
-        android:textSize="13sp" />
+        android:textSize="13pt" />
 
     <TextView
         android:id="@+id/tv_desc"
         android:layout_width="match_parent"
-        android:layout_height="15dp"
+        android:layout_height="15pt"
         android:gravity="center_vertical"
         android:singleLine="true"
         android:text="这个漫画很好看"
         android:textColor="@color/colorGray_b"
-        android:textSize="11dp" />
+        android:textSize="11pt" />
+
 </LinearLayout>

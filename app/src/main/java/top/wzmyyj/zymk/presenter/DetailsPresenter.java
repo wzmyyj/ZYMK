@@ -1,32 +1,29 @@
 package top.wzmyyj.zymk.presenter;
 
 import android.app.Activity;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import org.greenrobot.eventbus.EventBus;
 
-import io.reactivex.Observer;
-import io.reactivex.disposables.Disposable;
 import top.wzmyyj.zymk.app.bean.BookBean;
 import top.wzmyyj.zymk.app.bean.FavorBean;
 import top.wzmyyj.zymk.app.bean.HistoryBean;
 import top.wzmyyj.zymk.app.data.Urls;
 import top.wzmyyj.zymk.app.event.FavorListChangeEvent;
 import top.wzmyyj.zymk.app.event.FavorUnReadChangeEvent;
-import top.wzmyyj.zymk.app.tools.I;
+import top.wzmyyj.zymk.app.helper.IntentHelper;
+import top.wzmyyj.zymk.base.presenter.BasePresenter;
 import top.wzmyyj.zymk.contract.DetailsContract;
 import top.wzmyyj.zymk.model.db.FavorModel;
 import top.wzmyyj.zymk.model.db.HistoryModel;
 import top.wzmyyj.zymk.model.net.DetailsModel;
 import top.wzmyyj.zymk.model.net.box.DetailsBox;
-import top.wzmyyj.zymk.base.presenter.BasePresenter;
-
 
 /**
  * Created by yyj on 2018/07/14. email: 2209011667@qq.com
  */
+public class DetailsPresenter extends BasePresenter<DetailsContract.IView> implements DetailsContract.IPresenter {
 
-public class DetailsPresenter extends BasePresenter<DetailsContract.IView> implements DetailsContract.IPresenter{
     private final DetailsModel mModel;
     private final FavorModel favorModel;
     private final HistoryModel historyModel;
@@ -38,16 +35,10 @@ public class DetailsPresenter extends BasePresenter<DetailsContract.IView> imple
         historyModel = new HistoryModel(activity);
     }
 
-
     @Override
     public void loadData() {
         String url = mActivity.getIntent().getStringExtra("href");
-        mModel.getMoreData(url, new Observer<DetailsBox>() {
-            @Override
-            public void onSubscribe(@NonNull Disposable d) {
-
-            }
-
+        mModel.getMoreData(url, new BaseObserver<DetailsBox>() {
             @Override
             public void onNext(@NonNull DetailsBox box) {
                 mView.setBook(box.getBook());
@@ -55,7 +46,6 @@ public class DetailsPresenter extends BasePresenter<DetailsContract.IView> imple
                 mView.setMu(box.getMu());
                 mView.setZi(box.getZi());
                 mView.setBookList(box.getXgBookList());
-
 //                mView.showToast("加载成功");
             }
 
@@ -63,22 +53,12 @@ public class DetailsPresenter extends BasePresenter<DetailsContract.IView> imple
             public void onError(@NonNull Throwable e) {
                 mView.showToast("Error:" + e.getMessage());
             }
-
-            @Override
-            public void onComplete() {
-
-            }
         });
     }
 
     @Override
     public void goComic(int comic_id, long chapter_id) {
-        I.toComicActivity(mActivity, comic_id, chapter_id);
-    }
-
-    @Override
-    public void goComic(int comic_id) {
-        I.toComicActivity(mActivity, comic_id);
+        IntentHelper.toComicActivity(mActivity, comic_id, chapter_id);
     }
 
     @Override
@@ -88,20 +68,15 @@ public class DetailsPresenter extends BasePresenter<DetailsContract.IView> imple
             return;
         }
         if (href.contains(Urls.ZYMK_Base)) {
-            I.toDetailsActivity(mActivity, href);
+            IntentHelper.toDetailsActivity(mActivity, href);
         } else {
-            I.toBrowser(mActivity, href);
+            IntentHelper.toBrowser(mActivity, href);
         }
     }
 
     @Override
     public void isFavor(long id) {
-        favorModel.isFavor(id, new Observer<Boolean>() {
-            @Override
-            public void onSubscribe(@NonNull Disposable d) {
-
-            }
-
+        favorModel.isFavor(id, new BaseObserver<Boolean>() {
             @Override
             public void onNext(@NonNull Boolean is) {
                 mView.setIsFavor(is);
@@ -112,22 +87,12 @@ public class DetailsPresenter extends BasePresenter<DetailsContract.IView> imple
             public void onError(@NonNull Throwable e) {
                 mView.showToast("Error:" + e.getMessage());
             }
-
-            @Override
-            public void onComplete() {
-
-            }
         });
     }
 
     @Override
     public void addFavor(BookBean book) {
-        favorModel.insert(book, new Observer<FavorBean>() {
-            @Override
-            public void onSubscribe(@NonNull Disposable d) {
-
-            }
-
+        favorModel.insert(book, new BaseObserver<FavorBean>() {
             @Override
             public void onNext(@NonNull FavorBean favorBean) {
                 if (favorBean.getBook() != null) {
@@ -144,22 +109,12 @@ public class DetailsPresenter extends BasePresenter<DetailsContract.IView> imple
             public void onError(@NonNull Throwable e) {
                 mView.showToast("Error:" + e.getMessage());
             }
-
-            @Override
-            public void onComplete() {
-
-            }
         });
     }
 
     @Override
     public void getHistoryRead(long id) {
-        historyModel.load(id, new Observer<HistoryBean>() {
-            @Override
-            public void onSubscribe(@NonNull Disposable d) {
-
-            }
-
+        historyModel.load(id, new BaseObserver<HistoryBean>() {
             @Override
             public void onNext(@NonNull HistoryBean historyBean) {
                 mView.setHistory(historyBean.getChapter());
@@ -169,12 +124,6 @@ public class DetailsPresenter extends BasePresenter<DetailsContract.IView> imple
             public void onError(@NonNull Throwable e) {
                 mView.showToast("Error:" + e.getMessage());
             }
-
-            @Override
-            public void onComplete() {
-
-            }
         });
     }
-
 }

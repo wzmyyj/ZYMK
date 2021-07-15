@@ -1,28 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/click_bg"
     android:clickable="true"
+    android:focusable="true"
     android:gravity="center_horizontal"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:ignore="HardcodedText,ContentDescription">
 
     <top.wzmyyj.wzm_sdk.widget.CircleImageView
         android:id="@+id/img_type"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:layout_marginTop="10dp"
+        android:layout_width="75pt"
+        android:layout_height="75pt"
+        android:layout_marginTop="10pt"
         app:border_color="@color/colorLine"
-        app:border_width="0.1dp" />
+        app:border_width="0.1pt" />
 
     <TextView
         android:id="@+id/tv_type"
         android:layout_width="match_parent"
-        android:layout_height="25dp"
-        android:layout_marginTop="10dp"
+        android:layout_height="25pt"
+        android:layout_marginTop="10pt"
         android:gravity="center_horizontal"
         android:text="- 标题 -"
         android:textColor="@color/colorGray_5"
-        android:textSize="13sp" />
+        android:textSize="13pt" />
+
 </LinearLayout>

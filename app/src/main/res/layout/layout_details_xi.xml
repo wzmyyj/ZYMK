@@ -1,178 +1,176 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:ignore="HardcodedText,ContentDescription">
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="35dp"
+        android:layout_height="35pt"
         android:gravity="center_vertical"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingTop="10dp"
+        android:paddingLeft="10pt"
+        android:paddingTop="10pt"
+        android:paddingRight="10pt"
         android:text="剧情简介"
         android:textColor="@color/colorGray_9"
-        android:textSize="14sp" />
+        android:textSize="14pt" />
 
     <TextView
-        android:id="@+id/tv_book_juqing"
+        android:id="@+id/tv_book_plot"
         android:layout_width="match_parent"
-        android:layout_height="110dp"
+        android:layout_height="110pt"
         android:ellipsize="end"
         android:lines="5"
-        android:padding="10dp"
+        android:padding="10pt"
         android:textColor="@color/colorGray_6"
-        android:textSize="14sp" />
+        android:textSize="14pt" />
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="0.1dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_height="0.1pt"
+        android:layout_marginLeft="10pt"
+        android:layout_marginRight="10pt"
         android:background="@color/colorLine" />
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="35dp"
+        android:layout_height="35pt"
         android:gravity="center_vertical"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingTop="10dp"
+        android:paddingLeft="10pt"
+        android:paddingTop="10pt"
+        android:paddingRight="10pt"
         android:text="作者信息"
         android:textColor="@color/colorGray_9"
-        android:textSize="14sp" />
+        android:textSize="14pt" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="60pt"
         android:orientation="horizontal"
-        android:padding="10dp">
-
+        android:padding="10pt">
 
         <top.wzmyyj.wzm_sdk.widget.CircleImageView
             android:id="@+id/img_author_head"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="40pt"
+            android:layout_height="40pt"
             android:layout_gravity="center_vertical"
             app:border_color="@color/colorLine"
-            app:border_width="0.1dp" />
-
+            app:border_width="0.1pt" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10pt"
+            android:layout_marginLeft="10pt"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/tv_author_name"
                 android:layout_width="wrap_content"
-                android:layout_height="20dp"
+                android:layout_height="20pt"
                 android:gravity="center_vertical"
                 android:textColor="@color/colorGray_6"
-                android:textSize="14sp" />
+                android:textSize="14pt" />
 
             <TextView
                 android:id="@+id/tv_author_fans_num"
                 android:layout_width="wrap_content"
-                android:layout_height="20dp"
+                android:layout_height="20pt"
                 android:gravity="center_vertical"
                 android:textColor="@color/colorGray_9"
-                android:textSize="10sp" />
+                android:textSize="10pt" />
+
         </LinearLayout>
 
         <ImageView
             android:id="@+id/img_author_type"
-            android:layout_width="48dp"
-            android:layout_height="20dp"
-            android:layout_marginLeft="2dp"
-            android:padding="2dp" />
+            android:layout_width="48pt"
+            android:layout_height="20pt"
+            android:layout_marginStart="2pt"
+            android:layout_marginLeft="2pt"
+            android:padding="2pt" />
 
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="0.1dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_height="0.1pt"
+        android:layout_marginLeft="10pt"
+        android:layout_marginRight="10pt"
         android:background="@color/colorLine" />
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="35dp"
+        android:layout_height="35pt"
         android:gravity="center_vertical"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingTop="10dp"
+        android:paddingLeft="10pt"
+        android:paddingTop="10pt"
+        android:paddingRight="10pt"
         android:text="作者公告"
         android:textColor="@color/colorGray_9"
-        android:textSize="14sp" />
+        android:textSize="14pt" />
 
     <TextView
         android:id="@+id/tv_author_say"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="40pt"
         android:ellipsize="end"
         android:lines="1"
-        android:padding="10dp"
+        android:padding="10pt"
         android:textColor="@color/colorGray_7"
-        android:textSize="14sp" />
+        android:textSize="14pt" />
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="0.1dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_height="0.1pt"
+        android:layout_marginLeft="10pt"
+        android:layout_marginRight="10pt"
         android:background="@color/colorLine" />
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="10pt"
+        android:layout_marginBottom="10pt"
         android:orientation="vertical">
-
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="25dp"
+            android:layout_height="25pt"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp">
+            android:paddingLeft="10pt"
+            android:paddingRight="10pt"
+            tools:ignore="UseCompoundDrawables">
 
             <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:padding="2dp"
+                android:layout_width="20pt"
+                android:layout_height="20pt"
+                android:padding="2pt"
                 android:src="@mipmap/svg_red_work" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5pt"
+                android:layout_marginLeft="5pt"
                 android:text="作者作品"
                 android:textColor="@color/colorGray_6"
-                android:textSize="15sp" />
+                android:textSize="15pt" />
+
         </LinearLayout>
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_author_books"
             android:layout_width="match_parent"
-            android:layout_height="180dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp">
-
-        </android.support.v7.widget.RecyclerView>
+            android:layout_height="180pt"
+            android:paddingLeft="10pt"
+            android:paddingRight="10pt" />
 
     </LinearLayout>
-
-    <!--<View-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="0.1dp"-->
-    <!--android:background="@color/colorLine" />-->
 
 </LinearLayout>

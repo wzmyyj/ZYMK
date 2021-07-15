@@ -6,14 +6,13 @@ import top.wzmyyj.zymk.base.contract.IBaseView;
 /**
  * Created by yyj on 2018/09/10. email: 2209011667@qq.com
  */
-
 public interface MineContract {
 
     interface IView extends IBaseView {
-
     }
 
     interface IPresenter extends IBasePresenter {
+
         void goAboutMe();
 
         void goGitHubWeb();
@@ -22,10 +21,8 @@ public interface MineContract {
 
         void goHotWeb();
 
-        void goTmallWeb();
+        void goTMallWeb();
 
         void goSetting();
     }
-
-
 }

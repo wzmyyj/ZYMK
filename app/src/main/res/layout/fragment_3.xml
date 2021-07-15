@@ -1,43 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:ignore="HardcodedText,ContentDescription">
 
     <View
         android:id="@+id/v_top"
         android:layout_width="match_parent"
-        android:layout_height="0dp" />
+        android:layout_height="0pt" />
 
     <FrameLayout
-        android:background="@color/colorWhite"
         android:layout_width="match_parent"
-        android:layout_height="45dp">
+        android:layout_height="45pt"
+        android:background="@color/colorWhite">
 
-        <android.support.design.widget.TabLayout
+        <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabLayout"
             android:layout_width="match_parent"
-            android:layout_marginLeft="60dp"
-            android:layout_marginRight="60dp"
-            android:layout_height="30dp"
+            android:layout_height="30pt"
             android:layout_gravity="center"
+            android:layout_marginLeft="60pt"
+            android:layout_marginRight="60pt"
             app:tabIndicatorColor="@color/colorPrimary"
-            app:tabIndicatorHeight="1dp"
+            app:tabIndicatorHeight="1pt"
             app:tabMode="fixed"
             app:tabSelectedTextColor="@color/colorPrimary"
             app:tabTextAppearance="@style/MyTabLayoutTextAppearance1"
             app:tabTextColor="@color/colorGray_7" />
 
-
     </FrameLayout>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="0.1dp"
+        android:layout_height="0.1pt"
         android:background="@color/colorLine" />
 
-    <android.support.v4.view.ViewPager
+    <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

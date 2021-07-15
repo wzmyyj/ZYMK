@@ -1,5 +1,6 @@
 package top.wzmyyj.zymk.view.fragment;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -29,9 +30,22 @@ import top.wzmyyj.zymk.view.panel.HomeNestedScrollPanel;
  * Created by yyj on 2018/06/28. email: 2209011667@qq.com
  * 第一页。
  */
-
+@SuppressLint("NonConstantResourceId")
 public class HomeFragment extends BaseFragment<HomeContract.IPresenter> implements HomeContract.IView {
 
+    private HomeNestedScrollPanel homeNestedScrollPanel;
+    private HomeFavorPanel homeFavorPanel;
+
+    @BindView(R.id.fl_panel)
+    FrameLayout flPanel;
+    @BindView(R.id.ll_top)
+    LinearLayout llTop;
+    @BindView(R.id.v_top_0)
+    View v0;
+    @BindView(R.id.v_top_1)
+    View v1;
+    @BindView(R.id.v_top_2)
+    View v2;
 
     @Override
     protected void initPresenter() {
@@ -42,10 +56,6 @@ public class HomeFragment extends BaseFragment<HomeContract.IPresenter> implemen
     protected int getLayoutId() {
         return R.layout.fragment_1;
     }
-
-
-    private HomeNestedScrollPanel homeNestedScrollPanel;
-    private HomeFavorPanel homeFavorPanel;
 
     @Override
     protected void initPanels() {
@@ -75,9 +85,6 @@ public class HomeFragment extends BaseFragment<HomeContract.IPresenter> implemen
         EventBus.getDefault().unregister(this);
     }
 
-    @BindView(R.id.fl_panel)
-    FrameLayout fl_panel;
-
     @OnClick(R.id.img_a)
     public void fff() {
         T.s("这是一个预留按钮>_<");
@@ -88,26 +95,13 @@ public class HomeFragment extends BaseFragment<HomeContract.IPresenter> implemen
         mPresenter.goSearch();
     }
 
-    @BindView(R.id.ll_top)
-    LinearLayout ll_top;
-    @BindView(R.id.v_top_0)
-    View v0;
-    @BindView(R.id.v_top_1)
-    View v1;
-    @BindView(R.id.v_top_2)
-    View v2;
-
-
     @Override
     protected void initView() {
         super.initView();
         StatusBarUtil.fitsStatusBarView(v0, v1, v2);
-
-        fl_panel.addView(homeNestedScrollPanel.getView());
-        fl_panel.addView(homeFavorPanel.getView());
-
-        homeNestedScrollPanel.bingViews(ll_top);
-
+        flPanel.addView(homeNestedScrollPanel.getView());
+        flPanel.addView(homeFavorPanel.getView());
+        homeNestedScrollPanel.bingViews(llTop);
     }
 
     @Override
@@ -126,8 +120,6 @@ public class HomeFragment extends BaseFragment<HomeContract.IPresenter> implemen
     public void showFavor(List<FavorBean> list) {
         homeFavorPanel.setFavorData(list);
     }
-
-
 }
 
 

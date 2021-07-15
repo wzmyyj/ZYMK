@@ -13,6 +13,9 @@
             android:layout_height="match_parent">
 
             <include layout="@layout/layout_details" />
+
         </top.wzmyyj.zymk.app.widget.AceNestedScrollView>
+
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
 </FrameLayout>
