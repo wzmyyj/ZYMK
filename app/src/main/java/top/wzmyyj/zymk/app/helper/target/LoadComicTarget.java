@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
 
@@ -34,7 +35,15 @@ public class LoadComicTarget extends CustomTarget<Bitmap> {
     }
 
     public void load() {
-        GlideLoaderHelper.load(img, url, this);
+        RequestOptions options;
+        if (comic.getImgWidth() > 0 && comic.getImgHeight() > 0) {
+            float scale = ((float) comic.getImgHeight()) / comic.getImgWidth();
+            int height = Math.round(scale * screenWidth);
+            options = new RequestOptions().override(screenWidth, height);
+        } else {
+            options = GlideLoaderHelper.ORIGINAL_OPTIONS;
+        }
+        GlideLoaderHelper.loadBitmap(img, url, options, this);
     }
 
     @Override

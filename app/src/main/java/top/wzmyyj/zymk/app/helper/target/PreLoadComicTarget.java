@@ -1,9 +1,7 @@
 package top.wzmyyj.zymk.app.helper.target;
 
-import android.content.Context;
-import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
-import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -11,13 +9,14 @@ import androidx.annotation.Nullable;
 import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
 
-import top.wzmyyj.wzm_sdk.tools.L;
+import java.io.File;
+
 import top.wzmyyj.zymk.app.bean.ComicBean;
 
 /**
  * Created by yyj on 2020/07/10. email: 2209011667@qq.com
  */
-public class PreLoadComicTarget extends CustomTarget<Bitmap> {
+public class PreLoadComicTarget extends CustomTarget<File> {
     private final ComicBean comic;
 
     public PreLoadComicTarget(ComicBean comic) {
@@ -31,9 +30,12 @@ public class PreLoadComicTarget extends CustomTarget<Bitmap> {
     }
 
     @Override
-    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-        comic.setImgWidth(resource.getWidth());
-        comic.setImgHeight(resource.getHeight());
+    public void onResourceReady(@NonNull File resource, @Nullable Transition<? super File> transition) {
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        BitmapFactory.decodeFile(resource.getName(), options);
+        comic.setImgWidth(options.outWidth);
+        comic.setImgHeight(options.outHeight);
         comic.setPreLoading(false);
     }
 

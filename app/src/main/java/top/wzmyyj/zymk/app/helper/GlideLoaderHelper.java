@@ -5,9 +5,12 @@ import android.graphics.Bitmap;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
+
+import java.io.File;
 
 import jp.wasabeef.glide.transformations.BlurTransformation;
 import top.wzmyyj.zymk.R;
@@ -18,7 +21,7 @@ import top.wzmyyj.zymk.R;
  */
 public class GlideLoaderHelper {
 
-    private final static RequestOptions ORIGINAL_OPTIONS = new RequestOptions().override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL);
+    public final static RequestOptions ORIGINAL_OPTIONS = new RequestOptions().override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL);
 
     public static void img(ImageView img, String url) {
         Glide.with(img)
@@ -52,16 +55,30 @@ public class GlideLoaderHelper {
                 .into(img);
     }
 
-    public static void load(ImageView view, final String url, Target<Bitmap> target) {
-        Glide.with(view).asBitmap().load(url).apply(ORIGINAL_OPTIONS).into(target);
+    public static void loadBitmap(ImageView view, final String url, RequestOptions options, Target<Bitmap> target) {
+        Glide.with(view)
+                .asBitmap()
+                .load(url)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .apply(options)
+                .into(target);
     }
 
-    public static void load(Context context, final String url, Target<Bitmap> target) {
-        Glide.with(context).asBitmap().load(url).apply(ORIGINAL_OPTIONS).into(target);
+    public static void loadFile(Context context, final String url, Target<File> target) {
+        Glide.with(context)
+                .asFile()
+                .load(url)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .apply(ORIGINAL_OPTIONS)
+                .into(target);
     }
 
-    public static void load(ImageView view, final int res, Target<Bitmap> target) {
-        Glide.with(view).asBitmap().load(res).apply(ORIGINAL_OPTIONS).into(target);
+    public static void loadBitmap(ImageView view, final int res, Target<Bitmap> target) {
+        Glide.with(view)
+                .asBitmap()
+                .load(res)
+                .apply(ORIGINAL_OPTIONS)
+                .into(target);
     }
 
     public static void clear(ImageView img) {
